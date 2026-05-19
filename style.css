@@ -469,6 +469,35 @@ a:hover { color: var(--accent); }
   grid-template-columns: 1fr;
 }
 
+/* ----- segmented control wrapper for 3-button toggle ----- */
+.lang-toggle-group {
+  display: none;  /* shown on mobile when article has .en */
+  margin-bottom: 32px;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.lang-toggle-group .lang-toggle {
+  display: inline-block;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  border-right: 1px solid var(--rule);
+}
+
+.lang-toggle-group .lang-toggle:last-child {
+  border-right: none;
+}
+
+@media (max-width: 720px) {
+  .lang-toggle-group.has-en {
+    display: inline-flex;
+  }
+}
+
 /* ----- toggle button (hidden on desktop, visible on mobile if any .en exists) ----- */
 .lang-toggle {
   display: none;  /* hidden by default; JS shows it when needed */
@@ -491,29 +520,32 @@ a:hover { color: var(--accent); }
   color: var(--ink);
 }
 
-.lang-toggle[aria-pressed="true"] {
+.lang-toggle.is-active {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
 }
 
-/* ----- mobile: stack, hide English by default, show on toggle ----- */
+/* ----- mobile: stack, default mode = zh only ----- */
 @media (max-width: 720px) {
   .pair {
     grid-template-columns: 1fr;
     gap: 0.5em;
   }
 
-  /* hide English paragraphs by default on mobile */
-  .pair .en {
-    display: none;
-  }
+  /* default: hide English, show Chinese */
+  .pair .en { display: none; }
+  .pair .zh { display: block; }
 
-  /* when the article body has 'show-en' class, reveal them */
-  .article-body.show-en .pair .en {
-    display: block;
-  }
+  /* mode: zh + en (both shown, stacked) */
+  .article-body.mode-both .pair .en { display: block; }
+  .article-body.mode-both .pair .zh { display: block; }
 
+  /* mode: en only */
+  .article-body.mode-en .pair .en { display: block; }
+  .article-body.mode-en .pair .zh { display: none; }
+
+  /* show toggle when article has English */
   .lang-toggle.has-en {
     display: inline-block;
   }
