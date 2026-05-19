@@ -150,6 +150,16 @@ function formatDate(d) {
 // ----- sample posts (used if posts/index.json is missing) -----
 const SAMPLE_POSTS = [
   {
+    slug: "footbridge-paradox",
+    title: "橋上悖論｜Paradox over the Footbridge",
+    date: "2026-05-19",
+    excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
+    tags: ["散文","移英","物","香港"],
+    cover: "images/bridge-paradox.jpg",
+    featured: true,
+    url: "posts/footbridge-paradox.html"
+  },
+  {
     slug: "sisyphus",
     title: "推石頭之人｜He Who Pushes the Stone",
     date: "2026-05-19",
