@@ -157,14 +157,6 @@ const SAMPLE_POSTS = [
     tags: ["散文","哲思","移英"],
     featured: true,
     url: "posts/sisyphus.html"
-  },
-  {
-    slug: "test-post",
-    title: "測試貼文",
-    date: "2026-05-19",
-    excerpt: "第一篇用 CMS 發出嘅文章。",
-    tags: ["散文"],
-    url: "posts/test-post.html"
   }
 ];
 
