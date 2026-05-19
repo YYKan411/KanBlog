@@ -6,8 +6,13 @@
   1. Copy this file's contents
   2. Create a new file in posts/ (e.g. my-new-post.html)
   3. Paste, then find-and-replace every [PLACEHOLDER] below
-  4. Add a card to app.js so it shows on the homepage
-  5. Commit
+  4. Commit
+
+  THAT'S IT.
+
+  GitHub Actions will automatically scan posts/, regenerate
+  app.js (the homepage post list) and sitemap.xml. Your new
+  article appears on the homepage in ~2 minutes.
   ════════════════════════════════════════════════════════════
 -->
 <html lang="zh-HK">
@@ -17,26 +22,36 @@
 
 <!-- ============ BASIC SEO ============ -->
 <title>[標題] — Kaga Chung</title>
-<meta name="description" content="[摘要 — 文章前 150 字左右，唔好句號截斷]">
+<meta name="description" content="[文章前 150 字左右嘅描述，用嚟畀 Google + 社交媒體 preview 用]">
 <meta name="author" content="Kaga Chung">
 <meta name="keywords" content="[tag1], [tag2], [tag3]">
+
+<!-- ============ HOMEPAGE CARD ============ -->
+<!-- excerpt: 主頁卡片顯示嘅一兩句。建議唔好太長。 -->
+<meta name="excerpt" content="[主頁卡片嘅一兩句]">
+<!-- featured: uncomment 嚟做深色 featured 卡（主頁 stand out 用） -->
+<!-- <meta name="featured" content="true"> -->
 
 <!-- ============ OPEN GRAPH (Facebook / Threads / WhatsApp / LinkedIn) ============ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="[標題]">
-<meta property="og:description" content="[摘要 — 同上]">
+<meta property="og:description" content="[同 description 一樣]">
 <meta property="og:url" content="https://kanblog.pages.dev/posts/[檔名沒有.html].html">
 <meta property="og:site_name" content="Kaga Chung">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="[YYYY-MM-DD]">
 <meta property="article:author" content="Kaga Chung">
-<!-- 如果有 cover image: <meta property="og:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
+<!-- 如果有 cover image (亦會自動做主頁卡片嘅 cover):
+<meta property="og:image" content="https://kanblog.pages.dev/images/[圖片檔名]">
+-->
 
 <!-- ============ TWITTER CARD ============ -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="[標題]">
-<meta name="twitter:description" content="[摘要]">
-<!-- 如果有 cover image: <meta name="twitter:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
+<meta name="twitter:description" content="[同 description 一樣]">
+<!-- 如果有 cover image:
+<meta name="twitter:image" content="https://kanblog.pages.dev/images/[圖片檔名]">
+-->
 
 <!-- ============ STRUCTURED DATA (Google Rich Result) ============ -->
 <script type="application/ld+json">
