@@ -45,7 +45,7 @@ function extractTags(keywordsRaw) {
   // keywords meta is comma-separated; first 1–3 are likely tags
   // we keep only the ones that look like Chinese tags (the canonical set)
   if (!keywordsRaw) return [];
-  const canonical = ['散文', '遊記', '哲思', '移英', '物', '人', '社會'];
+  const canonical = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
   const tokens = keywordsRaw.split(/[,，]/).map(s => s.trim());
   return tokens.filter(t => canonical.includes(t));
 }
