@@ -69,15 +69,7 @@
 <link rel="stylesheet" href="../style.css">
 
 <style>
-  /* bilingual-pair styling — local to this post */
-  .pair { margin-bottom: 1.6em; }
-  .pair .zh { margin-bottom: 0.4em; }
-  .pair .en {
-    color: var(--ink-soft);
-    font-style: italic;
-    font-size: 0.94em;
-    line-height: 1.75;
-  }
+  /* (bilingual pair styling now lives in global style.css) */
 </style>
 </head>
 <body>
@@ -96,9 +88,10 @@
     <div class="article-meta">[YYYY · MM · DD] &nbsp;·&nbsp; [主 tag，例如 散文]</div>
   </header>
 
-  <!-- 如果有 cover image，加返呢行（檔名改你嘅）：
-  <img src="../images/[檔名]" alt="" class="article-cover">
-  -->
+  <!-- ════════ Cover image（封面圖）═══════
+       想做封面圖嘅話，先上載圖去 /images/，再 uncomment 下面：
+  <img src="../images/[檔名].jpg" alt="" class="article-cover">
+  ═══════ -->
 
   <div class="article-body">
 
@@ -119,8 +112,28 @@
     <blockquote>引用嘅嘢。</blockquote>
     -->
 
-    <!-- 圖
-    <img src="../images/[檔名]" alt="">
+    <!-- ════════ 圖嘅排版選項 ════════ -->
+
+    <!-- 圖 1 — 大圖（佔成個欄闊）：最常用
+    <img src="../images/[檔名].jpg" alt="[簡短描述，畀讀屏軟體用]">
+    -->
+
+    <!-- 圖 2 — 細圖（縮細置中，留白）
+    <img src="../images/[檔名].jpg" alt="" class="img-inset">
+    -->
+
+    <!-- 圖 3 — 圖配 caption
+    <figure>
+      <img src="../images/[檔名].jpg" alt="">
+      <figcaption>caption 寫呢度 — 例如：Reading, May 2026</figcaption>
+    </figure>
+    -->
+
+    <!-- 圖 4 — 兩張圖左右並排（手機自動上下疊）
+    <div class="img-row">
+      <img src="../images/[檔名1].jpg" alt="">
+      <img src="../images/[檔名2].jpg" alt="">
+    </div>
     -->
 
   </div>
@@ -141,6 +154,8 @@
     <a href="../feed.xml">rss</a>
   </div>
 </footer>
+
+<script src="../post.js"></script>
 
 </body>
 </html>
