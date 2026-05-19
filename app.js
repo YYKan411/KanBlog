@@ -176,6 +176,15 @@ const SAMPLE_POSTS = [
     tags: ["散文","香港","人"],
     featured: true,
     url: "posts/bao-faan.html"
+  },
+  {
+    slug: "lands-end",
+    title: "地之盡頭大風吹",
+    date: "2023-04-03",
+    excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/landsend.jpg",
+    url: "posts/lands-end.html"
   }
 ];
 
