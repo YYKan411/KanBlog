@@ -345,10 +345,67 @@ a:hover { color: var(--accent); }
   font-style: italic;
 }
 
+/* ============================================
+   In-article images
+   ============================================ */
+
+/* Default: full-width within article column */
 .article-body img {
   width: 100%;
   margin: 2em 0;
   border-radius: 2px;
+  display: block;
+}
+
+/* Figure with caption */
+.article-body figure {
+  margin: 2.4em 0;
+}
+
+.article-body figure img {
+  margin: 0;
+}
+
+.article-body figcaption {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-faded);
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* Two images side-by-side (responsive: stacks on mobile) */
+.article-body .img-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 2em 0;
+}
+
+.article-body .img-row img {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .article-body .img-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* "Inset" — smaller image, centred, with breathing room */
+.article-body .img-inset {
+  max-width: 60%;
+  margin: 2.4em auto;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .article-body .img-inset {
+    max-width: 100%;
+  }
 }
 
 .article-body em { font-style: italic; }
@@ -377,3 +434,87 @@ a:hover { color: var(--accent); }
 }
 
 .article-tags a::before { content: '#'; opacity: 0.6; }
+
+/* ============================================
+   Bilingual pair — responsive behaviour:
+   Desktop + has English:  left/right 50/50
+   Desktop + no English:   single column (centred via parent)
+   Mobile + has English:   Chinese only, toggle reveals English
+   Mobile + no English:    single column, no toggle
+   ============================================ */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 1.8em;
+  align-items: start;
+}
+
+.pair .zh,
+.pair .en {
+  margin: 0;
+}
+
+.pair .en {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.94em;
+  line-height: 1.75;
+  padding-top: 0.08em;
+}
+
+/* When a .pair has no English child, collapse to single column.
+   :has() is supported in all modern browsers (2023+). */
+.pair:not(:has(.en)) {
+  grid-template-columns: 1fr;
+}
+
+/* ----- toggle button (hidden on desktop, visible on mobile if any .en exists) ----- */
+.lang-toggle {
+  display: none;  /* hidden by default; JS shows it when needed */
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 32px;
+}
+
+.lang-toggle:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.lang-toggle[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ----- mobile: stack, hide English by default, show on toggle ----- */
+@media (max-width: 720px) {
+  .pair {
+    grid-template-columns: 1fr;
+    gap: 0.5em;
+  }
+
+  /* hide English paragraphs by default on mobile */
+  .pair .en {
+    display: none;
+  }
+
+  /* when the article body has 'show-en' class, reveal them */
+  .article-body.show-en .pair .en {
+    display: block;
+  }
+
+  .lang-toggle.has-en {
+    display: inline-block;
+  }
+}
