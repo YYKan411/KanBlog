@@ -167,6 +167,15 @@ const SAMPLE_POSTS = [
     tags: ["散文","哲思","移英"],
     featured: true,
     url: "posts/sisyphus.html"
+  },
+  {
+    slug: "bao-faan",
+    title: "飽飯",
+    date: "2025-09-28",
+    excerpt: "細個嗰陣屋企忽然好窮。16歲生日返第一份兼職，月尾將幾百蚊放喺飯枱上。第二朝五點，我同老竇喊咗好耐好耐好耐。",
+    tags: ["散文","香港","人"],
+    featured: true,
+    url: "posts/bao-faan.html"
   }
 ];
 
