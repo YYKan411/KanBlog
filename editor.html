@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor — Kaga Chung</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #3d2f1f;
+  --ink-soft: #6a5840;
+  --ink-faded: #998566;
+  --paper: #ebe5d4;
+  --paper-warm: #e0d8c2;
+  --card: #f0ebd9;
+  --accent: #3a5a3a;
+  --accent-soft: #5a7a5a;
+  --rule: #c9bfa3;
+  --danger: #8b3a2f;
+  --shadow: 0 1px 2px rgba(61, 47, 31, 0.05), 0 8px 24px rgba(61, 47, 31, 0.07);
+
+  --font-display: 'Cormorant Garamond', 'Noto Serif HK', Georgia, serif;
+  --font-body: 'Noto Serif HK', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============ Topbar ============ */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.topbar-title a { color: var(--ink); text-decoration: none; }
+.topbar-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.topbar-meta button {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.topbar-meta button:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ============ Login screen ============ */
+.login-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 32px;
+  text-align: center;
+}
+.login-wrap h1 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-bottom: 12px;
+}
+.login-wrap p {
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+.login-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 12px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.login-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+/* ============ Editor layout ============ */
+.editor {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 32px 120px;
+}
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 32px;
+}
+.editor-header h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.editor-header .sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ============ Form ============ */
+.field {
+  margin-bottom: 24px;
+}
+.field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.field-help {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  margin-top: 4px;
+}
+.field input[type="text"],
+.field textarea {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.field input[type="text"]:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.field textarea { resize: vertical; min-height: 80px; }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } }
+
+/* Featured checkbox */
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+.checkbox-field input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+
+/* ============ Pairs editor ============ */
+.pairs-section {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.pairs-section h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.pairs-section .help {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  margin-bottom: 24px;
+}
+.pair-editor {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.pair-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 640px) { .pair-editor-grid { grid-template-columns: 1fr; } }
+.pair-editor textarea {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.65;
+  width: 100%;
+  resize: vertical;
+  min-height: 70px;
+  color: var(--ink);
+}
+.pair-editor textarea.en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.pair-editor textarea:focus { outline: none; border-color: var(--ink); }
+.pair-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.pair-controls .pair-num {
+  color: var(--ink-faded);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pair-controls .pair-actions {
+  display: flex;
+  gap: 8px;
+}
+.pair-controls button {
+  background: transparent;
+  border: none;
+  color: var(--ink-faded);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+}
+.pair-controls button:hover { color: var(--ink); }
+.pair-controls button.delete-btn:hover { color: var(--danger); }
+
+.add-pair-btn {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px dashed var(--rule);
+  border-radius: 4px;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faded);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.add-pair-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ============ Action bar ============ */
+.action-bar {
+  position: sticky;
+  bottom: 0;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.action-bar-inner {
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.publish-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 12px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.publish-btn:hover { background: var(--accent); border-color: var(--accent); }
+.publish-btn:disabled { opacity: 0.5; cursor: wait; }
+
+.status-msg {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faded);
+}
+.status-msg.success { color: var(--accent); }
+.status-msg.error { color: var(--danger); }
+
+/* loading state */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faded);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Topbar ============ -->
+<header class="topbar">
+  <div class="topbar-title">
+    <a href="/">Kaga Chung</a>
+  </div>
+  <div class="topbar-meta" id="topbarMeta"></div>
+</header>
+
+<!-- ============ Main content (rendered by JS) ============ -->
+<main id="root">
+  <div class="loading-screen">loading…</div>
+</main>
+
+<script>
+// ============================================================
+// Config
+// ============================================================
+const WORKER_URL = 'https://kanblog-editor-api.7r6r7hf474.workers.dev';
+
+// ============================================================
+// Session
+// ============================================================
+function getToken() {
+  return localStorage.getItem('kanblog_session');
+}
+function setToken(token) {
+  localStorage.setItem('kanblog_session', token);
+}
+function clearToken() {
+  localStorage.removeItem('kanblog_session');
+}
+
+// On load: capture token from URL hash if present
+(function captureTokenFromHash() {
+  if (location.hash.startsWith('#token=')) {
+    const token = location.hash.substring(7);
+    setToken(token);
+    // clean URL
+    history.replaceState(null, '', location.pathname);
+  }
+})();
+
+// ============================================================
+// API wrapper
+// ============================================================
+async function api(endpoint, options = {}) {
+  const token = getToken();
+  const res = await fetch(`${WORKER_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { 'X-Session-Token': token } : {}),
+      ...(options.headers || {}),
+    },
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    if (res.status === 401) {
+      clearToken();
+      renderLogin();
+      throw new Error('Session expired');
+    }
+    throw new Error(data.error || `HTTP ${res.status}`);
+  }
+  return data;
+}
+
+// ============================================================
+// Render: Login
+// ============================================================
+function renderLogin() {
+  document.getElementById('topbarMeta').innerHTML = '';
+  document.getElementById('root').innerHTML = `
+    <div class="login-wrap">
+      <h1>Editor</h1>
+      <p>Sign in with GitHub to write or edit posts.</p>
+      <a href="${WORKER_URL}/auth/start" class="login-btn">Sign in with GitHub</a>
+    </div>
+  `;
+}
+
+// ============================================================
+// Render: Editor (the main composer)
+// ============================================================
+function renderEditor(user) {
+  document.getElementById('topbarMeta').innerHTML = `
+    <span>${user}</span>
+    <button id="logoutBtn">Sign out</button>
+  `;
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    clearToken();
+    location.reload();
+  });
+
+  document.getElementById('root').innerHTML = `
+    <div class="editor">
+      <div class="editor-header">
+        <h2>New post</h2>
+        <span class="sub">${new Date().toISOString().split('T')[0]}</span>
+      </div>
+
+      <div class="field">
+        <label for="f-slug">Slug (filename, no spaces, no .html)</label>
+        <input type="text" id="f-slug" placeholder="e.g. reading-spring">
+        <div class="field-help">→ posts/&lt;slug&gt;.html</div>
+      </div>
+
+      <div class="field">
+        <label for="f-title">Title</label>
+        <input type="text" id="f-title" placeholder="標題">
+      </div>
+
+      <div class="field">
+        <label for="f-title-en">Bilingual sub-title (optional)</label>
+        <input type="text" id="f-title-en" placeholder="English subtitle if any">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-tags">Tags (comma-separated)</label>
+          <input type="text" id="f-tags" placeholder="散文, 哲思, 移英">
+        </div>
+        <div class="field">
+          <label for="f-cover">Cover image URL (optional)</label>
+          <input type="text" id="f-cover" placeholder="images/your-photo.jpg">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-description">Description (for Google + social card)</label>
+        <textarea id="f-description" placeholder="文章前 150 字左右"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="f-excerpt">Excerpt (for homepage card)</label>
+        <textarea id="f-excerpt" placeholder="主頁卡片嘅一兩句"></textarea>
+      </div>
+
+      <div class="checkbox-field">
+        <input type="checkbox" id="f-featured">
+        <label for="f-featured" style="margin: 0; text-transform: none; letter-spacing: 0; font-size: 12px;">
+          Featured (highlight as a dark card on homepage)
+        </label>
+      </div>
+
+      <div class="pairs-section">
+        <h3>Body</h3>
+        <div class="help">Each section can have Chinese only, or Chinese + English (which renders side-by-side on desktop).</div>
+        <div id="pairsContainer"></div>
+        <button class="add-pair-btn" id="addPairBtn">+ Add paragraph</button>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <div class="action-bar-inner">
+        <span class="status-msg" id="statusMsg"></span>
+        <button class="publish-btn" id="publishBtn">Publish</button>
+      </div>
+    </div>
+  `;
+
+  // Initial pair
+  addPair();
+
+  document.getElementById('addPairBtn').addEventListener('click', addPair);
+  document.getElementById('publishBtn').addEventListener('click', publish);
+}
+
+// ============================================================
+// Pairs management
+// ============================================================
+let pairCounter = 0;
+
+function addPair() {
+  pairCounter++;
+  const container = document.getElementById('pairsContainer');
+  const pair = document.createElement('div');
+  pair.className = 'pair-editor';
+  pair.dataset.id = pairCounter;
+  pair.innerHTML = `
+    <div class="pair-editor-grid">
+      <textarea class="zh" placeholder="中文段落…"></textarea>
+      <textarea class="en" placeholder="English (optional)"></textarea>
+    </div>
+    <div class="pair-controls">
+      <span class="pair-num">¶ ${container.children.length + 1}</span>
+      <div class="pair-actions">
+        <button class="move-up-btn" title="Move up">↑</button>
+        <button class="move-down-btn" title="Move down">↓</button>
+        <button class="delete-btn" title="Delete">delete</button>
+      </div>
+    </div>
+  `;
+  container.appendChild(pair);
+
+  pair.querySelector('.delete-btn').addEventListener('click', () => {
+    if (container.children.length > 1) {
+      pair.remove();
+      renumberPairs();
+    }
+  });
+  pair.querySelector('.move-up-btn').addEventListener('click', () => {
+    const prev = pair.previousElementSibling;
+    if (prev) container.insertBefore(pair, prev);
+    renumberPairs();
+  });
+  pair.querySelector('.move-down-btn').addEventListener('click', () => {
+    const next = pair.nextElementSibling;
+    if (next) container.insertBefore(next, pair);
+    renumberPairs();
+  });
+}
+
+function renumberPairs() {
+  const pairs = document.querySelectorAll('.pair-editor');
+  pairs.forEach((p, i) => {
+    p.querySelector('.pair-num').textContent = `¶ ${i + 1}`;
+  });
+}
+
+// ============================================================
+// Publish — build HTML and POST to Worker
+// ============================================================
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+}
+
+function escapeAttr(s) {
+  return escapeHtml(s).replace(/\n/g, ' ');
+}
+
+function buildArticleHtml(data) {
+  const dateDots = data.date.replace(/-/g, ' · ');
+  const primaryTag = data.tags[0] || '';
+
+  // Build pairs
+  const pairsHtml = data.pairs.map(p => {
+    if (!p.zh.trim()) return '';
+    if (p.en.trim()) {
+      return `    <div class="pair">
+      <p class="zh">${escapeHtml(p.zh.trim())}</p>
+      <p class="en">${escapeHtml(p.en.trim())}</p>
+    </div>`;
+    } else {
+      return `    <div class="pair">
+      <p class="zh">${escapeHtml(p.zh.trim())}</p>
+    </div>`;
+    }
+  }).filter(Boolean).join('\n\n');
+
+  // Build title block (with optional EN subtitle)
+  const titleBlock = data.titleEn
+    ? `<h1 class="article-title">${escapeHtml(data.title)}<br><span style="font-size: 0.62em; font-style: italic; color: var(--ink-soft); font-weight: 400;">${escapeHtml(data.titleEn)}</span></h1>`
+    : `<h1 class="article-title">${escapeHtml(data.title)}</h1>`;
+
+  const fullTitle = data.titleEn
+    ? `${data.title}｜${data.titleEn}`
+    : data.title;
+
+  const coverImageMeta = data.cover
+    ? `<meta property="og:image" content="https://kanblog.pages.dev/${data.cover}">
+<meta name="twitter:image" content="https://kanblog.pages.dev/${data.cover}">`
+    : '';
+
+  const featuredMeta = data.featured
+    ? `<meta name="featured" content="true">`
+    : '';
+
+  const tagsKeywords = data.tags.join(', ');
+  const tagsLinks = data.tags.map(t =>
+    `    <a href="../index.html#${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
+  ).join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>${escapeHtml(fullTitle)} — Kaga Chung</title>
+<meta name="description" content="${escapeAttr(data.description)}">
+<meta name="author" content="Kaga Chung">
+<meta name="keywords" content="${escapeAttr(tagsKeywords)}">
+<meta name="excerpt" content="${escapeAttr(data.excerpt)}">
+${featuredMeta}
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="${escapeAttr(fullTitle)}">
+<meta property="og:description" content="${escapeAttr(data.description)}">
+<meta property="og:url" content="https://kanblog.pages.dev/posts/${data.slug}.html">
+<meta property="og:site_name" content="Kaga Chung">
+<meta property="og:locale" content="zh_HK">
+<meta property="article:published_time" content="${data.date}">
+<meta property="article:author" content="Kaga Chung">
+${coverImageMeta}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escapeAttr(fullTitle)}">
+<meta name="twitter:description" content="${escapeAttr(data.description)}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "${escapeAttr(fullTitle)}",
+  "description": "${escapeAttr(data.description)}",
+  "author": { "@type": "Person", "name": "Kaga Chung", "url": "https://kanblog.pages.dev/about.html" },
+  "datePublished": "${data.date}",
+  "publisher": { "@type": "Person", "name": "Kaga Chung" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kanblog.pages.dev/posts/${data.slug}.html" }
+}
+</${'script'}>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<article class="article">
+  <a href="../index.html" class="article-back">← back</a>
+
+  <header class="article-header">
+    ${titleBlock}
+    <div class="article-meta">${dateDots}${primaryTag ? ` &nbsp;·&nbsp; ${escapeHtml(primaryTag)}` : ''}</div>
+  </header>
+
+${data.cover ? `  <img src="../${escapeAttr(data.cover)}" alt="" class="article-cover">\n\n` : ''}  <div class="article-body">
+
+${pairsHtml}
+
+  </div>
+
+  <div class="article-tags">
+${tagsLinks}
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="../index.html">© Kaga Chung</a>
+    <span class="dot">·</span>
+    <a href="../about.html">about</a>
+    <span class="dot">·</span>
+    <a href="../feed.xml">rss</a>
+  </div>
+</footer>
+
+<script src="../post.js"></${'script'}>
+
+</body>
+</html>
+`;
+}
+
+async function publish() {
+  const status = document.getElementById('statusMsg');
+  const btn = document.getElementById('publishBtn');
+
+  // Gather data
+  const slug = document.getElementById('f-slug').value.trim();
+  const title = document.getElementById('f-title').value.trim();
+  const titleEn = document.getElementById('f-title-en').value.trim();
+  const tagsRaw = document.getElementById('f-tags').value.trim();
+  const cover = document.getElementById('f-cover').value.trim();
+  const description = document.getElementById('f-description').value.trim();
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+  const featured = document.getElementById('f-featured').checked;
+
+  const pairs = [...document.querySelectorAll('.pair-editor')].map(p => ({
+    zh: p.querySelector('.zh').value,
+    en: p.querySelector('.en').value,
+  }));
+
+  // Validation
+  const errors = [];
+  if (!slug || !/^[a-z0-9-]+$/.test(slug)) errors.push('Slug must be lowercase letters / numbers / dashes only');
+  if (!title) errors.push('Title is required');
+  if (!description) errors.push('Description is required');
+  if (!excerpt) errors.push('Excerpt is required');
+  if (pairs.every(p => !p.zh.trim())) errors.push('At least one Chinese paragraph required');
+
+  if (errors.length) {
+    status.className = 'status-msg error';
+    status.textContent = '✗ ' + errors[0];
+    return;
+  }
+
+  const date = new Date().toISOString().split('T')[0];
+  const tags = tagsRaw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
+
+  const html = buildArticleHtml({
+    slug, title, titleEn, date, tags, cover, description, excerpt, featured, pairs
+  });
+
+  // Commit
+  btn.disabled = true;
+  status.className = 'status-msg';
+  status.textContent = 'Publishing…';
+
+  try {
+    const result = await api('/api/commit-file', {
+      method: 'POST',
+      body: JSON.stringify({
+        filepath: `posts/${slug}.html`,
+        content: html,
+        message: `Add: ${title}`,
+      }),
+    });
+
+    status.className = 'status-msg success';
+    status.innerHTML = `✓ Published! <a href="https://kanblog.pages.dev/posts/${slug}.html" target="_blank">View in ~1 min →</a>`;
+
+    // Reset form for next post (but keep the user here)
+    setTimeout(() => {
+      btn.disabled = false;
+    }, 1000);
+
+  } catch (err) {
+    status.className = 'status-msg error';
+    status.textContent = '✗ ' + err.message;
+    btn.disabled = false;
+  }
+}
+
+// ============================================================
+// Boot
+// ============================================================
+async function boot() {
+  const token = getToken();
+  if (!token) {
+    renderLogin();
+    return;
+  }
+  try {
+    const me = await api('/auth/me');
+    renderEditor(me.login);
+  } catch {
+    renderLogin();
+  }
+}
+
+boot();
+</script>
+
+</body>
+</html>
