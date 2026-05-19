@@ -21,6 +21,7 @@
   --accent-soft: #5a7a5a;
   --rule: #c9bfa3;
   --danger: #8b3a2f;
+  --warning: #a87a2f;
   --shadow: 0 1px 2px rgba(61, 47, 31, 0.05), 0 8px 24px rgba(61, 47, 31, 0.07);
 
   --font-display: 'Cormorant Garamond', 'Noto Serif HK', Georgia, serif;
@@ -165,6 +166,15 @@ a:hover { text-decoration: underline; }
   color: var(--ink-faded);
   margin-top: 4px;
 }
+.field-warning {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--warning);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+  display: none;
+}
+.field-warning.visible { display: block; }
 .field input[type="text"],
 .field textarea {
   width: 100%;
@@ -189,6 +199,9 @@ a:hover { text-decoration: underline; }
   gap: 16px;
 }
 @media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } }
+
+/* Cover image group — two fields sit together */
+.cover-group .field { margin-bottom: 12px; }
 
 /* Featured checkbox */
 .checkbox-field {
@@ -349,6 +362,7 @@ a:hover { text-decoration: underline; }
 }
 .status-msg.success { color: var(--accent); }
 .status-msg.error { color: var(--danger); }
+.status-msg.warning { color: var(--warning); }
 
 /* loading state */
 .loading-screen {
@@ -384,6 +398,10 @@ a:hover { text-decoration: underline; }
 // Config
 // ============================================================
 const WORKER_URL = 'https://kanblog-editor-api.7r6r7hf474.workers.dev';
+
+// Canonical tag set — kept in sync with scripts/build.js
+// Any tag outside this set will be silently dropped by the build pipeline.
+const CANONICAL_TAGS = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
 
 // ============================================================
 // Session
@@ -483,14 +501,22 @@ function renderEditor(user) {
         <input type="text" id="f-title-en" placeholder="English subtitle if any">
       </div>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="f-tags">Tags (comma-separated)</label>
-          <input type="text" id="f-tags" placeholder="散文, 哲思, 移英">
-        </div>
+      <div class="field">
+        <label for="f-tags">Tags (comma-separated)</label>
+        <input type="text" id="f-tags" placeholder="散文, 哲思, 移英">
+        <div class="field-help">Canonical set: ${CANONICAL_TAGS.join(' / ')}. Anything outside is silently dropped by build.js.</div>
+        <div class="field-warning" id="tags-warning"></div>
+      </div>
+
+      <div class="cover-group">
         <div class="field">
           <label for="f-cover">Cover image URL (optional)</label>
           <input type="text" id="f-cover" placeholder="images/your-photo.jpg">
+        </div>
+        <div class="field">
+          <label for="f-cover-alt">Cover image alt text (optional, but recommended)</label>
+          <input type="text" id="f-cover-alt" placeholder="e.g. 蘭茲角，康和郡">
+          <div class="field-help">Short description for screen readers and image search. Leave blank to fall back to title.</div>
         </div>
       </div>
 
@@ -532,6 +558,29 @@ function renderEditor(user) {
 
   document.getElementById('addPairBtn').addEventListener('click', addPair);
   document.getElementById('publishBtn').addEventListener('click', publish);
+
+  // Live tag validation
+  document.getElementById('f-tags').addEventListener('input', validateTagsLive);
+}
+
+// ============================================================
+// Tag validation
+// ============================================================
+function parseTags(raw) {
+  return raw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
+}
+
+function validateTagsLive() {
+  const raw = document.getElementById('f-tags').value;
+  const warningEl = document.getElementById('tags-warning');
+  const tags = parseTags(raw);
+  const offenders = tags.filter(t => !CANONICAL_TAGS.includes(t));
+  if (offenders.length) {
+    warningEl.textContent = `⚠ Not in canonical set, will be dropped: ${offenders.join(', ')}`;
+    warningEl.classList.add('visible');
+  } else {
+    warningEl.classList.remove('visible');
+  }
 }
 
 // ============================================================
@@ -637,6 +686,9 @@ function buildArticleHtml(data) {
     ? `<meta name="featured" content="true">`
     : '';
 
+  // Cover alt: user-supplied → fallback to title
+  const coverAlt = (data.coverAlt && data.coverAlt.trim()) || data.title;
+
   const tagsKeywords = data.tags.join(', ');
   const tagsLinks = data.tags.map(t =>
     `    <a href="../index.html#${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
@@ -653,6 +705,8 @@ function buildArticleHtml(data) {
 <meta name="author" content="Kaga Chung">
 <meta name="keywords" content="${escapeAttr(tagsKeywords)}">
 <meta name="excerpt" content="${escapeAttr(data.excerpt)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://kanblog.pages.dev/posts/${data.slug}.html">
 ${featuredMeta}
 
 <meta property="og:type" content="article">
@@ -694,10 +748,10 @@ ${coverImageMeta}
 
   <header class="article-header">
     ${titleBlock}
-    <div class="article-meta">${dateDots}${primaryTag ? ` &nbsp;·&nbsp; ${escapeHtml(primaryTag)}` : ''}</div>
+    <div class="article-meta"><time datetime="${data.date}">${dateDots}</time>${primaryTag ? ` &nbsp;·&nbsp; ${escapeHtml(primaryTag)}` : ''}</div>
   </header>
 
-${data.cover ? `  <img src="../${escapeAttr(data.cover)}" alt="" class="article-cover">\n\n` : ''}  <div class="article-body">
+${data.cover ? `  <img src="../${escapeAttr(data.cover)}" alt="${escapeAttr(coverAlt)}" class="article-cover">\n\n` : ''}  <div class="article-body">
 
 ${pairsHtml}
 
@@ -735,6 +789,7 @@ async function publish() {
   const titleEn = document.getElementById('f-title-en').value.trim();
   const tagsRaw = document.getElementById('f-tags').value.trim();
   const cover = document.getElementById('f-cover').value.trim();
+  const coverAlt = document.getElementById('f-cover-alt').value.trim();
   const description = document.getElementById('f-description').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const featured = document.getElementById('f-featured').checked;
@@ -759,10 +814,30 @@ async function publish() {
   }
 
   const date = new Date().toISOString().split('T')[0];
-  const tags = tagsRaw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
+  const tagsAll = parseTags(tagsRaw);
+
+  // Tag whitelist check — non-blocking, just surface the silent failure
+  const validTags = tagsAll.filter(t => CANONICAL_TAGS.includes(t));
+  const droppedTags = tagsAll.filter(t => !CANONICAL_TAGS.includes(t));
+
+  if (droppedTags.length && !window._tagWarningAcked) {
+    const proceed = confirm(
+      `These tags are not in the canonical set and will be silently dropped by build.js:\n\n` +
+      `  ${droppedTags.join(', ')}\n\n` +
+      `Canonical set: ${CANONICAL_TAGS.join(', ')}\n\n` +
+      `Publish anyway?`
+    );
+    if (!proceed) {
+      status.className = 'status-msg warning';
+      status.textContent = '⚠ Publish cancelled. Adjust tags above the fold.';
+      return;
+    }
+    window._tagWarningAcked = true;
+  }
 
   const html = buildArticleHtml({
-    slug, title, titleEn, date, tags, cover, description, excerpt, featured, pairs
+    slug, title, titleEn, date, tags: tagsAll, cover, coverAlt,
+    description, excerpt, featured, pairs
   });
 
   // Commit
