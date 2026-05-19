@@ -150,13 +150,13 @@ function formatDate(d) {
 // ----- sample posts (used if posts/index.json is missing) -----
 const SAMPLE_POSTS = [
   {
-    slug: 'bao-faan',
-    title: '飽飯',
-    date: '2024-11-12',
-    excerpt: '一頓飯之後，先至發現嗰個人原來係咁。碗碟未收，茶都涼咗，房間入面剩低嘅，係一種未必講得出口嘅明白。',
-    tags: ['散文'],
+    slug: 'sisyphus',
+    title: '推石頭之人',
+    date: '2026-05-19',
+    excerpt: '又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。',
+    tags: ['散文', '哲思', '移英'],
     featured: true,
-    url: 'posts/bao-faan.html'
+    url: 'posts/sisyphus.html'
   },
   {
     slug: 'edinburgh-rain',
@@ -166,57 +166,6 @@ const SAMPLE_POSTS = [
     tags: ['遊記', '移英'],
     cover: 'images/sample-1.svg',
     url: 'posts/edinburgh-rain.html'
-  },
-  {
-    slug: 'old-shirt',
-    title: '舊衫',
-    date: '2025-06-22',
-    excerpt: '一件衫著到第八年。袖口磨白嗰處，先記得當年喺旺角買嗰日落緊雨。',
-    tags: ['物', '散文'],
-    cover: 'images/sample-2.svg',
-    url: 'posts/old-shirt.html'
-  },
-  {
-    slug: 'reading-march',
-    title: 'Reading 三月',
-    date: '2026-03-15',
-    excerpt: '搬過嚟一年。橋邊嗰排櫻花開咗一半，地產經紀仲喺度寄信。',
-    tags: ['移英', '散文'],
-    url: 'posts/reading-march.html'
-  },
-  {
-    slug: 'schopenhauer-tube',
-    title: 'Schopenhauer 在地鐵',
-    date: '2025-09-03',
-    excerpt: '佢話人生喺痛苦同無聊之間擺盪。Central line 上等緊號誌嗰陣，我覺得佢講得啱。',
-    tags: ['哲思'],
-    url: 'posts/schopenhauer-tube.html'
-  },
-  {
-    slug: 'tea',
-    title: '茶',
-    date: '2025-07-19',
-    excerpt: '一杯普洱泡到第三泡先肯講真話。',
-    tags: ['物', '散文'],
-    cover: 'images/sample-3.svg',
-    url: 'posts/tea.html'
-  },
-  {
-    slug: 'on-restraint',
-    title: '克制論',
-    date: '2026-01-20',
-    excerpt: '香港人嘅克制，唔係修養，係保護。著住件大衣，唔係怕凍，係怕畀人睇穿。',
-    tags: ['哲思', '散文'],
-    url: 'posts/on-restraint.html'
-  },
-  {
-    slug: 'bath-postcard',
-    title: 'Bath 寄出嘅明信片',
-    date: '2025-10-11',
-    excerpt: 'Roman Bath 嘅水仲係綠。寄畀阿媽嗰張明信片，揀咗最唔似旅遊嗰張。',
-    tags: ['遊記', '移英'],
-    cover: 'images/sample-4.svg',
-    url: 'posts/bath-postcard.html'
   }
 ];
 
