@@ -158,15 +158,6 @@ const SAMPLE_POSTS = [
     featured: true,
     url: 'posts/sisyphus.html'
   },
-  {
-    slug: 'edinburgh-rain',
-    title: '愛丁堡的雨',
-    date: '2025-03-08',
-    excerpt: '北方嘅雨唔急，落得似有似冇。撐傘嘅人比唔撐嘅多一倍。',
-    tags: ['遊記', '移英'],
-    cover: 'images/sample-1.svg',
-    url: 'posts/edinburgh-rain.html'
-  }
 ];
 
 init();
