@@ -1,0 +1,41 @@
+name: Auto-build post list & sitemap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**'
+      - 'scripts/build.js'
+
+# Allow the action to push commits back to the repo
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run build script
+        run: node scripts/build.js
+
+      - name: Commit regenerated files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Only commit if there are actual changes
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add app.js sitemap.xml
+            git commit -m "chore: auto-update post list & sitemap [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
