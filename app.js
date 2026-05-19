@@ -153,8 +153,9 @@ const SAMPLE_POSTS = [
     slug: "sisyphus",
     title: "推石頭之人｜He Who Pushes the Stone",
     date: "2026-05-19",
-    excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。一個關於薛西弗斯、辭職信草稿同沖茶嘅五月下午。",
+    excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。",
     tags: ["散文","哲思","移英"],
+    featured: true,
     url: "posts/sisyphus.html"
   }
 ];
