@@ -79,6 +79,39 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.02em;
   line-height: 1.8;
   text-align: right;
+  margin: 0;
+}
+
+.site-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.site-follow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faded);
+  letter-spacing: 0.02em;
+  text-align: right;
+  margin: 0;
+}
+
+.site-follow a {
+  color: var(--ink-soft);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-follow a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.site-follow .dot {
+  opacity: 0.5;
+  margin: 0 4px;
 }
 
 /* ============================================
