@@ -73,14 +73,15 @@ a:hover { color: var(--accent); }
 .site-title a:hover { color: var(--ink); }
 
 .site-title-en {
-  display: block;
+  display: inline;
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 13px;
+  font-size: 0.5em;
   color: var(--ink-faded);
-  letter-spacing: 0.08em;
-  margin-top: 6px;
+  letter-spacing: 0.06em;
+  margin-left: 0.5em;
   text-transform: none;
+  vertical-align: 0.2em;
 }
 
 .site-subtitle {
