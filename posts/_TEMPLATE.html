@@ -6,13 +6,8 @@
   1. Copy this file's contents
   2. Create a new file in posts/ (e.g. my-new-post.html)
   3. Paste, then find-and-replace every [PLACEHOLDER] below
-  4. Commit
-
-  THAT'S IT.
-
-  GitHub Actions will automatically scan posts/, regenerate
-  app.js (the homepage post list) and sitemap.xml. Your new
-  article appears on the homepage in ~2 minutes.
+  4. Add a card to app.js so it shows on the homepage
+  5. Commit
   ════════════════════════════════════════════════════════════
 -->
 <html lang="zh-HK">
@@ -22,36 +17,28 @@
 
 <!-- ============ BASIC SEO ============ -->
 <title>[標題] — Kaga Chung</title>
-<meta name="description" content="[文章前 150 字左右嘅描述，用嚟畀 Google + 社交媒體 preview 用]">
+<meta name="description" content="[摘要 — 文章前 150 字左右，唔好句號截斷]">
 <meta name="author" content="Kaga Chung">
 <meta name="keywords" content="[tag1], [tag2], [tag3]">
-
-<!-- ============ HOMEPAGE CARD ============ -->
-<!-- excerpt: 主頁卡片顯示嘅一兩句。建議唔好太長。 -->
-<meta name="excerpt" content="[主頁卡片嘅一兩句]">
-<!-- featured: uncomment 嚟做深色 featured 卡（主頁 stand out 用） -->
-<!-- <meta name="featured" content="true"> -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://kanblog.pages.dev/posts/[檔名沒有.html].html">
 
 <!-- ============ OPEN GRAPH (Facebook / Threads / WhatsApp / LinkedIn) ============ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="[標題]">
-<meta property="og:description" content="[同 description 一樣]">
+<meta property="og:description" content="[摘要 — 同上]">
 <meta property="og:url" content="https://kanblog.pages.dev/posts/[檔名沒有.html].html">
 <meta property="og:site_name" content="Kaga Chung">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="[YYYY-MM-DD]">
 <meta property="article:author" content="Kaga Chung">
-<!-- 如果有 cover image (亦會自動做主頁卡片嘅 cover):
-<meta property="og:image" content="https://kanblog.pages.dev/images/[圖片檔名]">
--->
+<!-- 如果有 cover image: <meta property="og:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
 
 <!-- ============ TWITTER CARD ============ -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="[標題]">
-<meta name="twitter:description" content="[同 description 一樣]">
-<!-- 如果有 cover image:
-<meta name="twitter:image" content="https://kanblog.pages.dev/images/[圖片檔名]">
--->
+<meta name="twitter:description" content="[摘要]">
+<!-- 如果有 cover image: <meta name="twitter:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
 
 <!-- ============ STRUCTURED DATA (Google Rich Result) ============ -->
 <script type="application/ld+json">
@@ -84,7 +71,15 @@
 <link rel="stylesheet" href="../style.css">
 
 <style>
-  /* (bilingual pair styling now lives in global style.css) */
+  /* bilingual-pair styling — local to this post */
+  .pair { margin-bottom: 1.6em; }
+  .pair .zh { margin-bottom: 0.4em; }
+  .pair .en {
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 0.94em;
+    line-height: 1.75;
+  }
 </style>
 </head>
 <body>
@@ -100,13 +95,12 @@
     <h1 class="article-title">[中文標題]<br><span style="font-size: 0.62em; font-style: italic; color: var(--ink-soft); font-weight: 400;">[英文標題]</span></h1>
     -->
 
-    <div class="article-meta">[YYYY · MM · DD] &nbsp;·&nbsp; [主 tag，例如 散文]</div>
+    <div class="article-meta"><time datetime="[YYYY-MM-DD]">[YYYY · MM · DD]</time> &nbsp;·&nbsp; [主 tag，例如 散文]</div>
   </header>
 
-  <!-- ════════ Cover image（封面圖）═══════
-       想做封面圖嘅話，先上載圖去 /images/，再 uncomment 下面：
-  <img src="../images/[檔名].jpg" alt="" class="article-cover">
-  ═══════ -->
+  <!-- 如果有 cover image，加返呢行（檔名改你嘅）：
+  <img src="../images/[檔名]" alt="[圖片描述 — SEO + accessibility，例如「蘭茲角，康和郡」]" class="article-cover">
+  -->
 
   <div class="article-body">
 
@@ -127,28 +121,8 @@
     <blockquote>引用嘅嘢。</blockquote>
     -->
 
-    <!-- ════════ 圖嘅排版選項 ════════ -->
-
-    <!-- 圖 1 — 大圖（佔成個欄闊）：最常用
-    <img src="../images/[檔名].jpg" alt="[簡短描述，畀讀屏軟體用]">
-    -->
-
-    <!-- 圖 2 — 細圖（縮細置中，留白）
-    <img src="../images/[檔名].jpg" alt="" class="img-inset">
-    -->
-
-    <!-- 圖 3 — 圖配 caption
-    <figure>
-      <img src="../images/[檔名].jpg" alt="">
-      <figcaption>caption 寫呢度 — 例如：Reading, May 2026</figcaption>
-    </figure>
-    -->
-
-    <!-- 圖 4 — 兩張圖左右並排（手機自動上下疊）
-    <div class="img-row">
-      <img src="../images/[檔名1].jpg" alt="">
-      <img src="../images/[檔名2].jpg" alt="">
-    </div>
+    <!-- 圖
+    <img src="../images/[檔名]" alt="[圖片描述]">
     -->
 
   </div>
@@ -170,6 +144,7 @@
   </div>
 </footer>
 
+<!-- bilingual toggle (mobile only, injected when .pair .en exists) -->
 <script src="../post.js"></script>
 
 </body>
