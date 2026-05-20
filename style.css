@@ -55,7 +55,7 @@ a:hover { color: var(--accent); }
 
 .masthead-inner {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 32px;
   flex-wrap: wrap;
@@ -71,6 +71,31 @@ a:hover { color: var(--accent); }
 }
 
 .site-title a:hover { color: var(--ink); }
+
+.site-title-en {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--ink-faded);
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+  text-transform: none;
+}
+
+.site-subtitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  margin: 12px 0 0 0;
+}
+
+.site-subtitle .sep {
+  opacity: 0.5;
+  margin: 0 6px;
+}
 
 .site-tagline {
   font-family: var(--font-mono);
