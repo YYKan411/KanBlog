@@ -1,3 +1,6 @@
+# Redirect old pages.dev URLs to custom domain
+https://kanblog.pages.dev/* https://yykan.uk/:splat 301
+
 # OAuth callback forwarded to Worker
 /auth/callback  https://kanblog-editor-api.7r6r7hf474.workers.dev/auth/callback  302
 /auth/start     https://kanblog-editor-api.7r6r7hf474.workers.dev/auth/start     302
