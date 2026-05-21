@@ -136,12 +136,13 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <a href="../index.html">© Kaga Chung</a>
+    <a href="../index.html">© <span id="year"></span> 言又勤</a>
     <span class="dot">·</span>
     <a href="../about.html">about</a>
     <span class="dot">·</span>
     <a href="../feed.xml">rss</a>
   </div>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </footer>
 
 <!-- bilingual toggle (mobile only, injected when .pair .en exists) -->
