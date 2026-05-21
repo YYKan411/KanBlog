@@ -150,6 +150,16 @@ function formatDate(d) {
 // ----- sample posts (used if posts/index.json is missing) -----
 const SAMPLE_POSTS = [
   {
+    slug: "candleblossoms",
+    title: "蠟燭花｜Candle Blossoms — 言又勤",
+    date: "2026-05-21",
+    excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
+    tags: [],
+    cover: "images/CandleBlossoms.jpg",
+    featured: true,
+    url: "posts/candleblossoms.html"
+  },
+  {
     slug: "theballadoftheurgentbowels",
     title: "鳩佬極急便｜The Ballad of the Urgent Bowels — 言又勤",
     date: "2026-05-21",
