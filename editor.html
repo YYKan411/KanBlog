@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Editor — Kaga Chung</title>
+<title>Editor — 言又勤</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -383,7 +383,7 @@ a:hover { text-decoration: underline; }
 <!-- ============ Topbar ============ -->
 <header class="topbar">
   <div class="topbar-title">
-    <a href="/">Kaga Chung</a>
+    <a href="/">言又勤</a>
   </div>
   <div class="topbar-meta" id="topbarMeta"></div>
 </header>
@@ -567,7 +567,7 @@ function renderEditor(user) {
 // Tag validation
 // ============================================================
 function parseTags(raw) {
-  return raw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
+  return raw.split(/[,,]/).map(t => t.trim()).filter(Boolean);
 }
 
 function validateTagsLive() {
@@ -652,6 +652,7 @@ function escapeAttr(s) {
 function buildArticleHtml(data) {
   const dateDots = data.date.replace(/-/g, ' · ');
   const primaryTag = data.tags[0] || '';
+  const year = data.date.split('-')[0];
 
   // Build pairs
   const pairsHtml = data.pairs.map(p => {
@@ -700,9 +701,9 @@ function buildArticleHtml(data) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>${escapeHtml(fullTitle)} — Kaga Chung</title>
+<title>${escapeHtml(fullTitle)} — 言又勤</title>
 <meta name="description" content="${escapeAttr(data.description)}">
-<meta name="author" content="Kaga Chung">
+<meta name="author" content="言又勤 Yin Yau Kan">
 <meta name="keywords" content="${escapeAttr(tagsKeywords)}">
 <meta name="excerpt" content="${escapeAttr(data.excerpt)}">
 <meta name="robots" content="index, follow">
@@ -713,10 +714,10 @@ ${featuredMeta}
 <meta property="og:title" content="${escapeAttr(fullTitle)}">
 <meta property="og:description" content="${escapeAttr(data.description)}">
 <meta property="og:url" content="https://kanblog.pages.dev/posts/${data.slug}.html">
-<meta property="og:site_name" content="Kaga Chung">
+<meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="${data.date}">
-<meta property="article:author" content="Kaga Chung">
+<meta property="article:author" content="言又勤 Yin Yau Kan">
 ${coverImageMeta}
 
 <meta name="twitter:card" content="summary_large_image">
@@ -729,9 +730,18 @@ ${coverImageMeta}
   "@type": "BlogPosting",
   "headline": "${escapeAttr(fullTitle)}",
   "description": "${escapeAttr(data.description)}",
-  "author": { "@type": "Person", "name": "Kaga Chung", "url": "https://kanblog.pages.dev/about.html" },
+  "author": {
+    "@type": "Person",
+    "name": "言又勤",
+    "alternateName": "Yin Yau Kan",
+    "url": "https://kanblog.pages.dev/about.html"
+  },
   "datePublished": "${data.date}",
-  "publisher": { "@type": "Person", "name": "Kaga Chung" },
+  "publisher": {
+    "@type": "Person",
+    "name": "言又勤",
+    "alternateName": "Yin Yau Kan"
+  },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kanblog.pages.dev/posts/${data.slug}.html" }
 }
 </${'script'}>
@@ -764,7 +774,7 @@ ${tagsLinks}
 
 <footer class="footer">
   <div class="footer-inner">
-    <a href="../index.html">© Kaga Chung</a>
+    <a href="../index.html">© ${year} 言又勤</a>
     <span class="dot">·</span>
     <a href="../about.html">about</a>
     <span class="dot">·</span>
