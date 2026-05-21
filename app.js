@@ -151,7 +151,7 @@ function formatDate(d) {
 const SAMPLE_POSTS = [
   {
     slug: "theballadoftheurgentbowels",
-    title: "鳩佬極急便｜The Ballad of the Urgent Bowels",
+    title: "鳩佬極急便｜The Ballad of the Urgent Bowels — 言又勤",
     date: "2026-05-21",
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
     tags: ["散文"],
@@ -160,7 +160,7 @@ const SAMPLE_POSTS = [
   },
   {
     slug: "footbridge-paradox",
-    title: "橋上悖論｜Paradox over the Footbridge",
+    title: "橋上悖論｜Paradox over the Footbridge — 言又勤",
     date: "2026-05-19",
     excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
     tags: ["散文","移英","物","香港"],
@@ -170,7 +170,7 @@ const SAMPLE_POSTS = [
   },
   {
     slug: "sisyphus",
-    title: "推石頭之人｜He Who Pushes the Stone",
+    title: "推石頭之人｜He Who Pushes the Stone — 言又勤",
     date: "2026-05-19",
     excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。",
     tags: ["散文","哲思","移英"],
@@ -179,7 +179,7 @@ const SAMPLE_POSTS = [
   },
   {
     slug: "bao-faan",
-    title: "飽飯",
+    title: "飽飯 — 言又勤",
     date: "2025-09-28",
     excerpt: "細個嗰陣屋企忽然好窮。16歲生日返第一份兼職，月尾將幾百蚊放喺飯枱上。第二朝五點，我同老竇喊咗好耐好耐好耐。",
     tags: ["散文","香港","人"],
@@ -188,7 +188,7 @@ const SAMPLE_POSTS = [
   },
   {
     slug: "lands-end",
-    title: "地之盡頭大風吹",
+    title: "地之盡頭大風吹 — 言又勤",
     date: "2023-04-03",
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
     tags: ["散文","遊記","移英"],
