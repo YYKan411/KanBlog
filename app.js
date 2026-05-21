@@ -154,7 +154,7 @@ const SAMPLE_POSTS = [
     title: "蠟燭花｜Candle Blossoms — 言又勤",
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
-    tags: [],
+    tags: ["散文","哲思","移英","社會","香港"],
     cover: "images/CandleBlossoms.jpg",
     featured: true,
     url: "posts/candleblossoms.html"
