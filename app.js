@@ -150,6 +150,15 @@ function formatDate(d) {
 // ----- sample posts (used if posts/index.json is missing) -----
 const SAMPLE_POSTS = [
   {
+    slug: "theballadoftheurgentbowels",
+    title: "鳩佬極急便｜The Ballad of the Urgent Bowels",
+    date: "2026-05-21",
+    excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
+    tags: ["散文"],
+    cover: "images/TheBalladoftheUrgentBowels.jpg",
+    url: "posts/theballadoftheurgentbowels.html"
+  },
+  {
     slug: "footbridge-paradox",
     title: "橋上悖論｜Paradox over the Footbridge",
     date: "2026-05-19",
