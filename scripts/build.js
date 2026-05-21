@@ -14,7 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://kanblog.pages.dev';
+const SITE_URL = 'https://yykan.uk';
 const ROOT = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
 const APP_JS = path.join(ROOT, 'app.js');
@@ -143,14 +143,21 @@ if (updatedAppJs === appJsCurrent) {
 // 3. rewrite sitemap.xml
 // ============================================================
 
-const today = new Date().toISOString().split('T')[0];
+// Home page lastmod = newest post's date
+const newestPostDate = posts.length > 0
+  ? posts[0].date.split('T')[0]
+  : new Date().toISOString().split('T')[0];
+
+// About page lastmod = actual file modification time
+const aboutPath = path.join(ROOT, 'about.html');
+const aboutMtime = fs.statSync(aboutPath).mtime.toISOString().split('T')[0];
 
 const urls = [
-  { loc: `${SITE_URL}/`,            lastmod: today,  priority: '1.0' },
-  { loc: `${SITE_URL}/about.html`,  lastmod: today,  priority: '0.8' },
+  { loc: `${SITE_URL}/`,            lastmod: newestPostDate,  priority: '1.0' },
+  { loc: `${SITE_URL}/about.html`,  lastmod: aboutMtime,      priority: '0.8' },
   ...posts.map(p => ({
     loc: `${SITE_URL}/${p.url}`,
-    lastmod: p.date,
+    lastmod: p.date.split('T')[0],
     priority: '0.9'
   }))
 ];
