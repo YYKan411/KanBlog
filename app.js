@@ -155,7 +155,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
     tags: ["散文","哲思","移英","社會","香港"],
-    cover: "images/CandleBlossoms.jpg",
+    cover: "https://kanblog.pages.dev/images/CandleBlossoms.jpg",
     featured: true,
     url: "posts/candleblossoms.html"
   },
@@ -165,7 +165,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
     tags: ["散文"],
-    cover: "images/TheBalladoftheUrgentBowels.jpg",
+    cover: "https://kanblog.pages.dev/images/TheBalladoftheUrgentBowels.jpg",
     url: "posts/theballadoftheurgentbowels.html"
   },
   {
@@ -174,7 +174,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-19",
     excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
     tags: ["散文","移英","物","香港"],
-    cover: "images/bridge-paradox.jpg",
+    cover: "https://kanblog.pages.dev/images/bridge-paradox.jpg",
     featured: true,
     url: "posts/footbridge-paradox.html"
   },
@@ -202,7 +202,7 @@ const SAMPLE_POSTS = [
     date: "2023-04-03",
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
     tags: ["散文","遊記","移英"],
-    cover: "images/landsend.jpg",
+    cover: "https://kanblog.pages.dev/images/landsend.jpg",
     url: "posts/lands-end.html"
   }
 ];
