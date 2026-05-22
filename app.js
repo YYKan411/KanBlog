@@ -155,7 +155,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
     tags: ["散文","哲思","移英","社會","香港"],
-    cover: "https://kanblog.pages.dev/images/CandleBlossoms.jpg",
+    cover: "images/CandleBlossoms.jpg",
     featured: true,
     url: "posts/candleblossoms.html"
   },
