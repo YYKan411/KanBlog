@@ -165,7 +165,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
     tags: ["散文"],
-    cover: "https://kanblog.pages.dev/images/TheBalladoftheUrgentBowels.jpg",
+    cover: "images/TheBalladoftheUrgentBowels.jpg",
     url: "posts/theballadoftheurgentbowels.html"
   },
   {
