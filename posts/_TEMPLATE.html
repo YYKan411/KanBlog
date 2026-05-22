@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
   ════════════════════════════════════════════════════════════
@@ -6,8 +7,7 @@
   1. Copy this file's contents
   2. Create a new file in posts/ (e.g. my-new-post.html)
   3. Paste, then find-and-replace every [PLACEHOLDER] below
-  4. Add a card to app.js so it shows on the homepage
-  5. Commit
+  4. Commit — build.js auto-regenerates app.js and sitemap.xml
   ════════════════════════════════════════════════════════════
 -->
 <html lang="zh-HK">
@@ -16,29 +16,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ============ BASIC SEO ============ -->
-<title>[標題] — Kaga Chung</title>
+<title>[標題] — 言又勤</title>
 <meta name="description" content="[摘要 — 文章前 150 字左右，唔好句號截斷]">
-<meta name="author" content="Kaga Chung">
+<meta name="author" content="言又勤">
 <meta name="keywords" content="[tag1], [tag2], [tag3]">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://kanblog.pages.dev/posts/[檔名沒有.html].html">
+<link rel="canonical" href="https://yykan.uk/posts/[檔名沒有.html].html">
 
 <!-- ============ OPEN GRAPH (Facebook / Threads / WhatsApp / LinkedIn) ============ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="[標題]">
 <meta property="og:description" content="[摘要 — 同上]">
-<meta property="og:url" content="https://kanblog.pages.dev/posts/[檔名沒有.html].html">
-<meta property="og:site_name" content="Kaga Chung">
+<meta property="og:url" content="https://yykan.uk/posts/[檔名沒有.html].html">
+<meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="[YYYY-MM-DD]">
-<meta property="article:author" content="Kaga Chung">
-<!-- 如果有 cover image: <meta property="og:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
+<meta property="article:author" content="言又勤">
+<!-- 如果有 cover image: <meta property="og:image" content="https://yykan.uk/images/[圖片檔名]"> -->
 
 <!-- ============ TWITTER CARD ============ -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="[標題]">
 <meta name="twitter:description" content="[摘要]">
-<!-- 如果有 cover image: <meta name="twitter:image" content="https://kanblog.pages.dev/images/[圖片檔名]"> -->
+<!-- 如果有 cover image: <meta name="twitter:image" content="https://yykan.uk/images/[圖片檔名]"> -->
 
 <!-- ============ STRUCTURED DATA (Google Rich Result) ============ -->
 <script type="application/ld+json">
@@ -49,17 +49,19 @@
   "description": "[摘要]",
   "author": {
     "@type": "Person",
-    "name": "Kaga Chung",
-    "url": "https://kanblog.pages.dev/about.html"
+    "name": "言又勤",
+    "alternateName": "Yin Yau Kan",
+    "url": "https://yykan.uk/about.html"
   },
   "datePublished": "[YYYY-MM-DD]",
   "publisher": {
     "@type": "Person",
-    "name": "Kaga Chung"
+    "name": "言又勤",
+    "alternateName": "Yin Yau Kan"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://kanblog.pages.dev/posts/[檔名沒有.html].html"
+    "@id": "https://yykan.uk/posts/[檔名沒有.html].html"
   }
 }
 </script>
@@ -136,13 +138,12 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <a href="../index.html">© <span id="year"></span> 言又勤</a>
+    <a href="../index.html">© 言又勤</a>
     <span class="dot">·</span>
     <a href="../about.html">about</a>
     <span class="dot">·</span>
     <a href="../feed.xml">rss</a>
   </div>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </footer>
 
 <!-- bilingual toggle (mobile only, injected when .pair .en exists) -->
