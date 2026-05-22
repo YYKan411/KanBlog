@@ -202,7 +202,7 @@ const SAMPLE_POSTS = [
     date: "2023-04-03",
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
     tags: ["散文","遊記","移英"],
-    cover: "https://kanblog.pages.dev/images/landsend.jpg",
+    cover: "images/landsend.jpg",
     url: "posts/lands-end.html"
   }
 ];
