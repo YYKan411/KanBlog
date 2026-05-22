@@ -679,8 +679,8 @@ function buildArticleHtml(data) {
     : data.title;
 
   const coverImageMeta = data.cover
-    ? `<meta property="og:image" content="https://kanblog.pages.dev/${data.cover}">
-<meta name="twitter:image" content="https://kanblog.pages.dev/${data.cover}">`
+    ? `<meta property="og:image" content="https://yykan.uk/${data.cover}">
+<meta name="twitter:image" content="https://yykan.uk/${data.cover}">`
     : '';
 
   const featuredMeta = data.featured
@@ -707,13 +707,13 @@ function buildArticleHtml(data) {
 <meta name="keywords" content="${escapeAttr(tagsKeywords)}">
 <meta name="excerpt" content="${escapeAttr(data.excerpt)}">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://kanblog.pages.dev/posts/${data.slug}.html">
+<link rel="canonical" href="https://yykan.uk/posts/${data.slug}.html">
 ${featuredMeta}
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="${escapeAttr(fullTitle)}">
 <meta property="og:description" content="${escapeAttr(data.description)}">
-<meta property="og:url" content="https://kanblog.pages.dev/posts/${data.slug}.html">
+<meta property="og:url" content="https://yykan.uk/posts/${data.slug}.html">
 <meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="${data.date}">
@@ -734,7 +734,7 @@ ${coverImageMeta}
     "@type": "Person",
     "name": "言又勤",
     "alternateName": "Yin Yau Kan",
-    "url": "https://kanblog.pages.dev/about.html"
+    "url": "https://yykan.uk/about.html"
   },
   "datePublished": "${data.date}",
   "publisher": {
@@ -742,7 +742,7 @@ ${coverImageMeta}
     "name": "言又勤",
     "alternateName": "Yin Yau Kan"
   },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kanblog.pages.dev/posts/${data.slug}.html" }
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yykan.uk/posts/${data.slug}.html" }
 }
 </${'script'}>
 
@@ -866,7 +866,7 @@ async function publish() {
     });
 
     status.className = 'status-msg success';
-    status.innerHTML = `✓ Published! <a href="https://kanblog.pages.dev/posts/${slug}.html" target="_blank">View in ~1 min →</a>`;
+    status.innerHTML = `✓ Published! <a href="https://yykan.uk/posts/${slug}.html" target="_blank">View in ~1 min →</a>`;
 
     // Reset form for next post (but keep the user here)
     setTimeout(() => {
