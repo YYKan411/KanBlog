@@ -1,9 +1,9 @@
-# Kaga Chung — Personal Site
+# 言又勤 — Personal Site
 
 A static personal blog hosted on Cloudflare Pages, source on GitHub.
 No build step you have to touch. No framework. No monthly fee. Forever yours.
 
-URL: https://kanblog.pages.dev
+URL: https://yykan.uk
 
 ---
 
@@ -81,7 +81,7 @@ Template 入面個 `<div class="article-body">` 嗰部分。揀寫法：
 3. 拖張圖入去 → Commit
 4. 喺文章 head 嗰部分加返 og:image meta（建議 — 主頁卡片同社交分享都會用呢張）：
    ```html
-   <meta property="og:image" content="https://kanblog.pages.dev/images/your-photo.jpg">
+   <meta property="og:image" content="https://yykan.uk/images/your-photo.jpg">
    ```
 5. 喺文章內文用其中一種 layout（template 有四個選項，uncomment 你想嗰個）
 
@@ -97,7 +97,7 @@ Template 入面個 `<div class="article-body">` 嗰部分。揀寫法：
 2. Action 跑 `scripts/build.js`：掃 `posts/` folder、抽 metadata、重寫 `app.js` 同 `sitemap.xml`
 3. Action 自動 commit 嗰兩個檔案
 4. Cloudflare detect 到 commit，重新 deploy
-5. 大約 **1-2 分鐘**後，refresh `kanblog.pages.dev` —— 你篇文喺主頁最頂出現
+5. 大約 **1-2 分鐘**後，refresh `yykan.uk` —— 你篇文喺主頁最頂出現
 
 **你完全唔需要碰 `app.js` 或者 `sitemap.xml`。** 永遠唔需要。
 
