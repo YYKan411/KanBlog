@@ -44,7 +44,7 @@ function readTitle(html) {
   // page <title> is "標題 — 言又勤" — strip the suffix
   const m = html.match(/<title>([^<]*)<\/title>/i);
   if (!m) return null;
-  return m[1].replace(/\s*—\s*(言又勤|Kaga Chung)\s*$/, '').trim();
+  return m[1].replace(/\s*—\s*言又勤\s*$/, '').trim();
 }
 
 function extractTags(keywordsRaw) {
