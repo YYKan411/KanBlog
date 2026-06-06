@@ -6,7 +6,7 @@
 :root {
   --ink: #3d2f1f;             /* 濃啡 — body & headings */
   --ink-soft: #6a5840;        /* secondary text */
-  --ink-faded: #998566;       /* meta, dates */
+  --ink-faded: #75603e;       /* meta, dates — 校深至 WCAG AA on --paper */
   --paper: #ebe5d4;           /* linen base */
   --paper-warm: #e0d8c2;      /* card / image bg */
   --accent: #3a5a3a;          /* 墨綠 — used rarely */
@@ -653,4 +653,30 @@ a:hover { color: var(--accent); }
   .lang-toggle.has-en {
     display: inline-block;
   }
+}
+
+/* ============================================
+   Reduced motion — 尊重系統「減少動態效果」設定
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Keyboard focus — 鍵盤導覽先見到嘅 focus ring
+   ============================================ */
+a:focus-visible,
+button:focus-visible,
+.tag:focus-visible,
+.share-btn:focus-visible,
+.lang-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
