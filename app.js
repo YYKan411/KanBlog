@@ -3,8 +3,6 @@
 // Simple client-side rendering. No framework.
 // ============================================
 
-const POSTS_URL = 'posts/index.json';
-
 // ----- bootstrap -----
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -17,16 +15,10 @@ function getTagFromHash() {
   return hash || 'all';
 }
 
-async function init() {
-  try {
-    const res = await fetch(POSTS_URL);
-    if (!res.ok) throw new Error('Failed to load posts index');
-    allPosts = await res.json();
-  } catch (err) {
-    // graceful fallback — show sample posts for prototype/preview
-    console.warn('Using sample posts:', err.message);
-    allPosts = SAMPLE_POSTS;
-  }
+function init() {
+  // 下面個 SAMPLE_POSTS 係 scripts/build.js 每次 build 重新生成嘅，
+  // 係真正嘅文章來源，唔係 placeholder。
+  allPosts = SAMPLE_POSTS.slice();
 
   // sort newest first
   allPosts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
@@ -147,7 +139,7 @@ function formatDate(d) {
   return `${y} · ${m} · ${day}`;
 }
 
-// ----- sample posts (used if posts/index.json is missing) -----
+// ----- post list (由 scripts/build.js 每次 build 重生) -----
 const SAMPLE_POSTS = [
   {
     slug: "candleblossoms",
