@@ -560,6 +560,13 @@ a:hover { color: var(--accent); }
   padding-top: 0.08em;
 }
 
+/* Verse / 詩體 — 保留作者嘅斷行。
+   喺 .article-body 加 class="verse" 就將成篇切換成詩體。 */
+.article-body.verse .pair .zh,
+.article-body.verse .pair .en {
+  white-space: pre-line;
+}
+
 /* When a .pair has no English child, collapse to single column.
    :has() is supported in all modern browsers (2023+). */
 .pair:not(:has(.en)) {
