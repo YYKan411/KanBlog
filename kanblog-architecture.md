@@ -177,13 +177,13 @@ These exist in `style.css` and `_TEMPLATE.html` but the **editor cannot produce 
 
 - **`SAMPLE_POSTS` naming debt** — the live list is misleadingly named (see "The one coupling that can bite you").
 - **Masonry reading order** — CSS columns fill top-to-bottom *per column*, so the visual order does not strictly match newest-first left-to-right. Accepted trade-off for zero JS.
-- **Contrast** — `--ink-faded` (#998566) on `--paper` is ≈ 2.7:1, below WCAG AA (4.5:1) for the small mono meta text. *Open.*
-- **Motion** — no `prefers-reduced-motion`; the card fade-in and transitions always run. *Open.*
-- **CLS** — cover and card images have no `width`/`height`, so layout can shift on load. *Open.*
-- **Font weight** — Noto Serif HK loads four weights (400/500/600/700); a heavy CJK payload. *Open.*
-- **Favicon / share image** — no `<link rel="icon">` (browsers 404 `/favicon.ico`); the homepage has no `og:image`. *Open.*
+- **Card cover CLS — accepted by design** — the masonry deliberately lets each card keep its natural image height (Pinterest-style freeflow), so card covers carry no fixed dimensions and can shift slightly as they load. This is an intentional aesthetic choice, not a defect. The proper "freeflow *and* no CLS" fix (reserving each card's natural-ratio space from known image dimensions) is on the Roadmap.
+- **Article hero CLS — open** — the full-width `.article-cover` on each post has no `width`/`height`, so content can shift once it loads. Fixable *without* cropping by adding each image's intrinsic dimensions (needs the four cover sizes). Not yet done.
+- **Font weight** — Noto Serif HK loads four weights (400/500/600/700); `700` is unused. Note: browsers do not download unused-weight font files, so dropping `700` trims only a little font CSS, not real bytes. A meaningful payload cut means dropping a *used* weight (e.g. `400 + 600`, losing `500`) — a visual trade-off, on the Roadmap.
 - **Editor** — publish-only, pairs-only (see editor section). *Open.*
 - **build.js meta regex** — attribute-order-sensitive (`name`/`property` before `content`).
+
+*Resolved 2026-06-06:* meta-text contrast (`--ink-faded` → `#75603e`), `prefers-reduced-motion`, `:focus-visible`, site favicon, homepage `og:image`, and the legacy-name strip in `readTitle`.
 
 ---
 
@@ -191,7 +191,8 @@ These exist in `style.css` and `_TEMPLATE.html` but the **editor cannot produce 
 
 | Date | Change |
 |---|---|
-| **2026-06-06** | **Site health audit** (full review + scorecard; overall 7.4/10). **Four bugs fixed across six commits:** (1) *Verse rendering* — added a reusable `.verse` mode (`white-space: pre-line`) to `style.css` and applied it to the Ballad, so the four-stanza poem no longer collapses into prose. (2) *Dead fetch* — `app.js` no longer fetches the non-existent `posts/index.json`; it renders directly from the build-injected `SAMPLE_POSTS`, ending the per-load 404 and console warning. (3) *Candle Blossoms tags* — links changed from `?tag=` query to `#` hash, so tag filtering works. (4) *Accessibility* — descriptive `alt` text added to the `footbridge-paradox` and `lands-end` cover images. |
+| **2026-06-06 — quick-win pass** | Accessibility + SEO polish. **`style.css`:** lifted `--ink-faded` to `#75603e` (now passes WCAG AA on `--paper` for the small meta text); added a `prefers-reduced-motion` block (animations + transitions neutralised for users who request it); added `:focus-visible` rings (keyboard-only) on links, tags, share and language-toggle buttons. **`build.js`:** dropped the legacy "Kaga Chung" branch from `readTitle`. **`index.html`:** added homepage `og:image` and upgraded the Twitter card to `summary_large_image`. **Favicon:** added a site favicon (`言`) at the repo root, auto-served on every page. Card-CLS and font-weight items were reviewed and deliberately deferred (see Roadmap). |
+| **2026-06-06 — audit + bug fixes** | Full site health review + scorecard (overall 7.4 → 7.6 after fixes). **Four bugs fixed across six commits:** (1) *Verse rendering* — reusable `.verse` mode (`white-space: pre-line`) in `style.css`, applied to the Ballad. (2) *Dead fetch* — `app.js` renders directly from the build-injected `SAMPLE_POSTS`; removed the `posts/index.json` fetch (no more per-load 404 / console warning). (3) *Candle Blossoms tags* — `?tag=` query → `#` hash, so filtering works. (4) *Accessibility* — descriptive `alt` on the `footbridge-paradox` and `lands-end` cover images. |
 | (prior, summarised) | Migrated to the `yykan.uk` custom domain (Cloudflare custom domains + Bulk Redirect from `kanblog.pages.dev`); `build.js` `SITE_URL` → `yykan.uk`; `robots.txt` disallow `/editor.html`; Search Console domain property; per-post BlogPosting schema; editor cover-alt field + canonical-tag warning. |
 
 ---
@@ -210,16 +211,12 @@ These exist in `style.css` and `_TEMPLATE.html` but the **editor cannot produce 
 
 ---
 
-## Roadmap / pick-up (open items from the 2026-06-06 audit)
+## Roadmap / pick-up
 
-**Quick wins (low risk):**
-- Lift `--ink-faded` contrast to pass WCAG AA for meta text.
-- Add a `prefers-reduced-motion` block to disable animations.
-- Add `width`/`height` (or `aspect-ratio`) to cover/card images — fixes CLS.
-- Reduce Noto Serif HK to two weights — lighter payload.
-- Add a favicon and a homepage `og:image`.
-- Add `:focus-visible` styles for keyboard users.
-- Remove the stale "Kaga Chung" strip in `build.js`'s `readTitle`.
+**Performance / a11y (reviewed and deferred in the 2026-06-06 quick-win pass):**
+- *Freeflow + no CLS for cards* — keep the Pinterest-style natural card heights but eliminate layout shift by reserving each card's natural-ratio space. Mechanism: store each cover's intrinsic dimensions in post metadata → read in `build.js` → apply as `width`/`height` in `app.js`'s `makeCard`. Multi-file; this is the *non-cropping* version of the card-CLS fix (the 3:2 crop option was rejected on purpose — uniform covers kill the freeflow look).
+- *Article hero dimensions* — add intrinsic `width`/`height` to each `.article-cover` (no cropping, no uniformity). Quick once the four cover sizes are to hand.
+- *Font payload* — only worthwhile if dropping a *used* weight (e.g. `400 + 600`); a visual decision, not free. Dropping the unused `700` alone is near-zero benefit.
 
 **Features:**
 - Previous / next ("read next") links at the foot of each post — retention + internal-link SEO.
