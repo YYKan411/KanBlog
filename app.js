@@ -142,6 +142,15 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const SAMPLE_POSTS = [
   {
+    slug: "all-quiet-at-hastings",
+    title: "喜士定無戰事｜All Quiet at Hastings",
+    date: "2026-06-07",
+    excerpt: "撞正銀行假，話行就行，去喜士定睇海。黑屋、石灘、海鷗虎視眈眈，一場人鷗之間嘅無形戰爭靜默展開。而所謂喜士定戰役，一千年前根本唔喺喜士定打。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/AllQuietatHastings.jpg",
+    url: "posts/all-quiet-at-hastings.html"
+  },
+  {
     slug: "candleblossoms",
     title: "蠟燭花｜Candle Blossoms",
     date: "2026-05-21",
