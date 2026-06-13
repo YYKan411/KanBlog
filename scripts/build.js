@@ -28,6 +28,7 @@ const POSTS_DIR = path.join(ROOT, 'posts');
 const APP_JS = path.join(ROOT, 'app.js');
 const SITEMAP = path.join(ROOT, 'sitemap.xml');
 const FEED = path.join(ROOT, 'feed.xml');
+const LLMS = path.join(ROOT, 'llms.txt');
 
 // ============================================================
 // helpers — extract things from HTML
@@ -256,5 +257,37 @@ ${feedItems}
 
 fs.writeFileSync(FEED, feedXml);
 console.log('✓ feed.xml updated');
+
+// ============================================================
+// 5. rewrite llms.txt (GEO — a curated map for AI answer engines)
+// ============================================================
+
+const llmsPostLines = posts.map(p =>
+  `- [${p.title}](${SITE_URL}/${p.url})${p.excerpt ? ': ' + p.excerpt.replace(/\s+/g, ' ').slice(0, 120) : ''}`
+).join('\n');
+
+const llmsTxt = `# ${SITE_TITLE} (Yin Yau Kan)
+
+> ${SITE_DESCRIPTION}
+> A Hong Konger's bilingual (Cantonese / English) personal blog from the UK — essays, travelogues, philosophy, and notes on emigrating.
+
+## About
+- [關於 · About](${SITE_URL}/about.html): 關於作者言又勤 Yin Yau Kan
+
+## Writing
+${llmsPostLines}
+
+## Mini Games
+- [小遊戲 · Mini Games](${SITE_URL}/minigames/): browser games built for fun
+- [Cats — A Logic Puzzle](${SITE_URL}/minigames/catspuzzle/): a Star-Battle-style logic puzzle — one cat per colour, row and column, no two cats may touch
+
+## Links
+- [RSS feed](${SITE_URL}/feed.xml)
+- [Instagram](https://www.instagram.com/yykan411/)
+- [Facebook](https://www.facebook.com/YYKan411)
+`;
+
+fs.writeFileSync(LLMS, llmsTxt);
+console.log('✓ llms.txt updated');
 
 console.log(`✓ done — ${posts.length} post(s), ${urls.length} sitemap URL(s), ${Math.min(posts.length, MAX_FEED_ITEMS)} feed item(s)`);
