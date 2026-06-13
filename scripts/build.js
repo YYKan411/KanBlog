@@ -171,9 +171,24 @@ const newestPostDate = posts.length > 0
 const aboutPath = path.join(ROOT, 'about.html');
 const aboutMtime = fs.statSync(aboutPath).mtime.toISOString().split('T')[0];
 
+// Static section pages (not generated from posts/). Add future MiniGames
+// or other standalone pages here and they'll appear in the sitemap.
+const STATIC_PAGES = [
+  { file: 'minigames/index.html',            loc: `${SITE_URL}/minigames/`,            priority: '0.7' },
+  { file: 'minigames/catspuzzle/index.html', loc: `${SITE_URL}/minigames/catspuzzle/`, priority: '0.6' },
+];
+const staticUrls = STATIC_PAGES
+  .filter(p => fs.existsSync(path.join(ROOT, p.file)))
+  .map(p => ({
+    loc: p.loc,
+    lastmod: fs.statSync(path.join(ROOT, p.file)).mtime.toISOString().split('T')[0],
+    priority: p.priority
+  }));
+
 const urls = [
   { loc: `${SITE_URL}/`,            lastmod: newestPostDate,  priority: '1.0' },
   { loc: `${SITE_URL}/about.html`,  lastmod: aboutMtime,      priority: '0.8' },
+  ...staticUrls,
   ...posts.map(p => ({
     loc: `${SITE_URL}/${p.url}`,
     lastmod: p.date.split('T')[0],
