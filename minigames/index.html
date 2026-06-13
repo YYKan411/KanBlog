@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小遊戲 · MiniGames — 言又勤</title>
+<meta name="description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta name="author" content="言又勤">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="小遊戲 · MiniGames — 言又勤">
+<meta property="og:description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta property="og:url" content="https://yykan.uk/minigames/">
+<meta property="og:site_name" content="言又勤">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://yykan.uk/images/catspuzzle-cover.svg">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="小遊戲 · MiniGames — 言又勤">
+<meta name="twitter:description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta name="twitter:image" content="https://yykan.uk/images/catspuzzle-cover.svg">
+<link rel="canonical" href="https://yykan.uk/minigames/">
+<link rel="alternate" type="application/rss+xml" title="言又勤 RSS feed" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "小遊戲 · MiniGames",
+  "url": "https://yykan.uk/minigames/",
+  "inLanguage": ["zh-HK", "en-GB"],
+  "isPartOf": { "@type": "WebSite", "name": "言又勤", "url": "https://yykan.uk/" },
+  "author": { "@type": "Person", "name": "言又勤", "alternateName": "Yin Yau Kan" }
+}
+</script>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="site-identity">
+      <h1 class="site-title">
+        <a href="/">
+          言又勤
+          <span class="site-title-en">Yin Yau Kan</span>
+        </a>
+      </h1>
+      <p class="site-subtitle">英倫酒精關注組<span class="sep">｜</span>Just some late-night talk</p>
+    </div>
+    <div class="site-meta">
+      <p class="site-tagline">不必熱鬧，只要盡興。歡迎來坐。<br>A funky world needs a funky soul.</p>
+      <p class="site-follow">
+        Follow me on:
+        <a href="https://www.instagram.com/yykan411/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span class="dot">|</span>
+        <a href="https://www.facebook.com/YYKan411" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- Page intro — aligns with .masonry's max-width / horizontal padding -->
+<section style="max-width: var(--max-w); margin: 0 auto; padding: 48px 32px 0;">
+  <h1 style="font-family: var(--font-sans); font-weight: 600; font-size: clamp(28px, 5vw, 40px); color: var(--ink); margin: 0;">
+    小遊戲 <span style="color: var(--ink-faded);">·</span> MiniGames
+  </h1>
+  <p style="font-family: var(--font-sans); font-size: clamp(16px, 2.4vw, 19px); color: var(--ink-soft); margin: 10px 0 0; max-width: 60ch; line-height: 1.5;">
+    得閒 vibe code 出嚟嘅小嘢，喺瀏覽器入面即玩，唔使裝。<br>
+    Little things I built for fun — playable right here in the browser, nothing to install.
+  </p>
+</section>
+
+<main class="masonry" id="gamesGrid">
+  <!-- game cards injected by the script below -->
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© <span id="year"></span> 言又勤</span>
+    <span class="dot">·</span>
+    <a href="/">home</a>
+    <span class="dot">·</span>
+    <a href="/about.html">about</a>
+    <span class="dot">·</span>
+    <a href="/feed.xml">rss</a>
+  </div>
+</footer>
+
+<script>
+  // ── The shelf. Add a new game = add one entry here. ──────────────────────
+  // Fields mirror the blog's post cards so the same .card styling applies:
+  //   title, excerpt, cover (image URL), url (where "play" goes), tags[], meta
+  const GAMES = [
+    {
+      title: "Cats — A Logic Puzzle",
+      excerpt: "一格色一隻貓、一行一列一隻貓，貓貓之間唔可以掂到對方（連打斜都唔得）。A Star-Battle-style logic puzzle: one cat per colour, row and column — and no two cats may ever touch.",
+      cover: "/images/catspuzzle-cover.svg",
+      url: "/catspuzzle/",
+      tags: ["邏輯", "puzzle"],
+      meta: "▶ 開始玩 · play"
+    }
+  ];
+
+  // ── Render (mirrors makeCard() in the blog's app.js) ─────────────────────
+  function makeGameCard(game) {
+    const a = document.createElement('a');
+    a.className = 'card' + (game.cover ? '' : ' text-only');
+    a.href = game.url;
+
+    if (game.cover) {
+      const img = document.createElement('img');
+      img.className = 'card-cover';
+      img.src = game.cover;
+      img.alt = game.title;
+      img.loading = 'lazy';
+      a.appendChild(img);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const title = document.createElement('h2');
+    title.className = 'card-title';
+    title.textContent = game.title;
+    body.appendChild(title);
+
+    if (game.excerpt) {
+      const ex = document.createElement('p');
+      ex.className = 'card-excerpt';
+      ex.textContent = game.excerpt;
+      body.appendChild(ex);
+    }
+
+    if (game.meta) {
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      meta.innerHTML = '<span>' + game.meta + '</span>';
+      body.appendChild(meta);
+    }
+
+    if (game.tags && game.tags.length) {
+      const tagsEl = document.createElement('div');
+      tagsEl.className = 'card-tags';
+      game.tags.forEach(function (t) {
+        const span = document.createElement('span');
+        span.className = 'card-tag';
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+      body.appendChild(tagsEl);
+    }
+
+    a.appendChild(body);
+    return a;
+  }
+
+  (function () {
+    const grid = document.getElementById('gamesGrid');
+    GAMES.forEach(function (g) { grid.appendChild(makeGameCard(g)); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
