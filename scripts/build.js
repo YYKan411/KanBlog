@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================
-// build.js — auto-generate post list (in app.js), sitemap.xml, feed.xml
+// build.js — auto-generate post list (in app.js), sitemap.xml, feed.xml, llms.txt
 // ============================================================
 // Reads every .html file in posts/ (except _TEMPLATE.html),
 // extracts metadata from <title>, <meta>, og:image, etc.,
