@@ -16,6 +16,9 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://yykan.uk';
+// Default social share image (used by _TEMPLATE.html for cover-less posts).
+// Guarded below so it never becomes a repeated home-card cover.
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.png`;
 const SITE_TITLE = '言又勤';
 const SITE_DESCRIPTION = '言又勤的雙語網誌。散文、遊記、哲思、移英筆記。一個香港人喺英倫,記低酒後與酒醒之間嘅閒話。';
 const MAX_FEED_ITEMS = 50;  // cap RSS feed length
@@ -85,11 +88,16 @@ function parsePost(filename) {
   const ogImage = readMeta(html, 'property', 'og:image');
   const featured = readMeta(html, 'name', 'featured') === 'true';
 
+    // og:image doubles as the home-card cover — but DEFAULT_OG_IMAGE is a
+  // generic share fallback, not a real cover, so skip it here (the post
+  // keeps og:image for social sharing; its card just stays text-only).
   let cover = null;
-  if (ogImage && ogImage.startsWith(SITE_URL)) {
-    cover = ogImage.replace(SITE_URL + '/', '');
-  } else if (ogImage) {
-    cover = ogImage;
+  if (ogImage && ogImage !== DEFAULT_OG_IMAGE) {
+    if (ogImage.startsWith(SITE_URL)) {
+      cover = ogImage.replace(SITE_URL + '/', '');
+    } else {
+      cover = ogImage;
+    }
   }
 
   if (!title || !date) {
