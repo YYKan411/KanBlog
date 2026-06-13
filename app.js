@@ -189,6 +189,15 @@ const SAMPLE_POSTS = [
     url: "posts/sisyphus.html"
   },
   {
+    slug: "the-cat-teachers",
+    title: "貓老師｜The Cat Teachers",
+    date: "2026-01-23",
+    excerpt: "一路以為寵物同我無關，尤其諗到佢哋會走先過我。幾年前一個無工開嘅下午，我抱起兩隻黑媽媽嘅貓 BB 喊咗出嚟，然後帶咗佢哋返屋企——兩個小生命，撈返我返嚟。",
+    tags: ["散文","哲思"],
+    cover: "images/CatTeacher.jpg",
+    url: "posts/the-cat-teachers.html"
+  },
+  {
     slug: "bao-faan",
     title: "飽飯",
     date: "2025-09-28",
