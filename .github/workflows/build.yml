@@ -27,7 +27,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Only commit if there are actual changes
           if [[ -n "$(git status --porcelain)" ]]; then
-            git add app.js sitemap.xml feed.xml llms.txt
+            git add app.js sitemap.xml feed.xml llms.txt index.html
             git commit -m "chore: auto-update post list, sitemap & feed [skip ci]"
             git push
           else

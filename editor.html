@@ -692,7 +692,7 @@ function buildArticleHtml(data) {
 
   const tagsKeywords = data.tags.join(', ');
   const tagsLinks = data.tags.map(t =>
-    `    <a href="../index.html#${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
+    `    <a href="../#${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
   ).join('\n');
 
   return `<!DOCTYPE html>
@@ -707,13 +707,13 @@ function buildArticleHtml(data) {
 <meta name="keywords" content="${escapeAttr(tagsKeywords)}">
 <meta name="excerpt" content="${escapeAttr(data.excerpt)}">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://yykan.uk/posts/${data.slug}.html">
+<link rel="canonical" href="https://yykan.uk/posts/${data.slug}">
 ${featuredMeta}
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="${escapeAttr(fullTitle)}">
 <meta property="og:description" content="${escapeAttr(data.description)}">
-<meta property="og:url" content="https://yykan.uk/posts/${data.slug}.html">
+<meta property="og:url" content="https://yykan.uk/posts/${data.slug}">
 <meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
 <meta property="article:published_time" content="${data.date}">
@@ -734,7 +734,7 @@ ${coverImageMeta}
     "@type": "Person",
     "name": "言又勤",
     "alternateName": "Yin Yau Kan",
-    "url": "https://yykan.uk/about.html"
+    "url": "https://yykan.uk/about"
   },
   "datePublished": "${data.date}",
   "publisher": {
@@ -742,7 +742,7 @@ ${coverImageMeta}
     "name": "言又勤",
     "alternateName": "Yin Yau Kan"
   },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yykan.uk/posts/${data.slug}.html" }
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yykan.uk/posts/${data.slug}" }
 }
 </${'script'}>
 
@@ -754,7 +754,7 @@ ${coverImageMeta}
 <body>
 
 <article class="article">
-  <a href="../index.html" class="article-back">← back</a>
+  <a href="../" class="article-back">← back</a>
 
   <header class="article-header">
     ${titleBlock}
@@ -774,9 +774,9 @@ ${tagsLinks}
 
 <footer class="footer">
   <div class="footer-inner">
-    <a href="../index.html">© ${year} 言又勤</a>
+    <a href="../">© ${year} 言又勤</a>
     <span class="dot">·</span>
-    <a href="../about.html">about</a>
+    <a href="../about">about</a>
     <span class="dot">·</span>
     <a href="../feed.xml">rss</a>
   </div>
@@ -866,7 +866,7 @@ async function publish() {
     });
 
     status.className = 'status-msg success';
-    status.innerHTML = `✓ Published! <a href="https://yykan.uk/posts/${slug}.html" target="_blank">View in ~1 min →</a>`;
+    status.innerHTML = `✓ Published! <a href="https://yykan.uk/posts/${slug}" target="_blank">View in ~1 min →</a>`;
 
     // Reset form for next post (but keep the user here)
     setTimeout(() => {

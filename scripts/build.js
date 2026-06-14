@@ -126,7 +126,10 @@ function parsePost(filename) {
     tags,
     cover,
     featured,
-    url: `posts/${filename}`
+    // Clean URL (no .html): Cloudflare Pages 308-redirects /posts/x.html → /posts/x,
+    // so the .html form would point crawlers + internal links at a redirect. Use the
+    // 200 endpoint everywhere (sitemap, feed, llms, home-card href).
+    url: `posts/${slug}`
   };
 }
 
@@ -207,7 +210,7 @@ const staticUrls = STATIC_PAGES
 
 const urls = [
   { loc: `${SITE_URL}/`,            lastmod: newestPostDate,  priority: '1.0' },
-  { loc: `${SITE_URL}/about.html`,  lastmod: aboutMtime,      priority: '0.8' },
+  { loc: `${SITE_URL}/about`,       lastmod: aboutMtime,      priority: '0.8' },
   ...staticUrls,
   ...posts.map(p => ({
     loc: `${SITE_URL}/${p.url}`,
@@ -283,7 +286,7 @@ const llmsTxt = `# ${SITE_TITLE} (Yin Yau Kan)
 > A Hong Konger's bilingual (Cantonese / English) personal blog from the UK — essays, travelogues, philosophy, and notes on emigrating.
 
 ## About
-- [關於 · About](${SITE_URL}/about.html): 關於作者言又勤 Yin Yau Kan
+- [關於 · About](${SITE_URL}/about): 關於作者言又勤 Yin Yau Kan
 
 ## Writing
 ${llmsPostLines}
@@ -300,5 +303,32 @@ ${llmsPostLines}
 
 fs.writeFileSync(LLMS, llmsTxt);
 console.log('✓ llms.txt updated');
+
+// ============================================================
+// 6. inject static <noscript> post links into index.html
+// ============================================================
+// The home grid is rendered from SAMPLE_POSTS by app.js (JS). Google runs JS,
+// but non-JS clients and some AI crawlers don't — so we mirror the post list as
+// real <a href> links inside a <noscript> block, regenerated here on every build.
+// index.html carries the markers <!-- BUILD:POSTS_START --> / <!-- BUILD:POSTS_END -->.
+const INDEX = path.join(ROOT, 'index.html');
+const indexHtml = fs.readFileSync(INDEX, 'utf8');
+const noscriptItems = posts.map(p =>
+  `      <li><a href="${p.url}">${xmlEscape(p.title)}</a></li>`
+).join('\n');
+const noscriptBlock =
+  `<!-- BUILD:POSTS_START -->\n` +
+  `    <ul class="noscript-posts">\n${noscriptItems}\n    </ul>\n` +
+  `    <!-- BUILD:POSTS_END -->`;
+const updatedIndex = indexHtml.replace(
+  /<!-- BUILD:POSTS_START -->[\s\S]*?<!-- BUILD:POSTS_END -->/,
+  noscriptBlock
+);
+if (updatedIndex === indexHtml) {
+  console.warn('⚠️  could not find BUILD:POSTS markers in index.html — noscript links not updated');
+} else {
+  fs.writeFileSync(INDEX, updatedIndex);
+  console.log('✓ index.html noscript links updated');
+}
 
 console.log(`✓ done — ${posts.length} post(s), ${urls.length} sitemap URL(s), ${Math.min(posts.length, MAX_FEED_ITEMS)} feed item(s)`);

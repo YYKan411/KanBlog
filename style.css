@@ -184,6 +184,22 @@ a:hover { color: var(--accent); }
 @media (max-width: 960px) { .masonry { column-count: 2; } }
 @media (max-width: 600px) { .masonry { column-count: 1; padding: 32px 20px; } }
 
+/* Static post list for non-JS clients / crawlers (build-generated, inside <noscript>) */
+.noscript-posts {
+  column-span: all;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.noscript-posts li { margin: 0 0 14px; }
+.noscript-posts a {
+  font-family: 'Cormorant Garamond', 'Noto Serif HK', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
 .card {
   break-inside: avoid;
   margin-bottom: var(--col-gap);
