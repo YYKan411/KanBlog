@@ -63,6 +63,7 @@ Author commits to  posts/**  OR  scripts/build.js  OR  about.html
                 · sitemap.xml  (posts + STATIC_PAGES: /minigames/, /minigames/catspuzzle/)
                 · feed.xml
                 · llms.txt     (GEO map — added 2026-06-13)
+                · index.html   (<noscript> post links between BUILD:POSTS markers — added 2026-06-14)
             → commits the regenerated files as github-actions[bot]
               with message "...[skip ci]"  (so it does not re-trigger itself)
     → Cloudflare Pages detects the commit → redeploys
@@ -190,7 +191,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 - **Social share images:** raster **1200×630 PNG** OG images — `og-minigames.png` (MiniGames + game) and `og-default.png` (About + cover-less posts). *Social scrapers do not render SVG OG images, so these are PNG, not SVG.*
 - **Home `<title>`** is keyword-rich (`言又勤 Yin Yau Kan｜雙語散文 · 遊記 · 雜談`) while `og:title` stays the clean brand "言又勤" — search gets keywords, social stays brand.
 - **Search Console:** `yykan.uk` is a DNS-verified domain property. The old `kanblog.pages.dev` property is retained to watch the 301 transition. *(Resubmit the sitemap after the 2026-06-13 changes; consider adding Bing Webmaster Tools — Roadmap.)*
-- **Open gaps** (see Roadmap): Person entity still lacks `jobTitle` / `knowsAbout` / `alumniOf`; About page has two `<h1>`s and no `twitter:card`; homepage/MiniGames post cards are JS-injected (no static `<a href>` — fine for Google, weaker for non-JS/AI crawlers).
+- **Open gaps** (see Roadmap): Person entity still lacks `jobTitle` / `knowsAbout` / `alumniOf`; About page has two `<h1>`s and no `twitter:card`; MiniGames cards are JS-injected (no static `<a href>` — the homepage got a `<noscript>` static link list 2026-06-14, MiniGames still pending).
 
 ---
 
@@ -223,7 +224,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 - **build.js meta regex** — attribute-order-sensitive (`name`/`property` before `content`).
 
 - **About page — two `<h1>`s** (should be one); also no `twitter:card`. *Open (2026-06-13).*
-- **Homepage / MiniGames cards are JS-injected** — no static `<a href>` links in the HTML; Google renders JS so it indexes fine, but a `<noscript>` link list would harden it for non-JS / AI crawlers. *Open (2026-06-13).*
+- **MiniGames cards are JS-injected** — no static `<a href>` links; a `<noscript>` list would harden it for non-JS / AI crawlers. *Open.* *(The **homepage** got exactly this on 2026-06-14 — `build.js` writes a `<noscript>` post list into `index.html` between `BUILD:POSTS` markers; MiniGames could copy the pattern.)*
 
 *Resolved 2026-06-06:* meta-text contrast (`--ink-faded` → `#75603e`), `prefers-reduced-motion`, `:focus-visible`, site favicon, homepage `og:image`, and the legacy-name strip in `readTitle`.
 
@@ -235,6 +236,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 | Date | Change |
 |---|---|
+| **2026-06-14 — clean URLs everywhere + `<noscript>` post links (#3)** | **Clean URLs.** Cloudflare Pages 308-redirects `/x.html` → `/x`, so every `.html` URL was pointing crawlers + internal links at a redirect. Fixed across the whole surface: `build.js` post `url` → `posts/<slug>` (propagates to sitemap, feed, llms, home-card href) + about → `/about`; all 8 posts + `_TEMPLATE` + the `editor.html` generator had canonical / `og:url` / JSON-LD `@id` / author-url / internal back-footer-tag links de-`.html`'d; `about.html` + `index.html` own canonical/og/JSON-LD + footer link; `robots.txt` also disallows clean `/editor`. The editor's commit **`filepath` stays `posts/<slug>.html`** (real file on disk). Verified live: canonical/og/@id/sitemap clean, clean URL 200, `.html` still 308. **`<noscript>` post links (#3).** `build.js` now regenerates a `<ul class="noscript-posts">` of real `<a href>` links inside `index.html` (between `<!-- BUILD:POSTS_START/END -->` markers); `build.yml` now also commits `index.html`. Hardens the home page for non-JS / AI crawlers (cards are otherwise JS-injected). |
 | **2026-06-14 — WebP cover images (#2 perf)** | Converted the 6 photographic cover JPEGs to **WebP** (`cwebp -q 80`, ~30–40% smaller) for display; **kept the JPEGs for `og:image`** (social scrapers don't reliably render WebP). Swapped the `article-cover` `<img>` srcs in the 6 posts to `.webp`. **`build.js` now prefers a `.webp` sibling** for the home-card `cover` while `og:image` reads the JPEG (see Image format policy under Post metadata contract). Net: home grid + article heroes load WebP, social thumbnails stay JPEG. Shipped via Claude Code pull/edit/push. *(Note: app.js home covers update only after the CI bot regenerates app.js + its Pages deploy lands — a few minutes behind the source push.)* |
 | **2026-06-14 — security headers + www redirect** | Added repo-root **`_headers`** (Cloudflare Pages): HSTS (1y, `includeSubDomains; preload`), a **tailored CSP** (Google Fonts + inline JSON-LD `'unsafe-inline'` + editor Worker via `connect-src`), `X-Frame-Options: DENY`, `Permissions-Policy`, and a **1-year cache on `/images/*`** (was 4h). Added a `www.yykan.uk/* → yykan.uk` line to `_redirects` (dormant — Pages `_redirects` is path-only, not host-aware). Verified live: HSTS/CSP/X-Frame/Permissions all present, `/images` cache now 1y. **www→apex 301** completed via a Cloudflare **Redirect Rule** (`www to apex`, dynamic 301 preserving path+query) — verified live; the `_redirects` www line stays as a dormant fallback. **Editor login+commit round-trip verified** under the new CSP. **First change shipped via the Claude Code pull/edit/push path** (commit `27d1e44`) rather than the web UI. |
 | **2026-06-13 — MiniGames + SEO/GEO pass** | **New MiniGames section.** Added a gallery hub (`minigames/index.html`) reusing the blog's card classes via an inline `GAMES` array, and the "Cats" logic puzzle (React/TS/Tailwind/Vite, built output only) at `minigames/catspuzzle/`. Footer link home → `/minigames/`. **SEO/GEO.** Added branded `404.html` (fixes soft-404s — missing URLs had returned 200+homepage); enriched home `<title>` + added Person `sameAs`/`url`; `build.js` now adds `/minigames/` pages to the sitemap (`STATIC_PAGES`), guards the default share image from becoming a card cover (`DEFAULT_OG_IMAGE`), and **auto-generates `llms.txt`** (with `build.yml` committing it); raster 1200×630 OG images (`og-minigames.png`, `og-default.png`) replacing SVG for social; `_TEMPLATE.html` default OG for cover-less posts; canonical + OG/Twitter on the game page; OG image for About. **Gotcha learned:** `build.yml` is not a build-trigger path (see Build & deploy flow). |
@@ -279,7 +281,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 **SEO/GEO follow-ups (deferred 2026-06-13):**
 - Fix About page: single `<h1>`, add `twitter:card` = `summary_large_image`.
-- `<noscript>` static post-link list on homepage/MiniGames (hardens for non-JS/AI crawlers).
+- `<noscript>` static post-link list — **done for the homepage (2026-06-14)**; still to do for `/minigames/` (copy the `BUILD:POSTS` marker pattern from `index.html` into the MiniGames hub).
 - Real cover images for the 3 cover-less posts (`sisyphus`, `bao-faan`, `theballadoftheurgentbowels`) — currently text-only cards, no social thumbnail.
 - Submit updated sitemap in Search Console; add Bing Webmaster Tools.
 - Off-site (the real growth lever): backlinks (r/HongKong, HK-diaspora, IG/FB), posting cadence.
