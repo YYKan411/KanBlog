@@ -147,7 +147,7 @@ const SAMPLE_POSTS = [
     date: "2026-06-07",
     excerpt: "撞正銀行假，話行就行，去喜士定睇海。黑屋、石灘、海鷗虎視眈眈，一場人鷗之間嘅無形戰爭靜默展開。而所謂喜士定戰役，一千年前根本唔喺喜士定打。",
     tags: ["散文","遊記","移英"],
-    cover: "images/AllQuietatHastings.jpg",
+    cover: "images/AllQuietatHastings.webp",
     url: "posts/all-quiet-at-hastings.html"
   },
   {
@@ -156,7 +156,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
     tags: ["散文","哲思","移英","社會","香港"],
-    cover: "images/CandleBlossoms.jpg",
+    cover: "images/CandleBlossoms.webp",
     featured: true,
     url: "posts/candleblossoms.html"
   },
@@ -166,7 +166,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-21",
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
     tags: ["散文"],
-    cover: "images/TheBalladoftheUrgentBowels.jpg",
+    cover: "images/TheBalladoftheUrgentBowels.webp",
     url: "posts/theballadoftheurgentbowels.html"
   },
   {
@@ -175,7 +175,7 @@ const SAMPLE_POSTS = [
     date: "2026-05-19",
     excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
     tags: ["散文","移英","物","香港"],
-    cover: "images/bridge-paradox.jpg",
+    cover: "images/bridge-paradox.webp",
     featured: true,
     url: "posts/footbridge-paradox.html"
   },
@@ -194,7 +194,7 @@ const SAMPLE_POSTS = [
     date: "2026-01-23",
     excerpt: "一路以為寵物同我無關，尤其諗到佢哋會走先過我。幾年前一個無工開嘅下午，我抱起兩隻黑媽媽嘅貓 BB 喊咗出嚟，然後帶咗佢哋返屋企——兩個小生命，撈返我返嚟。",
     tags: ["散文","哲思"],
-    cover: "images/CatTeacher.jpg",
+    cover: "images/CatTeacher.webp",
     url: "posts/the-cat-teachers.html"
   },
   {
@@ -212,7 +212,7 @@ const SAMPLE_POSTS = [
     date: "2023-04-03",
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
     tags: ["散文","遊記","移英"],
-    cover: "images/landsend.jpg",
+    cover: "images/landsend.webp",
     url: "posts/lands-end.html"
   }
 ];
