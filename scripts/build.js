@@ -101,6 +101,17 @@ function parsePost(filename) {
     }
   }
 
+  // Image policy: display covers are served as WebP (smaller, faster on the
+  // home grid); og:image stays the original raster (JPEG/PNG) because some
+  // social scrapers don't render WebP. So if a .webp sibling of the cover
+  // exists in images/, use it for the home card — otherwise keep the original.
+  if (cover) {
+    const webpCover = cover.replace(/\.(jpe?g|png)$/i, '.webp');
+    if (webpCover !== cover && fs.existsSync(path.join(ROOT, webpCover))) {
+      cover = webpCover;
+    }
+  }
+
   if (!title || !date) {
     console.warn(`⚠️  skipping ${filename}: missing title or date`);
     return null;
