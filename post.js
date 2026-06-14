@@ -17,8 +17,12 @@
   const body = document.querySelector('.article-body');
   if (!body) return;
 
-  const hasEnglish = body.querySelector('.pair .en') !== null;
-  if (!hasEnglish) return;  // pure-Chinese article: do nothing
+  const enParagraphs = body.querySelectorAll('.pair .en');
+  if (enParagraphs.length === 0) return;  // pure-Chinese article: do nothing
+
+  // Mark the English mirror text so screen readers switch voice and the
+  // lang signal stays correct (the page itself is lang="zh-HK").
+  enParagraphs.forEach(el => { if (!el.lang) el.lang = 'en'; });
 
   // build the segmented control
   const group = document.createElement('div');

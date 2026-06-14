@@ -72,6 +72,32 @@ a:hover { color: var(--accent); }
 
 .site-title a:hover { color: var(--ink); }
 
+/* English mirror of the site name — quiet, sits under 言又勤 */
+.site-title-en {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.6vw, 19px);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  color: var(--ink-faded);
+  margin-top: 4px;
+}
+
+/* Sub-identity line under the title block */
+.site-subtitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faded);
+  letter-spacing: 0.02em;
+  margin-top: 10px;
+}
+
+.site-subtitle .sep {
+  opacity: 0.5;
+  margin: 0 4px;
+}
+
 .site-tagline {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -387,9 +413,6 @@ a:hover { color: var(--accent); }
 }
 
 .article-body p { margin-bottom: 1.4em; }
-.article-body p:first-letter {
-  /* removed by default — opt in per-post if wanted */
-}
 
 .article-body h2 {
   font-family: var(--font-display);
@@ -664,11 +687,6 @@ a:hover { color: var(--accent); }
   /* mode: en only */
   .article-body.mode-en .pair .en { display: block; }
   .article-body.mode-en .pair .zh { display: none; }
-
-  /* show toggle when article has English */
-  .lang-toggle.has-en {
-    display: inline-block;
-  }
 }
 
 /* ============================================

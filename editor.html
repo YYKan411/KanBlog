@@ -567,7 +567,7 @@ function renderEditor(user) {
 // Tag validation
 // ============================================================
 function parseTags(raw) {
-  return raw.split(/[,,]/).map(t => t.trim()).filter(Boolean);
+  return raw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
 }
 
 function validateTagsLive() {
