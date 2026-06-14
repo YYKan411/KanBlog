@@ -191,7 +191,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 - **Social share images:** raster **1200×630 PNG** OG images — `og-minigames.png` (MiniGames + game) and `og-default.png` (About + cover-less posts). *Social scrapers do not render SVG OG images, so these are PNG, not SVG.*
 - **Home `<title>`** is keyword-rich (`言又勤 Yin Yau Kan｜雙語散文 · 遊記 · 雜談`) while `og:title` stays the clean brand "言又勤" — search gets keywords, social stays brand.
 - **Search Console:** `yykan.uk` is a DNS-verified domain property. The old `kanblog.pages.dev` property is retained to watch the 301 transition. *(Resubmit the sitemap after the 2026-06-13 changes; consider adding Bing Webmaster Tools — Roadmap.)*
-- **Open gaps** (see Roadmap): Person entity still lacks `jobTitle` / `knowsAbout` / `alumniOf`; About page has two `<h1>`s (its `twitter:card` is now `summary` — ideally upgrade to `summary_large_image`); MiniGames cards are JS-injected (no static `<a href>` — the homepage got a `<noscript>` static link list 2026-06-14, MiniGames still pending).
+- **Open gaps:** none of the prior on-page SEO gaps remain. About is now a single `<h1>` + `twitter:card = summary_large_image`; the MiniGames hub got its `<noscript>` static link list — all shipped 2026-06-15. Person-entity enrichment (`jobTitle` / `knowsAbout` / extra `sameAs`) was **deliberately declined** — see Known issues. Remaining lever is off-site (backlinks / cadence), not markup.
 
 ---
 
@@ -217,14 +217,14 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 - **`SAMPLE_POSTS` naming debt** — the live list is misleadingly named (see "The one coupling that can bite you").
 - **Masonry reading order** — CSS columns fill top-to-bottom *per column*, so the visual order does not strictly match newest-first left-to-right. Accepted trade-off for zero JS.
-- **Card cover CLS — accepted by design** — the masonry deliberately lets each card keep its natural image height (Pinterest-style freeflow), so card covers carry no fixed dimensions and can shift slightly as they load. This is an intentional aesthetic choice, not a defect. The proper "freeflow *and* no CLS" fix (reserving each card's natural-ratio space from known image dimensions) is on the Roadmap.
-- **Article hero CLS — open** — the full-width `.article-cover` on each post has no `width`/`height`, so content can shift once it loads. Fixable *without* cropping by adding each image's intrinsic dimensions (needs the four cover sizes). Not yet done.
+- **Card cover CLS — accepted by design, won't-fix (decided 2026-06-15)** — the masonry deliberately lets each card keep its natural image height (Pinterest-style freeflow), so card covers carry no fixed dimensions and can shift slightly as they load. The "freeflow *and* no-CLS" fix (reserving natural-ratio space from known dimensions) was considered and **declined**: Kaga wants to keep the effortless, automatic Pinterest-style layout. Not a defect — a chosen trade-off.
+- **Article hero CLS — won't-fix (decided 2026-06-15)** — the full-width `.article-cover` has no `width`/`height`; same call as above, declined for the same reason.
+- **Person entity enrichment — won't-do (decided 2026-06-15)** — `jobTitle` / `knowsAbout` / `alumniOf` / extra `sameAs` were considered for AEO and **declined by design**: 言又勤 is a deliberate persona, and the intent is to let the site speak for itself — readers who connect with the writing (and the games, and whatever comes next) will find their way in. No fabricated structured-data identity.
 - **Font weight** — Noto Serif HK loads four weights (400/500/600/700); `700` is unused. Note: browsers do not download unused-weight font files, so dropping `700` trims only a little font CSS, not real bytes. A meaningful payload cut means dropping a *used* weight (e.g. `400 + 600`, losing `500`) — a visual trade-off, on the Roadmap.
 - **Editor** — publish-only, pairs-only (see editor section). *Open.*
 - **build.js meta regex** — attribute-order-sensitive (`name`/`property` before `content`).
 
-- **About page — two `<h1>`s** (should be one). *Open.* (`twitter:card` was added 2026-06-15 — currently `summary`; ideally `summary_large_image` since About uses a 1200×630 OG.)
-- **MiniGames cards are JS-injected** — no static `<a href>` links; a `<noscript>` list would harden it for non-JS / AI crawlers. *Open.* *(The **homepage** got exactly this on 2026-06-14 — `build.js` writes a `<noscript>` post list into `index.html` between `BUILD:POSTS` markers; MiniGames could copy the pattern.)*
+*Resolved 2026-06-15:* **About single `<h1>`** (the masthead site-title was demoted to a `<div>` so the page's only `<h1>` is "About"); **About `twitter:card` → `summary_large_image`**; **MiniGames `<noscript>`** static link list added (hand-maintained — add a `<li>` when adding a game); the missing `.site-title-en` / `.site-subtitle` / `.sep` masthead styles; `var(--font-sans)` (undefined) → `var(--font-body)` in `404.html` **and** `minigames/index.html`; a stale `/about.html` footer link in MiniGames → clean `/about`; `editor.html` tag-split separator aligned to `build.js` (`/[,，]/`); `lang="en"` on all `.pair .en` (via `post.js` + inline in `about.html`); dead CSS removed (`.lang-toggle.has-en`, empty `:first-letter`).
 
 *Resolved 2026-06-06:* meta-text contrast (`--ink-faded` → `#75603e`), `prefers-reduced-motion`, `:focus-visible`, site favicon, homepage `og:image`, and the legacy-name strip in `readTitle`.
 
@@ -236,6 +236,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 | Date | Change |
 |---|---|
+| **2026-06-15 — quick-win follow-ups + scope decisions** | Shipped three low-risk wins: (a) **About single `<h1>`** — demoted the masthead site-title to a `<div>` (class-based CSS unchanged) so "About" is the page's only `<h1>`; (b) **About `twitter:card` → `summary_large_image`**; (c) **MiniGames `<noscript>`** static link list (hand-maintained). Plus same-file catches: `var(--font-sans)` (undefined) → `var(--font-body)` in `minigames/index.html` (matching the 404 fix), and a stale `/about.html` → `/about` footer link there. **Scope decisions recorded:** *Card + article-hero CLS* — **declined** (keep the automatic Pinterest freeflow); *Person-entity enrichment* — **declined** (言又勤 is a persona; let the site speak for itself). `SAMPLE_POSTS` rename and the two cover-less posts' artwork remain deferred. |
 | **2026-06-15 — full-site audit + cleanup pass** | Audit across security / best-practices / a11y / SEO / perf + code efficiency (local clone, then verified live: `_headers`, real-404, 1y image cache, `llms.txt` all confirmed serving; clone == `origin/main`). **Fixes shipped:** (1) added the missing `.site-title-en` / `.site-subtitle` / `.sep` masthead styles (the classes were in `index.html` + `about.html` but had **no CSS** — English name + sub-identity line were rendering unstyled). (2) `404.html` referenced undefined `var(--font-sans)` → switched to `var(--font-body)`. (3) `editor.html` `parseTags` split on `/[,,]/` (two ASCII commas) while `build.js` uses `/[,，]/` — fullwidth-comma tag input gave a false "will be dropped" warning; aligned the editor to `/[,，]/`. (4) a11y: English mirror paragraphs (`.pair .en`) now get `lang="en"` — injected by `post.js` for all posts (single-source), added inline to `about.html` (which doesn't load `post.js`). (5) removed dead CSS: the unreachable `.lang-toggle.has-en` rule (the `has-en` class only ever lands on the *group*) and an empty `:first-letter` ruleset. **Doc reconciliation:** `--ink-faded` reference corrected to `#75603e`; About `twitter:card` and theballad's cover both logged as resolved. |
 | **2026-06-14 — clean URLs everywhere + `<noscript>` post links (#3)** | **Clean URLs.** Cloudflare Pages 308-redirects `/x.html` → `/x`, so every `.html` URL was pointing crawlers + internal links at a redirect. Fixed across the whole surface: `build.js` post `url` → `posts/<slug>` (propagates to sitemap, feed, llms, home-card href) + about → `/about`; all 8 posts + `_TEMPLATE` + the `editor.html` generator had canonical / `og:url` / JSON-LD `@id` / author-url / internal back-footer-tag links de-`.html`'d; `about.html` + `index.html` own canonical/og/JSON-LD + footer link; `robots.txt` also disallows clean `/editor`. The editor's commit **`filepath` stays `posts/<slug>.html`** (real file on disk). Verified live: canonical/og/@id/sitemap clean, clean URL 200, `.html` still 308. **`<noscript>` post links (#3).** `build.js` now regenerates a `<ul class="noscript-posts">` of real `<a href>` links inside `index.html` (between `<!-- BUILD:POSTS_START/END -->` markers); `build.yml` now also commits `index.html`. Hardens the home page for non-JS / AI crawlers (cards are otherwise JS-injected). |
 | **2026-06-14 — WebP cover images (#2 perf)** | Converted the 6 photographic cover JPEGs to **WebP** (`cwebp -q 80`, ~30–40% smaller) for display; **kept the JPEGs for `og:image`** (social scrapers don't reliably render WebP). Swapped the `article-cover` `<img>` srcs in the 6 posts to `.webp`. **`build.js` now prefers a `.webp` sibling** for the home-card `cover` while `og:image` reads the JPEG (see Image format policy under Post metadata contract). Net: home grid + article heroes load WebP, social thumbnails stay JPEG. Shipped via Claude Code pull/edit/push. *(Note: app.js home covers update only after the CI bot regenerates app.js + its Pages deploy lands — a few minutes behind the source push.)* |
@@ -266,24 +267,21 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 ## Roadmap / pick-up
 
-**Performance / a11y (reviewed and deferred in the 2026-06-06 quick-win pass):**
-- *Freeflow + no CLS for cards* — keep the Pinterest-style natural card heights but eliminate layout shift by reserving each card's natural-ratio space. Mechanism: store each cover's intrinsic dimensions in post metadata → read in `build.js` → apply as `width`/`height` in `app.js`'s `makeCard`. Multi-file; this is the *non-cropping* version of the card-CLS fix (the 3:2 crop option was rejected on purpose — uniform covers kill the freeflow look).
-- *Article hero dimensions* — add intrinsic `width`/`height` to each `.article-cover` (no cropping, no uniformity). Quick once the four cover sizes are to hand.
+**Performance / a11y:**
+- *Card + article-hero CLS* — **declined 2026-06-15** (keep Pinterest freeflow; see Known issues). Not on the roadmap anymore.
 - *Font payload* — only worthwhile if dropping a *used* weight (e.g. `400 + 600`); a visual decision, not free. Dropping the unused `700` alone is near-zero benefit.
 
 **Features:**
 - Previous / next ("read next") links at the foot of each post — retention + internal-link SEO.
 - Web Share API as the primary mobile share action (current links as fallback).
 - Dark mode (`prefers-color-scheme`) — fits the candlelight theme.
-- Enrich the Person entity further: `jobTitle`, `knowsAbout`, `alumniOf` (`sameAs` IG/FB done 2026-06-13; add Threads/LinkedIn) — strengthens AEO / entity recognition.
+- ~~Enrich the Person entity~~ — **declined 2026-06-15** (let the site speak for itself; see Known issues).
 - Client-side search over the post list — when the corpus grows.
 - Cloudflare Web Analytics — free, cookie-less.
 - Date-indexed archive page — when the corpus grows.
 
-**SEO/GEO follow-ups (deferred 2026-06-13):**
-- Fix About page: single `<h1>`; upgrade `twitter:card` `summary` → `summary_large_image` (the tag itself was added 2026-06-15).
-- `<noscript>` static post-link list — **done for the homepage (2026-06-14)**; still to do for `/minigames/` (copy the `BUILD:POSTS` marker pattern from `index.html` into the MiniGames hub).
-- Real cover images for the 2 cover-less posts (`sisyphus`, `bao-faan`) — currently text-only cards, no social thumbnail. *(`theballadoftheurgentbowels` gained a WebP+JPEG cover in the 2026-06-14 WebP pass.)*
+**SEO/GEO follow-ups:**
+- Real cover images for the 2 cover-less posts (`sisyphus`, `bao-faan`) — currently text-only cards, no social thumbnail. *(`theballadoftheurgentbowels` gained a WebP+JPEG cover in the 2026-06-14 WebP pass.)* *Deferred — needs artwork, not code.*
 - Submit updated sitemap in Search Console; add Bing Webmaster Tools.
 - Off-site (the real growth lever): backlinks (r/HongKong, HK-diaspora, IG/FB), posting cadence.
 

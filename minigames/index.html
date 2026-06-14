@@ -51,8 +51,8 @@
       <p class="site-subtitle">英倫酒精關注組<span class="sep">｜</span>Just some late-night talk</p>
       <!-- MiniGames section label — small text under the site identity -->
       <div style="margin-top: 16px; line-height: 1.4;">
-        <h2 style="margin: 0; font-family: var(--font-sans); font-weight: 600; font-size: 18px; color: var(--ink);">小遊戲 · Mini Games</h2>
-        <p style="margin: 3px 0 0; font-family: var(--font-sans); font-size: 14.5px; color: var(--ink-faded);">閒來無事砌出小玩意<br>Little things just built for fun</p>
+        <h2 style="margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink);">小遊戲 · Mini Games</h2>
+        <p style="margin: 3px 0 0; font-family: var(--font-body); font-size: 14.5px; color: var(--ink-faded);">閒來無事砌出小玩意<br>Little things just built for fun</p>
       </div>
     </div>
     <div class="site-meta">
@@ -69,6 +69,13 @@
 
 <main class="masonry" id="gamesGrid">
   <!-- game cards injected by the script below -->
+  <noscript>
+    <!-- Static fallback for non-JS / AI crawlers. Hand-maintained: when you add
+         a game to the GAMES array below, add a matching <li> here too. -->
+    <ul class="noscript-posts">
+      <li><a href="/minigames/catspuzzle/">Cats — A Logic Puzzle</a></li>
+    </ul>
+  </noscript>
 </main>
 
 <footer class="footer">
@@ -77,7 +84,7 @@
     <span class="dot">·</span>
     <a href="/">home</a>
     <span class="dot">·</span>
-    <a href="/about.html">about</a>
+    <a href="/about">about</a>
     <span class="dot">·</span>
     <a href="/feed.xml">rss</a>
   </div>
