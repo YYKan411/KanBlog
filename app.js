@@ -148,7 +148,7 @@ const SAMPLE_POSTS = [
     excerpt: "撞正銀行假，話行就行，去喜士定睇海。黑屋、石灘、海鷗虎視眈眈，一場人鷗之間嘅無形戰爭靜默展開。而所謂喜士定戰役，一千年前根本唔喺喜士定打。",
     tags: ["散文","遊記","移英"],
     cover: "images/AllQuietatHastings.webp",
-    url: "posts/all-quiet-at-hastings.html"
+    url: "posts/all-quiet-at-hastings"
   },
   {
     slug: "candleblossoms",
@@ -158,7 +158,7 @@ const SAMPLE_POSTS = [
     tags: ["散文","哲思","移英","社會","香港"],
     cover: "images/CandleBlossoms.webp",
     featured: true,
-    url: "posts/candleblossoms.html"
+    url: "posts/candleblossoms"
   },
   {
     slug: "theballadoftheurgentbowels",
@@ -167,7 +167,7 @@ const SAMPLE_POSTS = [
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
     tags: ["散文"],
     cover: "images/TheBalladoftheUrgentBowels.webp",
-    url: "posts/theballadoftheurgentbowels.html"
+    url: "posts/theballadoftheurgentbowels"
   },
   {
     slug: "footbridge-paradox",
@@ -177,7 +177,7 @@ const SAMPLE_POSTS = [
     tags: ["散文","移英","物","香港"],
     cover: "images/bridge-paradox.webp",
     featured: true,
-    url: "posts/footbridge-paradox.html"
+    url: "posts/footbridge-paradox"
   },
   {
     slug: "sisyphus",
@@ -186,7 +186,7 @@ const SAMPLE_POSTS = [
     excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。",
     tags: ["散文","哲思","移英"],
     featured: true,
-    url: "posts/sisyphus.html"
+    url: "posts/sisyphus"
   },
   {
     slug: "the-cat-teachers",
@@ -195,7 +195,7 @@ const SAMPLE_POSTS = [
     excerpt: "一路以為寵物同我無關，尤其諗到佢哋會走先過我。幾年前一個無工開嘅下午，我抱起兩隻黑媽媽嘅貓 BB 喊咗出嚟，然後帶咗佢哋返屋企——兩個小生命，撈返我返嚟。",
     tags: ["散文","哲思"],
     cover: "images/CatTeacher.webp",
-    url: "posts/the-cat-teachers.html"
+    url: "posts/the-cat-teachers"
   },
   {
     slug: "bao-faan",
@@ -204,7 +204,7 @@ const SAMPLE_POSTS = [
     excerpt: "細個嗰陣屋企忽然好窮。16歲生日返第一份兼職，月尾將幾百蚊放喺飯枱上。第二朝五點，我同老竇喊咗好耐好耐好耐。",
     tags: ["散文","香港","人"],
     featured: true,
-    url: "posts/bao-faan.html"
+    url: "posts/bao-faan"
   },
   {
     slug: "lands-end",
@@ -213,7 +213,7 @@ const SAMPLE_POSTS = [
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
     tags: ["散文","遊記","移英"],
     cover: "images/landsend.webp",
-    url: "posts/lands-end.html"
+    url: "posts/lands-end"
   }
 ];
 
