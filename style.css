@@ -512,9 +512,7 @@ a:hover { color: var(--accent); }
 .article-body a:hover { border-color: var(--accent); color: var(--accent); }
 
 .article-tags {
-  margin-top: 64px;
-  padding-top: 32px;
-  border-top: 1px solid var(--rule);
+  margin-top: 56px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -604,9 +602,9 @@ a:hover { color: var(--accent); }
 
 .post-nav .nav-title {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.3;
-  color: var(--ink);
+  color: var(--ink-soft);
 }
 
 .post-nav a:hover .nav-title { color: var(--accent); }
