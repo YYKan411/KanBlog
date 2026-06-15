@@ -329,8 +329,7 @@ a:hover { color: var(--accent); }
 
 .card.featured .card-title,
 .card.featured .card-excerpt,
-.card.featured .card-meta,
-.card.featured .card-tag {
+.card.featured .card-meta {
   color: var(--paper);
 }
 

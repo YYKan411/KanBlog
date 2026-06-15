@@ -82,7 +82,7 @@ function renderPosts() {
 function makeCard(post) {
   const a = document.createElement('a');
   a.className = 'card' + (post.cover ? '' : ' text-only') + (post.featured ? ' featured' : '');
-  a.href = post.url || `posts/${post.slug}.html`;
+  a.href = post.url || `posts/${post.slug}`;
 
   if (post.cover) {
     const img = document.createElement('img');

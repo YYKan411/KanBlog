@@ -14,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const SITE_URL = 'https://yykan.uk';
 // Default social share image (used by _TEMPLATE.html for cover-less posts).
@@ -67,6 +68,25 @@ function xmlEscape(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
+}
+
+// Last content-change date of a tracked file, from git (deterministic across
+// machines / CI runs — unlike fs mtime, which a fresh checkout resets to "now").
+// %cs = committer date in strict YYYY-MM-DD. Returns null if git/history is
+// unavailable (e.g. shallow clone that never touched the file) so the caller
+// can fall back to a deterministic date. NOTE: requires full history —
+// build.yml checks out with fetch-depth: 0.
+function gitLastModified(relPath) {
+  try {
+    const out = execSync(`git log -1 --format=%cs -- "${relPath}"`, {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : null;
+  } catch {
+    return null;
+  }
 }
 
 // Convert ISO date "YYYY-MM-DD" → RFC 822 "Wed, 21 May 2026 00:00:00 GMT"
@@ -178,7 +198,13 @@ const updatedAppJs = appJsCurrent.replace(
 );
 
 if (updatedAppJs === appJsCurrent) {
-  console.warn('⚠️  could not find SAMPLE_POSTS in app.js — no changes written');
+  // distinguish "regex never matched" (a real bug) from "already up to date"
+  // (a no-op build), so the genuine warning isn't lost in routine noise
+  if (!/const SAMPLE_POSTS\s*=\s*\[/.test(appJsCurrent)) {
+    console.warn('⚠️  SAMPLE_POSTS not found in app.js — no changes written');
+  } else {
+    console.log('✓ app.js already up to date');
+  }
 } else {
   fs.writeFileSync(APP_JS, updatedAppJs);
   console.log('✓ app.js updated');
@@ -192,8 +218,12 @@ const newestPostDate = posts.length > 0
   ? posts[0].date.split('T')[0]
   : new Date().toISOString().split('T')[0];
 
-const aboutPath = path.join(ROOT, 'about.html');
-const aboutMtime = fs.statSync(aboutPath).mtime.toISOString().split('T')[0];
+// Static-page lastmod uses the git commit date (deterministic + reflects real
+// content changes), falling back to the newest post date if git history isn't
+// available. Previously this was fs mtime, which a CI checkout resets to the
+// build day — churning lastmod on every run and giving crawlers a false
+// "page changed" signal.
+const aboutLastmod = gitLastModified('about.html') || newestPostDate;
 
 // Static section pages (not generated from posts/). Add future MiniGames
 // or other standalone pages here and they'll appear in the sitemap.
@@ -205,13 +235,13 @@ const staticUrls = STATIC_PAGES
   .filter(p => fs.existsSync(path.join(ROOT, p.file)))
   .map(p => ({
     loc: p.loc,
-    lastmod: fs.statSync(path.join(ROOT, p.file)).mtime.toISOString().split('T')[0],
+    lastmod: gitLastModified(p.file) || newestPostDate,
     priority: p.priority
   }));
 
 const urls = [
   { loc: `${SITE_URL}/`,            lastmod: newestPostDate,  priority: '1.0' },
-  { loc: `${SITE_URL}/about`,       lastmod: aboutMtime,      priority: '0.8' },
+  { loc: `${SITE_URL}/about`,       lastmod: aboutLastmod,    priority: '0.8' },
   ...staticUrls,
   ...posts.map(p => ({
     loc: `${SITE_URL}/${p.url}`,
@@ -326,7 +356,11 @@ const updatedIndex = indexHtml.replace(
   noscriptBlock
 );
 if (updatedIndex === indexHtml) {
-  console.warn('⚠️  could not find BUILD:POSTS markers in index.html — noscript links not updated');
+  if (!/<!-- BUILD:POSTS_START -->/.test(indexHtml)) {
+    console.warn('⚠️  BUILD:POSTS markers not found in index.html — noscript links not updated');
+  } else {
+    console.log('✓ index.html noscript already up to date');
+  }
 } else {
   fs.writeFileSync(INDEX, updatedIndex);
   console.log('✓ index.html noscript links updated');
