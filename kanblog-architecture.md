@@ -160,11 +160,110 @@ A small section listing browser games built for fun. Two layers:
 - **Gallery hub — `minigames/index.html`:** a **standalone static page** (not processed by `build.js`). It reuses the blog's look by linking the live stylesheet with an **absolute** path (`<link href="/style.css">`) and the same fonts, and replicates the masthead + footer. The "小遊戲 · Mini Games" label sits as **small text under the site identity** in the masthead. Game cards are rendered by an **inline `<script>`** holding a `GAMES` array, using the blog's own card classes (`.card`, `.card-cover`, `.card-body`, `.card-title`, `.card-excerpt`, `.card-meta`, `.card-tag`) — so they look identical to post cards.
 - **The "Cats" game — `minigames/catspuzzle/`:** a Star-Battle / Queens-style logic puzzle (one cat per colour/row/column, no two cats touch incl. diagonally). Built with **React + TypeScript + Tailwind 4 + Vite**, fully client-side, themed in Library Linen. Has a "← Mini Games" link (→ `/minigames/`) and a footer link home. **Only the built output is in the repo** (`index.html` + `assets/index-<hash>.js/.css`) — *the React source is not in the repo.*
 
-### ➕ How to add a new game
-1. Build/deploy the game into `minigames/<game>/`.
-2. Add a cover to `images/`.
-3. Append one entry to the `GAMES` array in `minigames/index.html` (`{ title, excerpt, cover, url, tags, meta }`).
-4. Add it to `STATIC_PAGES` in `scripts/build.js` (sitemap) and to the `## Mini Games` list in the `llms.txt` generator (also in `build.js`).
+### 🎮 The Game Contract (added 2026-06-15)
+
+Games are **apps, not posts**: each game's *interior* (gameplay UI, board, controls,
+layout, animation) should differ — **do not template it.** But every game shares an
+*outer contract* so it belongs to the site and is discoverable. **Standardise the
+shell; keep the interior free.** (Same philosophy as posts having a rigid
+`_TEMPLATE.html` head but free body content — just inverted: here the body is free and
+only the shell is fixed.)
+
+**FREE — the interior.** Everything about how the game looks and plays. A puzzle, an
+arcade game, a word game should look nothing alike. Reference the existing game(s) for
+*tone* (quiet, paper, Library Linen restraint), **not** for layout.
+
+**FIXED — the contract every game must honour:**
+
+1. **Frame & tone** — use the Library Linen tokens (below) + the three site fonts;
+   restraint over flash. Provide a `← Mini Games` link (→ `/minigames/`) and a link
+   home (→ `/`). The game must visually read as part of yykan.uk.
+2. **Page meta** — `minigames/<game>/index.html` carries the head block below
+   (title / description / canonical / robots / OG / Twitter / JSON-LD). Same discipline
+   as `_TEMPLATE.html` for posts.
+3. **Registration — 3 synchronized edits (the easy-to-forget part):**
+   - `minigames/index.html` → append to the `GAMES` array: `{ title, excerpt, cover, url, tags, meta }`
+   - `scripts/build.js` → add to `STATIC_PAGES` (→ sitemap): `{ file, loc, priority }`
+   - `scripts/build.js` → add a line to the `## Mini Games` list in the `llms.txt` generator
+4. **Share image** — a 1200×630 **PNG** `images/og-<game>.png` (raster; SVG doesn't
+   render in social scrapers). Until it exists, the page falls back to `og-minigames.png`.
+5. **Hub cover** — an image in `images/` for the gallery card (SVG is fine here —
+   same-origin, not a social scraper).
+6. **Asset hygiene** — Vite `base: './'` (relative paths, works from the subfolder).
+   Prefer **stable output filenames** so updating a game is a plain overwrite; if
+   filenames stay hashed, deleting the old hashed files on update is mandatory.
+
+**Head block** — copy into `minigames/<game>/index.html`, replace every `[…]`:
+
+```html
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[遊戲名] · Mini Games — 言又勤</title>
+<meta name="description" content="[一兩句遊戲描述，中英皆可]">
+<meta name="author" content="言又勤">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yykan.uk/minigames/[game]/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="[遊戲名] · Mini Games — 言又勤">
+<meta property="og:description" content="[同上描述]">
+<meta property="og:url" content="https://yykan.uk/minigames/[game]/">
+<meta property="og:site_name" content="言又勤">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://yykan.uk/images/og-[game].png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[遊戲名] · Mini Games — 言又勤">
+<meta name="twitter:description" content="[同上描述]">
+<meta name="twitter:image" content="https://yykan.uk/images/og-[game].png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "[遊戲名]",
+  "url": "https://yykan.uk/minigames/[game]/",
+  "description": "[描述]",
+  "inLanguage": ["zh-HK", "en-GB"],
+  "applicationCategory": "Game",
+  "gamePlatform": "Web browser",
+  "isPartOf": { "@type": "WebSite", "name": "言又勤", "url": "https://yykan.uk/" },
+  "author": { "@type": "Person", "name": "言又勤", "alternateName": "Yin Yau Kan" }
+}
+</script>
+<!-- the game's own bundled CSS / JS (e.g. Vite output) go here -->
+</head>
+```
+
+**Library Linen tokens** — use directly, or map into the game's Tailwind/Vite theme so
+the palette is recolourable and feels native (these match `style.css` `:root` exactly,
+incl. the WCAG-corrected `--ink-faded`):
+
+```css
+:root {
+  --ink: #3d2f1f;          /* primary text / strokes — deep walnut */
+  --ink-soft: #6a5840;     /* secondary text */
+  --ink-faded: #75603e;    /* meta, dates — WCAG AA on --paper */
+  --paper: #ebe5d4;        /* page background — linen */
+  --paper-warm: #e0d8c2;   /* card / surface bg */
+  --accent: #3a5a3a;       /* moss green — used sparingly */
+  --rule: #c9bfa3;         /* hairline borders */
+  --font-display: 'Cormorant Garamond', 'Noto Serif HK', Georgia, serif;
+  --font-body: 'Noto Serif HK', 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+```
+
+**Review workflow:** build the game, then bring the finished code in a fresh chat. The
+review is two-track — *objective* against this contract (meta complete? 3 registrations
+done? back/home links present? asset hygiene?), and *judgement* on tone/coherence with
+the existing games. catspuzzle is the reference implementation.
 
 ### ⚠️ Vite asset-hash gotcha
 Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = upload the new asset files AND delete the old hashed ones** (orphans are harmless but messy). Current live assets: `index-BTKfVq4T.js` / `index-DDfAfMFm.css`. *Future improvement (Roadmap): configure Vite for stable filenames so updates are a plain overwrite.* The game is built with Vite `base: './'` so relative asset paths work from any subfolder.
@@ -238,6 +337,7 @@ Vite re-hashes `index-<hash>.js/.css` on every build, so **updating the game = u
 
 | Date | Change |
 |---|---|
+| **2026-06-15 — Game Contract for MiniGames** | Reverse-engineered catspuzzle + the site conventions into a written **Game Contract** (see MiniGames section): the model is "standardise the shell, keep the interior free" — gameplay UI varies per game, but every game honours a fixed outer contract (frame/tone + Library Linen tokens, page meta head block, 3 synchronized registrations [GAMES / STATIC_PAGES / llms.txt], 1200×630 PNG share image, asset hygiene). Includes copy-paste head-meta block (title/canonical/OG/Twitter/VideoGame JSON-LD) and the `:root` tokens snippet. Prep for an incoming new game — built so a new game ships consistent without re-deriving the contract each time. |
 | **2026-06-15 — referential-integrity housekeeping** | From a cross-file reference audit (all link/asset/contract checks passed). Two tidy-ups: (1) deleted 4 orphan placeholder SVGs `images/sample-1…4.svg` (zero references anywhere — scaffold art from the initial upload; `catspuzzle-cover.svg` is real and kept). (2) **Asset-path convention unified:** all standalone top-level pages now use absolute `/style.css` (was mixed — `index.html`/`about.html` used relative `style.css`, `404.html`/`minigames/` already absolute); `index.html` script also `app.js`→`/app.js`. **Convention going forward:** top-level pages use absolute `/…` for assets; posts keep their coherent relative `../…` scheme (style.css, post.js, images, links — also keeps the editor generator simple). |
 | **2026-06-15 — health-check fixes (4)** | From a self-run health check: (1) **Non-deterministic sitemap `<lastmod>`** — static pages (`about`, `/minigames/`, catspuzzle) used `fs.statSync().mtime`, which a CI fresh-checkout resets to the build day → lastmod churned every run, signalling false "page changed" to crawlers. Now uses **git commit date** (`git log -1 --format=%cs`, deterministic + content-true), falling back to newest-post date; `build.yml` checkout set to `fetch-depth: 0` so history is available. Verified: identical across re-runs, dates match each file's last commit. (Posts already used `p.date` from meta — unaffected.) (2) **`build.js` false warnings** — the app.js + index.html "replaced === original" branches conflated "regex/marker missing" with "already up to date", so every no-op build emitted two bogus ⚠️; now they distinguish the two (matching the post.js NAV step). (3) **`app.js:85`** card-href fallback used `posts/<slug>.html` (would 308); now clean `posts/<slug>` (the fallback never fires — `build.js` always sets a clean `url` — but no longer points at a redirect if it ever did). (4) **`style.css`** `.card.featured .card-tag` was declared twice (grouped `color:--paper` then overridden by `--paper-warm`); removed the dead grouped entry. |
 | **2026-06-15 — post-footer polish** | Two `style.css`-only tweaks (class-based → every post, no backfill): removed the `border-top` divider on `.article-tags` (the rule between body and hashtags — the footer had one too many horizontal lines; tags now flow quietly off the prose, leaving a single rule above the prev/next nav); and toned the prev/next neighbour titles down (`.post-nav .nav-title` 17px→15px, `--ink`→`--ink-soft`) so they read as secondary "read next" rather than competing with article headings. |
