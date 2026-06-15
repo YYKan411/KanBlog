@@ -26,6 +26,7 @@ const MAX_FEED_ITEMS = 50;  // cap RSS feed length
 const ROOT = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
 const APP_JS = path.join(ROOT, 'app.js');
+const POST_JS = path.join(ROOT, 'post.js');
 const SITEMAP = path.join(ROOT, 'sitemap.xml');
 const FEED = path.join(ROOT, 'feed.xml');
 const LLMS = path.join(ROOT, 'llms.txt');
@@ -329,6 +330,39 @@ if (updatedIndex === indexHtml) {
 } else {
   fs.writeFileSync(INDEX, updatedIndex);
   console.log('✓ index.html noscript links updated');
+}
+
+// ============================================================
+// 7. inject ordered nav data into post.js (prev / next links)
+// ============================================================
+// Each post's previous/next neighbours are chronological. post.js reads
+// this build-generated array (newest-first), finds the current post by
+// slug, and links the older/newer posts. Regenerated here so old and new
+// posts get prev/next with no per-post markup. Markers in post.js:
+//   /* BUILD:NAV_START */ ... /* BUILD:NAV_END */
+const navItems = posts.map(p =>
+  `  { slug: ${JSON.stringify(p.slug)}, title: ${JSON.stringify(p.title)}, url: ${JSON.stringify('/' + p.url)} }`
+).join(',\n');
+const navBlock =
+  `/* BUILD:NAV_START */\n` +
+  `var POSTS_NAV = [\n${navItems}\n];\n` +
+  `/* BUILD:NAV_END */`;
+const postJsCurrent = fs.readFileSync(POST_JS, 'utf8');
+const updatedPostJs = postJsCurrent.replace(
+  /\/\* BUILD:NAV_START \*\/[\s\S]*?\/\* BUILD:NAV_END \*\//,
+  navBlock
+);
+if (updatedPostJs === postJsCurrent) {
+  // either no change, or markers missing — distinguish so a missing-marker
+  // bug doesn't hide silently
+  if (!/\/\* BUILD:NAV_START \*\//.test(postJsCurrent)) {
+    console.warn('⚠️  BUILD:NAV markers not found in post.js — prev/next data not updated');
+  } else {
+    console.log('✓ post.js nav already up to date');
+  }
+} else {
+  fs.writeFileSync(POST_JS, updatedPostJs);
+  console.log('✓ post.js nav updated');
 }
 
 console.log(`✓ done — ${posts.length} post(s), ${urls.length} sitemap URL(s), ${Math.min(posts.length, MAX_FEED_ITEMS)} feed item(s)`);
