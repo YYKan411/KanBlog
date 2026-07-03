@@ -6,7 +6,9 @@ on:
       - 'posts/**'
       - 'scripts/build.js'
       - 'about.html'
-# Allow the action to push commits back to the repo
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
