@@ -87,7 +87,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['wang-yangming', 'gandhi', 'ibn-rushd'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'bao-faan', title: { zh: '飽飯', en: 'A Profound Satiety' } }],
   },
   {
     id: 'kant',
@@ -263,7 +263,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['laozi', 'gandhi', 'zhuangzi'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'the-cat-teachers', title: { zh: '貓老師', en: 'The Cat Teachers' } }],
   },
   {
     id: 'fanon',
@@ -351,7 +351,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['buddha', 'wang-yangming', 'confucius'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'candleblossoms', title: { zh: '蠟燭花', en: 'Candle Blossoms' } }],
   },
   {
     id: 'ibn-rushd',
@@ -395,7 +395,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['confucius', 'socrates', 'kant'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'why-overthink-on-an-empty-stomach', title: { zh: '做乜諗嘢唔食飯？', en: 'Why Overthink on an Empty Stomach?' } }],
   },
   {
     id: 'mill',
@@ -483,7 +483,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['zhuangzi', 'buddha', 'confucius'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'lands-end', title: { zh: '地之盡頭大風吹', en: 'Land\'s End' } }],
   },
   {
     id: 'socrates',
@@ -512,8 +512,8 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'You would rather suspend conclusion and keep asking — that honesty of not-knowing is Socratic.',
       },
       {
-        zh: '你也相信善與知識相關：許多壞決定，來自未經審視的假設。酒吧裏的長談，若夠真誠，也是哲學。',
-        en: 'You tie the good to knowledge: many bad decisions come from unexamined assumptions. A sincere long talk at the bar is philosophy too.',
+        zh: '你也相信善與知識相關：許多壞決定，來自未經審視的假設。深夜傾計若夠真誠，也是哲學。',
+        en: 'You tie the good to knowledge: many bad decisions come from unexamined assumptions. A sincere late-night chat is philosophy too.',
       },
     ],
     blindSpots: [
@@ -527,7 +527,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['kant', 'zhuangzi', 'mill'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'why-overthink-on-an-empty-stomach', title: { zh: '做乜諗嘢唔食飯？', en: 'Why Overthink on an Empty Stomach?' } }],
   },
   {
     id: 'arendt',
@@ -703,7 +703,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['confucius', 'gandhi', 'kant'],
-    blogLinks: [],
+    blogLinks: [{ slug: 'bao-faan', title: { zh: '飽飯', en: 'A Profound Satiety' } }],
   },
 ];
 

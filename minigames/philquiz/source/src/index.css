@@ -184,6 +184,52 @@ a {
   color: var(--ink-faded);
 }
 
+.fine-print.disclaimer {
+  margin-top: 10px;
+}
+
+.axis-intro {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--ink-faded);
+}
+
+.axis-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.axis-tip {
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  cursor: help;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
+
+.blog-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-link-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.blog-link-list a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.blog-link-list a:hover {
+  text-decoration: underline;
+}
+
 .primary-btn,
 .ghost-btn {
   margin-top: 18px;

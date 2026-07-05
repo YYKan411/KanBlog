@@ -28,7 +28,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
   return (
     <section className="panel results-panel">
-      <p className="results-kicker">{t({ zh: '你的深夜吧枱側寫', en: 'Your late-night bar profile' })}</p>
+      <p className="results-kicker">{t({ zh: '你的深夜傾計側寫', en: 'Your late-night chat profile' })}</p>
       <h2 className="results-title">{t(primary.philosopher.name)}</h2>
       <p className="results-epithet">{t(primary.philosopher.epithet)}</p>
       <p className="match-score">
@@ -71,15 +71,31 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       <section className="result-section">
         <h3>{t({ zh: '你的六個向度', en: 'Your six-axis profile' })}</h3>
+        <p className="axis-intro">
+          {t({
+            zh: '數值已按各向度題目曝光量校正。滑鼠或點按 ⓘ 可查看各軸解釋。',
+            en: 'Scores are adjusted for how often each axis appears in the quiz. Hover or tap ⓘ for axis glossaries.',
+          })}
+        </p>
         <div className="axis-grid">
           {AXES.map((axis) => {
             const value = vector[axis.id];
-            const pct = Math.round(((value + 12) / 24) * 100);
+            const pct = Math.round(((value + 6) / 12) * 100);
             return (
               <div key={axis.id} className="axis-row">
                 <div className="axis-labels">
                   <span>{t(axis.low)}</span>
-                  <span>{t(axis.label)}</span>
+                  <span className="axis-center">
+                    {t(axis.label)}
+                    <button
+                      type="button"
+                      className="axis-tip"
+                      aria-label={t({ zh: `${t(axis.label)} 說明`, en: `${t(axis.label)} glossary` })}
+                      title={t(axis.glossary)}
+                    >
+                      ⓘ
+                    </button>
+                  </span>
                   <span>{t(axis.high)}</span>
                 </div>
                 <div className="axis-track">
@@ -90,6 +106,19 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
           })}
         </div>
       </section>
+
+      {primary.philosopher.blogLinks.length > 0 && (
+        <section className="result-section">
+          <h3>{t({ zh: '站內延伸閱讀', en: 'Further reading on KanBlog' })}</h3>
+          <ul className="blog-link-list">
+            {primary.philosopher.blogLinks.map((link) => (
+              <li key={link.slug}>
+                <a href={`/posts/${link.slug}`}>{t(link.title)}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {secondary && (
         <section className="result-section secondary-match">
@@ -146,8 +175,8 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       <p className="fine-print">
         {t({
-          zh: '免責：本問卷為趣味傾向配對，不構成心理、學術或道德判斷。哲學家本人若坐在吧枱，大概也並不認同這種歸類。',
-          en: 'Disclaimer: this is playful tendency matching — not psychological, academic, or moral judgment. Most philosophers, at the bar, would disagree with being filed this neatly.',
+          zh: '免責：本問卷非學術量表，結果受題目設計影響；為趣味傾向配對，不構成心理、學術或道德判斷。思想家本人若坐在一旁傾計，大概也並不認同這種歸類。',
+          en: 'Disclaimer: not an academic scale — results reflect how the questions are designed. Playful tendency matching only, not psychological, academic, or moral judgment. Most thinkers, chatting beside you, would disagree with being filed this neatly.',
         })}
       </p>
     </section>
