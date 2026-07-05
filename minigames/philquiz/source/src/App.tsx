@@ -9,7 +9,7 @@ import {
   computeVector,
   decodeShareParam,
   matchPhilosophers,
-  normalizeMatches,
+  resolveShareVector,
 } from './engine/score';
 import type { AppScreen, MatchResult, QuizAnswer } from './types';
 
@@ -32,11 +32,13 @@ function loadSaved(): SavedState | null {
 }
 
 function AppInner() {
-  const sharePrimary = decodeShareParam(new URLSearchParams(window.location.search).get('r'));
-  const shareSecondary = decodeShareParam(new URLSearchParams(window.location.search).get('s'));
+  const params = new URLSearchParams(window.location.search);
+  const sharePrimary = decodeShareParam(params.get('r'));
+  const shareVector = resolveShareVector(params.get('axes'), sharePrimary);
+  const isShareView = Boolean(sharePrimary || shareVector);
 
   const [screen, setScreen] = useState<AppScreen>(() => {
-    if (sharePrimary) return 'results';
+    if (isShareView) return 'results';
     const saved = loadSaved();
     return saved?.screen ?? 'intro';
   });
@@ -44,16 +46,20 @@ function AppInner() {
   const [index, setIndex] = useState(() => loadSaved()?.index ?? 0);
 
   useEffect(() => {
-    if (screen === 'results' && sharePrimary) return;
+    if (isShareView) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ screen, answers, index }));
-  }, [screen, answers, index, sharePrimary]);
+  }, [screen, answers, index, isShareView]);
 
-  const vector = useMemo(() => computeVector(answers), [answers]);
+  const vector = useMemo(() => {
+    if (shareVector) return shareVector;
+    return computeVector(answers);
+  }, [shareVector, answers]);
+
   const matches: MatchResult[] = useMemo(() => {
-    if (sharePrimary) return normalizeMatches(sharePrimary, shareSecondary ?? undefined);
+    if (shareVector) return matchPhilosophers(shareVector, 4);
     if (answers.length === QUESTIONS.length) return matchPhilosophers(vector, 4);
     return [];
-  }, [answers.length, sharePrimary, shareSecondary, vector]);
+  }, [answers.length, shareVector, vector]);
 
   const handleAnswer = (answer: QuizAnswer) => {
     setAnswers((prev) => {
@@ -84,7 +90,7 @@ function AppInner() {
       {screen === 'intro' && <Intro onStart={() => setScreen('quiz')} />}
       {screen === 'quiz' && <Quiz answers={answers} index={index} onAnswer={handleAnswer} />}
       {screen === 'results' && matches.length > 0 && (
-        <Results matches={matches} vector={vector} onRetake={handleRetake} />
+        <Results matches={matches} vector={vector} onRetake={handleRetake} isShareView={isShareView} />
       )}
     </Layout>
   );

@@ -3,6 +3,8 @@ import { PHILOSOPHERS } from '../data/philosophers';
 import { QUESTIONS } from '../data/questions';
 import type { AxisId, AxisVector, MatchResult, Philosopher, QuizAnswer } from '../types';
 
+export const SCORING_VERSION = 2;
+
 const AXIS_SCALE: Record<AxisId, number> = {
   ethics: 3,
   epistemology: 3,
@@ -12,33 +14,56 @@ const AXIS_SCALE: Record<AxisId, number> = {
   tradition: 3,
 };
 
-/** Sum of per-question max |weight| per axis — used to normalize exposure imbalance. */
-function computeAxisMaxExposure(): AxisVector {
-  const exposure = EMPTY_VECTOR();
-  for (const question of QUESTIONS) {
-    for (const axis of AXIS_IDS) {
-      const maxForQuestion = Math.max(
-        ...question.options.map((option) => Math.abs(option.weights[axis] ?? 0)),
-      );
-      exposure[axis] += maxForQuestion;
-    }
-  }
-  return exposure;
+interface AxisBounds {
+  min: AxisVector;
+  max: AxisVector;
+  baseline: AxisVector;
 }
 
-const AXIS_MAX_EXPOSURE = computeAxisMaxExposure();
+/** Per-axis achievable min, max, and neutral baseline (equal option probability). */
+function computeAxisBounds(): AxisBounds {
+  const min = EMPTY_VECTOR();
+  const max = EMPTY_VECTOR();
+  const baseline = EMPTY_VECTOR();
 
-/** Scale raw sums to comparable range for centroid matching. */
-function normalizeVector(raw: AxisVector): AxisVector {
-  const normalized = EMPTY_VECTOR();
-  for (const axis of AXIS_IDS) {
-    const max = AXIS_MAX_EXPOSURE[axis];
-    normalized[axis] = max > 0 ? (raw[axis] / max) * 6 : 0;
+  for (const question of QUESTIONS) {
+    for (const axis of AXIS_IDS) {
+      const weights = question.options.map((option) => option.weights[axis] ?? 0);
+      min[axis] += Math.min(...weights);
+      max[axis] += Math.max(...weights);
+      baseline[axis] += weights.reduce((sum, weight) => sum + weight, 0) / weights.length;
+    }
   }
+
+  return { min, max, baseline };
+}
+
+const AXIS_BOUNDS = computeAxisBounds();
+
+/** Map raw sums to the same -2…+2 scale as philosopher centroids. */
+export function normalizeVector(raw: AxisVector): AxisVector {
+  const normalized = EMPTY_VECTOR();
+
+  for (const axis of AXIS_IDS) {
+    const value = raw[axis];
+    const base = AXIS_BOUNDS.baseline[axis];
+    const lo = AXIS_BOUNDS.min[axis];
+    const hi = AXIS_BOUNDS.max[axis];
+
+    let score = 0;
+    if (value >= base) {
+      score = hi === base ? 0 : (2 * (value - base)) / (hi - base);
+    } else {
+      score = base === lo ? 0 : (2 * (value - base)) / (base - lo);
+    }
+
+    normalized[axis] = Math.max(-2, Math.min(2, score));
+  }
+
   return normalized;
 }
 
-export function computeVector(answers: QuizAnswer[]): AxisVector {
+export function computeRawVector(answers: QuizAnswer[]): AxisVector {
   const raw = EMPTY_VECTOR();
   const questionMap = new Map(QUESTIONS.map((q) => [q.id, q]));
 
@@ -53,7 +78,11 @@ export function computeVector(answers: QuizAnswer[]): AxisVector {
     }
   }
 
-  return normalizeVector(raw);
+  return raw;
+}
+
+export function computeVector(answers: QuizAnswer[]): AxisVector {
+  return normalizeVector(computeRawVector(answers));
 }
 
 function weightedDistance(a: AxisVector, b: AxisVector): number {
@@ -65,23 +94,23 @@ function weightedDistance(a: AxisVector, b: AxisVector): number {
   return Math.sqrt(sum);
 }
 
-function toSimilarity(distance: number): number {
+/** Internal ordering key only — not a statistical match probability. */
+function toRankScore(distance: number): number {
   return Math.round((1 / (1 + distance)) * 100);
 }
 
 export function matchPhilosophers(vector: AxisVector, limit = 4): MatchResult[] {
-  const ranked = PHILOSOPHERS.map((philosopher) => ({
+  return PHILOSOPHERS.map((philosopher) => ({
     philosopher,
     distance: weightedDistance(vector, philosopher.centroid),
   }))
     .sort((a, b) => a.distance - b.distance)
     .slice(0, limit)
-    .map(({ philosopher, distance }) => ({
+    .map(({ philosopher, distance }, index) => ({
       philosopher,
-      similarity: toSimilarity(distance),
+      similarity: toRankScore(distance),
+      rank: index + 1,
     }));
-
-  return ranked;
 }
 
 export function getPhilosopherById(id: string): Philosopher | undefined {
@@ -93,35 +122,56 @@ export function decodeShareParam(param: string | null): string | null {
   return PHILOSOPHERS.some((p) => p.id === param) ? param : null;
 }
 
-export function buildShareUrl(primaryId: string, secondaryId?: string): string {
+export function encodeShareAxes(vector: AxisVector): string {
+  return AXIS_IDS.map((axis) => vector[axis].toFixed(2)).join(',');
+}
+
+export function decodeShareAxes(param: string | null): AxisVector | null {
+  if (!param) return null;
+  const parts = param.split(',').map((part) => Number(part.trim()));
+  if (parts.length !== AXIS_IDS.length || parts.some((part) => Number.isNaN(part))) return null;
+
+  const vector = EMPTY_VECTOR();
+  AXIS_IDS.forEach((axis, index) => {
+    vector[axis] = Math.max(-2, Math.min(2, parts[index]));
+  });
+  return vector;
+}
+
+export function buildShareUrl(
+  primaryId: string,
+  vector: AxisVector,
+  secondaryId?: string,
+): string {
   const url = new URL(window.location.href);
   url.searchParams.set('r', primaryId);
   if (secondaryId) url.searchParams.set('s', secondaryId);
+  url.searchParams.set('axes', encodeShareAxes(vector));
+  url.searchParams.set('sv', String(SCORING_VERSION));
   url.hash = '';
   return url.toString();
 }
 
-export function normalizeMatches(primaryId: string, secondaryId?: string): MatchResult[] {
-  const primary = getPhilosopherById(primaryId);
-  if (!primary) return matchPhilosophers(EMPTY_VECTOR());
+/** Legacy share links without axes fall back to the primary thinker's centroid. */
+export function resolveShareVector(
+  axesParam: string | null,
+  primaryId: string | null,
+): AxisVector | null {
+  const decoded = decodeShareAxes(axesParam);
+  if (decoded) return decoded;
 
-  const secondary = secondaryId ? getPhilosopherById(secondaryId) : undefined;
-  const fallback = matchPhilosophers(primary.centroid, 4);
+  if (primaryId) {
+    const primary = getPhilosopherById(primaryId);
+    if (primary) return { ...primary.centroid };
+  }
 
-  const results: MatchResult[] = [{ philosopher: primary, similarity: fallback[0]?.similarity ?? 88 }];
-  if (secondary && secondary.id !== primary.id) {
-    results.push({ philosopher: secondary, similarity: fallback[1]?.similarity ?? 62 });
-  }
-  for (const item of fallback) {
-    if (results.length >= 4) break;
-    if (!results.some((r) => r.philosopher.id === item.philosopher.id)) {
-      results.push(item);
-    }
-  }
-  return results;
+  return null;
 }
 
-/** Audit helper — axis max exposure totals from question design. */
-export function getAxisMaxExposure(): AxisVector {
-  return { ...AXIS_MAX_EXPOSURE };
+export function getAxisBounds(): AxisBounds {
+  return {
+    min: { ...AXIS_BOUNDS.min },
+    max: { ...AXIS_BOUNDS.max },
+    baseline: { ...AXIS_BOUNDS.baseline },
+  };
 }
