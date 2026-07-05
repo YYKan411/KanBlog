@@ -11,7 +11,7 @@ export function Intro({ onStart }: IntroProps) {
     <section className="panel intro-panel">
       <figure className="intro-hero">
         <img
-          src="/images/philquiz-cover.webp"
+          src="/images/philquiz-cover.webp?v=9a8c35e"
           alt={t({ zh: '深夜街頭，一人靜坐沉思', en: 'A lone figure pauses to think on a quiet street' })}
           loading="eager"
         />
