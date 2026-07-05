@@ -40,7 +40,7 @@ export function Quiz({ answers, index, onAnswer }: QuizProps) {
           {chapter.phase === 3 && (
             <p className="chapter-note">
               {t({
-                zh: '最後一輪：想像力實驗。沒有「聰明答案」，只有你的取捨。',
+                zh: '最後一輪：想像力實驗。沒有標準答案，只有你的取捨。',
                 en: 'Final round: thought experiments. No clever answer — only your trade-offs.',
               })}
             </p>
