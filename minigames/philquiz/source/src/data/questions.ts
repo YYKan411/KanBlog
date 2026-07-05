@@ -13,17 +13,17 @@ export const QUESTIONS: QuizQuestion[] = [
     options: [
       {
         id: 'a',
-        label: { zh: '當面直說，即使尷尬', en: 'Say it to their face, even if awkward' },
+        label: { zh: '當面直説，即使尷尬', en: 'Say it to their face, even if awkward' },
         weights: { ethics: -1, social: -0.5, stance: -1 },
       },
       {
         id: 'b',
-        label: { zh: '先了解他為什麼這樣做，再決定说不说', en: 'Understand why first, then decide whether to speak' },
+        label: { zh: '先了解他為什麼這樣做，再決定説不説', en: 'Understand why first, then decide whether to speak' },
         weights: { epistemology: 1, stance: 1, social: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '沉默，避免破坏关系', en: 'Stay silent to preserve the relationship' },
+        label: { zh: '沉默，避免破壞關係', en: 'Stay silent to preserve the relationship' },
         weights: { social: -1.5, tradition: -1, ethics: 0.5 },
       },
     ],
@@ -33,23 +33,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'ethics',
     phase: 1,
     prompt: {
-      zh: '若一個謊言能避免许多人受伤，你會……',
+      zh: '若一個謊言能避免許多人受傷，你會……',
       en: 'If one lie could spare many people pain, you would…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '說謊——結果更重要', en: 'Lie — outcomes matter more' },
+        label: { zh: '説謊——結果更重要', en: 'Lie — outcomes matter more' },
         weights: { ethics: 2, epistemology: 0.5 },
       },
       {
         id: 'b',
-        label: { zh: '不说——有些线不能跨', en: 'Not lie — some lines must not be crossed' },
+        label: { zh: '不説——有些線不能跨', en: 'Not lie — some lines must not be crossed' },
         weights: { ethics: -2, stance: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '看对象是誰、伤有多深', en: 'It depends who is involved and how deep the harm' },
+        label: { zh: '看對象是誰、傷有多深', en: 'It depends who is involved and how deep the harm' },
         weights: { epistemology: 1, social: -0.5, stance: 0.5 },
       },
     ],
@@ -70,12 +70,12 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '好——让最多人过得去', en: 'Good — let the most people get through' },
+        label: { zh: '好——讓最多人過得去', en: 'Good — let the most people get through' },
         weights: { ethics: 2, social: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '很难分——要看情境', en: 'Hard to split — it depends on the situation' },
+        label: { zh: '很難分——要看情境', en: 'Hard to split — it depends on the situation' },
         weights: { stance: 1.5, epistemology: 1 },
       },
     ],
@@ -96,12 +96,12 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '找別人代幫，自己继续', en: 'Find someone else while you continue' },
+        label: { zh: '請別人幫忙，自己繼續', en: 'Find someone else while you continue' },
         weights: { ethics: 1, social: 0.5, stance: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '先完成计划——你不是万能', en: 'Finish your plan first — you are not omnipotent' },
+        label: { zh: '先完成計劃——你不是萬能', en: 'Finish your plan first — you are not omnipotent' },
         weights: { social: 1.5, ethics: 0.5, existence: 1 },
       },
     ],
@@ -139,7 +139,7 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'knowledge',
     phase: 1,
     prompt: {
-      zh: '一本從未有人讀過的書，裡面會有真理嗎？',
+      zh: '一本從未有人讀過的書，裏面會有真理嗎？',
       en: 'Can a book no one has ever read contain truth?',
     },
     options: [
@@ -181,7 +181,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '两者對話，看哪邊解釋力更強', en: 'Let them dialogue — whichever explains better' },
+        label: { zh: '兩者對話，看哪邊解釋力更強', en: 'Let them dialogue — whichever explains better' },
         weights: { stance: 1, epistemology: 0.5, tradition: 0.5 },
       },
     ],
@@ -191,23 +191,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'knowledge',
     phase: 1,
     prompt: {
-      zh: '「我確定我是對的」這種感覺，對你來說……',
+      zh: '「我確定我是對的」這種感覺，對你來説……',
       en: 'The feeling "I am sure I am right" is for you…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '行动的燃料', en: 'Fuel for action' },
+        label: { zh: '行動的燃料', en: 'Fuel for action' },
         weights: { stance: -2, tradition: 1 },
       },
       {
         id: 'b',
-        label: { zh: '需要警惕的信号', en: 'A signal to stay alert' },
+        label: { zh: '需要警惕的信號', en: 'A signal to stay alert' },
         weights: { stance: 2, epistemology: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '看领域——医学不同于诗歌', en: 'Domain-dependent — medicine differs from poetry' },
+        label: { zh: '看領域——醫學不同於詩歌', en: 'Domain-dependent — medicine differs from poetry' },
         weights: { epistemology: 1, stance: 0.5 },
       },
     ],
@@ -259,7 +259,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '追問——谁受益於這個觀點', en: 'Ask who benefits from the view' },
+        label: { zh: '追問——誰受益於這個觀點', en: 'Ask who benefits from the view' },
         weights: { tradition: 1.5, epistemology: 1, social: -0.5 },
       },
     ],
@@ -313,7 +313,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '很难——可能需要重新找意义', en: 'Hard — I would need to rebuild meaning' },
+        label: { zh: '很難——可能需要重新找意義', en: 'Hard — I would need to rebuild meaning' },
         weights: { existence: -1.5, stance: 1, tradition: -0.5 },
       },
     ],
@@ -323,18 +323,18 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'freedom',
     phase: 1,
     prompt: {
-      zh: '後悔對你來說是……',
+      zh: '後悔對你來説是……',
       en: 'Regret is for you…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '成长的材料', en: 'Material for growth' },
+        label: { zh: '成長的材料', en: 'Material for growth' },
         weights: { existence: 1, stance: 0.5, tradition: 1 },
       },
       {
         id: 'b',
-        label: { zh: '应尽量减少的东西', en: 'Something to minimise' },
+        label: { zh: '應儘量減少的東西', en: 'Something to minimise' },
         weights: { ethics: 1, stance: -1 },
       },
       {
@@ -349,23 +349,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'freedom',
     phase: 1,
     prompt: {
-      zh: '父母期望与你真实想要冲突时，你倾向……',
+      zh: '父母期望與你真實想要衝突時，你傾向……',
       en: 'When parental expectations clash with what you want, you tend to…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '跟随自己', en: 'Follow yourself' },
+        label: { zh: '跟隨自己', en: 'Follow yourself' },
         weights: { social: 2, tradition: 2 },
       },
       {
         id: 'b',
-        label: { zh: '兼顾——关系也是自由的一部分', en: 'Balance — relationship is part of freedom' },
+        label: { zh: '兼顧——關係也是自由的一部分', en: 'Balance — relationship is part of freedom' },
         weights: { social: -1, tradition: -1, ethics: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '延后——先看清自己到底要什么', en: 'Defer — clarify what you really want' },
+        label: { zh: '延後——先看清自己到底要什麼', en: 'Defer — clarify what you really want' },
         weights: { stance: 1.5, existence: 0.5 },
       },
     ],
@@ -381,17 +381,17 @@ export const QUESTIONS: QuizQuestion[] = [
     options: [
       {
         id: 'a',
-        label: { zh: '相信——身份可以重写', en: 'Believe it — identity can be rewritten' },
+        label: { zh: '相信——身份可以重寫', en: 'Believe it — identity can be rewritten' },
         weights: { social: 1.5, tradition: 2, existence: 1 },
       },
       {
         id: 'b',
-        label: { zh: '半信——处境限制选项', en: 'Half believe — situation limits options' },
+        label: { zh: '半信——處境限制選項', en: 'Half believe — situation limits options' },
         weights: { epistemology: 1.5, social: -0.5, stance: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '不信——人活在具体历史里', en: 'Disbelieve — we live inside concrete history' },
+        label: { zh: '不信——人活在具體歷史裏', en: 'Disbelieve — we live inside concrete history' },
         weights: { tradition: 0.5, social: -1, existence: -0.5 },
       },
     ],
@@ -403,7 +403,7 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'others',
     phase: 1,
     prompt: {
-      zh: '社群規範與個人感受衝突時，你通常……',
+      zh: '社羣規範與個人感受衝突時，你通常……',
       en: 'When community norms clash with personal feeling, you usually…',
     },
     options: [
@@ -419,7 +419,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '公开讨论规范是否该改', en: 'Debate openly whether norms should change' },
+        label: { zh: '公開討論規範是否該改', en: 'Debate openly whether norms should change' },
         weights: { tradition: 1.5, social: -0.5, stance: -0.5 },
       },
     ],
@@ -429,7 +429,7 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'others',
     phase: 1,
     prompt: {
-      zh: '對陌生人的痛苦，你的第一反应是……',
+      zh: '對陌生人的痛苦，你的第一反應是……',
       en: 'Your first response to a stranger\'s suffering is…',
     },
     options: [
@@ -440,12 +440,12 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '分析原因与结构', en: 'Analyse causes and structures' },
+        label: { zh: '分析原因與結構', en: 'Analyse causes and structures' },
         weights: { epistemology: 1.5, tradition: 1, ethics: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '保持距离——我不了解全部', en: 'Keep distance — I do not know enough' },
+        label: { zh: '保持距離——我不瞭解全部', en: 'Keep distance — I do not know enough' },
         weights: { stance: 1.5, existence: 1 },
       },
     ],
@@ -466,7 +466,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '更广泛的公共事务', en: 'Broader public concerns' },
+        label: { zh: '更廣泛的公共事務', en: 'Broader public concerns' },
         weights: { social: -1.5, tradition: 0.5, stance: -0.5 },
       },
       {
@@ -481,23 +481,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'others',
     phase: 1,
     prompt: {
-      zh: '「中立」在冲突中可能吗？',
+      zh: '「中立」在衝突中可能嗎？',
       en: 'Is "neutrality" possible in conflict?',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '可能——应保持', en: 'Possible — and worth keeping' },
+        label: { zh: '可能——應保持', en: 'Possible — and worth keeping' },
         weights: { stance: 1, epistemology: -0.5, ethics: 0.5 },
       },
       {
         id: 'b',
-        label: { zh: '很难——沉默也有位置', en: 'Hard — silence also takes a side' },
+        label: { zh: '很難——沉默也有位置', en: 'Hard — silence also takes a side' },
         weights: { tradition: 1.5, social: -0.5, stance: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '看情况——有些冲突需要站队', en: 'Depends — some conflicts demand taking sides' },
+        label: { zh: '看情況——有些衝突需要站隊', en: 'Depends — some conflicts demand taking sides' },
         weights: { stance: -1, ethics: -0.5, social: 0.5 },
       },
     ],
@@ -507,18 +507,18 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'others',
     phase: 1,
     prompt: {
-      zh: '传统仪式（节日、礼仪）对你来说是……',
+      zh: '傳統儀式（節日、禮儀）對你來説是……',
       en: 'Traditional rituals (festivals, etiquette) are for you…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '连结与意义的容器', en: 'Vessels of connection and meaning' },
+        label: { zh: '連結與意義的容器', en: 'Vessels of connection and meaning' },
         weights: { tradition: -2, social: -1.5, existence: -1 },
       },
       {
         id: 'b',
-        label: { zh: '可以改造的惯例', en: 'Conventions that can be remade' },
+        label: { zh: '可以改造的慣例', en: 'Conventions that can be remade' },
         weights: { tradition: 1, social: 0.5 },
       },
       {
@@ -535,23 +535,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'meaning',
     phase: 2,
     prompt: {
-      zh: '若宇宙没有预设目的，你會……',
+      zh: '若宇宙沒有預設目的，你會……',
       en: 'If the universe has no preset purpose, you…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '仍然认真活——目的由行动定义', en: 'Still live seriously — purpose is defined by action' },
+        label: { zh: '仍然認真活——目的由行動定義', en: 'Still live seriously — purpose is defined by action' },
         weights: { existence: 2, stance: -0.5, social: 0.5 },
       },
       {
         id: 'b',
-        label: { zh: '寻找替代框架（信仰、社群、艺术）', en: 'Seek alternative frames (faith, community, art)' },
+        label: { zh: '尋找替代框架（信仰、社羣、藝術）', en: 'Seek alternative frames (faith, community, art)' },
         weights: { existence: -1.5, tradition: -1, social: -1 },
       },
       {
         id: 'c',
-        label: { zh: '接受有限——不强迫终极答案', en: 'Accept finitude — stop forcing final answers' },
+        label: { zh: '接受有限——不強迫終極答案', en: 'Accept finitude — stop forcing final answers' },
         weights: { existence: 1.5, stance: 1.5 },
       },
     ],
@@ -561,23 +561,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'meaning',
     phase: 2,
     prompt: {
-      zh: '重复的日常（上班、做饭、睡觉）对你来说是……',
+      zh: '重複的日常（上班、做飯、睡覺）對你來説是……',
       en: 'Repetitive daily life (work, cooking, sleep) is…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '需要超越的循环', en: 'A loop to transcend' },
+        label: { zh: '需要超越的循環', en: 'A loop to transcend' },
         weights: { existence: -1, tradition: 1.5, social: 1 },
       },
       {
         id: 'b',
-        label: { zh: '可以修炼的道场', en: 'A dojo for practice' },
+        label: { zh: '可以修煉的道場', en: 'A dojo for practice' },
         weights: { existence: -1, tradition: -1.5, social: -1 },
       },
       {
         id: 'c',
-        label: { zh: '像推石头——意义在推本身', en: 'Like pushing the stone — meaning is in the push' },
+        label: { zh: '像推石頭——意義在推本身', en: 'Like pushing the stone — meaning is in the push' },
         weights: { existence: 2, stance: 0.5 },
       },
     ],
@@ -587,23 +587,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'meaning',
     phase: 2,
     prompt: {
-      zh: '死亡念头出现时，你通常……',
+      zh: '死亡念頭出現時，你通常……',
       en: 'When thoughts of death arise, you usually…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '更想把握当下', en: 'Want to seize the present' },
+        label: { zh: '更想把握當下', en: 'Want to seize the present' },
         weights: { existence: 1, social: 0.5, ethics: 0.5 },
       },
       {
         id: 'b',
-        label: { zh: '转向更大的故事（家族、历史、信仰）', en: 'Turn to larger stories (family, history, faith)' },
+        label: { zh: '轉向更大的故事（家族、歷史、信仰）', en: 'Turn to larger stories (family, history, faith)' },
         weights: { existence: -1.5, tradition: -1.5, social: -1 },
       },
       {
         id: 'c',
-        label: { zh: '与它并存——不急着解决', en: 'Live with it — no rush to resolve' },
+        label: { zh: '與它並存——不著急解決', en: 'Live with it — no rush to resolve' },
         weights: { stance: 1.5, existence: 1, epistemology: 0.5 },
       },
     ],
@@ -613,23 +613,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'meaning',
     phase: 2,
     prompt: {
-      zh: '你最能感到「活着」的时刻是……',
+      zh: '你最能感到「活著」的時刻是……',
       en: 'You feel most alive when…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '与人真实相遇', en: 'Meeting someone truthfully' },
+        label: { zh: '與人真實相遇', en: 'Meeting someone truthfully' },
         weights: { social: -1.5, existence: -0.5 },
       },
       {
         id: 'b',
-        label: { zh: '独自思考或创作', en: 'Thinking or creating alone' },
+        label: { zh: '獨自思考或創作', en: 'Thinking or creating alone' },
         weights: { social: 1.5, epistemology: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '行动改变一点什么', en: 'Action that changes something' },
+        label: { zh: '行動改變一點什麼', en: 'Action that changes something' },
         weights: { stance: -1.5, tradition: 1, social: -0.5 },
       },
     ],
@@ -652,7 +652,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '不拉——不能主动杀人', en: 'Not pull — must not actively kill' },
+        label: { zh: '不拉——不能主動殺人', en: 'Not pull — must not actively kill' },
         weights: { ethics: -2, stance: 0.5 },
       },
       {
@@ -667,7 +667,7 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '天橋上，胖子的体积可以挡住电车救五人。推吗？',
+      zh: '天橋上，胖子的體積可以擋住電車救五人。推嗎？',
       en: 'On a footbridge, a large stranger\'s body could stop the trolley and save five. Push?',
     },
     options: [
@@ -683,7 +683,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '先尝试自己跳下去', en: 'Try jumping myself first' },
+        label: { zh: '先嚐試自己跳下去', en: 'Try jumping myself first' },
         weights: { ethics: -1, social: -1, existence: 1 },
       },
     ],
@@ -699,17 +699,17 @@ export const QUESTIONS: QuizQuestion[] = [
     options: [
       {
         id: 'a',
-        label: { zh: '揭发', en: 'Expose it' },
+        label: { zh: '揭發', en: 'Expose it' },
         weights: { ethics: -1, stance: -1.5, tradition: 1 },
       },
       {
         id: 'b',
-        label: { zh: '沉默——还要养家', en: 'Stay silent — you still have dependants' },
+        label: { zh: '沉默——還要養家', en: 'Stay silent — you still have dependants' },
         weights: { social: -1, ethics: 0.5, existence: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '匿名或找集体行动', en: 'Anonymously or act collectively' },
+        label: { zh: '匿名或找集體行動', en: 'Anonymously or act collectively' },
         weights: { social: -1.5, epistemology: 1, tradition: 0.5 },
       },
     ],
@@ -719,23 +719,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '移民後，旧乡朋友请你「站队表态」。你會……',
+      zh: '移民後，舊鄉朋友請你「站隊表態」。你會……',
       en: 'After emigrating, old friends ask you to "pick a side publicly." You would…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '表态——沉默也是立场', en: 'Speak — silence is also a stance' },
+        label: { zh: '表態——沉默也是立場', en: 'Speak — silence is also a stance' },
         weights: { stance: -1, tradition: 1.5, social: -0.5 },
       },
       {
         id: 'b',
-        label: { zh: '拒绝——距离改变了能说的话', en: 'Refuse — distance changes what can be said' },
+        label: { zh: '拒絕——距離改變了能説的話', en: 'Refuse — distance changes what can be said' },
         weights: { social: 1, stance: 1, existence: 0.5 },
       },
       {
         id: 'c',
-        label: { zh: '私下谈，不公开表演', en: 'Talk privately, not perform in public' },
+        label: { zh: '私下談，不公開表演', en: 'Talk privately, not perform in public' },
         weights: { social: -1, tradition: -0.5, stance: 0.5 },
       },
     ],
@@ -745,13 +745,13 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '酒吧里有人发表你强烈不同意的言论，但并未直接伤人。你會……',
+      zh: '酒吧裏有人發表你強烈不同意的言論，但並未直接傷人。你會……',
       en: 'At the bar someone voices views you reject strongly, but no one is directly harmed. You…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '当场反驳', en: 'Challenge them on the spot' },
+        label: { zh: '當場反駁', en: 'Challenge them on the spot' },
         weights: { stance: -1.5, tradition: 1, social: 0.5 },
       },
       {
@@ -761,7 +761,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '离开——今晚不想打仗', en: 'Leave — not fighting tonight' },
+        label: { zh: '離開——今晚不想打仗', en: 'Leave — not fighting tonight' },
         weights: { existence: 1, social: 1, stance: 0.5 },
       },
     ],
@@ -771,7 +771,7 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '你只能救一个：陌生人小孩，或陪伴你一生的宠物。你會……',
+      zh: '你只能救一個：陌生人小孩，或陪伴你一生的寵物。你會……',
       en: 'You can save only one: a stranger\'s child, or the pet who shared your life. You would…',
     },
     options: [
@@ -782,12 +782,12 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '救宠物——关系也是伦理', en: 'Save the pet — bonds are ethical too' },
+        label: { zh: '救寵物——關係也是倫理', en: 'Save the pet — bonds are ethical too' },
         weights: { social: -1, epistemology: 1, ethics: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '拒绝选择——问题本身残忍', en: 'Refuse the choice — the question is cruel' },
+        label: { zh: '拒絕選擇——問題本身殘忍', en: 'Refuse the choice — the question is cruel' },
         weights: { stance: 1.5, existence: 1, ethics: -0.5 },
       },
     ],
@@ -797,23 +797,23 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '若知道十年後會後悔今天的決定，你仍會做吗？',
+      zh: '若知道十年後會後悔今天的決定，你仍會做嗎？',
       en: 'If you knew you would regret today\'s decision in ten years, would you still make it?',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '会——当下真实比未来后悔重要', en: 'Yes — present truth beats future regret' },
+        label: { zh: '會——當下真實比未來後悔重要', en: 'Yes — present truth beats future regret' },
         weights: { existence: 1.5, social: 1, tradition: 1 },
       },
       {
         id: 'b',
-        label: { zh: '不会——十年后的我也算我', en: 'No — my future self counts too' },
+        label: { zh: '不會——十年後的我也算我', en: 'No — my future self counts too' },
         weights: { ethics: -0.5, existence: -1, tradition: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '不知道——未来本不确定', en: 'Unclear — the future is uncertain anyway' },
+        label: { zh: '不知道——未來本不確定', en: 'Unclear — the future is uncertain anyway' },
         weights: { stance: 2, epistemology: 1 },
       },
     ],
@@ -823,18 +823,18 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '最後一題：若必须删除一段记忆以换取更平静的生活，你會……',
+      zh: '最後一題：若必須刪除一段記憶以換取更平靜的生活，你會……',
       en: 'Final question: if you must delete one memory for a calmer life, you would…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '删——痛苦不应定义我', en: 'Delete — pain should not define me' },
+        label: { zh: '刪——痛苦不應定義我', en: 'Delete — pain should not define me' },
         weights: { existence: -1, social: 1, ethics: 0.5 },
       },
       {
         id: 'b',
-        label: { zh: '不删——记忆构成我是谁', en: 'Not delete — memory makes who I am' },
+        label: { zh: '不刪——記憶構成我是誰', en: 'Not delete — memory makes who I am' },
         weights: { existence: -1.5, tradition: -1, social: -0.5 },
       },
       {

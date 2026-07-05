@@ -70,7 +70,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
       </section>
 
       <section className="result-section">
-        <h3>{t({ zh: '你的六軸傾向', en: 'Your six-axis profile' })}</h3>
+        <h3>{t({ zh: '你的六個向度', en: 'Your six-axis profile' })}</h3>
         <div className="axis-grid">
           {AXES.map((axis) => {
             const value = vector[axis.id];
@@ -133,7 +133,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       {primary.philosopher.blogLinks.length > 0 && (
         <section className="result-section">
-          <h3>{t({ zh: '言又勤延伸閱讀', en: 'Further reading on KanBlog' })}</h3>
+          <h3>{t({ zh: '言又勤延伸閲讀', en: 'Further reading on KanBlog' })}</h3>
           <ul className="blog-links">
             {primary.philosopher.blogLinks.map((link) => (
               <li key={link.slug}>
@@ -155,7 +155,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       <p className="fine-print">
         {t({
-          zh: '免責：本問卷為趣味傾向配對，不構成心理、學術或道德判斷。哲學家本人若坐在吧枱，大概也會 disagree。',
+          zh: '免責：本問卷為趣味傾向配對，不構成心理、學術或道德判斷。哲學家本人若坐在吧枱，大概也並不認同這種歸類。',
           en: 'Disclaimer: this is playful tendency matching — not psychological, academic, or moral judgment. Most philosophers, at the bar, would disagree with being filed this neatly.',
         })}
       </p>

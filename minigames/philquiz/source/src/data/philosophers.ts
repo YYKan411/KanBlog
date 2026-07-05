@@ -18,17 +18,17 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Camus was born into poverty in French Algeria and grew up between Mediterranean sunlight and hardship. He began as a journalist covering injustice, then became one of the twentieth century\'s defining writer-thinkers through works such as *The Stranger*, *The Plague*, and *The Myth of Sisyphus*, winning the Nobel Prize in Literature in 1957.',
       },
       {
-        zh: '他拒絕被簡單歸入「存在主義」，也拒絕任何以未來烏托邦之名正當化當下之惡的做法。對他而言，世界並不欠我們意義；但在這個前提下，人仍可以選擇如何活——以清醒、以團結、以拒絕謊言。',
+        zh: '他拒絕被簡單歸入「存在主義」，也拒絕任何以未來烏託邦之名正當化當下之惡的做法。對他而言，世界並不欠我們意義；但在這個前提下，人仍可以選擇如何活——以清醒、以團結、以拒絕謊言。',
         en: 'He resisted being filed under "existentialism" and rejected any doctrine that justified present evil in the name of a future utopia. For him the world owes us no meaning — yet we may still choose how to live: lucidly, in solidarity, and without lies.',
       },
     ],
     worldviewMatch: [
       {
-        zh: '你的答案顯示：你不太相信「歷史終會給出完美解釋」。當制度、意義或宏大敘事失效時，你寧願誠實面對荒謬，也不願用漂亮話語麻醉自己。這很接近卡繆——不是悲觀，而是拒絕自欺。',
+        zh: '你的答案顯示：你不太相信「歷史終會給出完美解釋」。當制度、意義或宏大敍事失效時，你寧願誠實面對荒謬，也不願用漂亮話語麻醉自己。這很接近卡繆——不是悲觀，而是拒絕自欺。',
         en: 'Your answers suggest you don\'t really trust that history will eventually hand down a perfect explanation. When institutions, meaning, or grand narratives fail, you\'d rather face the absurd honestly than anaesthetise yourself with fine words. That is very close to Camus — not pessimism, but a refusal of self-deception.',
       },
       {
-        zh: '你也傾向在具體處境中做決定：救誰、說什麼真話、今天如何過——而不是等待一套終極理論。卡繆式的自由，是在太陽底上推石頭，仍然選擇站直。',
+        zh: '你也傾向在具體處境中做決定：救誰、説什麼真話、今天如何過——而不是等待一套終極理論。卡繆式的自由，是在太陽底上推石頭，仍然選擇站直。',
         en: 'You also lean toward deciding in concrete situations — whom to help, which truth to speak, how to get through today — rather than waiting for a final theory. Camus-style freedom is standing upright while pushing the stone in full sunlight.',
       },
     ],
@@ -94,7 +94,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     name: { zh: '伊曼努爾·康德', en: 'Immanuel Kant' },
     epithet: { zh: '義務的守夜人', en: 'Guardian of duty' },
     era: { zh: '1724–1804', en: '1724–1804' },
-    region: { zh: ' Königsberg（今加里寧格勒）／普魯士', en: 'Königsberg / Prussia' },
+    region: { zh: 'Königsberg（今加里寧格勒）／普魯士', en: 'Königsberg / Prussia' },
     centroid: { ethics: -2, epistemology: -1.5, existence: -1, social: 0.5, stance: -1, tradition: -1 },
     barQuote: {
       zh: '「兩件事物我愈是思考愈覺神奇，心中充滿敬畏：我頭上的星空與我心中的道德律。」',
@@ -102,11 +102,11 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '康德一生幾乎未離開故鄉 Königsberg，以規律聞名：下午三時散步，鄰里據此校時。他在批判哲學中重新界定理性、知識與道德的邊界，寫下《純粹理性批判》《實踐理性批判》等著作，深刻影響後世。',
+        zh: '康德一生幾乎未離開故鄉 Königsberg，以規律聞名：下午三時散步，鄰裏據此校時。他在批判哲學中重新界定理性、知識與道德的邊界，寫下《純粹理性批判》《實踐理性批判》等著作，深刻影響後世。',
         en: 'Kant scarcely left his native Königsberg, famed for his routine — the afternoon walk at three o\'clock by which neighbours set their clocks. In his critical philosophy he redraw the limits of reason, knowledge, and morality in works such as the *Critique of Pure Reason* and *Critique of Practical Reason*, shaping generations to come.',
       },
       {
-        zh: '在倫理上，他提出「定言命令」：只按照你能同時願它成為普遍法則的準則而行。人永遠不可 merely 被當作手段，而必須同時被視為目的。',
+        zh: '在倫理上，他提出「定言命令」：只按照你能同時願它成為普遍法則的準則而行。人永遠不可僅僅被當作手段，而必須同時被視為目的。',
         en: 'In ethics he formulated the categorical imperative: act only on maxims you could will as universal law. Humanity must never be treated merely as a means, but always also as an end.',
       },
     ],
@@ -126,7 +126,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'An overemphasis on universal law can overlook situated context, emotion, and special obligations within relationships.',
       },
       {
-        zh: '康德對「理性」的界定，長期被批評為帶有歐洲中心與男性中心的假設；其政治實踐亦未完全兌現其道德理想。',
+        zh: '康德對「理性」的界定，長期被批評為帶有歐洲中心與男性中心的假設；其政治實踐亦未完全兑現其道德理想。',
         en: 'Kant\'s conception of "reason" has been criticised as Eurocentric and androcentric; his political practice did not fully live up to his moral ideals.',
       },
     ],
@@ -160,7 +160,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'You stay suspicious of the one correct answer and will redescribe the same problem from another angle. That looseness resembles Zhuangzi\'s play with names and categories.',
       },
       {
-        zh: '當他人急於判斷時，你傾向保留餘地——不是優柔寡斷，而是看見視角本身的局限。蝶與周，未必需要立刻分個勝負。',
+        zh: '當他人急於判斷時，你傾向保留餘地——不是優柔寡斷，而是看見視角本身的侷限。蝶與周，未必需要立刻分個勝負。',
         en: 'When others rush to judge, you tend to hold space — not indecision, but awareness of perspective\'s limits. Butterfly and Zhou need not be settled tonight.',
       },
     ],
@@ -170,7 +170,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Too much perspectival play can weaken response to real suffering — not every situation is solved by a change of view.',
       },
       {
-        zh: '逍遙理想若脫離社會責任，容易被誤讀為對不公的冷感；莊子本人對權力仍有尖銳批判，但文本開放性高，易被各取所需。',
+        zh: '逍遙理想若脱離社會責任，容易被誤讀為對不公的冷感；莊子本人對權力仍有尖鋭批判，但文本開放性高，易被各取所需。',
         en: 'If *xiaoyao* detaches from social responsibility it can read as indifference to injustice; Zhuangzi did skewer power, yet the text\'s openness invites selective reading.',
       },
     ],
@@ -190,7 +190,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '波娃是二十世紀最重要的存在主義哲學家與作家之一，以《第二性》系統分析女性如何被建構為「他者」，並以小說、回憶錄持續書寫自由、愛與政治。',
+        zh: '波娃是二十世紀最重要的存在主義哲學家與作家之一，以《第二性》系統分析女性如何被建構為「他者」，並以小説、回憶錄持續書寫自由、愛與政治。',
         en: 'Beauvoir was among the twentieth century\'s foremost existential philosophers and writers. *The Second Sex* analysed how woman is constructed as Other; her novels and memoirs continued to trace freedom, love, and politics.',
       },
       {
@@ -234,7 +234,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     biography: [
       {
-        zh: '釋迦牟尼原為迦毗羅衛國王子，見老、病、死、出家修行者後，離宮求道。經多年極端苦修與反思，於菩提樹下證悟，此後四十五年教導中道：不陷縱欲，也不陷自我折磨。',
+        zh: '釋迦牟尼原為迦毗羅衞國王子，見老、病、死、出家修行者後，離宮求道。經多年極端苦修與反思，於菩提樹下證悟，此後四十五年教導中道：不陷縱欲，也不陷自我折磨。',
         en: 'Born a prince of Kapilavastu, he left palace life after encountering old age, sickness, death, and a renunciant. After years of extreme asceticism and reflection he awakened beneath the Bodhi tree, then for forty-five years taught a middle way between indulgence and self-torture.',
       },
       {
@@ -278,7 +278,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '法農生於法屬馬提尼克，後在法國學醫並成為精神科醫生，於阿爾及利亞戰爭期間服務並支持阿爾及利亞獨立。其著作《黑皮膚，白面具》《全世界受苦的人》分析殖民如何內化為心理創傷與自我否定。',
+        zh: '法農生於法屬馬提尼克，後在法國學醫並成為精神科醫生，於阿爾及利亞戰爭期間服務並支持阿爾及利亞獨立。其著作《黑皮膚，白麪具》《全世界受苦的人》分析殖民如何內化為心理創傷與自我否定。',
         en: 'Born in Martinique, Fanon studied medicine in France and became a psychiatrist, serving in Algeria during the war of independence. *Black Skin, White Masks* and *The Wretched of the Earth* analyse how colonisation is internalised as psychic wound and self-negation.',
       },
       {
@@ -288,7 +288,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     ],
     worldviewMatch: [
       {
-        zh: '你對「中立」「客觀」保持警惕，相信視角從來帶著歷史與權力位置。這接近法農對殖民凝視的拆解。',
+        zh: '你對「中立」「客觀」保持警惕，相信視角從來帶有歷史與權力位置。這接近法農對殖民凝視的拆解。',
         en: 'You are wary of "neutrality" and "objectivity," believing perspective always carries history and power. That aligns with Fanon\'s dismantling of the colonial gaze.',
       },
       {
@@ -322,7 +322,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '甘地出身印度，在南非經歷種族歧視後發展出「真理堅持」（Satyagraha）與非暴力抗爭，回印後領導反殖民運動。他以簡樸生活、禁食、監禁與群眾行動，試圖同時改造自我與社會。',
+        zh: '甘地出身印度，在南非經歷種族歧視後發展出「真理堅持」（Satyagraha）與非暴力抗爭，回印後領導反殖民運動。他以簡樸生活、禁食、監禁與羣眾行動，試圖同時改造自我與社會。',
         en: 'Gandhi, born in India, developed *satyagraha* — truth-force — and nonviolent resistance after experiencing racism in South Africa. Returning home he led anti-colonial struggle through simple living, fasts, imprisonment, and mass action aiming to transform self and society together.',
       },
       {
@@ -346,7 +346,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Whether nonviolence suffices under extreme oppression remains fiercely debated; the powerful may demand it only of the powerless.',
       },
       {
-        zh: '甘地對種姓、性別等議題的立場複雜且具時代局限；不宜將其神化為無矛盾聖像。',
+        zh: '甘地對種姓、性別等議題的立場複雜且具時代侷限；不宜將其神化為無矛盾聖像。',
         en: 'Gandhi\'s stances on caste and gender were complex and period-bound; he should not be idolised as flawless.',
       },
     ],
@@ -390,7 +390,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Projects of harmonisation may understate genuine conflict — some values do not align by finer interpretation alone.',
       },
       {
-        zh: '以精英理性詮釋啟示，可能被指忽略普通信徒的宗教體驗與社群實踐。',
+        zh: '以精英理性詮釋啟示，可能被指忽略普通信徒的宗教體驗與社羣實踐。',
         en: 'Elite rational interpretation of revelation can be accused of sidelining ordinary believers\' experience and communal practice.',
       },
     ],
@@ -420,7 +420,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     ],
     worldviewMatch: [
       {
-        zh: '你在權衡後果時，會認真計算「誰受益、誰受傷」——不是冷血的算計，而是負責任的衡量。這很彌爾。',
+        zh: '你在權衡後果時，會認真計算「誰受益、誰受傷」——不是冷血的算計，而是負責任的衡量。這頗有彌爾的味道。',
         en: 'When weighing outcomes you seriously ask who benefits and who is harmed — not cold calculation but responsible measure. Very Mill.',
       },
       {
@@ -449,7 +449,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     region: { zh: '周朝中國', en: 'Zhou China' },
     centroid: { ethics: 0, epistemology: 0.5, existence: 1, social: -0.5, stance: 1, tradition: -1 },
     barQuote: {
-      zh: '「道可道，非常道。」——能說出口的，已經不是那個「道」的全部。',
+      zh: '「道可道，非常道。」——能説出口的，已經不是那個「道」的全部。',
       en: '"The Way that can be spoken is not the eternal Way." — what can be said is already not the whole.',
     },
     biography: [
@@ -458,7 +458,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'The *Daodejing* is attributed to Laozi, a figure historically elusive yet immensely influential. Taking the *Dao* as source, it teaches *wu wei*, softness overcoming hardness, and return to simplicity — shaping Chinese politics, religion, art, and lived philosophy.',
       },
       {
-        zh: '他並非單純消極，而是質疑過度控制、過度言說與過度競爭——在適當時候讓事情自然成其自身。',
+        zh: '他並非單純消極，而是質疑過度控制、過度言説與過度競爭——在適當時候讓事情自然成其自身。',
         en: 'Not mere passivity, it questions over-control, over-speech, and over-competition — allowing things to ripen in their time.',
       },
     ],
@@ -498,17 +498,17 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '蘇格拉底本人無著述，形象主要來自柏拉圖、色諾芬等弟子記錄。他在雅典街頭與廣場以問答方式挑戰人們的自以為知，最終被控不敬與腐化青年，飲鸩而死。',
+        zh: '蘇格拉底本人無著述，形象主要來自柏拉圖、色諾芬等弟子記錄。他在雅典街頭與廣場以問答方式挑戰人們的自以為知，最終被控不敬與腐化青年，飲鴆而死。',
         en: 'Socrates wrote nothing; we know him mainly through Plato and Xenophon. He questioned confident knowledge in Athens\' streets and squares, was tried for impiety and corrupting youth, and died by hemlock.',
       },
       {
-        zh: '他的方法不是傳授答案，而是逼出矛盾、澄清概念——什麼是勇氣、正義、虔敬？若連定義都說不清，憑什麼行動？',
+        zh: '他的方法不是傳授答案，而是逼出矛盾、澄清概念——什麼是勇氣、正義、虔敬？若連定義都説不清，憑什麼行動？',
         en: 'His method was not delivering answers but exposing contradictions and clarifying concepts — courage, justice, piety: if we cannot define them, on what basis do we act?',
       },
     ],
     worldviewMatch: [
       {
-        zh: '你寧可暫時不結論，也要把問題問到底——這種「知不知」的誠實，很蘇格拉底。',
+        zh: '你寧可暫時不結論，也要把問題問到底——這種「知不知」的誠實，頗有蘇格拉底之風。',
         en: 'You would rather suspend conclusion and keep asking — that honesty of not-knowing is Socratic.',
       },
       {
@@ -562,7 +562,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     ],
     blindSpots: [
       {
-        zh: '「公共領域」的理想化可能忽視家務、照護勞動與邊緣群體的可見性。',
+        zh: '「公共領域」的理想化可能忽視家務、照護勞動與邊緣羣體的可見性。',
         en: 'Idealised "public realm" can overlook domestic and care labour and the visibility of marginalised groups.',
       },
       {
@@ -571,7 +571,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['kant', 'du-bois', 'fanon'],
-    blogLinks: [{ slug: 'all-quiet-at-hastings', title: { zh: 'Hastings 的宁静', en: 'All Quiet at Hastings' } }],
+    blogLinks: [{ slug: 'all-quiet-at-hastings', title: { zh: 'Hastings 的寧靜', en: 'All Quiet at Hastings' } }],
   },
   {
     id: 'du-bois',
@@ -600,7 +600,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'You believe experience and identity shape what one can and cannot see — refusing the myth of colourless neutrality.',
       },
       {
-        zh: '你也把正義視為需要知識、組織與世代接力的事業，而非一夜頓悟——很杜波依斯。',
+        zh: '你也把正義視為需要知識、組織與世代接力的事業，而非一夜頓悟——頗像杜波依斯。',
         en: 'You treat justice as work requiring knowledge, organisation, and generational relay — not overnight enlightenment. Very Du Bois.',
       },
     ],
@@ -610,7 +610,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Double consciousness arises from American racial experience and does not map directly onto every context — including Hong Kong\'s complex identities.',
       },
       {
-        zh: '精英教育路徑若被理想化，可能忽視底層社群的聲音與知識形式。',
+        zh: '精英教育路徑若被理想化，可能忽視底層社羣的聲音與知識形式。',
         en: 'Idealising elite education can sideline voices and knowledges from communities at the bottom.',
       },
     ],
@@ -630,7 +630,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     },
     biography: [
       {
-        zh: '尼采以古典語文學者起家，後脫離學院，以格言、詩歌與「哲學錘」風格寫作。他批判基督教道德、群體心態與虛無主義，提出永恆回歸、權力意志、超人等充滿爭議的概念。',
+        zh: '尼采以古典語文學者起家，後脱離學院，以格言、詩歌與「哲學錘」風格寫作。他批判基督教道德、羣體心態與虛無主義，提出永恆回歸、權力意志、超人等充滿爭議的概念。',
         en: 'Nietzsche began as a classical philologist, left the academy, and wrote in aphorism, poetry, and hammer-strike prose. He critiqued Christian morality, herd mentality, and nihilism, proposing eternal recurrence, will to power, and the Übermensch — all fiercely contested.',
       },
       {
@@ -684,11 +684,11 @@ export const PHILOSOPHERS: Philosopher[] = [
     ],
     worldviewMatch: [
       {
-        zh: '你相信真正的「知道」會體現在行動上——若說重視正義卻從不行動，你會懷疑那是否只是口號。',
+        zh: '你相信真正的「知道」會體現在行動上——若説重視正義卻從不行動，你會懷疑那是否只是口號。',
         en: 'You believe real knowing shows in action — if one claims justice yet never acts, you suspect slogans over conviction.',
       },
       {
-        zh: '你也重視內心良知與日常責任的一體：在家庭、工作、社群中具體地做人——很陽明。',
+        zh: '你也重視內心良知與日常責任的一體：在家庭、工作、社羣中具體地做人——頗有王陽明的味道。',
         en: 'You unite inner conscience with daily duty: becoming a person in family, work, and community — very Yangming.',
       },
     ],
