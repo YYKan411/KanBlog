@@ -50,7 +50,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '看對象是誰、傷有多深', en: 'It depends who is involved and how deep the harm' },
-        weights: { epistemology: 1, social: -0.5, stance: 0.5 },
+        weights: { epistemology: 1, social: -0.5 },
       },
     ],
   },
@@ -76,7 +76,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '很難分——要看情境', en: 'Hard to split — it depends on the situation' },
-        weights: { stance: 1.5, epistemology: 1 },
+        weights: { stance: 0.5, epistemology: 1, social: 0.5 },
       },
     ],
   },
@@ -156,7 +156,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '問題本身可能問錯了', en: 'The question itself may be wrong' },
-        weights: { stance: 2, existence: 1 },
+        weights: { stance: 0.5, epistemology: 1.5, existence: 0.5 },
       },
     ],
   },
@@ -182,7 +182,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '兩者對話，看哪邊解釋力更強', en: 'Let them dialogue — whichever explains better' },
-        weights: { stance: 1, epistemology: 0.5, tradition: 0.5 },
+        weights: { stance: 0.5, epistemology: 0.5, tradition: 0.5 },
       },
     ],
   },
@@ -208,7 +208,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '看領域——醫學不同於詩歌', en: 'Domain-dependent — medicine differs from poetry' },
-        weights: { epistemology: 1, stance: 0.5 },
+        weights: { epistemology: 1, stance: 0 },
       },
     ],
   },
@@ -234,7 +234,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '長時間的實踐與修正', en: 'Long practice and revision' },
-        weights: { epistemology: 1, tradition: -1, stance: 0.5 },
+        weights: { epistemology: 1, tradition: -1 },
       },
     ],
   },
@@ -288,7 +288,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '結構與運氣的產物', en: 'Products of structure and luck' },
-        weights: { epistemology: 1.5, existence: 1, stance: 1 },
+        weights: { epistemology: 1.5, existence: 1, stance: 0.5 },
       },
     ],
   },
@@ -314,7 +314,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '很難——可能需要重新找意義', en: 'Hard — I would need to rebuild meaning' },
-        weights: { existence: -1.5, stance: 1, tradition: -0.5 },
+        weights: { existence: -1.5, epistemology: 0.5, tradition: -0.5 },
       },
     ],
   },
@@ -366,7 +366,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '延後——先看清自己到底要什麼', en: 'Defer — clarify what you really want' },
-        weights: { stance: 1.5, existence: 0.5 },
+        weights: { stance: 0.5, existence: 0.5, epistemology: 0.5 },
       },
     ],
   },
@@ -446,7 +446,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '保持距離——我不瞭解全部', en: 'Keep distance — I do not know enough' },
-        weights: { stance: 1.5, existence: 1 },
+        weights: { stance: 0.5, existence: 1, social: 0.5 },
       },
     ],
   },
@@ -529,7 +529,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── Chapter 5: meaning (4) — phase 2 grouping ──
+  // ── Chapter 5: meaning (6) — phase 2 grouping ──
   {
     id: 'q21',
     chapterId: 'meaning',
@@ -552,7 +552,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '接受有限——不強迫終極答案', en: 'Accept finitude — stop forcing final answers' },
-        weights: { existence: 1.5, stance: 1.5 },
+        weights: { existence: 1.5, stance: 0.5 },
       },
     ],
   },
@@ -604,7 +604,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '與它並存——不著急解決', en: 'Live with it — no rush to resolve' },
-        weights: { stance: 1.5, existence: 1, epistemology: 0.5 },
+        weights: { stance: 0.5, existence: 1, epistemology: 0.5 },
       },
     ],
   },
@@ -634,6 +634,58 @@ export const QUESTIONS: QuizQuestion[] = [
       },
     ],
   },
+  {
+    id: 'q24b',
+    chapterId: 'meaning',
+    phase: 2,
+    prompt: {
+      zh: '若你的努力對「大局」幾乎無影響，你仍會……',
+      en: 'If your efforts barely move "the big picture," you would still…',
+    },
+    options: [
+      {
+        id: 'a',
+        label: { zh: '繼續——小範圍也值得', en: 'Continue — small circles matter too' },
+        weights: { existence: -1, social: -1, ethics: -0.5 },
+      },
+      {
+        id: 'b',
+        label: { zh: '轉向更可改變的事', en: 'Shift to what can actually change' },
+        weights: { ethics: 1, stance: -0.5, social: 0.5 },
+      },
+      {
+        id: 'c',
+        label: { zh: '接受有限——不強求英雄敍事', en: 'Accept limits — no need for a hero story' },
+        weights: { existence: 1.5, epistemology: 0.5 },
+      },
+    ],
+  },
+  {
+    id: 'q24c',
+    chapterId: 'meaning',
+    phase: 2,
+    prompt: {
+      zh: '「活著有意義」對你來説，更接近……',
+      en: '"A meaningful life" is closer for you to…',
+    },
+    options: [
+      {
+        id: 'a',
+        label: { zh: '與重要的人共度時光', en: 'Time with people who matter' },
+        weights: { social: -1.5, existence: -1 },
+      },
+      {
+        id: 'b',
+        label: { zh: '完成一件你相信的事', en: 'Finishing something you believe in' },
+        weights: { stance: -1, tradition: 1, existence: -0.5 },
+      },
+      {
+        id: 'c',
+        label: { zh: '日常裏的微小清晰', en: 'Small clarity in daily life' },
+        weights: { existence: 1, epistemology: 0.5, social: 0.5 },
+      },
+    ],
+  },
 
   // ── Chapter 6: scenarios (8) — phase 3 ──
   {
@@ -641,24 +693,24 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '電車失控。你可以拉桿，改道撞死一人，救五人。你會……',
-      en: 'A runaway trolley. You can pull a lever to kill one and save five. You would…',
+      zh: '多年好友做咗一件你認為傷害無辜者嘅事。揭發可能令佢名譽盡毀，沉默像你共犯。你會……',
+      en: 'A long-time friend did something you believe harmed an innocent person. Exposing them could ruin their reputation; silence feels like complicity. You would…',
     },
     options: [
       {
         id: 'a',
-        label: { zh: '拉桿', en: 'Pull the lever' },
-        weights: { ethics: 2, stance: -0.5 },
+        label: { zh: '公開揭發', en: 'Expose it publicly' },
+        weights: { ethics: -1, social: -1, stance: -1 },
       },
       {
         id: 'b',
-        label: { zh: '不拉——不能主動殺人', en: 'Not pull — must not actively kill' },
-        weights: { ethics: -2, stance: 0.5 },
+        label: { zh: '先私下對質，再決定', en: 'Confront privately first, then decide' },
+        weights: { social: -0.5, ethics: -0.5, tradition: -0.5 },
       },
       {
         id: 'c',
-        label: { zh: '無法決定——這不是我的位置', en: 'Cannot decide — not my place' },
-        weights: { stance: 1.5, existence: 1, social: 0.5 },
+        label: { zh: '先了解全貌——急於判斷或會傷錯人', en: 'Learn more first — rushing may harm the wrong person' },
+        weights: { epistemology: 1.5, social: 0.5, existence: 0.5 },
       },
     ],
   },
@@ -736,7 +788,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '私下談，不公開表演', en: 'Talk privately, not perform in public' },
-        weights: { social: -1, tradition: -0.5, stance: 0.5 },
+        weights: { social: -1, tradition: -0.5 },
       },
     ],
   },
@@ -745,8 +797,8 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '酒吧裏有人發表你強烈不同意的言論，但並未直接傷人。你會……',
-      en: 'At the bar someone voices views you reject strongly, but no one is directly harmed. You…',
+      zh: '聚會裏有人發表你強烈不同意的言論，但並未直接傷人。你會……',
+      en: 'At a gathering someone voices views you reject strongly, but no one is directly harmed. You…',
     },
     options: [
       {
@@ -762,7 +814,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '離開——今晚不想打仗', en: 'Leave — not fighting tonight' },
-        weights: { existence: 1, social: 1, stance: 0.5 },
+        weights: { existence: 1, social: 1 },
       },
     ],
   },
@@ -788,7 +840,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '拒絕選擇——問題本身殘忍', en: 'Refuse the choice — the question is cruel' },
-        weights: { stance: 1.5, existence: 1, ethics: -0.5 },
+        weights: { stance: 0.5, existence: 1, ethics: -0.5 },
       },
     ],
   },
@@ -814,7 +866,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '不知道——未來本不確定', en: 'Unclear — the future is uncertain anyway' },
-        weights: { stance: 2, epistemology: 1 },
+        weights: { stance: 0.5, epistemology: 1.5 },
       },
     ],
   },
@@ -840,7 +892,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'c',
         label: { zh: '看是哪段——有些痛值得留', en: 'Depends which — some pain is worth keeping' },
-        weights: { stance: 1, epistemology: 1, existence: 0.5 },
+        weights: { stance: 0.5, epistemology: 1, existence: 0.5 },
       },
     ],
   },

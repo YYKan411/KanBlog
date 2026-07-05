@@ -12,8 +12,34 @@ const AXIS_SCALE: Record<AxisId, number> = {
   tradition: 3,
 };
 
+/** Sum of per-question max |weight| per axis — used to normalize exposure imbalance. */
+function computeAxisMaxExposure(): AxisVector {
+  const exposure = EMPTY_VECTOR();
+  for (const question of QUESTIONS) {
+    for (const axis of AXIS_IDS) {
+      const maxForQuestion = Math.max(
+        ...question.options.map((option) => Math.abs(option.weights[axis] ?? 0)),
+      );
+      exposure[axis] += maxForQuestion;
+    }
+  }
+  return exposure;
+}
+
+const AXIS_MAX_EXPOSURE = computeAxisMaxExposure();
+
+/** Scale raw sums to comparable range for centroid matching. */
+function normalizeVector(raw: AxisVector): AxisVector {
+  const normalized = EMPTY_VECTOR();
+  for (const axis of AXIS_IDS) {
+    const max = AXIS_MAX_EXPOSURE[axis];
+    normalized[axis] = max > 0 ? (raw[axis] / max) * 6 : 0;
+  }
+  return normalized;
+}
+
 export function computeVector(answers: QuizAnswer[]): AxisVector {
-  const vector = EMPTY_VECTOR();
+  const raw = EMPTY_VECTOR();
   const questionMap = new Map(QUESTIONS.map((q) => [q.id, q]));
 
   for (const answer of answers) {
@@ -23,11 +49,11 @@ export function computeVector(answers: QuizAnswer[]): AxisVector {
     if (!option) continue;
 
     for (const axis of AXIS_IDS) {
-      vector[axis] += option.weights[axis] ?? 0;
+      raw[axis] += option.weights[axis] ?? 0;
     }
   }
 
-  return vector;
+  return normalizeVector(raw);
 }
 
 function weightedDistance(a: AxisVector, b: AxisVector): number {
@@ -93,4 +119,9 @@ export function normalizeMatches(primaryId: string, secondaryId?: string): Match
     }
   }
   return results;
+}
+
+/** Audit helper — axis max exposure totals from question design. */
+export function getAxisMaxExposure(): AxisVector {
+  return { ...AXIS_MAX_EXPOSURE };
 }

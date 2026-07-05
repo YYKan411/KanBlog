@@ -13,7 +13,7 @@ import {
 } from './engine/score';
 import type { AppScreen, MatchResult, QuizAnswer } from './types';
 
-const STORAGE_KEY = 'yykan-philquiz-v1';
+const STORAGE_KEY = 'yykan-philquiz-v2';
 
 interface SavedState {
   screen: AppScreen;

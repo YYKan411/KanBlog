@@ -13,15 +13,15 @@ export function Layout({ children }: { children: ReactNode }) {
               {t({ zh: '← 小遊戲', en: '← Mini Games' })}
             </a>
             <p className="game-kicker">
-              {t({ zh: '深夜酒吧傾計版 · 16 型', en: 'Late-night bar chat · 16 types' })}
+              {t({ zh: '深夜傾計版 · 16 型', en: 'Late-night chat · 16 types' })}
             </p>
             <h1 className="game-title">
               {t({ zh: '哲學傾向問卷', en: 'Philosophical Tendency Quiz' })}
             </h1>
             <p className="game-subtitle">
               {t({
-                zh: '32 題，無標準答案。最後會配對一位與你思路最接近的思想家——僅供傾計，不是診斷。',
-                en: '32 questions, no correct answers. We match you with the thinker whose groove fits yours — for conversation, not diagnosis.',
+                zh: '34 題，無標準答案。最後會配對一位與你思路最接近的思想家——有偏見但誠實的傾計探索，不是診斷。',
+                en: '34 questions, no correct answers. We match you with the thinker whose groove fits yours — a biased-but-honest chat, not diagnosis.',
               })}
             </p>
           </div>
