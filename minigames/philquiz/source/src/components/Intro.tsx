@@ -9,6 +9,13 @@ export function Intro({ onStart }: IntroProps) {
 
   return (
     <section className="panel intro-panel">
+      <figure className="intro-hero">
+        <img
+          src="/images/philquiz-cover.webp"
+          alt={t({ zh: '深夜街頭，一人靜坐沉思', en: 'A lone figure pauses to think on a quiet street' })}
+          loading="eager"
+        />
+      </figure>
       <p className="lede">
         {t({
           zh: '想像深夜吧枱，燈光偏暗，有人問你一系列「如果……」——不是考你背書，而是看你如何取捨。',
@@ -23,7 +30,7 @@ export function Intro({ onStart }: IntroProps) {
       </ul>
       <p className="fine-print">
         {t({
-          zh: '結果是「傾向相似」，不是身份認同。每一位思想家都有盲点——你的也是。',
+          zh: '結果是「傾向相似」，不是身份認同。每一位思想家都有盲點——你的也是。',
           en: 'Results show tendency, not identity. Every thinker has blind spots — so do you.',
         })}
       </p>
