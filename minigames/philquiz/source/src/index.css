@@ -433,8 +433,15 @@ a {
   color: var(--ink-faded);
 }
 
+.related-list a,
 .blog-links a {
   color: var(--accent);
+  text-decoration: none;
+}
+
+.related-list a:hover,
+.blog-links a:hover {
+  text-decoration: underline;
 }
 
 .results-actions {
