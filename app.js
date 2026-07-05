@@ -142,6 +142,14 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const SAMPLE_POSTS = [
   {
+    slug: "why-overthink-on-an-empty-stomach",
+    title: "移英周記｜做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?",
+    date: "2026-07-05",
+    excerpt: "本周初有場面試，回家愈諗愈惆悵。開着焗爐，酥皮捲腸仔——油香一湧，成個腦静晒。結果可以等，美味不可以。",
+    tags: ["散文","移英"],
+    url: "posts/why-overthink-on-an-empty-stomach"
+  },
+  {
     slug: "all-quiet-at-hastings",
     title: "喜士定無戰事｜All Quiet at Hastings",
     date: "2026-06-07",
