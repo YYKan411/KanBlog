@@ -230,6 +230,7 @@ const aboutLastmod = gitLastModified('about.html') || newestPostDate;
 const STATIC_PAGES = [
   { file: 'minigames/index.html',            loc: `${SITE_URL}/minigames/`,            priority: '0.7' },
   { file: 'minigames/catspuzzle/index.html', loc: `${SITE_URL}/minigames/catspuzzle/`, priority: '0.6' },
+  { file: 'minigames/philquiz/index.html',   loc: `${SITE_URL}/minigames/philquiz/`,   priority: '0.6' },
 ];
 const staticUrls = STATIC_PAGES
   .filter(p => fs.existsSync(path.join(ROOT, p.file)))
@@ -325,6 +326,7 @@ ${llmsPostLines}
 ## Mini Games
 - [小遊戲 · Mini Games](${SITE_URL}/minigames/): browser games built for fun
 - [Cats — A Logic Puzzle](${SITE_URL}/minigames/catspuzzle/): a Star-Battle-style logic puzzle — one cat per colour, row and column, no two cats may touch
+- [哲學傾向問卷 · Philosophical Tendency Quiz](${SITE_URL}/minigames/philquiz/): a 32-question late-night bar quiz matching you to one of 16 thinkers worldwide
 
 ## Links
 - [RSS feed](${SITE_URL}/feed.xml)
