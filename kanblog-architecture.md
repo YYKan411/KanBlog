@@ -39,6 +39,7 @@ KanBlog/
 ├── minigames/              MiniGames section (2026-06-13)
 │   ├── index.html           Gallery hub — standalone static page; inline GAMES array
 │   └── catspuzzle/          The "Cats" logic puzzle (built React SPA — index.html + assets/)
+│   └── philquiz/            Philosophical tendency quiz — index.html + assets/ + source/ (Vite React app)
 ├── posts/
 │   ├── _TEMPLATE.html       Copy this for a new hand-coded post (default og:image baked in)
 │   └── *.html               The essays
@@ -159,6 +160,7 @@ A small section listing browser games built for fun. Two layers:
 
 - **Gallery hub — `minigames/index.html`:** a **standalone static page** (not processed by `build.js`). It reuses the blog's look by linking the live stylesheet with an **absolute** path (`<link href="/style.css">`) and the same fonts, and replicates the masthead + footer. The "小遊戲 · Mini Games" label sits as **small text under the site identity** in the masthead. Game cards are rendered by an **inline `<script>`** holding a `GAMES` array, using the blog's own card classes (`.card`, `.card-cover`, `.card-body`, `.card-title`, `.card-excerpt`, `.card-meta`, `.card-tag`) — so they look identical to post cards.
 - **The "Cats" game — `minigames/catspuzzle/`:** a Star-Battle / Queens-style logic puzzle (one cat per colour/row/column, no two cats touch incl. diagonally). Built with **React + TypeScript + Tailwind 4 + Vite**, fully client-side, themed in Library Linen. Has a "← Mini Games" link (→ `/minigames/`) and a footer link home. **Only the built output is in the repo** (`index.html` + `assets/index-<hash>.js/.css`) — *the React source is not in the repo.*
+- **The philosophy quiz — `minigames/philquiz/`:** a 32-question late-night bar chat quiz matching players to 16 thinkers. Built with **React + TypeScript + Vite**, Library Linen themed, bilingual (zh/en). **Deployed like catspuzzle** (`index.html` + `assets/`). Source lives alongside at **`minigames/philquiz/source/`** (`npm run build` writes to the parent folder). See `minigames/philquiz/source/README.md`.
 
 ### 🎮 The Game Contract (added 2026-06-15)
 

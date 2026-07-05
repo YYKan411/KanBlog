@@ -5,7 +5,8 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
-    outDir: '../minigames/philquiz',
-    emptyOutDir: true,
+    // Deploy to minigames/philquiz/ (parallel to catspuzzle); keep source/ intact.
+    outDir: '..',
+    emptyOutDir: false,
   },
 });
