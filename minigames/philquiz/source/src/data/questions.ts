@@ -719,8 +719,8 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '天橋上，胖子的體積可以擋住電車救五人。推嗎？',
-      en: 'On a footbridge, a large stranger\'s body could stop the trolley and save five. Push?',
+      zh: '天橋上有一名體型足以令電車停下的陌生人。若把他推下去，可以救回軌道上的五個人。推嗎？',
+      en: 'On a footbridge, a stranger large enough to stop the trolley stands in the way. Push them to save five on the tracks?',
     },
     options: [
       {
@@ -849,8 +849,8 @@ export const QUESTIONS: QuizQuestion[] = [
     chapterId: 'scenarios',
     phase: 3,
     prompt: {
-      zh: '若知道十年後會後悔今天的決定，你仍會做嗎？',
-      en: 'If you knew you would regret today\'s decision in ten years, would you still make it?',
+      zh: '若有人以極高可信度預測，你十年後會後悔今天的決定，你仍會做嗎？',
+      en: 'If someone you trust predicted with high confidence that you would regret today\'s decision in ten years, would you still make it?',
     },
     options: [
       {
@@ -865,7 +865,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '不知道——未來本不確定', en: 'Unclear — the future is uncertain anyway' },
+        label: { zh: '不確定——預測不等於必然', en: 'Uncertain — a prediction is not destiny' },
         weights: { stance: 0.5, epistemology: 1.5 },
       },
     ],

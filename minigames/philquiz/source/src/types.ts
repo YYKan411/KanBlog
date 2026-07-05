@@ -62,7 +62,9 @@ export interface QuizAnswer {
 
 export interface MatchResult {
   philosopher: Philosopher;
+  /** Internal rank score for ordering — not a statistical match probability. */
   similarity: number;
+  rank: number;
 }
 
 export type AppScreen = 'intro' | 'quiz' | 'results';

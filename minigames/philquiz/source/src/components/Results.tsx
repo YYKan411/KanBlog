@@ -8,16 +8,17 @@ interface ResultsProps {
   matches: MatchResult[];
   vector: AxisVector;
   onRetake: () => void;
+  isShareView?: boolean;
 }
 
-export function Results({ matches, vector, onRetake }: ResultsProps) {
+export function Results({ matches, vector, onRetake, isShareView = false }: ResultsProps) {
   const { t } = useLanguage();
   const primary = matches[0];
   const secondary = matches[1];
   const tertiary = matches.slice(2);
 
   const copyShare = async () => {
-    const url = buildShareUrl(primary.philosopher.id, secondary?.philosopher.id);
+    const url = buildShareUrl(primary.philosopher.id, vector, secondary?.philosopher.id);
     try {
       await navigator.clipboard.writeText(url);
       alert(t({ zh: '連結已複製', en: 'Link copied' }));
@@ -28,11 +29,20 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
   return (
     <section className="panel results-panel">
-      <p className="results-kicker">{t({ zh: '你的深夜傾計側寫', en: 'Your late-night chat profile' })}</p>
+      <p className="results-kicker">
+        {t(
+          isShareView
+            ? { zh: '分享的思想輪廓', en: 'Shared thought profile' }
+            : { zh: '你目前最接近的思想輪廓', en: 'Your closest thought profile' },
+        )}
+      </p>
       <h2 className="results-title">{t(primary.philosopher.name)}</h2>
       <p className="results-epithet">{t(primary.philosopher.epithet)}</p>
       <p className="match-score">
-        {t({ zh: '匹配度', en: 'Match' })} · {primary.similarity}%
+        {t({
+          zh: `16 位思想家中的第 ${primary.rank} 位共鳴`,
+          en: `Resonance rank ${primary.rank} of 16 thinkers`,
+        })}
       </p>
 
       <blockquote className="bar-quote">{t(primary.philosopher.barQuote)}</blockquote>
@@ -73,14 +83,14 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
         <h3>{t({ zh: '你的六個向度', en: 'Your six-axis profile' })}</h3>
         <p className="axis-intro">
           {t({
-            zh: '數值已按各向度題目曝光量校正。滑鼠或點按 ⓘ 可查看各軸解釋。',
-            en: 'Scores are adjusted for how often each axis appears in the quiz. Hover or tap ⓘ for axis glossaries.',
+            zh: '各軸已正規化至 -2 至 +2，與思想家輪廓同一尺度。滑鼠或點按 ⓘ 可查看各軸解釋。',
+            en: 'Each axis is normalised to -2…+2 on the same scale as thinker profiles. Hover or tap ⓘ for glossaries.',
           })}
         </p>
         <div className="axis-grid">
           {AXES.map((axis) => {
             const value = vector[axis.id];
-            const pct = Math.round(((value + 6) / 12) * 100);
+            const pct = Math.round(((value + 2) / 4) * 100);
             return (
               <div key={axis.id} className="axis-row">
                 <div className="axis-labels">
@@ -122,9 +132,10 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       {secondary && (
         <section className="result-section secondary-match">
-          <h3>{t({ zh: '次要匹配', en: 'Secondary match' })}</h3>
+          <h3>{t({ zh: '次要共鳴', en: 'Secondary resonance' })}</h3>
           <p className="secondary-name">
-            {t(secondary.philosopher.name)} · {secondary.similarity}%
+            {t(secondary.philosopher.name)} ·{' '}
+            {t({ zh: `第 ${secondary.rank} 位`, en: `Rank ${secondary.rank}` })}
           </p>
           <p>{t(secondary.philosopher.epithet)}</p>
           <p>{t(secondary.philosopher.worldviewMatch[0])}</p>
@@ -138,7 +149,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
             {tertiary.map((item) => (
               <li key={item.philosopher.id}>
                 <strong>{t(item.philosopher.name)}</strong>
-                <span>{item.similarity}%</span>
+                <span>{t({ zh: `第 ${item.rank} 位`, en: `Rank ${item.rank}` })}</span>
                 <p>{t(item.philosopher.epithet)}</p>
               </li>
             ))}
@@ -155,7 +166,7 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
               .filter(Boolean)
               .map((p) => (
                 <li key={p!.id}>
-                  <a href={buildShareUrl(p!.id)}>
+                  <a href={buildShareUrl(p!.id, p!.centroid)}>
                     {t(p!.name)} — {t(p!.epithet)}
                   </a>
                 </li>
@@ -175,8 +186,8 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
 
       <p className="fine-print">
         {t({
-          zh: '免責：本問卷非學術量表，結果受題目設計影響；為趣味傾向配對，不構成心理、學術或道德判斷。思想家本人若坐在一旁傾計，大概也並不認同這種歸類。',
-          en: 'Disclaimer: not an academic scale — results reflect how the questions are designed. Playful tendency matching only, not psychological, academic, or moral judgment. Most thinkers, chatting beside you, would disagree with being filed this neatly.',
+          zh: '免責：本問卷非學術量表，結果受題目設計影響；為趣味傾向配對，不構成心理、學術或道德判斷。排名只表示在 16 位人物中哪個輪廓最接近，並非機率或身份認同。',
+          en: 'Disclaimer: not an academic scale — results reflect how the questions are designed. Rankings show which of 16 profiles is nearest, not probability or identity.',
         })}
       </p>
     </section>
