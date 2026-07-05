@@ -17,7 +17,7 @@ var POSTS_NAV = [
   { slug: "footbridge-paradox", title: "橋上悖論｜Paradox over the Footbridge", url: "/posts/footbridge-paradox" },
   { slug: "sisyphus", title: "推石頭之人｜He Who Pushes the Stone", url: "/posts/sisyphus" },
   { slug: "the-cat-teachers", title: "貓老師｜The Cat Teachers", url: "/posts/the-cat-teachers" },
-  { slug: "bao-faan", title: "飽飯", url: "/posts/bao-faan" },
+  { slug: "bao-faan", title: "飽飯｜A Profound Satiety", url: "/posts/bao-faan" },
   { slug: "lands-end", title: "地之盡頭大風吹", url: "/posts/lands-end" }
 ];
 /* BUILD:NAV_END */
