@@ -125,21 +125,12 @@ export function Results({ matches, vector, onRetake }: ResultsProps) {
               .map((id) => PHILOSOPHER_MAP.get(id))
               .filter(Boolean)
               .map((p) => (
-                <li key={p!.id}>{t(p!.name)} — {t(p!.epithet)}</li>
+                <li key={p!.id}>
+                  <a href={buildShareUrl(p!.id)}>
+                    {t(p!.name)} — {t(p!.epithet)}
+                  </a>
+                </li>
               ))}
-          </ul>
-        </section>
-      )}
-
-      {primary.philosopher.blogLinks.length > 0 && (
-        <section className="result-section">
-          <h3>{t({ zh: '言又勤延伸閲讀', en: 'Further reading on KanBlog' })}</h3>
-          <ul className="blog-links">
-            {primary.philosopher.blogLinks.map((link) => (
-              <li key={link.slug}>
-                <a href={`/posts/${link.slug}`}>{t(link.title)}</a>
-              </li>
-            ))}
           </ul>
         </section>
       )}
