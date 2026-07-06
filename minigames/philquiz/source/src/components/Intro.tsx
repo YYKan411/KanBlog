@@ -1,3 +1,4 @@
+import { PHILOSOPHERS } from '../data/philosophers';
 import { useLanguage } from '../context/LanguageContext';
 
 interface IntroProps {
@@ -23,21 +24,18 @@ export function Intro({ onStart }: IntroProps) {
         })}
       </p>
       <ul className="intro-list">
-        <li>{t({ zh: '26 題核心傾向 + 8 題情境試題', en: '26 core tendency questions + 8 scenario dilemmas' })}</li>
+        <li>{t({ zh: '27 題核心傾向 + 9 題情境試題', en: '27 core tendency questions + 9 scenario dilemmas' })}</li>
         <li>{t({ zh: '6 個哲學向度：倫理、認識、存在、社羣、態度、傳統', en: '6 philosophical axes: ethics, knowing, existence, community, stance, tradition' })}</li>
         <li>{t({ zh: '16 位世界各地思想家——附次選及第三匹配', en: '16 thinkers worldwide — with secondary & tertiary matches' })}</li>
-        <li>{t({ zh: '約 8–12 分鐘；進度會保存在本機', en: 'About 8–12 minutes; progress saved locally' })}</li>
+        <li>{t({ zh: '約 10–14 分鐘；進度會保存在本機，可以中途離開', en: 'About 10–14 minutes; progress saves locally, leave any time' })}</li>
       </ul>
+      <p className="thinker-strip">
+        {PHILOSOPHERS.map((p) => t(p.name)).join(' · ')}
+      </p>
       <p className="fine-print">
         {t({
-          zh: '結果是「傾向相似」，不是身份認同。每一位思想家都有盲點——你的也是。',
-          en: 'Results show tendency, not identity. Every thinker has blind spots — so do you.',
-        })}
-      </p>
-      <p className="fine-print disclaimer">
-        {t({
-          zh: '免責：本問卷非學術量表，結果受題目設計影響；僅供傾計探索，不是心理或道德診斷。',
-          en: 'Disclaimer: not an academic scale — results reflect how the questions are designed. For playful exploration, not psychological or moral diagnosis.',
+          zh: '結果是「傾向相似」，不是身份認同，也不是心理或道德診斷。每一位思想家都有盲點——你的也是。',
+          en: 'Results show tendency, not identity — and no psychological or moral diagnosis. Every thinker has blind spots; so do you.',
         })}
       </p>
       <button type="button" className="primary-btn" onClick={onStart}>

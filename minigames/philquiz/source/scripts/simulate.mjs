@@ -1,132 +1,124 @@
 /**
- * Random simulation for philquiz balance audit.
- * Run: node scripts/simulate.mjs
+ * Balance audit for philquiz (SCORING_VERSION 3, cosine matching).
+ * Run: node scripts/simulate.mjs   (Node >= 22.18 — imports .ts via native type stripping)
+ *
+ * Reports:
+ *  1. uniform-random answering  -> top-1 distribution (flat-ish = healthy; no thinker should dominate)
+ *  2. "attractive option" bias  -> top-1 distribution when takers prefer option c
+ *  3. persona self-recovery     -> a noisy persona seeded at each thinker's centroid should
+ *                                  get that thinker back as top match (target: >= ~50% each;
+ *                                  arendt/du-bois are known near-twins and sit lower)
+ *  4. population fidelity       -> quiz top-1 == persona's true nearest centroid
  */
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-const ts = require('typescript');
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const srcDir = join(__dirname, '../src');
-
-function loadTsModule(relativePath) {
-  const filePath = join(srcDir, relativePath);
-  const source = readFileSync(filePath, 'utf8');
-  const { outputText } = ts.transpileModule(source, {
-    compilerOptions: {
-      module: ts.ModuleKind.CommonJS,
-      target: ts.ScriptTarget.ES2020,
-      esModuleInterop: true,
-    },
-    fileName: filePath,
-  });
-  const module = { exports: {} };
-  const fn = new Function('exports', 'require', 'module', '__filename', '__dirname', outputText);
-  fn(module.exports, require, module, filePath, dirname(filePath));
-  return module.exports;
-}
-
-const { AXIS_IDS, EMPTY_VECTOR } = loadTsModule('data/axes.ts');
-const { QUESTIONS } = loadTsModule('data/questions.ts');
-const { PHILOSOPHERS } = loadTsModule('data/philosophers.ts');
+import { QUESTIONS } from '../src/data/questions.ts';
+import { PHILOSOPHERS } from '../src/data/philosophers.ts';
+import { AXIS_IDS, EMPTY_VECTOR } from '../src/data/axes.ts';
 
 function computeAxisBounds() {
-  const min = EMPTY_VECTOR();
-  const max = EMPTY_VECTOR();
-  const baseline = EMPTY_VECTOR();
-  for (const question of QUESTIONS) {
-    for (const axis of AXIS_IDS) {
-      const weights = question.options.map((o) => o.weights[axis] ?? 0);
-      min[axis] += Math.min(...weights);
-      max[axis] += Math.max(...weights);
-      baseline[axis] += weights.reduce((sum, w) => sum + w, 0) / weights.length;
-    }
+  const min = EMPTY_VECTOR(), max = EMPTY_VECTOR(), baseline = EMPTY_VECTOR();
+  for (const q of QUESTIONS) for (const axis of AXIS_IDS) {
+    const ws = q.options.map((o) => o.weights[axis] ?? 0);
+    min[axis] += Math.min(...ws);
+    max[axis] += Math.max(...ws);
+    baseline[axis] += ws.reduce((s, w) => s + w, 0) / ws.length;
   }
   return { min, max, baseline };
 }
+const B = computeAxisBounds();
 
-const BOUNDS = computeAxisBounds();
-
-function normalizeVector(raw) {
-  const normalized = EMPTY_VECTOR();
+function normalize(raw) {
+  const n = EMPTY_VECTOR();
   for (const axis of AXIS_IDS) {
-    const value = raw[axis];
-    const base = BOUNDS.baseline[axis];
-    const lo = BOUNDS.min[axis];
-    const hi = BOUNDS.max[axis];
-    let score = 0;
-    if (value >= base) score = hi === base ? 0 : (2 * (value - base)) / (hi - base);
-    else score = base === lo ? 0 : (2 * (value - base)) / (base - lo);
-    normalized[axis] = Math.max(-2, Math.min(2, score));
+    const v = raw[axis], base = B.baseline[axis], lo = B.min[axis], hi = B.max[axis];
+    let s = 0;
+    if (v >= base) s = hi === base ? 0 : (2 * (v - base)) / (hi - base);
+    else s = base === lo ? 0 : (2 * (v - base)) / (base - lo);
+    n[axis] = Math.max(-2, Math.min(2, s));
   }
-  return normalized;
+  return n;
 }
 
-function computeRaw(answers) {
+function cosineDistance(a, b) {
+  let dot = 0, na = 0, nb = 0;
+  for (const axis of AXIS_IDS) { dot += a[axis] * b[axis]; na += a[axis] ** 2; nb += b[axis] ** 2; }
+  const denom = Math.sqrt(na) * Math.sqrt(nb);
+  if (denom < 1e-9) return 1;
+  return 1 - dot / denom;
+}
+
+function nearest(v) {
+  let best = null;
+  for (const p of PHILOSOPHERS) {
+    const d = cosineDistance(v, p.centroid);
+    if (!best || d < best.d) best = { id: p.id, d };
+  }
+  return best.id;
+}
+
+function vectorFor(pick) {
   const raw = EMPTY_VECTOR();
-  const questionMap = new Map(QUESTIONS.map((q) => [q.id, q]));
-  for (const answer of answers) {
-    const question = questionMap.get(answer.questionId);
-    const option = question?.options.find((o) => o.id === answer.optionId);
-    if (!option) continue;
-    for (const axis of AXIS_IDS) raw[axis] += option.weights[axis] ?? 0;
+  for (const q of QUESTIONS) {
+    const o = q.options[pick(q)];
+    for (const a of AXIS_IDS) raw[a] += o.weights[a] ?? 0;
   }
-  return raw;
+  return normalize(raw);
 }
 
-function matchPhilosophers(vector) {
-  const ranked = PHILOSOPHERS.map((p) => {
-    let sum = 0;
-    for (const axis of AXIS_IDS) {
-      const diff = vector[axis] - p.centroid[axis];
-      sum += (diff * diff) / 9;
-    }
-    return { id: p.id, distance: Math.sqrt(sum) };
-  }).sort((a, b) => a.distance - b.distance);
-  return ranked[0].id;
-}
-
-function simulate(n, pick) {
+function distribution(n, pick) {
   const counts = Object.fromEntries(PHILOSOPHERS.map((p) => [p.id, 0]));
-  const rankScores = [];
-  for (let i = 0; i < n; i += 1) {
-    const answers = QUESTIONS.map((q) => ({
-      questionId: q.id,
-      optionId: pick(q),
-    }));
-    const vector = normalizeVector(computeRaw(answers));
-    rankScores.push(1 / (1 + PHILOSOPHERS.map((p) => {
-      let sum = 0;
-      for (const axis of AXIS_IDS) {
-        const diff = vector[axis] - p.centroid[axis];
-        sum += (diff * diff) / 9;
-      }
-      return Math.sqrt(sum);
-    }).sort((a, b) => a - b)[0]));
-    const top = matchPhilosophers(vector);
-    counts[top] += 1;
-  }
-  rankScores.sort((a, b) => a - b);
-  return { counts, medianRankScore: rankScores[Math.floor(rankScores.length / 2)] };
+  for (let i = 0; i < n; i += 1) counts[nearest(vectorFor(pick))] += 1;
+  return counts;
 }
 
-function topEntries(counts, n = 5000) {
-  return Object.entries(counts)
+function printDist(title, counts, n) {
+  console.log(`\n=== ${title} ===`);
+  Object.entries(counts)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .map(([id, c]) => `${id}: ${((c / n) * 100).toFixed(1)}%`);
+    .forEach(([id, c]) => console.log(`  ${id.padEnd(14)} ${((100 * c) / n).toFixed(1)}%`));
 }
 
-const n = 5000;
-const random = simulate(n, () => ['a', 'b', 'c'][Math.floor(Math.random() * 3)]);
-const allC = simulate(n, () => 'c');
+function personaVector(persona, T) {
+  const raw = EMPTY_VECTOR();
+  for (const q of QUESTIONS) {
+    const scores = q.options.map((o) => AXIS_IDS.reduce((s, a) => s + (o.weights[a] ?? 0) * persona[a], 0));
+    const exps = scores.map((s) => Math.exp(s / T));
+    const Z = exps.reduce((s, e) => s + e, 0);
+    let r = Math.random() * Z, oi = 0;
+    for (; oi < exps.length - 1; oi += 1) { r -= exps[oi]; if (r <= 0) break; }
+    for (const a of AXIS_IDS) raw[a] += q.options[oi].weights[a] ?? 0;
+  }
+  return normalize(raw);
+}
 
-console.log('Questions:', QUESTIONS.length);
-console.log('Baseline (random expected raw):', BOUNDS.baseline);
-console.log('\nRandom top-match:', topEntries(random.counts).join(', '));
-console.log('Random median rank score:', (random.medianRankScore * 100).toFixed(1));
-console.log('\nAll-C top-match:', topEntries(allC.counts).join(', '));
+const N = 20000;
+console.log(`Questions: ${QUESTIONS.length}, thinkers: ${PHILOSOPHERS.length}`);
+
+printDist('1. uniform random answering (top-1)', distribution(N, () => Math.floor(Math.random() * 3)), N);
+printDist(
+  '2. attractive-option bias (c 50%, a/b 25%)',
+  distribution(N, () => { const r = Math.random(); return r < 0.5 ? 2 : r < 0.75 ? 0 : 1; }),
+  N,
+);
+
+console.log('\n=== 3. persona self-recovery (noise ±0.5, softmax T=1.0) ===');
+const NSELF = 1500;
+for (const target of PHILOSOPHERS) {
+  const counts = {};
+  for (let i = 0; i < NSELF; i += 1) {
+    const persona = Object.fromEntries(AXIS_IDS.map((a) => [a, target.centroid[a] + (Math.random() - 0.5)]));
+    const top = nearest(personaVector(persona, 1.0));
+    counts[top] = (counts[top] ?? 0) + 1;
+  }
+  const self = ((100 * (counts[target.id] ?? 0)) / NSELF).toFixed(0);
+  const second = Object.entries(counts).sort((a, b) => b[1] - a[1]).filter(([id]) => id !== target.id)[0];
+  console.log(`  ${target.id.padEnd(14)} ${String(self).padStart(3)}%   (next: ${second ? second[0] : '-'})`);
+}
+
+console.log('\n=== 4. population fidelity (uniform personas, T=1.5) ===');
+const NPOP = 10000;
+let hits = 0;
+for (let i = 0; i < NPOP; i += 1) {
+  const persona = Object.fromEntries(AXIS_IDS.map((a) => [a, Math.random() * 4 - 2]));
+  if (nearest(personaVector(persona, 1.5)) === nearest(persona)) hits += 1;
+}
+console.log(`  quiz top-1 == persona's nearest centroid: ${((100 * hits) / NPOP).toFixed(1)}%`);

@@ -1,18 +1,9 @@
 import { AXIS_IDS, EMPTY_VECTOR } from '../data/axes';
 import { PHILOSOPHERS } from '../data/philosophers';
 import { QUESTIONS } from '../data/questions';
-import type { AxisId, AxisVector, MatchResult, Philosopher, QuizAnswer } from '../types';
+import type { AxisVector, MatchResult, Philosopher, QuizAnswer } from '../types';
 
-export const SCORING_VERSION = 2;
-
-const AXIS_SCALE: Record<AxisId, number> = {
-  ethics: 3,
-  epistemology: 3,
-  existence: 3,
-  social: 3,
-  stance: 3,
-  tradition: 3,
-};
+export const SCORING_VERSION = 3;
 
 interface AxisBounds {
   min: AxisVector;
@@ -85,13 +76,25 @@ export function computeVector(answers: QuizAnswer[]): AxisVector {
   return normalizeVector(computeRawVector(answers));
 }
 
-function weightedDistance(a: AxisVector, b: AxisVector): number {
-  let sum = 0;
+/**
+ * Cosine distance: matching compares the *direction* of a profile, not its length.
+ * Consistent answering stretches a vector without changing its direction, so this
+ * keeps mild-but-coherent takers matchable to every thinker (SCORING_VERSION 3;
+ * v2 used magnitude-sensitive Euclidean distance, which let low-magnitude centroids
+ * capture most takers).
+ */
+function cosineDistance(a: AxisVector, b: AxisVector): number {
+  let dot = 0;
+  let normA = 0;
+  let normB = 0;
   for (const axis of AXIS_IDS) {
-    const diff = a[axis] - b[axis];
-    sum += (diff * diff) / (AXIS_SCALE[axis] * AXIS_SCALE[axis]);
+    dot += a[axis] * b[axis];
+    normA += a[axis] * a[axis];
+    normB += b[axis] * b[axis];
   }
-  return Math.sqrt(sum);
+  const denom = Math.sqrt(normA) * Math.sqrt(normB);
+  if (denom < 1e-9) return 1;
+  return 1 - dot / denom;
 }
 
 /** Internal ordering key only — not a statistical match probability. */
@@ -102,7 +105,7 @@ function toRankScore(distance: number): number {
 export function matchPhilosophers(vector: AxisVector, limit = 4): MatchResult[] {
   return PHILOSOPHERS.map((philosopher) => ({
     philosopher,
-    distance: weightedDistance(vector, philosopher.centroid),
+    distance: cosineDistance(vector, philosopher.centroid),
   }))
     .sort((a, b) => a.distance - b.distance)
     .slice(0, limit)
@@ -138,14 +141,24 @@ export function decodeShareAxes(param: string | null): AxisVector | null {
   return vector;
 }
 
-export function buildShareUrl(
-  primaryId: string,
-  vector: AxisVector,
-  secondaryId?: string,
-): string {
+/**
+ * External share URL — points at the per-philosopher static landing page
+ * (r/<id>/) so social scrapers see result-specific og tags; the landing page
+ * redirects into the app preserving the query string.
+ */
+export function buildShareUrl(primaryId: string, vector: AxisVector): string {
+  const base = new URL('.', window.location.href);
+  const url = new URL(`r/${primaryId}/`, base);
+  url.searchParams.set('axes', encodeShareAxes(vector));
+  url.searchParams.set('sv', String(SCORING_VERSION));
+  return url.toString();
+}
+
+/** In-app result URL — same page with query params, no landing-page hop. */
+export function buildInlineResultUrl(primaryId: string, vector: AxisVector): string {
   const url = new URL(window.location.href);
   url.searchParams.set('r', primaryId);
-  if (secondaryId) url.searchParams.set('s', secondaryId);
+  url.searchParams.delete('s');
   url.searchParams.set('axes', encodeShareAxes(vector));
   url.searchParams.set('sv', String(SCORING_VERSION));
   url.hash = '';

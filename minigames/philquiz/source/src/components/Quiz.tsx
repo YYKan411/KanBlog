@@ -7,9 +7,12 @@ interface QuizProps {
   answers: QuizAnswer[];
   index: number;
   onAnswer: (answer: QuizAnswer) => void;
+  onBack: () => void;
 }
 
-export function Quiz({ answers, index, onAnswer }: QuizProps) {
+const HALFWAY_INDEX = Math.floor(QUESTIONS.length / 2);
+
+export function Quiz({ answers, index, onAnswer, onBack }: QuizProps) {
   const { t } = useLanguage();
   const question = QUESTIONS[index];
   const chapter = CHAPTERS.find((c) => c.id === question.chapterId)!;
@@ -48,6 +51,15 @@ export function Quiz({ answers, index, onAnswer }: QuizProps) {
         </div>
       )}
 
+      {index === HALFWAY_INDEX && (
+        <p className="halfway-note">
+          {t({
+            zh: '已過半。你的輪廓開始成形……',
+            en: 'Past halfway. Your profile is taking shape…',
+          })}
+        </p>
+      )}
+
       <h3 className="question-text">{t(question.prompt)}</h3>
       <div className="options">
         {question.options.map((option) => (
@@ -62,9 +74,18 @@ export function Quiz({ answers, index, onAnswer }: QuizProps) {
         ))}
       </div>
 
-      <p className="chapter-progress">
-        {t(chapter.title)} · {chapterIndex + 1}/{chapterQuestions.length}
-      </p>
+      <div className="quiz-nav">
+        {index > 0 ? (
+          <button type="button" className="ghost-btn back-btn" onClick={onBack}>
+            {t({ zh: '← 上一題', en: '← Previous' })}
+          </button>
+        ) : (
+          <span aria-hidden="true" />
+        )}
+        <p className="chapter-progress">
+          {t(chapter.title)} · {chapterIndex + 1}/{chapterQuestions.length}
+        </p>
+      </div>
     </section>
   );
 }

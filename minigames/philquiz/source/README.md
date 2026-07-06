@@ -21,7 +21,7 @@ This writes `../index.html` and `../assets/*`. Commit those built files with any
 
 ## Content
 
-- `src/data/questions.ts` — 32 quiz questions (zh/en)
+- `src/data/questions.ts` — 36 quiz questions (zh/en)
 - `src/data/philosophers.ts` — 16 thinker profiles
 - `src/engine/score.ts` — axis scoring & matching
 

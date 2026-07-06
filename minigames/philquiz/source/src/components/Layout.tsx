@@ -20,8 +20,8 @@ export function Layout({ children }: { children: ReactNode }) {
             </h1>
             <p className="game-subtitle">
               {t({
-                zh: '34 題，無標準答案。最後會配對一位與你思路最接近的思想家——有偏見但誠實的傾計探索，不是診斷。',
-                en: '34 questions, no correct answers. We match you with the thinker whose groove fits yours — a biased-but-honest chat, not diagnosis.',
+                zh: '36 題，無標準答案。最後會配對一位與你思路最接近的思想家——有偏見但誠實的傾計探索，不是診斷。',
+                en: '36 questions, no correct answers. We match you with the thinker whose groove fits yours — a biased-but-honest chat, not diagnosis.',
               })}
             </p>
           </div>

@@ -7,7 +7,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '荒謬中的反抗者', en: 'The rebel in the absurd' },
     era: { zh: '1913–1960', en: '1913–1960' },
     region: { zh: '阿爾及利亞／法國', en: 'Algeria / France' },
-    centroid: { ethics: 0.5, epistemology: 0.5, existence: 2, social: 1.2, stance: 0.8, tradition: 1 },
+    centroid: { ethics: 0.05, epistemology: 0.55, existence: 1.85, social: 1.2, stance: 1.05, tradition: 0.8 },
     barQuote: {
       zh: '「必須想像西西弗斯是快樂的。」——不是因為有希望，而是因為推石頭本身已是回答。',
       en: '"One must imagine Sisyphus happy." — not because there is hope, but because the pushing itself is the answer.',
@@ -18,7 +18,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Camus was born into poverty in French Algeria and grew up between Mediterranean sunlight and hardship. He began as a journalist covering injustice, then became one of the twentieth century\'s defining writer-thinkers through works such as *The Stranger*, *The Plague*, and *The Myth of Sisyphus*, winning the Nobel Prize in Literature in 1957.',
       },
       {
-        zh: '他拒絕被簡單歸入「存在主義」，也拒絕任何以未來烏託邦之名正當化當下之惡的做法。對他而言，世界並不欠我們意義；但在這個前提下，人仍可以選擇如何活——以清醒、以團結、以拒絕謊言。',
+        zh: '他拒絕被簡單歸入「存在主義」，也拒絕任何以未來烏托邦之名正當化當下之惡的做法。對他而言，世界並不欠我們意義；但在這個前提下，人仍可以選擇如何活——以清醒、以團結、以拒絕謊言。',
         en: 'He resisted being filed under "existentialism" and rejected any doctrine that justified present evil in the name of a future utopia. For him the world owes us no meaning — yet we may still choose how to live: lucidly, in solidarity, and without lies.',
       },
     ],
@@ -28,7 +28,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Your answers suggest you don\'t really trust that history will eventually hand down a perfect explanation. When institutions, meaning, or grand narratives fail, you\'d rather face the absurd honestly than anaesthetise yourself with fine words. That is very close to Camus — not pessimism, but a refusal of self-deception.',
       },
       {
-        zh: '你也傾向在具體處境中做決定：救誰、説什麼真話、今天如何過——而不是等待一套終極理論。卡繆式的自由，是在太陽底上推石頭，仍然選擇站直。',
+        zh: '你也傾向在具體處境中做決定：救誰、説什麼真話、今天如何過——而不是等待一套終極理論。卡繆式的自由，是在太陽底下推石頭，仍然選擇站直。',
         en: 'You also lean toward deciding in concrete situations — whom to help, which truth to speak, how to get through today — rather than waiting for a final theory. Camus-style freedom is standing upright while pushing the stone in full sunlight.',
       },
     ],
@@ -51,7 +51,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '在關係中成為君子', en: 'Becoming exemplary in relation' },
     era: { zh: '公元前 551–479', en: '551–479 BCE' },
     region: { zh: '春秋時代魯國', en: 'Lu, Spring and Autumn China' },
-    centroid: { ethics: -1.2, epistemology: -0.8, existence: -1.5, social: -2, stance: -0.5, tradition: -2 },
+    centroid: { ethics: -1.35, epistemology: -0.9, existence: -1.8, social: -1.6, stance: -0.4, tradition: -1.7 },
     barQuote: {
       zh: '「己所不欲，勿施於人。」——聽似簡單，但要在一輩子的關係裏做到，並不簡單。',
       en: '"Do not impose on others what you yourself do not desire." — it sounds simple; to live it out across a lifetime of relationships is not.',
@@ -59,7 +59,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     biography: [
       {
         zh: '孔子名丘，字仲尼，生於魯國陬邑。他早年從政，後周遊列國，試圖以禮樂與德治匡扶亂世，卻屢屢碰壁。晚年返魯，整理經典、教導弟子，其言論由門人編纂為《論語》。',
-        en: 'Confucius, Kong Qiu styled Zhongni, was born in Zou in the state of Lu. He served in office, then travelled among warring states hoping to restore order through ritual and moral governance, meeting repeated frustration. In old age he returned to Lu, edited classics, and taught disciples whose records became the *Analects*.',
+        en: 'Confucius, Kong Qiu styled Zhongni, was born in Zou in the state of Lu. He served in office, then travelled among the states hoping to restore order through ritual and moral governance, meeting repeated frustration. In old age he returned to Lu, edited classics, and taught disciples whose records became the *Analects*.',
       },
       {
         zh: '他關心的不是抽象命題，而是人如何成為「君子」：在父子、君臣、朋友之間，學會適度、誠實與分寸。對他而言，倫理不在雲端，而在你今日如何對待一個具體的人。',
@@ -95,15 +95,15 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '義務的守夜人', en: 'Guardian of duty' },
     era: { zh: '1724–1804', en: '1724–1804' },
     region: { zh: 'Königsberg（今加里寧格勒）／普魯士', en: 'Königsberg / Prussia' },
-    centroid: { ethics: -2, epistemology: -1.5, existence: -1, social: 0.5, stance: -1, tradition: -1 },
+    centroid: { ethics: -1.75, epistemology: -1.6, existence: -1.65, social: -0.45, stance: -0.95, tradition: -1.15 },
     barQuote: {
       zh: '「兩件事物我愈是思考愈覺神奇，心中充滿敬畏：我頭上的星空與我心中的道德律。」',
       en: '"Two things fill the mind with ever new and increasing admiration and awe: the starry heavens above me and the moral law within me."',
     },
     biography: [
       {
-        zh: '康德一生幾乎未離開故鄉 Königsberg，以規律聞名：下午三時散步，鄰裏據此校時。他在批判哲學中重新界定理性、知識與道德的邊界，寫下《純粹理性批判》《實踐理性批判》等著作，深刻影響後世。',
-        en: 'Kant scarcely left his native Königsberg, famed for his routine — the afternoon walk at three o\'clock by which neighbours set their clocks. In his critical philosophy he redraw the limits of reason, knowledge, and morality in works such as the *Critique of Pure Reason* and *Critique of Practical Reason*, shaping generations to come.',
+        zh: '康德一生幾乎未離開故鄉 Königsberg，以規律聞名：下午三時散步，鄰里據此校時。他在批判哲學中重新界定理性、知識與道德的邊界，寫下《純粹理性批判》《實踐理性批判》等著作，深刻影響後世。',
+        en: 'Kant scarcely left his native Königsberg, famed for his routine — the afternoon walk at three o\'clock by which neighbours set their clocks. In his critical philosophy he redrew the limits of reason, knowledge, and morality in works such as the *Critique of Pure Reason* and *Critique of Practical Reason*, shaping generations to come.',
       },
       {
         zh: '在倫理上，他提出「定言命令」：只按照你能同時願它成為普遍法則的準則而行。人永遠不可僅僅被當作手段，而必須同時被視為目的。',
@@ -126,7 +126,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'An overemphasis on universal law can overlook situated context, emotion, and special obligations within relationships.',
       },
       {
-        zh: '康德對「理性」的界定，長期被批評為帶有歐洲中心與男性中心的假設；其政治實踐亦未完全兑現其道德理想。',
+        zh: '康德對「理性」的界定，長期被批評為帶有歐洲中心與男性中心的假設；其政治實踐亦未完全兌現其道德理想。',
         en: 'Kant\'s conception of "reason" has been criticised as Eurocentric and androcentric; his political practice did not fully live up to his moral ideals.',
       },
     ],
@@ -139,7 +139,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '蝶夢與逍遙', en: 'Butterfly dreams & easy wandering' },
     era: { zh: '約公元前 4 世紀', en: 'c. 4th century BCE' },
     region: { zh: '戰國時代宋國', en: 'Song, Warring States China' },
-    centroid: { ethics: 0.5, epistemology: 1.5, existence: 1.5, social: 1, stance: 2, tradition: 0 },
+    centroid: { ethics: 0.45, epistemology: 0.8, existence: 1.65, social: 1.2, stance: 1.55, tradition: 0.35 },
     barQuote: {
       zh: '「昔者莊周夢為胡蝶，栩栩然胡蝶也……不知周之夢為胡蝶與？胡蝶之夢為周與？」',
       en: '"Once Zhuang Zhou dreamt he was a butterfly, fluttering about as a butterfly would… Did Zhou dream the butterfly, or the butterfly dream Zhou?"',
@@ -151,7 +151,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
       {
         zh: '他並非單純「躺平」，而是追問：誰的視角在定義成敗？能否在變化中保持精神的自由？「逍遙」不是逃避，而是不被外物完全綁架。',
-        en: 'He was not simply " opting out." He asked whose perspective defines success and failure, and whether the spirit can stay free amid change. *Xiaoyao* — easy wandering — is not escape but refusing to be wholly owned by externals.',
+        en: 'He was not simply "opting out." He asked whose perspective defines success and failure, and whether the spirit can stay free amid change. *Xiaoyao* — easy wandering — is not escape but refusing to be wholly owned by externals.',
       },
     ],
     worldviewMatch: [
@@ -170,7 +170,7 @@ export const PHILOSOPHERS: Philosopher[] = [
         en: 'Too much perspectival play can weaken response to real suffering — not every situation is solved by a change of view.',
       },
       {
-        zh: '逍遙理想若脱離社會責任，容易被誤讀為對不公的冷感；莊子本人對權力仍有尖鋭批判，但文本開放性高，易被各取所需。',
+        zh: '逍遙理想若脫離社會責任，容易被誤讀為對不公的冷感；莊子本人對權力仍有尖銳批判，但文本開放性高，易被各取所需。',
         en: 'If *xiaoyao* detaches from social responsibility it can read as indifference to injustice; Zhuangzi did skewer power, yet the text\'s openness invites selective reading.',
       },
     ],
@@ -183,7 +183,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '處境中的自由', en: 'Freedom in situation' },
     era: { zh: '1908–1986', en: '1908–1986' },
     region: { zh: '法國', en: 'France' },
-    centroid: { ethics: 0, epistemology: 1, existence: 1, social: 1.2, stance: -0.5, tradition: 1.5 },
+    centroid: { ethics: 0.05, epistemology: 0.75, existence: 1.2, social: 1.4, stance: -0.15, tradition: 1.4 },
     barQuote: {
       zh: '「人並非生而為女，而是變成女人。」——存在先於本質，也先於被指派的角色。',
       en: '"One is not born, but rather becomes, woman." — existence precedes essence, and assigned roles too.',
@@ -227,7 +227,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '中道與止苦', en: 'Middle way & the end of suffering' },
     era: { zh: '約公元前 5 世紀', en: 'c. 5th century BCE' },
     region: { zh: '古印度', en: 'Ancient India' },
-    centroid: { ethics: -0.5, epistemology: 1, existence: -1.5, social: -1, stance: 1, tradition: -1 },
+    centroid: { ethics: -0.85, epistemology: 1.05, existence: -1.45, social: -1.35, stance: 0.8, tradition: -0.7 },
     barQuote: {
       zh: '「諸行無常，諸法無我。」——不是虛無，而是邀請你看清執著如何製造苦。',
       en: '"All conditioned things are impermanent; all phenomena are not-self." — not nihilism, but an invitation to see how clinging manufactures suffering.',
@@ -271,14 +271,14 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '被殖民的身體與解放', en: 'Colonised bodies & liberation' },
     era: { zh: '1925–1961', en: '1925–1961' },
     region: { zh: '馬提尼克／阿爾及利亞／法國', en: 'Martinique / Algeria / France' },
-    centroid: { ethics: 0.5, epistemology: 1.5, existence: 0.5, social: -0.5, stance: -1.5, tradition: 2 },
+    centroid: { ethics: 0.45, epistemology: 1.05, existence: 0.25, social: -0.3, stance: -1.25, tradition: 1.6 },
     barQuote: {
       zh: '「每個世代都該發現其使命，完成它或背叛它。」',
       en: '"Each generation must, out of relative obscurity, discover its mission, fulfil it, or betray it."',
     },
     biography: [
       {
-        zh: '法農生於法屬馬提尼克，後在法國學醫並成為精神科醫生，於阿爾及利亞戰爭期間服務並支持阿爾及利亞獨立。其著作《黑皮膚，白麪具》《全世界受苦的人》分析殖民如何內化為心理創傷與自我否定。',
+        zh: '法農生於法屬馬提尼克，後在法國學醫並成為精神科醫生，於阿爾及利亞戰爭期間服務並支持阿爾及利亞獨立。其著作《黑皮膚，白面具》《全世界受苦的人》分析殖民如何內化為心理創傷與自我否定。',
         en: 'Born in Martinique, Fanon studied medicine in France and became a psychiatrist, serving in Algeria during the war of independence. *Black Skin, White Masks* and *The Wretched of the Earth* analyse how colonisation is internalised as psychic wound and self-negation.',
       },
       {
@@ -315,7 +315,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '真理與非暴力', en: 'Truth-force & nonviolence' },
     era: { zh: '1869–1948', en: '1869–1948' },
     region: { zh: '印度／南非', en: 'India / South Africa' },
-    centroid: { ethics: -1.5, epistemology: 1, existence: -1, social: -1.5, stance: -1, tradition: -1.5 },
+    centroid: { ethics: -1.7, epistemology: 0.8, existence: -1.75, social: -1.4, stance: -0.85, tradition: -1.2 },
     barQuote: {
       zh: '「以眼還眼，只會令全世界失明。」——但對他而言，非暴力不是軟弱，而是更艱難的紀律。',
       en: '"An eye for an eye will make the whole world blind." — for him nonviolence was not weakness but harder discipline.',
@@ -359,14 +359,14 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '理性與啟示的橋', en: 'Bridge of reason & revelation' },
     era: { zh: '1126–1198', en: '1126–1198' },
     region: { zh: '安達盧斯（伊斯蘭西班牙）', en: 'Al-Andalus (Islamic Spain)' },
-    centroid: { ethics: -0.5, epistemology: -1, existence: -1.5, social: -0.5, stance: -0.5, tradition: -1.5 },
+    centroid: { ethics: -1.1, epistemology: -1.7, existence: -1.8, social: -1.05, stance: -0.5, tradition: -1.45 },
     barQuote: {
       zh: '「真理與真理不會衝突。」——哲學與神聖啟示，若同為真，終可相互印證。',
       en: '"Truth does not contradict truth." — philosophy and revelation, if both true, should ultimately accord.',
     },
     biography: [
       {
-        zh: '伊本·魯什德生於科爾多瓦，是法官、醫者、哲學家與阿裡士多德注釋者。他試圖調和理性探究與伊斯蘭啟示，強調用哲學理解宗教文本，而非盲目字面化。',
+        zh: '伊本·魯什德生於科爾多瓦，是法官、醫者、哲學家與亞里士多德注釋者。他試圖調和理性探究與伊斯蘭啟示，強調用哲學理解宗教文本，而非盲目字面化。',
         en: 'Ibn Rushd was born in Córdoba — jurist, physician, philosopher, and commentator on Aristotle. He sought to harmonise rational inquiry with Islamic revelation, using philosophy to interpret scripture rather than literalism alone.',
       },
       {
@@ -399,14 +399,14 @@ export const PHILOSOPHERS: Philosopher[] = [
   },
   {
     id: 'mill',
-    name: { zh: '約翰·史特勞斯·彌爾', en: 'John Stuart Mill' },
+    name: { zh: '約翰·史都華·彌爾', en: 'John Stuart Mill' },
     epithet: { zh: '自由與最大幸福', en: 'Liberty & the greatest happiness' },
     era: { zh: '1806–1873', en: '1806–1873' },
     region: { zh: '英國', en: 'United Kingdom' },
-    centroid: { ethics: 2, epistemology: 1, existence: -0.5, social: 1.5, stance: -0.5, tradition: 0.5 },
+    centroid: { ethics: 1.55, epistemology: 0.5, existence: 0.15, social: 1.4, stance: -0.5, tradition: 1.1 },
     barQuote: {
-      zh: '「做一個不滿足的蘇格拉底，好過做一個滿足的傻瓜。」——快樂也有高低之分。',
-      en: '"It is better to be a human being dissatisfied than a pig satisfied." — pleasures differ in quality, not only quantity.',
+      zh: '「做一個不滿足的人，好過做一頭滿足的豬；做一個不滿足的蘇格拉底，好過做一個滿足的傻瓜。」——快樂也有高低之分。',
+      en: '"Better to be a human being dissatisfied than a pig satisfied; better to be Socrates dissatisfied than a fool satisfied." — pleasures differ in quality, not only quantity.',
     },
     biography: [
       {
@@ -447,7 +447,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '無為而治', en: 'Wu wei — acting without forcing' },
     era: { zh: '約公元前 6 世紀（傳）', en: 'trad. c. 6th century BCE' },
     region: { zh: '周朝中國', en: 'Zhou China' },
-    centroid: { ethics: 0, epistemology: 0.5, existence: 1, social: -0.5, stance: 1, tradition: -1 },
+    centroid: { ethics: 0, epistemology: 0.55, existence: 1.15, social: -0.25, stance: 1.55, tradition: -0.7 },
     barQuote: {
       zh: '「道可道，非常道。」——能説出口的，已經不是那個「道」的全部。',
       en: '"The Way that can be spoken is not the eternal Way." — what can be said is already not the whole.',
@@ -491,7 +491,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '未檢討的人生不值得過', en: 'The unexamined life is not worth living' },
     era: { zh: '公元前 470–399', en: '470–399 BCE' },
     region: { zh: '古雅典', en: 'Ancient Athens' },
-    centroid: { ethics: -0.5, epistemology: 0.5, existence: -0.5, social: 0, stance: 2, tradition: 0 },
+    centroid: { ethics: -0.8, epistemology: -0.5, existence: -0.55, social: -0.3, stance: 1.4, tradition: -0.55 },
     barQuote: {
       zh: '「我唯一知道的，是我一無所知。」——這不是謙虛套話，而是提問的開場白。',
       en: '"I know that I know nothing." — not false modesty, but the opening of inquiry.',
@@ -535,7 +535,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '在公共中思考', en: 'Thinking in public' },
     era: { zh: '1906–1975', en: '1906–1975' },
     region: { zh: '德國／美國', en: 'Germany / United States' },
-    centroid: { ethics: -0.5, epistemology: 0.5, existence: -1, social: -1.5, stance: -0.5, tradition: 0 },
+    centroid: { ethics: -0.6, epistemology: 0.85, existence: -0.95, social: -1.15, stance: -0.8, tradition: 0.75 },
     barQuote: {
       zh: '「邪惡的平庸。」——最可怕的不總是惡魔，而是不再思考的人。',
       en: '"The banality of evil." — the horror is often not a devil but people who stop thinking.',
@@ -579,9 +579,9 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '雙重意識', en: 'Double consciousness' },
     era: { zh: '1868–1963', en: '1868–1963' },
     region: { zh: '美國', en: 'United States' },
-    centroid: { ethics: 0, epistemology: 1.5, existence: -0.5, social: -1, stance: 0, tradition: 1 },
+    centroid: { ethics: -0.3, epistemology: 1.35, existence: -1.05, social: -0.95, stance: -0.65, tradition: 0.8 },
     barQuote: {
-      zh: '「問題是：在這個國家，做一個黑人意味著什麼？」——問題本身已是哲學。',
+      zh: '「二十世紀的問題，是膚色界線的問題。」——問題本身已是哲學。',
       en: '"The problem of the twentieth century is the problem of the color-line." — the question itself is philosophy.',
     },
     biography: [
@@ -623,19 +623,19 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '成為你自己', en: 'Become who you are' },
     era: { zh: '1844–1900', en: '1844–1900' },
     region: { zh: '德國／瑞士／意大利', en: 'Germany / Switzerland / Italy' },
-    centroid: { ethics: 1, epistemology: 0, existence: 1.5, social: 2, stance: -2, tradition: 2 },
+    centroid: { ethics: 0.8, epistemology: 0.35, existence: 0.9, social: 1.25, stance: -1.15, tradition: 1.65 },
     barQuote: {
       zh: '「殺死上帝之後，什麼仍值得相信？」——他逼我們自己回答，而不是替他回答。',
       en: '"After the death of God, what remains worth believing?" — he forces us to answer for ourselves, not for him.',
     },
     biography: [
       {
-        zh: '尼采以古典語文學者起家，後脱離學院，以格言、詩歌與「哲學錘」風格寫作。他批判基督教道德、羣體心態與虛無主義，提出永恆回歸、權力意志、超人等充滿爭議的概念。',
+        zh: '尼采以古典語文學者起家，後脫離學院，以格言、詩歌與「哲學錘」風格寫作。他批判基督教道德、羣體心態與虛無主義，提出永恆回歸、權力意志、超人等充滿爭議的概念。',
         en: 'Nietzsche began as a classical philologist, left the academy, and wrote in aphorism, poetry, and hammer-strike prose. He critiqued Christian morality, herd mentality, and nihilism, proposing eternal recurrence, will to power, and the Übermensch — all fiercely contested.',
       },
       {
-        zh: '他晚年精神崩潰，著作卻被後世大量誤讀與挪用——從納粹到存在主義到後現代，皆曾選擇性引用。',
-        en: 'He collapsed mentally in old age; his work was vastly misread and appropriated — by Nazis, existentialists, postmodernists, each selectively.',
+        zh: '他 1889 年精神崩潰，年僅四十四歲；著作卻被後世大量誤讀與挪用——從納粹到存在主義到後現代，皆曾選擇性引用。',
+        en: 'His mind collapsed in 1889, at only forty-four; his work was vastly misread and appropriated — by Nazis, existentialists, postmodernists, each selectively.',
       },
     ],
     worldviewMatch: [
@@ -667,7 +667,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     epithet: { zh: '知行合一', en: 'Unity of knowledge and action' },
     era: { zh: '1472–1529', en: '1472–1529' },
     region: { zh: '明朝中國', en: 'Ming China' },
-    centroid: { ethics: -1, epistemology: 0.5, existence: -1, social: -1.5, stance: -1.5, tradition: -1.5 },
+    centroid: { ethics: -1.3, epistemology: 0.5, existence: -1.75, social: -1.5, stance: -1.25, tradition: -1.25 },
     barQuote: {
       zh: '「知是行的主意，行是知的功夫；知是行之始，行是知之成。」——知道而不做，只是未知。',
       en: '"Knowledge is the idea of action; action is the effort of knowledge." — to know without acting is not yet to know.',
@@ -675,7 +675,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     biography: [
       {
         zh: '王守仁，號陽明，明代思想家、軍事家與官員。龍場悟道後發展心學，主張「致良知」「知行合一」，影響東亞儒學數百年。',
-        en: 'Wang Shouren, styled Yangming, was a Ming philosopher, general, and official. After enlightenment at Longchang he developed Philosophical Mind, teaching "extension of innate knowing" and the unity of knowledge and action — shaping East Asian Confucianism for centuries.',
+        en: 'Wang Shouren, styled Yangming, was a Ming philosopher, general, and official. After enlightenment at Longchang he developed the School of Mind (xinxue), teaching "extension of innate knowing" and the unity of knowledge and action — shaping East Asian Confucianism for centuries.',
       },
       {
         zh: '他並非空談心性，而在平亂、施政、教化中實踐——道德必須在具體事上磨練，而非懸於口。',
@@ -695,7 +695,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     blindSpots: [
       {
         zh: '「良知」若被權威定義，可能壓制異議——心學亦曾被政治化利用。',
-        en: 'If "innate knowing" is defined by authority it can suppress dissent — Mind Learning was also politicised.',
+        en: 'If "innate knowing" is defined by authority it can suppress dissent — the School of Mind was also politicised.',
       },
       {
         zh: '強調主觀覺悟，可能低估制度變革與外部約束；並非人人都有同等的「實踐」空間。',

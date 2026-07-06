@@ -67,4 +67,4 @@ export interface MatchResult {
   rank: number;
 }
 
-export type AppScreen = 'intro' | 'quiz' | 'results';
+export type AppScreen = 'intro' | 'resume' | 'quiz' | 'results';
