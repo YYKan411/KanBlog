@@ -159,8 +159,13 @@ These exist in `style.css` and `_TEMPLATE.html` but the **editor cannot produce 
 A small section listing browser games built for fun. Two layers:
 
 - **Gallery hub — `minigames/index.html`:** a **standalone static page** (not processed by `build.js`). It reuses the blog's look by linking the live stylesheet with an **absolute** path (`<link href="/style.css">`) and the same fonts, and replicates the masthead + footer. The "小遊戲 · Mini Games" label sits as **small text under the site identity** in the masthead. Game cards are rendered by an **inline `<script>`** holding a `GAMES` array, using the blog's own card classes (`.card`, `.card-cover`, `.card-body`, `.card-title`, `.card-excerpt`, `.card-meta`, `.card-tag`) — so they look identical to post cards.
-- **The "Cats" game — `minigames/catspuzzle/`:** a Star-Battle / Queens-style logic puzzle (one cat per colour/row/column, no two cats touch incl. diagonally). Built with **React + TypeScript + Tailwind 4 + Vite**, fully client-side, themed in Library Linen. Has a "← Mini Games" link (→ `/minigames/`) and a footer link home. **Only the built output is in the repo** (`index.html` + `assets/index-<hash>.js/.css`) — *the React source is not in the repo.*
+- **`貓陣 · Cats — A Logic Puzzle` — `minigames/catspuzzle/`:** a Star-Battle / Queens-style logic puzzle (one cat per colour/row/column, no two cats touch incl. diagonally). Built with **React + TypeScript + Tailwind 4 + Vite**, fully client-side, themed in Library Linen. Its checked-in bundle has bilingual HK copy and a cache-busting query because **only the built output is in the repo** (`index.html` + `assets/index-<hash>.js/.css`) — *the React source is not in the repo.*
 - **The philosophy quiz — `minigames/philquiz/`:** a 36-question late-night bar chat quiz matching players to 16 thinkers. Built with **React + TypeScript + Vite**, Library Linen themed, bilingual (zh/en). **Deployed like catspuzzle** (`index.html` + `assets/`). Source lives alongside at **`minigames/philquiz/source/`** (`npm run build` writes to the parent folder). Matching is **cosine-based** (`SCORING_VERSION 3`); per-philosopher share landing pages live at `minigames/philquiz/r/<id>/` (og-tag shells, noindex, regenerate with `source/scripts/gen-share-pages.mjs`). **After any change to question weights or centroids, run `node source/scripts/simulate.mjs`** and keep every thinker's persona self-recovery ≥~50% and uniform-random top-1 under ~15%. See `minigames/philquiz/source/README.md`.
+- **2026-07-19 shelf refresh:** the three hub cards now use one photographic
+  **Atmosphere** series (`catspuzzle-cover.webp`, `philquiz-cover.webp`,
+  `xiangqi-cover.webp`), all 3:2 and text-free. Card titles, excerpts, tags and alt
+  text follow the Hub Presentation contract below; the shelf uses an equal-height
+  responsive grid instead of masonry so the three promises read as one collection.
 
 ### 🎮 The Game Contract (added 2026-06-15)
 
@@ -189,8 +194,22 @@ arcade game, a word game should look nothing alike. Reference the existing game(
    - `scripts/build.js` → add a line to the `## Mini Games` list in the `llms.txt` generator
 4. **Share image** — a 1200×630 **PNG** `images/og-<game>.png` (raster; SVG doesn't
    render in social scrapers). Until it exists, the page falls back to `og-minigames.png`.
-5. **Hub cover** — an image in `images/` for the gallery card (SVG is fine here —
-   same-origin, not a social scraper).
+5. **Hub presentation — one shelf, three promises.** Every card follows the same
+   editorial rhythm even though each game keeps its own identity:
+   - **Title:** always bilingual, `中文名 · English Name`.
+   - **Excerpt:** one Chinese sentence followed by one English sentence. Speak from
+     the player's point of view: **what they do + what they take away**. Do not dump
+     rules, question counts, engine names, frameworks or other implementation detail.
+     The English line may complement the Chinese; it must not mechanically translate it.
+   - **Tags:** exactly two at launch — one Chinese and one English, at the same level
+     of specificity (for example `象棋` + `xiangqi`, not `象棋` + `board`).
+   - **Cover:** a text-free **3:2 WebP atmosphere image**, not a raw UI screenshot.
+     Keep the Library Linen restraint (warm paper, muted colour, editorial light) and
+     include a trace of human presence — a pencil, glass, hand, unfinished move. Covers
+     should feel like one photographic series while each game's objects remain distinct.
+     The `GAMES` entry must carry a descriptive `alt`; do not reuse the title as alt text.
+   - **Separation of jobs:** hub cover creates mood; `og-<game>.png` creates a legible
+     social preview. They need not be the same composition.
 6. **Asset hygiene** — Vite `base: './'` (relative paths, works from the subfolder).
    Prefer **stable output filenames** so updating a game is a plain overwrite; if
    filenames stay hashed, deleting the old hashed files on update is mandatory.

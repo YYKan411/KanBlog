@@ -115,16 +115,16 @@ function AppInner() {
         <section className="panel resume-panel">
           <p className="lede">
             {t({
-              zh: `上次做到第 ${Math.min(index + 1, QUESTIONS.length)} 題（共 ${QUESTIONS.length} 題）。繼續，還是重新開始？`,
+              zh: `你上次答到第 ${Math.min(index + 1, QUESTIONS.length)} 題（共 ${QUESTIONS.length} 題）。接住嚟，定由頭開始？`,
               en: `You were on question ${Math.min(index + 1, QUESTIONS.length)} of ${QUESTIONS.length}. Continue, or start over?`,
             })}
           </p>
           <div className="resume-actions">
             <button type="button" className="primary-btn" onClick={() => setScreen('quiz')}>
-              {t({ zh: '繼續', en: 'Continue' })}
+              {t({ zh: '接住答', en: 'Continue' })}
             </button>
             <button type="button" className="ghost-btn" onClick={restart}>
-              {t({ zh: '重新開始', en: 'Start over' })}
+              {t({ zh: '由頭開始', en: 'Start over' })}
             </button>
           </div>
         </section>

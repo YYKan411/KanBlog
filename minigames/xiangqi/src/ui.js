@@ -11,7 +11,7 @@ export function createUi(root) {
   root.innerHTML = `
     <div class="xq-shell">
       <header class="xq-top">
-        <a class="xq-back" href="/minigames/">← Mini Games</a>
+        <a class="xq-back" href="/minigames/">← 小遊戲 · Mini Games</a>
         <div class="xq-brand">
           <h1 class="xq-title">紙上象棋</h1>
           <p class="xq-title-en">Xiangqi on Linen</p>
@@ -35,7 +35,7 @@ export function createUi(root) {
           <div class="xq-status" id="xqStatus" aria-live="polite"></div>
           <div class="xq-engine-status" id="xqEngineStatus">引擎熱身中…</div>
 
-          <div class="xq-eval" title="局面優劣（引擎視角）">
+          <div class="xq-eval" title="局面走勢（只供參考）">
             <div class="xq-eval-track">
               <div class="xq-eval-fill" id="xqEvalFill"></div>
             </div>
@@ -55,7 +55,7 @@ export function createUi(root) {
             <select id="xqLevel">
               <option value="easy">閒聊</option>
               <option value="medium" selected>認真</option>
-              <option value="hard">較勁</option>
+              <option value="hard">認真啲</option>
             </select>
           </label>
 
@@ -68,13 +68,17 @@ export function createUi(root) {
             <h2 class="xq-side-h">着法</h2>
             <ol class="xq-move-list" id="xqMoveList"></ol>
             <details class="xq-notation-help">
+              <summary>第一次玩？</summary>
+              <p>唔使先背晒規則。撳一隻棋，綠點就係佢行得嘅位置；目標係逼到對方個將無路可走。試住行，完局再一齊睇返。</p>
+            </details>
+            <details class="xq-notation-help">
               <summary>點睇棋譜？</summary>
               <p>「炮二平五」即二路炮橫移至五路；「傌八進七」即八路傌向前行至七路。</p>
             </details>
           </div>
 
           <div class="xq-review" id="xqReview" hidden>
-            <h2 class="xq-side-h">終局檢討</h2>
+            <h2 class="xq-side-h">完局睇返</h2>
             <p class="xq-review-progress" id="xqReviewProgress" aria-live="polite"></p>
             <div class="xq-highlight" id="xqHighlight" hidden></div>
             <p class="xq-review-sum" id="xqReviewSum"></p>
@@ -180,7 +184,8 @@ export function renderStatus(ui, state) {
     const winner = sideToMove === RED ? '黑' : '紅';
     text = `將死 — ${winner}方勝`;
   } else if (status === 'stalemate') {
-    text = '困斃 — 和棋';
+    const winner = sideToMove === RED ? '黑' : '紅';
+    text = `困斃 — ${winner}方勝`;
   } else {
     const side = sideToMove === RED ? '紅' : '黑';
     const you = sideToMove === humanColor ? '（你）' : '（引擎）';
@@ -193,7 +198,7 @@ export function renderStatus(ui, state) {
   const engineStatus = {
     loading: '引擎熱身中…',
     ready: '引擎已就位',
-    fallback: '引擎未醒，暫由輕量對手陪你行',
+    fallback: '引擎未醒，暫由簡單對手陪你行',
   };
   ui.engineStatusEl.textContent = engineStatus[state.engineStatus] || engineStatus.loading;
   ui.engineStatusEl.dataset.status = state.engineStatus;
@@ -205,10 +210,10 @@ export function renderEval(ui, score, humanColor) {
   const pct = 50 + (clamped / 400) * 45;
   ui.evalFill.style.width = `${pct}%`;
   let label = '均衡';
-  if (clamped > 80) label = humanColor === RED ? '紅優' : '你優';
-  else if (clamped < -80) label = humanColor === RED ? '黑優' : '引擎優';
-  else if (clamped > 25) label = '略優';
-  else if (clamped < -25) label = '略劣';
+  if (clamped > 80) label = '你較優';
+  else if (clamped < -80) label = '對手較優';
+  else if (clamped > 25) label = '你稍優';
+  else if (clamped < -25) label = '對手稍優';
   ui.evalLabel.textContent = label;
 }
 
@@ -261,7 +266,7 @@ export function renderReview(ui, review, progress = null) {
 
   const s = review.summary;
   ui.reviewSum.textContent =
-    `最佳 ${s.best} · 穩健 ${s.good} · 可改進 ${s.inaccuracy} · 軟着 ${s.mistake} · 失着 ${s.blunder}`;
+    `最準 ${s.best} · 穩陣 ${s.good} · 差少少 ${s.inaccuracy} · 轉差 ${s.mistake} · 關鍵失誤 ${s.blunder}`;
 
   ui.reviewList.replaceChildren();
   for (const note of review.notes) {
@@ -280,7 +285,7 @@ export function renderReview(ui, review, progress = null) {
         : note.bestNotation;
       const cost = Math.round(note.delta);
       const punish = note.punishLine && note.punishLine.length
-        ? `<p class="xq-note-line">對手可乘：${escapeHtml(note.punishLine.join('，'))}</p>`
+        ? `<p class="xq-note-line">對手之後可以咁行：${escapeHtml(note.punishLine.join('，'))}</p>`
         : '';
       detail = `
         <p class="xq-note-line">實戰 ${escapeHtml(note.notation)} → ${escapeHtml(note.playedDesc)}</p>

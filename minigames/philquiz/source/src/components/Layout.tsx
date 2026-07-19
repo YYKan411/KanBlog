@@ -13,14 +13,14 @@ export function Layout({ children }: { children: ReactNode }) {
               {t({ zh: '← 小遊戲', en: '← Mini Games' })}
             </a>
             <p className="game-kicker">
-              {t({ zh: '深夜傾計版 · 16 型', en: 'Late-night chat · 16 types' })}
+              {t({ zh: '深夜傾計版 · 16 位思想家', en: 'Late-night chat · 16 thinkers' })}
             </p>
             <h1 className="game-title">
               {t({ zh: '哲學傾向問卷', en: 'Philosophical Tendency Quiz' })}
             </h1>
             <p className="game-subtitle">
               {t({
-                zh: '36 題，無標準答案。最後會配對一位與你思路最接近的思想家——有偏見但誠實的傾計探索，不是診斷。',
+                zh: '三十六題，冇標準答案。最後搵出一位同你思路最接近嘅思想家——有偏見，但老實；係傾計，唔係診斷。',
                 en: '36 questions, no correct answers. We match you with the thinker whose groove fits yours — a biased-but-honest chat, not diagnosis.',
               })}
             </p>

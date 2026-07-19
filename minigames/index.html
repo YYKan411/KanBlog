@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>小遊戲 · Mini Games — 言又勤</title>
-<meta name="description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta name="description" content="一格留畀慢慢玩、慢慢諗嘅小玩意。A small shelf of thoughtful browser games, made for unhurried play.">
 <meta name="author" content="言又勤">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="小遊戲 · Mini Games — 言又勤">
-<meta property="og:description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta property="og:description" content="一格留畀慢慢玩、慢慢諗嘅小玩意。A small shelf of thoughtful browser games, made for unhurried play.">
 <meta property="og:url" content="https://yykan.uk/minigames/">
 <meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
@@ -18,7 +18,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="小遊戲 · Mini Games — 言又勤">
-<meta name="twitter:description" content="言又勤得閒 vibe code 出嚟嘅小遊戲，喺瀏覽器入面即玩。A small shelf of browser games, built for fun.">
+<meta name="twitter:description" content="一格留畀慢慢玩、慢慢諗嘅小玩意。A small shelf of thoughtful browser games, made for unhurried play.">
 <meta name="twitter:image" content="https://yykan.uk/images/og-minigames.png">
 <link rel="canonical" href="https://yykan.uk/minigames/">
 <link rel="alternate" type="application/rss+xml" title="言又勤 RSS feed" href="/feed.xml">
@@ -26,6 +26,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<style>
+  .game-shelf {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-count: initial;
+    gap: var(--col-gap);
+    align-items: stretch;
+  }
+  .game-shelf .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0;
+  }
+  .game-shelf .card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .game-shelf .card-meta { margin-top: auto; }
+  @media (max-width: 960px) {
+    .game-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .game-shelf { grid-template-columns: 1fr; }
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,6 +60,16 @@
   "name": "小遊戲 · Mini Games",
   "url": "https://yykan.uk/minigames/",
   "inLanguage": ["zh-HK", "en-GB"],
+  "description": "一格留畀慢慢玩、慢慢諗嘅小玩意。",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 3,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "url": "https://yykan.uk/minigames/catspuzzle/", "name": "貓陣 · Cats — A Logic Puzzle" },
+      { "@type": "ListItem", "position": 2, "url": "https://yykan.uk/minigames/philquiz/", "name": "哲學傾向問卷 · Philosophical Tendency Quiz" },
+      { "@type": "ListItem", "position": 3, "url": "https://yykan.uk/minigames/xiangqi/", "name": "紙上象棋 · Xiangqi on Linen" }
+    ]
+  },
   "isPartOf": { "@type": "WebSite", "name": "言又勤", "url": "https://yykan.uk/" },
   "author": { "@type": "Person", "name": "言又勤", "alternateName": "Yin Yau Kan" }
 }
@@ -67,13 +104,13 @@
   </div>
 </header>
 
-<main class="masonry" id="gamesGrid">
+<main class="masonry game-shelf" id="gamesGrid">
   <!-- game cards injected by the script below -->
   <noscript>
     <!-- Static fallback for non-JS / AI crawlers. Hand-maintained: when you add
          a game to the GAMES array below, add a matching <li> here too. -->
     <ul class="noscript-posts">
-      <li><a href="/minigames/catspuzzle/">Cats — A Logic Puzzle</a></li>
+      <li><a href="/minigames/catspuzzle/">貓陣 · Cats — A Logic Puzzle</a></li>
       <li><a href="/minigames/philquiz/">哲學傾向問卷 · Philosophical Tendency Quiz</a></li>
       <li><a href="/minigames/xiangqi/">紙上象棋 · Xiangqi on Linen</a></li>
     </ul>
@@ -95,30 +132,33 @@
 <script>
   // ── The shelf. Add a new game = add one entry here. ──────────────────────
   // Fields mirror the blog's post cards so the same .card styling applies:
-  //   title, excerpt, cover (image URL), url (where "play" goes), tags[], meta
+  //   title, excerpt, cover (image URL), alt, url (where "play" goes), tags[], meta
   const GAMES = [
     {
-      title: "Cats — A Logic Puzzle",
-      excerpt: "一格色一隻貓、一行一列一隻貓，貓貓之間唔可以掂到對方（連打斜都唔得）。A Star-Battle-style logic puzzle: one cat per colour, row and column — and no two cats may ever touch.",
-      cover: "/images/catspuzzle-cover.svg",
+      title: "貓陣 · Cats — A Logic Puzzle",
+      excerpt: "幫貓貓各自搵一格容身之所：每行、每列、每個色區只放一隻，仲要留返一點距離。Give every cat a quiet corner — one per row, column and colour, with room to breathe.",
+      cover: "/images/catspuzzle-cover.webp",
+      alt: "暖黃燈下，一張放好八隻木貓棋子嘅彩色邏輯盤",
       url: "/minigames/catspuzzle/",
-      tags: ["邏輯", "puzzle"],
+      tags: ["邏輯", "logic"],
       meta: "▶ 開始玩 · play"
     },
     {
       title: "哲學傾向問卷 · Philosophical Tendency Quiz",
-      excerpt: "36 題深夜酒吧傾計版問卷，配對 16 位世界各地思想家——含生平、世界觀側寫與盲點提醒。A 36-question late-night bar quiz matching you to one of 16 thinkers worldwide.",
-      cover: "/images/philquiz-cover.webp?v=9a8c35e",
+      excerpt: "答完三十六個深夜先會問嘅問題，睇下邊位思想家最似你一路以來嘅取捨。Thirty-six late-night questions; one thinker whose contradictions echo yours.",
+      cover: "/images/philquiz-cover.webp",
+      alt: "深夜酒吧枱面上嘅問卷卡、鋼筆、思想家肖像卡同一杯威士忌",
       url: "/minigames/philquiz/",
-      tags: ["哲思", "quiz"],
+      tags: ["哲思", "philosophy"],
       meta: "▶ 開始玩 · play"
     },
     {
       title: "紙上象棋 · Xiangqi on Linen",
-      excerpt: "行完一盤，佢會陪你睇返：邊一步改變咗全局、點解、本來可以點行。A quiet game of Chinese chess — play, then see what actually mattered.",
+      excerpt: "行完一盤，陪你睇返邊一步改寫全局、點解，仲有本來可以點行。Play a quiet game, then see what changed everything.",
       cover: "/images/xiangqi-cover.webp",
+      alt: "暖黃燈下嘅紙上象棋盤、茶杯、棋譜簿同一隻停喺盤邊嘅手",
       url: "/minigames/xiangqi/",
-      tags: ["象棋", "board"],
+      tags: ["象棋", "xiangqi"],
       meta: "▶ 開始玩 · play"
     }
   ];
@@ -133,7 +173,7 @@
       const img = document.createElement('img');
       img.className = 'card-cover';
       img.src = game.cover;
-      img.alt = game.title;
+      img.alt = game.alt || game.title;
       img.loading = 'lazy';
       a.appendChild(img);
     }

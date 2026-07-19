@@ -181,7 +181,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '兩者對話，看哪邊解釋力更強', en: 'Let them dialogue — whichever explains better' },
+        label: { zh: '兩邊傾吓，睇邊邊講得通啲', en: 'Let them dialogue — whichever explains better' },
         weights: { epistemology: -0.5, stance: 0.5 },
       },
     ],
@@ -254,7 +254,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '暫停——情緒也是資訊', en: 'Pause — emotion is information too' },
+        label: { zh: '停一停——情緒本身都係線索', en: 'Pause — emotion is a clue too' },
         weights: { epistemology: 1, social: -0.5, stance: 1 },
       },
       {
@@ -314,7 +314,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'c',
-        label: { zh: '結構與運氣的產物', en: 'Products of structure and luck' },
+        label: { zh: '時代同運氣一齊砌出嚟', en: 'Products of structure and luck' },
         weights: { epistemology: 0.5, existence: 1, stance: 0.5 },
       },
     ],
@@ -335,7 +335,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '會——為了他者與日常', en: 'Yes — for others and daily life' },
+        label: { zh: '會——為咗身邊人同日常', en: 'Yes — for others and daily life' },
         weights: { existence: -1, social: -1.5 },
       },
       {
@@ -599,7 +599,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'b',
-        label: { zh: '可以修煉的道場', en: 'A dojo for practice' },
+        label: { zh: '可以磨練嘅日常', en: 'A place for daily practice' },
         weights: { existence: -1, tradition: -1.5, social: -1 },
       },
       {

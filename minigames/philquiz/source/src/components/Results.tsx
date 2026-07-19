@@ -110,7 +110,7 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
 
     ctx.fillStyle = '#6a5840';
     ctx.font = `400 30px ${zhSerif}`;
-    ctx.fillText(t({ zh: '我最接近的思想輪廓', en: 'My closest thought profile' }), W / 2, 260);
+    ctx.fillText(t({ zh: '同我最接近嘅思路', en: 'My closest thought profile' }), W / 2, 260);
 
     ctx.fillStyle = '#3d2f1f';
     ctx.font = `600 84px ${zhSerif}`;
@@ -216,15 +216,15 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
       <p className="results-kicker">
         {t(
           isShareView
-            ? { zh: '分享的思想輪廓', en: 'Shared thought profile' }
-            : { zh: '你目前最接近的思想輪廓', en: 'Your closest thought profile' },
+            ? { zh: '呢位朋友最接近嘅思想輪廓', en: 'Their closest thought profile' }
+            : { zh: '你最接近嘅思想輪廓', en: 'Your closest thought profile' },
         )}
       </p>
       <h2 className="results-title">{t(primary.philosopher.name)}</h2>
       <p className="results-epithet">{t(primary.philosopher.epithet)}</p>
       <p className="match-score">
         {t({
-          zh: `你們在「${t(alignAxis.label)}」一軸最合拍`,
+          zh: `你同佢最合拍嘅地方：${t(alignAxis.label)}`,
           en: `You align most on “${t(alignAxis.label)}”`,
         })}
       </p>
@@ -250,24 +250,24 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
       </section>
 
       <section className="result-section">
-        <h3>{t({ zh: '這如何反映你的世界觀', en: 'How this mirrors your worldview' })}</h3>
+        <h3>{t({ zh: '點解你哋會對得上', en: 'How this mirrors your worldview' })}</h3>
         {primary.philosopher.worldviewMatch.map((para) => (
           <p key={para.zh}>{t(para)}</p>
         ))}
       </section>
 
       <section className="result-section caution">
-        <h3>{t({ zh: '你可能忽略了什麼', en: 'What you may be overlooking' })}</h3>
+        <h3>{t({ zh: '不過，你可能漏睇咗……', en: 'What you may be overlooking' })}</h3>
         {primary.philosopher.blindSpots.map((para) => (
           <p key={para.zh}>{t(para)}</p>
         ))}
       </section>
 
       <section className="result-section">
-        <h3>{t({ zh: '你的六個向度', en: 'Your six-axis profile' })}</h3>
+        <h3>{t({ zh: '六個角度睇你點取捨', en: 'Your six-axis profile' })}</h3>
         <p className="axis-intro">
           {t({
-            zh: '各軸已正規化至 -2 至 +2，與思想家輪廓同一尺度。點按 ⓘ 可展開各軸解釋。',
+            zh: '每條線由 -2 去到 +2，用同一把尺同思想家比較。撳 ⓘ 可以睇每個角度講緊乜。',
             en: 'Each axis is normalised to -2…+2 on the same scale as thinker profiles. Tap ⓘ to expand glossaries.',
           })}
         </p>
@@ -306,7 +306,7 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
 
       {primary.philosopher.blogLinks.length > 0 && (
         <section className="result-section">
-          <h3>{t({ zh: '站內延伸閱讀', en: 'Further reading on KanBlog' })}</h3>
+          <h3>{t({ zh: '如果想再行遠少少', en: 'Further reading on KanBlog' })}</h3>
           <ul className="blog-link-list">
             {primary.philosopher.blogLinks.map((link) => (
               <li key={link.slug}>
@@ -319,10 +319,10 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
 
       {secondary && (
         <section className="result-section secondary-match">
-          <h3>{t({ zh: '次要共鳴', en: 'Secondary resonance' })}</h3>
+          <h3>{t({ zh: '第二接近', en: 'Second closest' })}</h3>
           <p className="secondary-name">
             {t(secondary.philosopher.name)} ·{' '}
-            {t({ zh: `第 ${secondary.rank} 位`, en: `Rank ${secondary.rank}` })}
+            {t({ zh: `排第 ${secondary.rank}`, en: `Rank ${secondary.rank}` })}
           </p>
           <p>{t(secondary.philosopher.epithet)}</p>
           <p>{t(secondary.philosopher.worldviewMatch[0])}</p>
@@ -331,12 +331,12 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
 
       {tertiary.length > 0 && (
         <section className="result-section">
-          <h3>{t({ zh: '其他相近思路', en: 'Other nearby thinkers' })}</h3>
+          <h3>{t({ zh: '另外幾個相近思路', en: 'Other nearby thinkers' })}</h3>
           <ul className="tertiary-list">
             {tertiary.map((item) => (
               <li key={item.philosopher.id}>
                 <strong>{t(item.philosopher.name)}</strong>
-                <span>{t({ zh: `第 ${item.rank} 位`, en: `Rank ${item.rank}` })}</span>
+                <span>{t({ zh: `排第 ${item.rank}`, en: `Rank ${item.rank}` })}</span>
                 <p>{t(item.philosopher.epithet)}</p>
               </li>
             ))}
@@ -346,7 +346,7 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
 
       {primary.philosopher.relatedIds.length > 0 && (
         <section className="result-section">
-          <h3>{t({ zh: '延伸對讀', en: 'Read alongside' })}</h3>
+          <h3>{t({ zh: '放埋一齊睇', en: 'Read alongside' })}</h3>
           <ul className="related-list">
             {primary.philosopher.relatedIds
               .map((id) => PHILOSOPHER_MAP.get(id))
@@ -367,16 +367,16 @@ export function Results({ matches, vector, onRetake, isShareView = false }: Resu
           {t({ zh: '分享結果', en: 'Share result' })}
         </button>
         <button type="button" className="primary-btn" onClick={shareCard}>
-          {t({ zh: '儲存結果卡', en: 'Save result card' })}
+          {t({ zh: '儲存呢張結果卡', en: 'Save result card' })}
         </button>
         <button type="button" className="ghost-btn" onClick={onRetake}>
-          {t({ zh: '再玩一次', en: 'Take again' })}
+          {t({ zh: '再答一次', en: 'Take again' })}
         </button>
       </div>
 
       <p className="fine-print">
         {t({
-          zh: '免責：本問卷非學術量表，結果受題目設計影響；為趣味傾向配對，不構成心理、學術或道德判斷。排名只表示在 16 位人物中哪個輪廓最接近，並非機率或身份認同。',
+          zh: '講清楚：呢份唔係學術量表，結果一定受題目點問影響。排名只係話十六個輪廓入面邊個最接近，唔係機率、身份，更加唔係心理或道德判斷。',
           en: 'Disclaimer: not an academic scale — results reflect how the questions are designed. Rankings show which of 16 profiles is nearest, not probability or identity.',
         })}
       </p>

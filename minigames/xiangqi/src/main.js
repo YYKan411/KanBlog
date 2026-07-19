@@ -73,7 +73,7 @@ async function runReview(ui, state, engine) {
     state.reviewProgress = null;
   } catch (error) {
     console.warn('review failed', error);
-    state.reviewProgress = '覆盤中斷，請稍後再試。';
+    state.reviewProgress = '覆盤斷咗，遲啲再試啦。';
   }
   paint(ui, state);
 }

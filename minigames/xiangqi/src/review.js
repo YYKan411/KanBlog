@@ -94,19 +94,19 @@ export async function reviewGame(initial, history, humanColor, engine, onProgres
     prefix.push(move);
 
     let kind = 'good';
-    let verdict = '穩健';
+    let verdict = '穩陣';
     if (best && best.from === move.from && best.to === move.to) {
       kind = 'best';
-      verdict = '最佳着';
+      verdict = '最準';
     } else if (delta >= 250) {
       kind = 'blunder';
-      verdict = '失着';
+      verdict = '關鍵失誤';
     } else if (delta >= 100) {
       kind = 'mistake';
-      verdict = '軟着';
+      verdict = '局面轉差';
     } else if (delta >= 40) {
       kind = 'inaccuracy';
-      verdict = '可改進';
+      verdict = '差少少';
     }
 
     const playedDesc = describeScore(playedScore);
@@ -167,7 +167,7 @@ function buildHighlight(humanNotes) {
     return {
       ply: turningPoint.ply,
       kind: turningPoint.kind,
-      title: `全場轉捩點 · 第 ${turn} 回合`,
+      title: `全盤轉捩點 · 第 ${turn} 回合`,
       text:
         `你行 ${turningPoint.notation}，局面變成${turningPoint.playedDesc}；` +
         `本來 ${reco}，可以保持${turningPoint.bestDesc}。` +
@@ -180,7 +180,7 @@ function buildHighlight(humanNotes) {
   return {
     ply: shining.ply,
     kind: 'best',
-    title: '全場高光',
+    title: '全盤最靚一着',
     text:
       `全盤冇明顯失誤，行得幾穩陣。` +
       `例如第 ${turn} 回合 ${shining.notation}，同引擎首選一致，維持${shining.bestDesc}。`,

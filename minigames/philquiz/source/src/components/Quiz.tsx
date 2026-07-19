@@ -43,7 +43,7 @@ export function Quiz({ answers, index, onAnswer, onBack }: QuizProps) {
           {chapter.phase === 3 && (
             <p className="chapter-note">
               {t({
-                zh: '最後一輪：想像力實驗。沒有標準答案，只有你的取捨。',
+                zh: '最後一輪：玩幾個想像實驗。冇標準答案，淨係睇你點揀。',
                 en: 'Final round: thought experiments. No clever answer — only your trade-offs.',
               })}
             </p>
@@ -54,7 +54,7 @@ export function Quiz({ answers, index, onAnswer, onBack }: QuizProps) {
       {index === HALFWAY_INDEX && (
         <p className="halfway-note">
           {t({
-            zh: '已過半。你的輪廓開始成形……',
+            zh: '過咗一半。你個輪廓開始浮出嚟……',
             en: 'Past halfway. Your profile is taking shape…',
           })}
         </p>

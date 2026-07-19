@@ -9,12 +9,12 @@ export const PHILOSOPHERS: Philosopher[] = [
     region: { zh: '阿爾及利亞／法國', en: 'Algeria / France' },
     centroid: { ethics: 0.05, epistemology: 0.55, existence: 1.85, social: 1.2, stance: 1.05, tradition: 0.8 },
     barQuote: {
-      zh: '「必須想像西西弗斯是快樂的。」——不是因為有希望，而是因為推石頭本身已是回答。',
+      zh: '「必須想像薛西弗斯是快樂的。」——唔係因為有希望，而係因為推石頭本身已經係回答。',
       en: '"One must imagine Sisyphus happy." — not because there is hope, but because the pushing itself is the answer.',
     },
     biography: [
       {
-        zh: '卡繆生於法屬阿爾及利亞的貧困社區，在地中海的陽光與貧苦之間長大。他早年以記者身份報導社會不公，後來以《異鄉人》《鼠疫》《西西弗的神話》等作品成為二十世紀最重要的作家—思想家之一，並於 1957 年獲得諾貝爾文學獎。',
+        zh: '卡繆生於法屬阿爾及利亞嘅貧苦街坊，喺地中海陽光同貧苦之間長大。佢早年以記者身份報導社會不公，後來以《異鄉人》《鼠疫》《薛西弗斯神話》等作品成為二十世紀最重要嘅作家—思想家之一，並於 1957 年獲得諾貝爾文學獎。',
         en: 'Camus was born into poverty in French Algeria and grew up between Mediterranean sunlight and hardship. He began as a journalist covering injustice, then became one of the twentieth century\'s defining writer-thinkers through works such as *The Stranger*, *The Plague*, and *The Myth of Sisyphus*, winning the Nobel Prize in Literature in 1957.',
       },
       {
@@ -43,7 +43,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['beauvoir', 'zhuangzi', 'nietzsche'],
-    blogLinks: [{ slug: 'sisyphus', title: { zh: '西西弗斯', en: 'Sisyphus' } }],
+    blogLinks: [{ slug: 'sisyphus', title: { zh: '推石頭之人', en: 'He Who Pushes the Stone' } }],
   },
   {
     id: 'confucius',
@@ -94,7 +94,7 @@ export const PHILOSOPHERS: Philosopher[] = [
     name: { zh: '伊曼努爾·康德', en: 'Immanuel Kant' },
     epithet: { zh: '義務的守夜人', en: 'Guardian of duty' },
     era: { zh: '1724–1804', en: '1724–1804' },
-    region: { zh: 'Königsberg（今加里寧格勒）／普魯士', en: 'Königsberg / Prussia' },
+    region: { zh: 'Königsberg／普魯士', en: 'Königsberg / Prussia' },
     centroid: { ethics: -1.75, epistemology: -1.6, existence: -1.65, social: -0.45, stance: -0.95, tradition: -1.15 },
     barQuote: {
       zh: '「兩件事物我愈是思考愈覺神奇，心中充滿敬畏：我頭上的星空與我心中的道德律。」',
@@ -488,7 +488,7 @@ export const PHILOSOPHERS: Philosopher[] = [
   {
     id: 'socrates',
     name: { zh: '蘇格拉底', en: 'Socrates' },
-    epithet: { zh: '未檢討的人生不值得過', en: 'The unexamined life is not worth living' },
+    epithet: { zh: '未經省察的人生不值得過', en: 'The unexamined life is not worth living' },
     era: { zh: '公元前 470–399', en: '470–399 BCE' },
     region: { zh: '古雅典', en: 'Ancient Athens' },
     centroid: { ethics: -0.8, epistemology: -0.5, existence: -0.55, social: -0.3, stance: 1.4, tradition: -0.55 },
@@ -659,7 +659,7 @@ export const PHILOSOPHERS: Philosopher[] = [
       },
     ],
     relatedIds: ['camus', 'beauvoir', 'zhuangzi'],
-    blogLinks: [{ slug: 'sisyphus', title: { zh: '西西弗斯', en: 'Sisyphus' } }],
+    blogLinks: [{ slug: 'sisyphus', title: { zh: '推石頭之人', en: 'He Who Pushes the Stone' } }],
   },
   {
     id: 'wang-yangming',

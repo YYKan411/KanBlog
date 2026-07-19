@@ -21,9 +21,9 @@ const OG_IMAGE = `${SITE}/images/og-philquiz.png?v=9a8c35e`;
 const esc = (s) => s.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 
 for (const p of PHILOSOPHERS) {
-  const title = `我最接近的思想家：${p.name.zh} — 哲學傾向問卷 · 言又勤`;
-  const ogTitle = `我最接近的思想家：${p.name.zh} · ${p.name.en}`;
-  const description = `${p.epithet.zh} · ${p.epithet.en} — 36 題深夜傾計版哲學問卷，你又會配對到誰？A late-night philosophy quiz: who would you match?`;
+  const title = `同我最接近嘅思想家：${p.name.zh} — 哲學傾向問卷 · 言又勤`;
+  const ogTitle = `同我最接近嘅思想家：${p.name.zh} · ${p.name.en}`;
+  const description = `${p.epithet.zh} · ${p.epithet.en} — 三十六題深夜傾計，你又會對到邊位？A late-night philosophy chat: who fits your groove?`;
   const pageUrl = `${SITE}/minigames/philquiz/r/${p.id}/`;
 
   const html = `<!DOCTYPE html>
@@ -41,6 +41,7 @@ for (const p of PHILOSOPHERS) {
 <meta property="og:url" content="${pageUrl}">
 <meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
+<meta property="og:locale:alternate" content="en_GB">
 <meta property="og:image" content="${OG_IMAGE}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
