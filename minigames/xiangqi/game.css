@@ -162,7 +162,9 @@ button, select {
 }
 
 .xq-board.is-flipped .xq-piece {
-  transform: rotate(180deg);
+  /* Must repeat the centring translate — a bare rotate() would replace it
+     and shove every piece half a cell off its intersection. */
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 
 /* Grid lines via cell borders — intersections feel */
