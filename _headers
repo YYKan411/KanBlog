@@ -12,11 +12,9 @@
 
 # Pikafish WebAssembly uses SharedArrayBuffer. Keep cross-origin isolation
 # scoped to the game so the rest of the site is unaffected.
-# Cover the directory index AND all assets under it (Pages path matching).
-/minigames/xiangqi/
-  Cross-Origin-Opener-Policy: same-origin
-  Cross-Origin-Embedder-Policy: require-corp
-
+# NOTE: only ONE rule may match each path — COOP/COEP are structured headers,
+# and duplicate values ("require-corp, require-corp") are invalid, which
+# silently disables isolation. /minigames/xiangqi/* also matches the index.
 /minigames/xiangqi/*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp
