@@ -1,0 +1,9 @@
+{
+  "name": "kanblog-xiangqi",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "test": "node scripts/smoke.mjs"
+  }
+}

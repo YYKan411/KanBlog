@@ -1,0 +1,22 @@
+Pikafish WebAssembly distribution notice
+=========================================
+
+Pikafish is Copyright (C) the Pikafish developers and is distributed under
+the GNU General Public License version 3. See COPYING.txt in this directory.
+
+Upstream source:
+https://github.com/official-pikafish/Pikafish
+
+This browser build (pikafish.js, pikafish.wasm and pikafish.data) is vendored
+unchanged from:
+https://github.com/dffge552/xiangqi-pwa-offline/commit/5450fdd43d269c97e44fef5ea2f4ebe6fd205748
+
+That pinned repository revision is the source and provenance reference for the
+distributed WebAssembly build. The wrapper in ../../src/pikafish-worker.js and
+../../src/pikafish.js is original KanBlog code and communicates with the engine
+through its UCI command interface.
+
+SHA-256:
+pikafish.data  eff217ee3cbfce0edca070601ca554628962cf5619249fb92ddb6afb0fbe5d77
+pikafish.js    9260f80f642ad1798e66409363af6295df8216e2472ebc518d37bfed942dcd0c
+pikafish.wasm  aed4a8fe1eee79a1b7b5deedf8be8333fd1241b05b236f3a19174bbbd36f24ec

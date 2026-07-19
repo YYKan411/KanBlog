@@ -21,6 +21,7 @@
 - [小遊戲 · Mini Games](https://yykan.uk/minigames/): browser games built for fun
 - [Cats — A Logic Puzzle](https://yykan.uk/minigames/catspuzzle/): a Star-Battle-style logic puzzle — one cat per colour, row and column, no two cats may touch
 - [哲學傾向問卷 · Philosophical Tendency Quiz](https://yykan.uk/minigames/philquiz/): a 32-question late-night bar quiz matching you to one of 16 thinkers worldwide
+- [紙上象棋 · Xiangqi on Linen](https://yykan.uk/minigames/xiangqi/): Chinese chess on Library Linen — play against a browser engine, then review your moves
 
 ## Links
 - [RSS feed](https://yykan.uk/feed.xml)
