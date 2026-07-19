@@ -19,7 +19,7 @@ export function createUi(root) {
         <a class="xq-home" href="/">言又勤</a>
       </header>
 
-      <p class="xq-lead">同引擎對弈，終局幫你檢討着法。<span lang="en">Play, then review.</span></p>
+      <p class="xq-lead">唔使急，慢慢行。完局之後，陪你睇返邊一步最要緊。<span lang="en">Play, then see what mattered.</span></p>
 
       <div class="xq-layout">
         <section class="xq-board-wrap" aria-label="棋盤">
@@ -33,7 +33,7 @@ export function createUi(root) {
 
         <aside class="xq-side">
           <div class="xq-status" id="xqStatus" aria-live="polite"></div>
-          <div class="xq-engine-status" id="xqEngineStatus">Pikafish 載入中…</div>
+          <div class="xq-engine-status" id="xqEngineStatus">引擎熱身中…</div>
 
           <div class="xq-eval" title="局面優劣（引擎視角）">
             <div class="xq-eval-track">
@@ -191,9 +191,9 @@ export function renderStatus(ui, state) {
   ui.undoBtn.disabled = !state.history.length || thinking || status !== 'playing';
 
   const engineStatus = {
-    loading: 'Pikafish 載入中…',
-    ready: 'Pikafish 已就緒',
-    fallback: '輕量後備引擎',
+    loading: '引擎熱身中…',
+    ready: '引擎已就位',
+    fallback: '引擎未醒，暫由輕量對手陪你行',
   };
   ui.engineStatusEl.textContent = engineStatus[state.engineStatus] || engineStatus.loading;
   ui.engineStatusEl.dataset.status = state.engineStatus;
@@ -273,7 +273,7 @@ export function renderReview(ui, review, progress = null) {
 
     let detail;
     if (isBest) {
-      detail = `<p>同 Pikafish 首選一致，維持${escapeHtml(note.bestDesc || '局面')}。</p>`;
+      detail = `<p>同引擎首選一致，維持${escapeHtml(note.bestDesc || '局面')}。</p>`;
     } else {
       const reco = note.recoLine && note.recoLine.length
         ? note.recoLine.join('，')

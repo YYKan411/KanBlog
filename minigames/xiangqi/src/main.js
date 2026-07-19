@@ -52,12 +52,12 @@ function paint(ui, state) {
 
 async function runReview(ui, state, engine) {
   if (!engine.ready) {
-    state.reviewProgress = 'Pikafish 未能載入，暫時未能深入檢討。';
+    state.reviewProgress = '引擎今次未醒到，覆盤要等佢返嚟先做到——不如再嚟一局？';
     paint(ui, state);
     return;
   }
 
-  state.reviewProgress = 'Pikafish 正在逐步覆盤…';
+  state.reviewProgress = '覆緊盤，逐步睇返你點行…';
   paint(ui, state);
   try {
     state.review = await reviewGame(
@@ -66,7 +66,7 @@ async function runReview(ui, state, engine) {
       state.humanColor,
       engine,
       (done, total) => {
-        state.reviewProgress = `Pikafish 正在覆盤 ${done} / ${total}…`;
+        state.reviewProgress = `覆緊盤 ${done} / ${total}…`;
         paint(ui, state);
       },
     );

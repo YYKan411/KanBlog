@@ -183,6 +183,6 @@ function buildHighlight(humanNotes) {
     title: '全場高光',
     text:
       `全盤冇明顯失誤，行得幾穩陣。` +
-      `例如第 ${turn} 回合 ${shining.notation}，同 Pikafish 首選一致，維持${shining.bestDesc}。`,
+      `例如第 ${turn} 回合 ${shining.notation}，同引擎首選一致，維持${shining.bestDesc}。`,
   };
 }
