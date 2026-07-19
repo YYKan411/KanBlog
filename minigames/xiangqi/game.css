@@ -219,16 +219,6 @@ button, select {
   box-shadow: 0 0 0 2px var(--accent);
 }
 
-.xq-cell.is-hint::before {
-  background: var(--accent);
-  width: 2px;
-}
-
-.xq-cell.is-hint:not(:has(.xq-piece)) .xq-hint-dot,
-.xq-cell.is-hint:not(:has(.xq-piece))::after {
-  /* destination hint: soft accent node */
-}
-
 .xq-cell.is-hint:not(:has(.xq-piece)) {
   background: radial-gradient(circle at center, rgba(58, 90, 58, 0.35) 0 14%, transparent 15%);
 }
