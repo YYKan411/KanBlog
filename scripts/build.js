@@ -327,14 +327,14 @@ const llmsTxt = `# ${SITE_TITLE} (Yin Yau Kan)
 ${llmsPostLines}
 
 ## Mini Games
-- [小遊戲 · Mini Games](${SITE_URL}/minigames/): browser games built for fun
-- [貓陣 · Cats — A Logic Puzzle](${SITE_URL}/minigames/catspuzzle/): place one cat per row, column and colour, with no touching
-- [哲學傾向問卷 · Philosophical Tendency Quiz](${SITE_URL}/minigames/philquiz/): 36 late-night questions matching your trade-offs to one of 16 thinkers
-- [紙上象棋 · Xiangqi on Linen](${SITE_URL}/minigames/xiangqi/): play Chinese chess, then revisit the move that changed everything
+- [小遊戲 · Mini Games](${SITE_URL}/minigames/): 一格留畀慢慢玩、慢慢諗嘅小玩意 · browser games built for fun
+- [貓陣 · Cats — A Logic Puzzle](${SITE_URL}/minigames/catspuzzle/): 幫貓貓各自搵一格容身之所 · place one cat per row, column and colour, with no touching
+- [哲學傾向問卷 · Philosophical Tendency Quiz](${SITE_URL}/minigames/philquiz/): 答完深夜先會問嘅問題，睇邊位思想家最似你 · 36 late-night questions matching your trade-offs to one of 16 thinkers
+- [紙上象棋 · Xiangqi on Linen](${SITE_URL}/minigames/xiangqi/): 行完一盤棋，睇返邊一步改寫全局 · play Chinese chess, then revisit the move that changed everything
 
 ## Learning
-- [學習 · Learning](${SITE_URL}/learning/): bilingual practice notes and problems
-- [SQL 自學 · SQL from scratch](${SITE_URL}/learning/sql/): write queries against a real SQLite database (football / anime / stocks themes)
+- [學習 · Learning](${SITE_URL}/learning/): 慢慢練嘅學習小格 · bilingual practice notes and problems
+- [SQL 自學 · SQL from scratch](${SITE_URL}/learning/sql/): 真實 SQLite 練查詢，英超／動漫／股票主題 · write queries against a real SQLite database (football / anime / stocks themes)
 
 ## Links
 - [RSS feed](${SITE_URL}/feed.xml)

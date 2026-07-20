@@ -148,8 +148,8 @@ async function openLesson(id) {
   $('#results').innerHTML =
     '<p class="muted">結果會顯示喺呢度 · Results appear here</p>';
   $('#status').textContent = lesson.chaos
-    ? 'Dirty data mode · 髒數據模式'
-    : theme.name + ' · clean';
+    ? theme.name + ' · 髒數據模式 dirty data'
+    : theme.name + ' · 乾淨模式 clean data';
 }
 
 function showHint() {

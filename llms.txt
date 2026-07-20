@@ -18,14 +18,14 @@
 - [地之盡頭大風吹](https://yykan.uk/posts/lands-end): 由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。
 
 ## Mini Games
-- [小遊戲 · Mini Games](https://yykan.uk/minigames/): browser games built for fun
-- [貓陣 · Cats — A Logic Puzzle](https://yykan.uk/minigames/catspuzzle/): place one cat per row, column and colour, with no touching
-- [哲學傾向問卷 · Philosophical Tendency Quiz](https://yykan.uk/minigames/philquiz/): 36 late-night questions matching your trade-offs to one of 16 thinkers
-- [紙上象棋 · Xiangqi on Linen](https://yykan.uk/minigames/xiangqi/): play Chinese chess, then revisit the move that changed everything
+- [小遊戲 · Mini Games](https://yykan.uk/minigames/): 一格留畀慢慢玩、慢慢諗嘅小玩意 · browser games built for fun
+- [貓陣 · Cats — A Logic Puzzle](https://yykan.uk/minigames/catspuzzle/): 幫貓貓各自搵一格容身之所 · place one cat per row, column and colour, with no touching
+- [哲學傾向問卷 · Philosophical Tendency Quiz](https://yykan.uk/minigames/philquiz/): 答完深夜先會問嘅問題，睇邊位思想家最似你 · 36 late-night questions matching your trade-offs to one of 16 thinkers
+- [紙上象棋 · Xiangqi on Linen](https://yykan.uk/minigames/xiangqi/): 行完一盤棋，睇返邊一步改寫全局 · play Chinese chess, then revisit the move that changed everything
 
 ## Learning
-- [學習 · Learning](https://yykan.uk/learning/): bilingual practice notes and problems
-- [SQL 自學 · SQL from scratch](https://yykan.uk/learning/sql/): write queries against a real SQLite database (football / anime / stocks themes)
+- [學習 · Learning](https://yykan.uk/learning/): 慢慢練嘅學習小格 · bilingual practice notes and problems
+- [SQL 自學 · SQL from scratch](https://yykan.uk/learning/sql/): 真實 SQLite 練查詢，英超／動漫／股票主題 · write queries against a real SQLite database (football / anime / stocks themes)
 
 ## Links
 - [RSS feed](https://yykan.uk/feed.xml)

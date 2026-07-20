@@ -24,7 +24,7 @@
 <style>
   .learn-shelf {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--col-gap);
     max-width: var(--max-w);
     margin: 0 auto 4rem;
@@ -44,12 +44,7 @@
     flex: 1;
     flex-direction: column;
   }
-  .learn-shelf .card-meta { margin-top: auto; }
-  .learn-lead {
-    max-width: var(--max-w);
-    margin: 0 auto 1.5rem;
-    padding: 0 1.25rem;
-  }
+  .learn-shelf .card-meta { margin-top: auto; text-transform: none; }
   @media (max-width: 700px) {
     .learn-shelf { grid-template-columns: 1fr; }
   }
@@ -94,13 +89,6 @@
     </div>
   </div>
 </header>
-
-<div class="learn-lead article-body">
-  <div class="pair">
-    <p class="zh">呢格係學習架——而家得 SQL，之後可以再加其他。每樣都盡量淨：簡介、題目、自己練。</p>
-    <p class="en" lang="en">A shelf for learning. SQL first; more can join later. Each item stays plain: a short note, problems, and your own practice.</p>
-  </div>
-</div>
 
 <main class="learn-shelf" id="learnGrid">
   <noscript>

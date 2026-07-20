@@ -49,7 +49,7 @@ Footer → **learning** → [`/learning/`](./learning/)
 | `[檔名沒有.html].html` | 你嘅檔名加 `.html`（例如 `reading-spring.html`） |
 | `[YYYY-MM-DD]` | 今日，例如 `2026-05-20` |
 | `[YYYY · MM · DD]` | 同上但用 dot，`2026 · 05 · 20` |
-| `[tag1]`, `[tag2]` | 你嘅 tag（散文／遊記／哲思／移英／物／人／社會） |
+| `[tag1]`, `[tag2]` | 你嘅 tag（散文／遊記／哲思／移英／物／人／社會／香港） |
 
 **想做 featured 卡（深色 stand out 卡）？**
 喺 head 嗰部分 uncomment：
