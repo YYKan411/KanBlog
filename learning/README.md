@@ -1,21 +1,14 @@
 # 學習 · Learning
 
-Site path: `/learning/`
+Site path: `/learning/` — a shelf for practice items (like Mini Games).
 
-Bilingual (zh-HK / en) practice shelf. Keep it plain: a short intro, then problems.
+Add a new course: edit `COURSES` in `learning/index.html`.
 
 ## SQL from scratch
 
-`/learning/sql/` — real SQLite in the browser (sql.js).
+`/learning/sql/` — real SQLite in the browser via **vendored** sql.js (`vendor/`), so CSP stays strict.
 
 ```bash
-# from repo root (Cloudflare Pages serves this as-is)
 python3 -m http.server 8765
-# open http://localhost:8765/learning/
-```
-
-Optional local check:
-
-```bash
-cd learning/sql && npm test
+# http://localhost:8765/learning/sql/
 ```

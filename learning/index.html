@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>學習 · Learning — 言又勤</title>
-<meta name="description" content="由零學 SQL：題目、簡介、真實資料庫。Learn SQL from scratch — problems, brief notes, a real database.">
+<meta name="description" content="慢慢練嘅學習小格。A quiet shelf for practice — notes and problems, added one by one.">
 <meta name="author" content="言又勤">
 <meta property="og:type" content="website">
 <meta property="og:title" content="學習 · Learning — 言又勤">
-<meta property="og:description" content="由零學 SQL：題目、簡介、真實資料庫。Learn SQL from scratch — problems, brief notes, a real database.">
+<meta property="og:description" content="慢慢練嘅學習小格。A quiet shelf for practice — notes and problems, added one by one.">
 <meta property="og:url" content="https://yykan.uk/learning/">
 <meta property="og:site_name" content="言又勤">
 <meta property="og:locale" content="zh_HK">
@@ -22,9 +22,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
-  .learn-shelf { max-width: 720px; margin: 0 auto 4rem; padding: 0 1.25rem; }
-  .learn-shelf .card { display: block; text-decoration: none; color: inherit; }
-  .learn-intro { margin-bottom: 2rem; }
+  .learn-shelf {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--col-gap);
+    max-width: var(--max-w);
+    margin: 0 auto 4rem;
+    padding: 0 1.25rem;
+    align-items: stretch;
+  }
+  .learn-shelf .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .learn-shelf .card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .learn-shelf .card-meta { margin-top: auto; }
+  .learn-lead {
+    max-width: var(--max-w);
+    margin: 0 auto 1.5rem;
+    padding: 0 1.25rem;
+  }
+  @media (max-width: 700px) {
+    .learn-shelf { grid-template-columns: 1fr; }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -33,6 +61,7 @@
   "name": "學習 · Learning",
   "url": "https://yykan.uk/learning/",
   "inLanguage": ["zh-HK", "en-GB"],
+  "description": "慢慢練嘅學習小格。",
   "isPartOf": { "@type": "WebSite", "name": "言又勤", "url": "https://yykan.uk/" },
   "author": { "@type": "Person", "name": "言又勤", "alternateName": "Yin Yau Kan" }
 }
@@ -66,25 +95,19 @@
   </div>
 </header>
 
-<main class="learn-shelf">
-  <div class="learn-intro article-body">
-    <div class="pair">
-      <p class="zh">識睇數唔等於識 SQL。呢度由淺入深：每題一句簡介、一條要你自己寫嘅查詢，背後係真實 SQLite。助教只提示方向，唔代寫答案。</p>
-      <p class="en" lang="en">Reading charts is not the same as reading SQL. Here each lesson is a short note plus a query you write yourself, against a real SQLite database. Hints point the way — they never paste the full answer.</p>
-    </div>
+<div class="learn-lead article-body">
+  <div class="pair">
+    <p class="zh">呢格係學習架——而家得 SQL，之後可以再加其他。每樣都盡量淨：簡介、題目、自己練。</p>
+    <p class="en" lang="en">A shelf for learning. SQL first; more can join later. Each item stays plain: a short note, problems, and your own practice.</p>
   </div>
+</div>
 
-  <a class="card text-only" href="/learning/sql/">
-    <div class="card-body">
-      <h2 class="card-title">SQL 自學 · SQL from scratch</h2>
-      <p class="card-excerpt">SELECT 到 JOIN、Window、髒數據同 EXPLAIN。可揀英超、動漫或股票主題資料庫。From SELECT to JOINs, windows, dirty data and EXPLAIN — pick football, anime, or stocks as your practice world.</p>
-      <div class="card-meta"><span>▶ 開始練習 · start</span></div>
-      <div class="card-tags">
-        <span class="card-tag">SQL</span>
-        <span class="card-tag">data</span>
-      </div>
-    </div>
-  </a>
+<main class="learn-shelf" id="learnGrid">
+  <noscript>
+    <ul class="noscript-posts">
+      <li><a href="/learning/sql/">SQL 自學 · SQL from scratch</a></li>
+    </ul>
+  </noscript>
 </main>
 
 <footer class="footer">
@@ -102,9 +125,68 @@
     <a href="/feed.xml">rss</a>
   </div>
 </footer>
+
 <script src="/post.js"></script>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Add a new course = add one entry here (same idea as minigames shelf).
+  const COURSES = [
+    {
+      title: 'SQL 自學 · SQL from scratch',
+      excerpt: 'SELECT 到 JOIN、Window、髒數據同 EXPLAIN。可揀英超、動漫或股票主題。From SELECT to JOINs, windows, dirty data and EXPLAIN — football, anime, or stocks.',
+      url: '/learning/sql/',
+      tags: ['SQL', 'data'],
+      meta: '▶ 開始練習 · start'
+    }
+  ];
+
+  function makeCourseCard(course) {
+    const a = document.createElement('a');
+    a.className = 'card text-only';
+    a.href = course.url;
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const title = document.createElement('h2');
+    title.className = 'card-title';
+    title.textContent = course.title;
+    body.appendChild(title);
+
+    if (course.excerpt) {
+      const ex = document.createElement('p');
+      ex.className = 'card-excerpt';
+      ex.textContent = course.excerpt;
+      body.appendChild(ex);
+    }
+
+    if (course.meta) {
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      meta.innerHTML = '<span>' + course.meta + '</span>';
+      body.appendChild(meta);
+    }
+
+    if (course.tags && course.tags.length) {
+      const tagsEl = document.createElement('div');
+      tagsEl.className = 'card-tags';
+      course.tags.forEach(function (t) {
+        const span = document.createElement('span');
+        span.className = 'card-tag';
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+      body.appendChild(tagsEl);
+    }
+
+    a.appendChild(body);
+    return a;
+  }
+
+  (function () {
+    const grid = document.getElementById('learnGrid');
+    COURSES.forEach(function (c) { grid.appendChild(makeCourseCard(c)); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
 </script>
 </body>
 </html>

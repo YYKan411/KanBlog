@@ -1,16 +1,25 @@
 /**
- * SQLite 引擎（sql.js WASM）
+ * SQLite 引擎（sql.js WASM）—— 本地 vendor，避開 CSP 擋 CDN
  */
 let SQL = null;
 let db = null;
 
+function getInitSqlJs() {
+  const fn = globalThis.initSqlJs;
+  if (typeof fn !== 'function') {
+    throw new Error(
+      'sql.js 尚未載入。請確認 ./vendor/sql-wasm.js 已用 <script> 引入。'
+    );
+  }
+  return fn;
+}
+
 export async function initSQL() {
   if (SQL) return SQL;
-  // sql.js from CDN
-  const mod = await import('https://sql.js.org/dist/sql-wasm.js');
-  const initSqlJs = mod.default;
+  const initSqlJs = getInitSqlJs();
+  const base = new URL('./vendor/', import.meta.url);
   SQL = await initSqlJs({
-    locateFile: (file) => `https://sql.js.org/dist/${file}`
+    locateFile: (file) => new URL(file, base).href
   });
   return SQL;
 }
