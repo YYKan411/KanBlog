@@ -22,14 +22,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
+  /*
+    Shelf cards: fixed comfortable width, not a forced 2-col that leaves
+    an empty half when only one course exists. auto-fit grows columns as
+    courses are added; justify-content keeps a single card left-aligned.
+  */
   .learn-shelf {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 24rem));
     gap: var(--col-gap);
     max-width: var(--max-w);
     margin: 0 auto 4rem;
     padding: 0 1.25rem;
     align-items: stretch;
+    justify-content: start;
   }
   .learn-shelf .card {
     display: flex;
@@ -43,15 +49,30 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    padding: 26px 26px 22px;
   }
-  .learn-shelf .card-meta { margin-top: auto; }
+  .learn-shelf .card-title {
+    margin-bottom: 10px;
+  }
+  .learn-shelf .card-excerpt {
+    margin-bottom: 0;
+  }
+  /* Meta + tags as one foot cluster; auto top-margin aligns CTAs when
+     multiple cards have unequal excerpt lengths. */
+  .learn-shelf .card-foot {
+    margin-top: auto;
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .learn-shelf .card-tags {
+    margin-top: 0;
+  }
   .learn-lead {
     max-width: var(--max-w);
     margin: 0 auto 1.5rem;
     padding: 0 1.25rem;
-  }
-  @media (max-width: 700px) {
-    .learn-shelf { grid-template-columns: 1fr; }
   }
 </style>
 <script type="application/ld+json">
@@ -159,11 +180,14 @@
       body.appendChild(ex);
     }
 
+    const foot = document.createElement('div');
+    foot.className = 'card-foot';
+
     if (course.meta) {
       const meta = document.createElement('div');
       meta.className = 'card-meta';
       meta.innerHTML = '<span>' + course.meta + '</span>';
-      body.appendChild(meta);
+      foot.appendChild(meta);
     }
 
     if (course.tags && course.tags.length) {
@@ -175,8 +199,10 @@
         span.textContent = t;
         tagsEl.appendChild(span);
       });
-      body.appendChild(tagsEl);
+      foot.appendChild(tagsEl);
     }
+
+    if (foot.childNodes.length) body.appendChild(foot);
 
     a.appendChild(body);
     return a;
