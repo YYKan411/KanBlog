@@ -232,6 +232,8 @@ const STATIC_PAGES = [
   { file: 'minigames/catspuzzle/index.html', loc: `${SITE_URL}/minigames/catspuzzle/`, priority: '0.6' },
   { file: 'minigames/philquiz/index.html',   loc: `${SITE_URL}/minigames/philquiz/`,   priority: '0.6' },
   { file: 'minigames/xiangqi/index.html',    loc: `${SITE_URL}/minigames/xiangqi/`,    priority: '0.6' },
+  { file: 'learning/index.html',             loc: `${SITE_URL}/learning/`,             priority: '0.7' },
+  { file: 'learning/sql/index.html',         loc: `${SITE_URL}/learning/sql/`,         priority: '0.6' },
 ];
 const staticUrls = STATIC_PAGES
   .filter(p => fs.existsSync(path.join(ROOT, p.file)))
@@ -329,6 +331,10 @@ ${llmsPostLines}
 - [貓陣 · Cats — A Logic Puzzle](${SITE_URL}/minigames/catspuzzle/): place one cat per row, column and colour, with no touching
 - [哲學傾向問卷 · Philosophical Tendency Quiz](${SITE_URL}/minigames/philquiz/): 36 late-night questions matching your trade-offs to one of 16 thinkers
 - [紙上象棋 · Xiangqi on Linen](${SITE_URL}/minigames/xiangqi/): play Chinese chess, then revisit the move that changed everything
+
+## Learning
+- [學習 · Learning](${SITE_URL}/learning/): bilingual practice notes and problems
+- [SQL 自學 · SQL from scratch](${SITE_URL}/learning/sql/): write queries against a real SQLite database (football / anime / stocks themes)
 
 ## Links
 - [RSS feed](${SITE_URL}/feed.xml)

@@ -7,12 +7,12 @@ URL: https://yykan.uk
 
 ---
 
-## 解碼室 Decode Lab（SQL 自學）
+## 學習 · Learning
 
-倉庫內附一套完整 SQL 自學工具：`sql-academy/`  
-本地：`cd sql-academy && python3 -m http.server 8765` → 開 `http://localhost:8765`
+Footer → **learning** → [`/learning/`](./learning/)
 
-詳見 [`sql-academy/README.md`](./sql-academy/README.md) 同 [`sql-academy/LEARNING_PATH.md`](./sql-academy/LEARNING_PATH.md)。
+雙語（中／英對照）練習頁。而家有 SQL 自學：[`/learning/sql/`](./learning/sql/)  
+題目 + 簡介 + 真實 SQLite；唔花巧。
 
 ---
 

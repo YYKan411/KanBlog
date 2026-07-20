@@ -1,0 +1,12 @@
+{
+  "name": "learning-sql",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate-curriculum.mjs"
+  },
+  "dependencies": {
+    "sql.js": "^1.14.1"
+  }
+}
