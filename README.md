@@ -7,6 +7,15 @@ URL: https://yykan.uk
 
 ---
 
+## 學習 · Learning
+
+Footer → **learning** → [`/learning/`](./learning/)
+
+雙語（中／英對照）練習頁。而家有 SQL 自學：[`/learning/sql/`](./learning/sql/)  
+題目 + 簡介 + 真實 SQLite；唔花巧。
+
+---
+
 ## 寫一篇新文章
 
 預計：每篇 5-10 分鐘。**單一 commit，自動上線。**

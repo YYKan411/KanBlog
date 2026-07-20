@@ -23,6 +23,10 @@
 - [哲學傾向問卷 · Philosophical Tendency Quiz](https://yykan.uk/minigames/philquiz/): 36 late-night questions matching your trade-offs to one of 16 thinkers
 - [紙上象棋 · Xiangqi on Linen](https://yykan.uk/minigames/xiangqi/): play Chinese chess, then revisit the move that changed everything
 
+## Learning
+- [學習 · Learning](https://yykan.uk/learning/): bilingual practice notes and problems
+- [SQL 自學 · SQL from scratch](https://yykan.uk/learning/sql/): write queries against a real SQLite database (football / anime / stocks themes)
+
 ## Links
 - [RSS feed](https://yykan.uk/feed.xml)
 - [Instagram](https://www.instagram.com/yykan411/)

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL 自學 · SQL from scratch — 言又勤</title>
+<meta name="description" content="雙語 SQL 練習：題目、簡介、真實 SQLite。Bilingual SQL practice — problems, brief notes, real SQLite.">
+<meta name="author" content="言又勤">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SQL 自學 · SQL from scratch — 言又勤">
+<meta property="og:url" content="https://yykan.uk/learning/sql/">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:locale:alternate" content="en_GB">
+<link rel="canonical" href="https://yykan.uk/learning/sql/">
+<link rel="alternate" type="application/rss+xml" title="言又勤 RSS feed" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+HK:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="./learning.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="site-identity">
+      <h1 class="site-title">
+        <a href="/">
+          言又勤
+          <span class="site-title-en">Yin Yau Kan</span>
+        </a>
+      </h1>
+      <p class="site-subtitle">英倫酒精關注組<span class="sep">｜</span>Just some late-night talk</p>
+      <div style="margin-top: 16px; line-height: 1.4;">
+        <h2 style="margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink);">SQL 自學 · SQL from scratch</h2>
+        <p style="margin: 3px 0 0; font-family: var(--font-body); font-size: 14.5px; color: var(--ink-faded);">
+          進度 <span id="progress">0 / 0</span>
+        </p>
+      </div>
+    </div>
+    <div class="site-meta">
+      <p class="site-tagline">不必熱鬧，只要盡興。歡迎來坐。<br>A funky world needs a funky soul.</p>
+    </div>
+  </div>
+</header>
+
+<div class="learn-shell">
+  <aside class="learn-nav" id="lesson-nav" aria-label="Lessons"></aside>
+
+  <main class="learn-main">
+    <a class="learn-back" href="/learning/">← 學習 · Learning</a>
+
+    <div class="theme-row">
+      <span class="label">主題 · theme</span>
+      <button type="button" class="theme-btn" data-theme="football">英超 · football</button>
+      <button type="button" class="theme-btn" data-theme="anime">動漫 · anime</button>
+      <button type="button" class="theme-btn" data-theme="stocks">股票 · stocks</button>
+    </div>
+
+    <section class="mission">
+      <h2>
+        <span id="mission-title-zh">—</span>
+        <span class="en" id="mission-title-en" lang="en">—</span>
+      </h2>
+      <p class="concepts" id="concepts"></p>
+
+      <div class="article-body" id="briefing">
+        <div class="pair">
+          <p class="zh" id="intro-zh"></p>
+          <p class="en" lang="en" id="intro-en"></p>
+        </div>
+        <div class="pair" style="margin-top: 1rem;">
+          <p class="zh"><strong>題目</strong>　<span id="brief-zh"></span></p>
+          <p class="en" lang="en"><strong>Task</strong>　<span id="brief-en"></span></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="schema-row" id="schema"></div>
+
+    <div class="editor-block">
+      <div class="editor-bar">
+        <span>SQL · SQLite</span>
+        <button type="button" id="btn-run">Run · 執行</button>
+      </div>
+      <textarea id="sql-editor" spellcheck="false" aria-label="SQL editor"></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="primary" id="btn-run-dup" onclick="document.getElementById('btn-run').click()">核對 · Check</button>
+      <button type="button" id="btn-hint">提示 · Hint</button>
+    </div>
+
+    <div id="hint-box" hidden></div>
+    <div id="results"></div>
+    <p class="status-line" id="status">—</p>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© <span id="year"></span> 言又勤</span>
+    <span class="dot">·</span>
+    <a href="/">home</a>
+    <span class="dot">·</span>
+    <a href="/about">about</a>
+    <span class="dot">·</span>
+    <a href="/minigames/">mini games</a>
+    <span class="dot">·</span>
+    <a href="/learning/">learning</a>
+    <span class="dot">·</span>
+    <a href="/feed.xml">rss</a>
+  </div>
+</footer>
+
+<script src="/post.js"></script>
+<script type="module" src="./app.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
