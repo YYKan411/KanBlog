@@ -33,9 +33,13 @@
     gap: var(--col-gap);
     max-width: var(--max-w);
     margin: 0 auto 4rem;
-    padding: 0 1.25rem;
+    /* Match .masonry top padding so the card is not stuck to the masthead rule */
+    padding: 48px 1.25rem 0;
     align-items: stretch;
     justify-content: start;
+  }
+  @media (max-width: 600px) {
+    .learn-shelf { padding-top: 32px; }
   }
   .learn-shelf .card {
     display: flex;
