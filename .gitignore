@@ -2,3 +2,4 @@
 .claude/
 *.zip
 minigames/philquiz/source/node_modules/
+sql-academy/node_modules/

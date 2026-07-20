@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>解碼室 Decode Lab — SQL 自學</title>
+  <meta name="description" content="由零到高階嘅 SQL 自學工具：興趣主題資料庫、蘇格拉底導師、髒數據實戰、EXPLAIN 評判。" />
+  <link rel="stylesheet" href="./css/lab.css" />
+</head>
+<body data-page="landing">
+  <div class="site-wrap landing-hero">
+    <p class="pill" style="width:fit-content;margin-bottom:1.25rem">給 Data Analyst 的 SQL 戰室</p>
+    <h1 class="brand">解碼室<span>Decode Lab</span></h1>
+    <p class="hero-lead">
+      你識睇數，但 SQL 唔可以交俾人呃。呢度用你興趣主題嘅虛擬庫，由語法到 EXPLAIN，
+      AI 助教只引導唔代寫——消滅挫敗感，留低判斷力。
+    </p>
+    <div class="cta-row">
+      <button type="button" class="btn btn-primary" id="btn-start">開始自學</button>
+      <button type="button" class="btn btn-ghost" id="btn-resume">繼續上次進度</button>
+    </div>
+
+    <div class="stage-strip">
+      <div class="stage-item">
+        <span class="range">0 → 1</span>
+        <h3>新手入門</h3>
+        <p>興趣主題動態資料庫，語法貼地唔再似天書。</p>
+      </div>
+      <div class="stage-item">
+        <span class="range">1 → 10</span>
+        <h3>中階進階</h3>
+        <p>JOIN 同 Window——助教用問題拆開你嘅邏輯結。</p>
+      </div>
+      <div class="stage-item">
+        <span class="range">10 → 50</span>
+        <h3>實戰髒數據</h3>
+        <p>NULL、重複、怪日期：學寫魯棒查詢。</p>
+      </div>
+      <div class="stage-item">
+        <span class="range">50 → 100</span>
+        <h3>效能架構</h3>
+        <p>真實 SQLite + EXPLAIN，識拆慢查詢同索引。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="onboard" role="dialog" aria-modal="true">
+    <div class="panel">
+      <h2>你嘅專屬資料庫</h2>
+      <p class="sub">揀一個興趣主題——之後所有關卡都會用呢套表同故事。</p>
+      <div class="theme-grid">
+        <button type="button" class="theme-card" data-theme="football">
+          <strong>英超足球</strong>
+          <span>球會、球員、賽果、轉會費</span>
+        </button>
+        <button type="button" class="theme-card" data-theme="anime">
+          <strong>動漫角色</strong>
+          <span>作品、戰鬥力、聲優、收視</span>
+        </button>
+        <button type="button" class="theme-card" data-theme="stocks">
+          <strong>股票市場</strong>
+          <span>公司、行情、成交、分析師評級</span>
+        </button>
+      </div>
+      <div class="name-field">
+        <label for="learner-name">點稱呼你</label>
+        <input id="learner-name" type="text" placeholder="例如：Kan" maxlength="40" />
+      </div>
+      <button type="button" class="btn btn-primary" id="btn-enter-lab" style="width:100%">進入解碼室</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
