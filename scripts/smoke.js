@@ -25,8 +25,8 @@ const jsFiles = [
   'scripts/smoke.js',
   'learning/sql/app.js',
   'learning/sql/db.js',
-  'learning/sql/curriculum.js',
-  'learning/sql/themes.js',
+  'learning/sql/cases.js',
+  'learning/sql/philosophers-data.js',
 ];
 for (const rel of jsFiles) {
   try {

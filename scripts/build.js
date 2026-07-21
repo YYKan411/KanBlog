@@ -339,7 +339,7 @@ ${llmsPostLines}
 
 ## Learning
 - [學習 · Learning](${SITE_URL}/learning/): 慢慢練嘅學習小格 · bilingual practice notes and problems
-- [SQL 自學 · SQL from scratch](${SITE_URL}/learning/sql/): 真實 SQLite 練查詢，英超／動漫／股票主題 · write queries against a real SQLite database (football / anime / stocks themes)
+- [SQL 自學 · SQL from scratch](${SITE_URL}/learning/sql/): 用真實 SQLite 查案，16 位歷史思想家嘅資料做案底 · investigate a real SQLite database of 16 historical thinkers, case by case
 
 ## Links
 - [RSS feed](${SITE_URL}/feed.xml)

@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SQL 自學 · SQL from scratch — 言又勤</title>
-<meta name="description" content="雙語 SQL 練習：題目、簡介、真實 SQLite。Bilingual SQL practice — problems, brief notes, real SQLite.">
+<title>思想偵探室 · The Thought Detective's Office — 言又勤</title>
+<meta name="description" content="雙語 SQL 練習：用 16 位真實歷史思想家嘅資料查案，真實 SQLite。Bilingual SQL practice — investigate 16 real historical thinkers' data, real SQLite.">
 <meta name="author" content="言又勤">
 <meta property="og:type" content="website">
-<meta property="og:title" content="SQL 自學 · SQL from scratch — 言又勤">
+<meta property="og:title" content="思想偵探室 · The Thought Detective's Office — 言又勤">
 <meta property="og:url" content="https://yykan.uk/learning/sql/">
 <meta property="og:locale" content="zh_HK">
 <meta property="og:locale:alternate" content="en_GB">
@@ -32,9 +33,9 @@
       </h1>
       <p class="site-subtitle">英倫酒精關注組<span class="sep">｜</span>Just some late-night talk</p>
       <div style="margin-top: 16px; line-height: 1.4;">
-        <h2 style="margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink);">SQL 自學 · SQL from scratch</h2>
+        <h2 style="margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink);">思想偵探室 · The Thought Detective's Office</h2>
         <p style="margin: 3px 0 0; font-family: var(--font-body); font-size: 14.5px; color: var(--ink-faded);">
-          進度 <span id="progress">0 / 0</span>
+          案件進度 <span id="progress">0 / 0</span>
         </p>
       </div>
     </div>
@@ -45,59 +46,31 @@
 </header>
 
 <div class="learn-shell">
-  <aside class="learn-nav" id="lesson-nav" aria-label="Lessons"></aside>
+  <aside class="learn-nav" id="case-nav" aria-label="Cases"></aside>
 
   <main class="learn-main">
     <a class="learn-back" href="/learning/">← 學習 · Learning</a>
 
-    <div class="theme-row">
-      <span class="label">主題 · theme</span>
-      <button type="button" class="theme-btn" data-theme="football">英超 · football</button>
-      <button type="button" class="theme-btn" data-theme="anime">動漫 · anime</button>
-      <button type="button" class="theme-btn" data-theme="stocks">股票 · stocks</button>
+    <div class="schema-note">
+      <b>資料庫入面有咩 · What's in the database</b><br>
+      thinkers(id, name_zh/en, epithet_zh/en, born_year, died_year, region_zh/en, quote_zh/en) — 16 位思想家 · 16 thinkers<br>
+      resonances(thinker_id, related_id) — 邊個同邊個「放埋一齊睇」，48 條連結 · who's linked to whom, 48 connections<br>
+      essays(thinker_id, slug, title_zh/en) — 邊位出現喺邊篇 KanBlog 文 · which thinker appears in which essay<br>
+      works(thinker_id, title_zh/en, year) — 主要著作（孔子、佛陀、蘇格拉底冇——史實如此）· major works (Confucius, the Buddha, and Socrates genuinely have none)
     </div>
 
     <section class="mission">
       <h2>
-        <span id="mission-title-zh">—</span>
-        <span class="en" id="mission-title-en" lang="en">—</span>
+        <span id="case-title-zh">—</span>
+        <span class="en" id="case-title-en" lang="en">—</span>
       </h2>
-      <p class="concepts" id="concepts"></p>
-
-      <div class="article-body" id="briefing">
-        <div class="pair">
-          <p class="zh" id="intro-zh"></p>
-          <p class="en" lang="en" id="intro-en"></p>
-        </div>
-        <div class="syntax-pattern">
-          <span class="syntax-label">通用寫法 · General shape</span>
-          <pre id="syntax-code"></pre>
-        </div>
-        <div class="pair" style="margin-top: 1rem;">
-          <p class="zh"><strong>題目</strong>　<span id="brief-zh"></span></p>
-          <p class="en" lang="en"><strong>Task</strong>　<span id="brief-en"></span></p>
-        </div>
+      <div class="pair" style="margin-bottom: 1.5rem;">
+        <p class="zh" id="case-premise-zh"></p>
+        <p class="en" lang="en" id="case-premise-en"></p>
       </div>
     </section>
 
-    <div class="schema-row" id="schema"></div>
-
-    <div class="editor-block">
-      <div class="editor-bar">
-        <span>SQL · SQLite</span>
-        <button type="button" id="btn-run">執行 · Run</button>
-      </div>
-      <textarea id="sql-editor" spellcheck="false" aria-label="SQL editor"></textarea>
-    </div>
-
-    <div class="actions">
-      <button type="button" class="primary" id="btn-run-dup" onclick="document.getElementById('btn-run').click()">核對 · Check</button>
-      <button type="button" id="btn-hint">提示 · Hint</button>
-    </div>
-
-    <div id="hint-box" hidden></div>
-    <div id="results"></div>
-    <p class="status-line" id="status">—</p>
+    <div id="steps-container"></div>
   </main>
 </div>
 

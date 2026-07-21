@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/validate-curriculum.mjs"
+    "test": "node scripts/validate-cases.mjs"
   },
   "dependencies": {
     "sql.js": "^1.14.1"
