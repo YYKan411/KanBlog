@@ -13,6 +13,7 @@ export const CURRICULUM = [
     stage: '0→1',
     title: { zh: '第一次 SELECT', en: 'Your first SELECT' },
     concepts: ['SELECT', 'FROM'],
+    syntax: 'SELECT * FROM table_name',
     briefing: {
       football: {
         zh: '睇吓 clubs 表入面有邊啲球會。用 SELECT 拎晒所有欄同所有列。',
@@ -59,6 +60,7 @@ export const CURRICULUM = [
     stage: '0→1',
     title: { zh: '用 WHERE 過濾', en: 'Filter with WHERE' },
     concepts: ['WHERE'],
+    syntax: "SELECT * FROM table_name WHERE column = 'value'",
     briefing: {
       football: {
         zh: '只拎出 nationality = \'England\' 嘅球員。',
@@ -93,6 +95,7 @@ export const CURRICULUM = [
     stage: '0→1',
     title: { zh: '排序同 Top N', en: 'Sort and Top N' },
     concepts: ['ORDER BY', 'LIMIT'],
+    syntax: 'SELECT * FROM table_name ORDER BY column DESC, tiebreak_column LIMIT n',
     briefing: {
       football: {
         zh: '按 market_value_m 由高至低排 players，只顯示最高 5 個；打和嘅話，player_id 細嘅排先。',
@@ -127,6 +130,7 @@ export const CURRICULUM = [
     stage: '0→1',
     title: { zh: '聚合：COUNT / AVG', en: 'Aggregates: COUNT / AVG' },
     concepts: ['GROUP BY', 'COUNT', 'AVG'],
+    syntax: 'SELECT column, COUNT(*) AS cnt, AVG(other_column) AS avg_val FROM table_name GROUP BY column',
     briefing: {
       football: {
         zh: '每個 position 有幾多球員？順便計平均 age。輸出：position, cnt, avg_age。',
@@ -173,6 +177,7 @@ export const CURRICULUM = [
     stage: '0→1',
     title: { zh: '去除重複：DISTINCT', en: 'Unique values with DISTINCT' },
     concepts: ['DISTINCT'],
+    syntax: 'SELECT DISTINCT column FROM table_name',
     briefing: {
       football: {
         zh: '睇吓 players 表入面有幾多個唔同嘅 nationality。',
@@ -207,6 +212,7 @@ export const CURRICULUM = [
     stage: '1→10',
     title: { zh: 'INNER JOIN', en: 'INNER JOIN' },
     concepts: ['INNER JOIN', 'ON'],
+    syntax: 'SELECT a.column, b.column FROM table_a a JOIN table_b b ON a.foreign_key = b.primary_key',
     briefing: {
       football: {
         zh: '列出球員名同球會名。只有「有球會」嘅球員。輸出：player_name, club_name。',
@@ -256,6 +262,7 @@ FROM trades t INNER JOIN companies c ON t.ticker = c.ticker`,
     stage: '1→10',
     title: { zh: 'LEFT JOIN', en: 'LEFT JOIN' },
     concepts: ['LEFT JOIN', 'NULL'],
+    syntax: 'SELECT a.column, b.column FROM table_a a LEFT JOIN table_b b ON a.foreign_key = b.primary_key',
     briefing: {
       football: {
         zh: '列出所有球員，包括未有球會嘅。輸出：player_name, club_name。',
@@ -306,6 +313,7 @@ FROM companies c LEFT JOIN ratings r ON c.ticker = r.ticker`,
     stage: '1→10',
     title: { zh: 'Subquery：IN / EXISTS', en: 'Subquery: IN / EXISTS' },
     concepts: ['Subquery', 'IN', 'EXISTS'],
+    syntax: "SELECT * FROM table_name WHERE column IN (SELECT column FROM other_table WHERE condition)",
     briefing: {
       football: {
         zh: '搵出至少喺主場贏過一場波嘅球會（呢個 schema 入面每間球會其實都做過主隊，所以純粹「有冇主場出過場」會篩極都係全部球會——改用「主場贏過波」先睇得出 subquery 真係揀緊嘢）。',
@@ -354,6 +362,7 @@ FROM companies c LEFT JOIN ratings r ON c.ticker = r.ticker`,
     stage: '1→10',
     title: { zh: 'NOT IN 嘅 NULL 陷阱', en: 'NOT IN and the NULL trap' },
     concepts: ['NOT IN', 'NULL', 'NOT EXISTS'],
+    syntax: 'SELECT * FROM table_name t WHERE NOT EXISTS (SELECT 1 FROM other_table o WHERE o.column = t.column)',
     chaos: true,
     briefing: {
       football: {
@@ -430,6 +439,7 @@ WHERE NOT EXISTS (
     stage: '1→10',
     title: { zh: 'Self-JOIN：一張表接兩次', en: 'Self-join: one table, twice' },
     concepts: ['Self-join', 'Table alias', 'ON'],
+    syntax: 'SELECT a.column, b.column FROM table_name a JOIN table_name b ON a.key = b.key AND a.column > b.column',
     briefing: {
       football: {
         zh: 'matches 表有 home_club_id 同 away_club_id 兩條外鍵，全部指返同一張 clubs 表——正正就係 self-join 嘅教科書例子。將 clubs 接自己兩次，起兩個別名 h（主場）同 a（客場）。輸出：match_date, home_club, away_club。',
@@ -494,6 +504,7 @@ JOIN companies c2 ON c1.sector = c2.sector AND c1.employees > c2.employees`,
     stage: '1→10',
     title: { zh: '連鎖 JOIN：三表以上', en: 'Chaining JOINs across 3+ tables' },
     concepts: ['JOIN', 'chained JOIN', 'multi-table ON'],
+    syntax: 'SELECT a.column, b.column, c.column FROM table_a a JOIN table_b b ON a.key = b.key JOIN table_c c ON b.key2 = c.key2',
     briefing: {
       football: {
         zh: '列出球員名、佢而家所屬球會名，同轉會費。要連 players、clubs、transfers 三張表；只計有轉會紀錄嘅球員。輸出：player_name, club_name, transfer_fee。',
@@ -560,6 +571,7 @@ JOIN analysts a ON r.analyst_id = a.analyst_id`,
     stage: '1→10',
     title: { zh: 'CASE WHEN 分級', en: 'Bucketing with CASE WHEN' },
     concepts: ['CASE WHEN', 'THEN', 'ELSE'],
+    syntax: "SELECT column,\n  CASE WHEN column >= threshold_1 THEN 'label_1'\n       WHEN column >= threshold_2 THEN 'label_2'\n       ELSE 'label_3'\n  END AS tier\nFROM table_name",
     briefing: {
       football: {
         zh: '用 CASE WHEN 將每個球員嘅 market_value_m 分做三級：>=100 叫 \'top\'，50 到 99 叫 \'mid\'，其餘叫 \'developing\'。輸出：name, market_tier。',
@@ -620,6 +632,7 @@ JOIN analysts a ON r.analyst_id = a.analyst_id`,
     stage: '1→10',
     title: { zh: 'Window：RANK()', en: 'Window: RANK()' },
     concepts: ['RANK', 'OVER', 'PARTITION BY'],
+    syntax: 'SELECT column, RANK() OVER (PARTITION BY group_column ORDER BY value_column DESC) AS rnk FROM table_name',
     briefing: {
       football: {
         zh: '喺每個 position 入面按市值排行。輸出：name, position, market_value_m, rnk。',
@@ -669,6 +682,7 @@ RANK() OVER (PARTITION BY sector ORDER BY employees DESC) AS rnk FROM companies`
     stage: '10→50',
     title: { zh: '偵察 NULL', en: 'Hunt for NULLs' },
     concepts: ['IS NULL'],
+    syntax: 'SELECT * FROM table_name WHERE column IS NULL',
     chaos: true,
     briefing: {
       football: {
@@ -704,6 +718,7 @@ RANK() OVER (PARTITION BY sector ORDER BY employees DESC) AS rnk FROM companies`
     stage: '10→50',
     title: { zh: '發現重複', en: 'Find duplicates' },
     concepts: ['HAVING', 'COUNT'],
+    syntax: 'SELECT column, COUNT(*) AS cnt FROM table_name GROUP BY column HAVING COUNT(*) > 1',
     chaos: true,
     briefing: {
       football: {
@@ -761,6 +776,7 @@ RANK() OVER (PARTITION BY sector ORDER BY employees DESC) AS rnk FROM companies`
     stage: '10→50',
     title: { zh: '填補 NULL：COALESCE', en: 'Fill NULLs: COALESCE' },
     concepts: ['COALESCE', 'NULLIF'],
+    syntax: "SELECT column, COALESCE(column, 'default_value') AS filled_value FROM table_name",
     chaos: true,
     briefing: {
       football: {
@@ -825,6 +841,7 @@ RANK() OVER (PARTITION BY sector ORDER BY employees DESC) AS rnk FROM companies`
     stage: '10→50',
     title: { zh: '魯棒平均', en: 'A robust average' },
     concepts: ['防禦性查詢', 'defensive SQL'],
+    syntax: 'SELECT AVG(column) AS clean_avg FROM table_name WHERE column IS NOT NULL AND column >= 0',
     chaos: true,
     briefing: {
       football: {
@@ -885,6 +902,7 @@ RANK() OVER (PARTITION BY sector ORDER BY employees DESC) AS rnk FROM companies`
     stage: '10→50',
     title: { zh: 'CTE：WITH 子句', en: 'CTE: the WITH clause' },
     concepts: ['WITH', 'CTE'],
+    syntax: 'WITH clean_rows AS (\n  SELECT column FROM table_name WHERE condition\n)\nSELECT AVG(column) AS clean_avg, COUNT(*) AS clean_count FROM clean_rows',
     chaos: true,
     briefing: {
       football: {
@@ -957,6 +975,7 @@ SELECT AVG(volume) AS clean_avg, COUNT(*) AS clean_count FROM clean_rows`,
     stage: '10→50',
     title: { zh: '唔止過濾：用 TRIM 同 UPDATE 真正修正', en: "Fix it, don't just filter it: TRIM and UPDATE" },
     concepts: ['TRIM', 'UPPER/LOWER', 'UPDATE', 'WHERE (targeting exact rows)', 'BEGIN/COMMIT (brief mention)'],
+    syntax: 'UPDATE table_name SET column = TRIM(column) WHERE id_column = specific_id',
     chaos: true,
     briefing: {
       football: {
@@ -1024,6 +1043,7 @@ SELECT AVG(volume) AS clean_avg, COUNT(*) AS clean_count FROM clean_rows`,
     stage: '10→50',
     title: { zh: '日期陷阱：睇落似日期唔代表係日期', en: 'The date trap: looks like a date, is not a date' },
     concepts: ['date()', 'strftime()', 'ISO-8601', 'TEXT dates'],
+    syntax: 'SELECT * FROM table_name WHERE date(date_column) IS NULL',
     chaos: true,
     briefing: {
       football: {
@@ -1073,6 +1093,7 @@ SELECT AVG(volume) AS clean_avg, COUNT(*) AS clean_count FROM clean_rows`,
     stage: '10→50',
     title: { zh: '用 UNION 疊結果', en: 'Combine result sets with UNION' },
     concepts: ['UNION', 'UNION ALL'],
+    syntax: 'SELECT column FROM table_name WHERE condition_1\nUNION\nSELECT column FROM table_name WHERE condition_2',
     briefing: {
       football: {
         zh: '將 market_value_m >= 100 嘅「expensive」球員，同 market_value_m < 50 嘅「cheap」球員，用 UNION 疊做一個名單，加返個 tier 欄分開兩批。輸出：tier, name。（呢兩批球員本身冇重疊，所以呢鋪 UNION 同 UNION ALL 出嚟行數一樣——但寫法仍然要啱。）',
@@ -1146,6 +1167,7 @@ WHERE r.rating = 'SELL'`,
     stage: '50→100',
     title: { zh: '讀 EXPLAIN', en: 'Read EXPLAIN' },
     concepts: ['EXPLAIN', 'QUERY PLAN'],
+    syntax: "EXPLAIN QUERY PLAN\nSELECT * FROM table_name WHERE column = 'value'",
     briefing: {
       football: {
         zh: '對「England 球員」查詢跑 EXPLAIN QUERY PLAN。',
@@ -1184,6 +1206,7 @@ WHERE r.rating = 'SELL'`,
     stage: '50→100',
     title: { zh: '建立 Index', en: 'Create an index' },
     concepts: ['CREATE INDEX'],
+    syntax: 'CREATE INDEX index_name ON table_name(column)',
     briefing: {
       football: {
         zh: '為 players.nationality 建立索引 idx_players_nat。',

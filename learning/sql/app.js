@@ -123,6 +123,7 @@ async function openLesson(id) {
   $('#brief-en').textContent = brief.en;
   $('#intro-zh').textContent = lesson.intro.zh;
   $('#intro-en').textContent = lesson.intro.en;
+  $('#syntax-code').textContent = lesson.syntax || '';
   $('#concepts').textContent = (lesson.concepts || []).join(' · ');
   $('#hint-box').hidden = true;
   $('#hint-box').textContent = '';
