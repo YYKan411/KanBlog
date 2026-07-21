@@ -136,7 +136,7 @@ The live list is named `POSTS` (renamed from the old `SAMPLE_POSTS` placeholder)
 散文 · 遊記 · 哲思 · 移英 · 物 · 人 · 社會 · 香港
 ```
 
-Defined in **two places that must stay in sync**: `build.js` (`extractTags`) and `editor.html` (`CANONICAL_TAGS`). Any tag outside this set is **silently dropped** by `build.js`. The editor surfaces a live warning and a confirm dialog before publishing an off-set tag.
+Defined in **two places that must stay in sync**: `build.js` (`CANONICAL_TAGS` / `extractTags`) and `editor.html` (`CANONICAL_TAGS`). Posts should declare nav tags in `<meta name="tags">`; `keywords` may hold SEO extras and remains a fallback if `tags` is missing. Any token outside the canonical set is **silently dropped** by `build.js`. The editor surfaces a live warning and a confirm dialog before publishing an off-set tag.
 
 ---
 
