@@ -205,7 +205,7 @@ KanBlog/
 
 ### Chrome 語言合約
 
-介面字用 `中文 · english`（例如 `主頁 · home`、`關於 · about`、`分享到 · share to`）。品牌 subtitle／tagline 可以例外（有意為之嘅聲線）。
+單一控制入面：中英用 `/` 黏埋（例如 `主頁/home`、`關於/about`、`分享到/share to`）。Footer 項目同項目之間先用 ` · ` 分隔——咁樣點號唔會同 button 睇落混淆。Follow lead：`追蹤 · Follow me:`。品牌 subtitle／tagline 可以例外。
 
 ---
 

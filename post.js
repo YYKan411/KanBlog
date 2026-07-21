@@ -46,7 +46,7 @@ var POSTS_NAV = [
   const group = document.createElement('div');
   group.className = 'lang-toggle-group has-en';
   group.setAttribute('role', 'group');
-  group.setAttribute('aria-label', '顯示語言 · language display');
+  group.setAttribute('aria-label', '顯示語言/language display');
 
   const modes = [
     { key: 'zh',   label: '中' },
@@ -143,9 +143,9 @@ var POSTS_NAV = [
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encUrl}`
     },
     {
-      label: '複製連結 · copy link',
-      labelDone: '已複製 · copied',
-      labelFail: '複製失敗 · copy failed',
+      label: '複製連結/copy link',
+      labelDone: '已複製/copied',
+      labelFail: '複製失敗/copy failed',
       action: 'copy'
     }
   ];
@@ -153,12 +153,12 @@ var POSTS_NAV = [
   const wrap = document.createElement('div');
   wrap.className = 'article-share';
   wrap.setAttribute('role', 'group');
-  wrap.setAttribute('aria-label', '分享呢篇 · share this post');
+  wrap.setAttribute('aria-label', '分享呢篇/share this post');
 
   // Optional small label, matches the visual quietness of footer
   const lead = document.createElement('span');
   lead.className = 'article-share-lead';
-  lead.textContent = '分享到 · share to';
+  lead.textContent = '分享到/share to';
   wrap.appendChild(lead);
 
   targets.forEach(t => {
@@ -233,7 +233,7 @@ var POSTS_NAV = [
 
   const nav = document.createElement('nav');
   nav.className = 'post-nav';
-  nav.setAttribute('aria-label', '更多文章 · more posts');
+  nav.setAttribute('aria-label', '更多文章/more posts');
 
   function makeLink(post, cls, label) {
     const a = document.createElement('a');
@@ -250,8 +250,8 @@ var POSTS_NAV = [
     return a;
   }
 
-  if (older) nav.appendChild(makeLink(older, 'nav-older', '← 較舊 · older'));
-  if (newer) nav.appendChild(makeLink(newer, 'nav-newer', '較新 · newer →'));
+  if (older) nav.appendChild(makeLink(older, 'nav-older', '← 較舊/older'));
+  if (newer) nav.appendChild(makeLink(newer, 'nav-newer', '較新/newer →'));
 
   // Place it after the share buttons (which sit after .article-tags)
   const share = article.querySelector('.article-share');

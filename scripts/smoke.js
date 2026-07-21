@@ -52,16 +52,16 @@ else ok('app.js exposes POSTS');
 
 // 3. Chrome language contract (zh · en) on primary shells
 const chromeChecks = [
-  ['index.html', '主頁 · home'],
-  ['index.html', '關於 · about'],
-  ['index.html', '小遊戲 · mini games'],
-  ['index.html', '學習 · learning'],
-  ['index.html', '跟住我 · Follow me:'],
+  ['index.html', '主頁/home'],
+  ['index.html', '關於/about'],
+  ['index.html', '小遊戲/mini games'],
+  ['index.html', '學習/learning'],
+  ['index.html', '追蹤 · Follow me:'],
   ['index.html', '全部 · all'],
   ['about.html', '關於 · About'],
-  ['404.html', '返主頁 · home'],
-  ['learning/index.html', '主頁 · home'],
-  ['minigames/index.html', '主頁 · home'],
+  ['404.html', '返主頁/home'],
+  ['learning/index.html', '主頁/home'],
+  ['minigames/index.html', '主頁/home'],
 ];
 for (const [rel, needle] of chromeChecks) {
   const text = fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -92,7 +92,7 @@ for (const f of posts) {
   if (!/<meta\s+name=["']keywords["']\s+content=["'][^"']*["']\s*>/i.test(html)) {
     fail(f + ' missing well-formed <meta name="keywords">');
   }
-  if (!html.includes('← 主頁 · home')) fail(f + ' missing bilingual back link');
+  if (!html.includes('← 主頁/home')) fail(f + ' missing bilingual back link');
 }
 ok(`checked ${posts.length} posts for tags/keywords meta + back link`);
 
