@@ -35,11 +35,11 @@ function saveDone() {
 }
 
 async function boot() {
-  $('#status').textContent = 'Loading SQLite…';
+  $('#status').textContent = '載入 SQLite 中… · Loading SQLite…';
   try {
     await initSQL();
   } catch (e) {
-    $('#status').textContent = 'Failed: ' + e.message;
+    $('#status').textContent = '失敗 · Failed: ' + e.message;
     return;
   }
 
@@ -85,7 +85,7 @@ function renderNav() {
       stage = lesson.stage;
       const h = document.createElement('p');
       h.className = 'stage-label';
-      h.textContent = 'Stage ' + stage;
+      h.textContent = '階段 · Stage ' + stage;
       nav.appendChild(h);
     }
     const btn = document.createElement('button');
@@ -148,8 +148,8 @@ async function openLesson(id) {
   $('#results').innerHTML =
     '<p class="muted">結果會顯示喺呢度 · Results appear here</p>';
   $('#status').textContent = lesson.chaos
-    ? theme.name + ' · 髒數據模式 dirty data'
-    : theme.name + ' · 乾淨模式 clean data';
+    ? theme.name + ' · 髒數據模式 · dirty data'
+    : theme.name + ' · 乾淨模式 · clean data';
 }
 
 function showHint() {
@@ -170,15 +170,15 @@ async function runCheck() {
     result = runSQL(sql);
   } catch (e) {
     $('#results').innerHTML = `<p class="err">${escapeHtml(e.message)}</p>`;
-    $('#status').textContent = 'Error';
+    $('#status').textContent = '錯誤 · Error';
     return;
   }
 
   const verdict = validate(state.lesson, sql, result);
   renderResult(result, verdict.pass);
   $('#status').textContent = verdict.pass
-    ? '✓ Passed · 過關'
-    : 'Not yet · 未啱' + (verdict.reason ? ' — ' + verdict.reason : '');
+    ? '✓ 過關 · Passed'
+    : '未啱 · Not yet' + (verdict.reason ? ' — ' + verdict.reason : '');
 
   if (verdict.pass) {
     state.completed[state.lesson.id] = true;
@@ -195,13 +195,13 @@ function validate(lesson, userSQL, result) {
 
   if (spec.type === 'explain') {
     const ok = result.kind === 'explain' || /^\s*EXPLAIN\b/i.test(userSQL);
-    return { pass: !!ok, reason: ok ? '' : 'Need EXPLAIN QUERY PLAN' };
+    return { pass: !!ok, reason: ok ? '' : '需要 EXPLAIN QUERY PLAN · Need EXPLAIN QUERY PLAN' };
   }
   if (spec.type === 'index') {
     const found = listIndexes().some(
       (i) => i.name.toLowerCase() === spec.name.toLowerCase()
     );
-    return { pass: found, reason: found ? '' : 'Index not found: ' + spec.name };
+    return { pass: found, reason: found ? '' : '搵唔到 index · Index not found: ' + spec.name };
   }
 
   if (spec.expectedSQL) {
@@ -217,7 +217,7 @@ function validate(lesson, userSQL, result) {
         .map((c) => c.toLowerCase())
         .filter((c) => !have.includes(c));
       if (missing.length) {
-        return { pass: false, reason: 'Missing columns: ' + missing.join(', ') };
+        return { pass: false, reason: '缺欄 · Missing columns: ' + missing.join(', ') };
       }
     }
     const equal = resultsEqual(
@@ -228,12 +228,12 @@ function validate(lesson, userSQL, result) {
     if (spec.mustIncludeNullClub && equal) {
       const idx = result.columns.findIndex((c) => /club_name/i.test(c));
       if (idx >= 0 && !result.values.some((r) => r[idx] === null)) {
-        return { pass: false, reason: 'LEFT JOIN should keep NULL club_name' };
+        return { pass: false, reason: 'LEFT JOIN 應該保留 NULL club_name · should keep NULL club_name' };
       }
     }
-    return { pass: equal, reason: equal ? '' : 'Rows do not match expected' };
+    return { pass: equal, reason: equal ? '' : '結果同預期唔啱 · Rows do not match expected' };
   }
-  return { pass: false, reason: 'No rule' };
+  return { pass: false, reason: '無驗證規則 · No rule' };
 }
 
 function renderResult(result, pass) {

@@ -1,5 +1,5 @@
 // ============================================
-// Kaga Chung — Personal Site
+// 言又勤 — Personal Site
 // Simple client-side rendering. No framework.
 // ============================================
 
@@ -16,9 +16,9 @@ function getTagFromHash() {
 }
 
 function init() {
-  // 下面個 SAMPLE_POSTS 係 scripts/build.js 每次 build 重新生成嘅，
-  // 係真正嘅文章來源，唔係 placeholder。
-  allPosts = SAMPLE_POSTS.slice();
+  // 下面個 POSTS 係 scripts/build.js 每次 build 重新生成嘅，
+  // 係真正嘅文章來源。
+  allPosts = POSTS.slice();
 
   // sort newest first
   allPosts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
@@ -140,7 +140,7 @@ function formatDate(d) {
 }
 
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
-const SAMPLE_POSTS = [
+const POSTS = [
   {
     slug: "why-overthink-on-an-empty-stomach",
     title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?",

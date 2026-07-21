@@ -89,7 +89,7 @@ export function createUi(root) {
       </div>
 
       <footer class="xq-foot">
-        <a href="/">home</a>
+        <a href="/">主頁 · home</a>
         <span class="xq-dot">·</span>
         <a href="/minigames/">minigames</a>
         <details class="xq-colophon">
