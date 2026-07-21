@@ -49,7 +49,7 @@ Footer → **learning** → [`/learning/`](./learning/)
 | `[檔名沒有.html].html` | 你嘅檔名加 `.html`（例如 `reading-spring.html`） |
 | `[YYYY-MM-DD]` | 今日，例如 `2026-05-20` |
 | `[YYYY · MM · DD]` | 同上但用 dot，`2026 · 05 · 20` |
-| `[tag1]`, `[tag2]` | 你嘅 tag（散文／遊記／哲思／移英／物／人／社會／香港） |
+| `[tag1]`, `[tag2]` | 導航 taxonomy：`散文／遊記／哲思／移英／物／人／社會／香港`（寫入 `<meta name="tags">`；`keywords` 可以另加 SEO 字） |
 
 **想做 featured 卡（深色 stand out 卡）？**
 喺 head 嗰部分 uncomment：
@@ -166,24 +166,46 @@ Template 入面個 `<div class="article-body">` 嗰部分。揀寫法：
 
 ```
 KanBlog/
-├── index.html         主頁（masonry）
-├── about.html         關於頁
-├── style.css          全部 styling
-├── app.js             主頁邏輯 + 文章列表（自動生成）
-├── post.js            bilingual toggle
+├── index.html              主頁（masonry）
+├── about.html              關於頁
+├── 404.html
+├── style.css               全部 styling
+├── app.js                  主頁邏輯 + POSTS 列表（自動生成）
+├── post.js                 bilingual toggle + share + prev/next
+├── feed.xml                RSS（自動生成）
+├── llms.txt                LLM／爬蟲摘要（自動生成）
 ├── robots.txt
-├── sitemap.xml        SEO sitemap（自動生成）
+├── sitemap.xml             SEO sitemap（自動生成）
 ├── README.md
-├── images/            所有圖
+├── images/                 圖（顯示用 WebP；og:image 用 JPEG/PNG）
 ├── posts/
-│   ├── _TEMPLATE.html       範本（每次新文 copy 呢個）
-│   └── *.html               你嘅文章
+│   ├── _TEMPLATE.html      範本（每次新文 copy 呢個）
+│   └── *.html              文章（檔名用 kebab-case，例如 reading-spring.html）
+├── learning/
+│   ├── index.html          學習架
+│   └── sql/                SQL 自學 lab
+├── minigames/
+│   ├── index.html          小遊戲架
+│   ├── catspuzzle/
+│   ├── philquiz/
+│   └── xiangqi/
 ├── scripts/
-│   └── build.js             auto-build script
+│   ├── build.js            掃 posts/ → app.js / sitemap / feed / llms
+│   └── smoke.js            CI 煙霧測試（chrome 合約、POSTS、tags meta）
 └── .github/
     └── workflows/
-        └── build.yml        GitHub Action
+        ├── build.yml       push posts/ 時自動 rebuild
+        └── smoke.yml       push / PR 煙霧閘
 ```
+
+### 命名慣例（新檔跟呢套；舊 URL 唔改，避免斷連）
+
+- **文章 slug／檔名**：全小寫 kebab-case（`all-quiet-at-hastings.html`）。唔好用空格、唔好用中文檔名。
+- **圖**：顯示 cover 用 `.webp`；社交 `og:image` 保留 `.jpg`／`.png`。新圖檔名同樣 kebab-case。
+
+### Chrome 語言合約
+
+介面字用 `中文 · english`（例如 `主頁 · home`、`關於 · about`、`分享到 · share to`）。品牌 subtitle／tagline 可以例外（有意為之嘅聲線）。
 
 ---
 

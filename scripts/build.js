@@ -5,7 +5,7 @@
 // Reads every .html file in posts/ (except _TEMPLATE.html),
 // extracts metadata from <title>, <meta>, og:image, etc.,
 // then rewrites:
-//   - app.js          (the SAMPLE_POSTS array)
+//   - app.js          (the POSTS array)
 //   - sitemap.xml     (URL list for crawlers)
 //   - feed.xml        (RSS 2.0 feed for subscribers)
 //
@@ -21,7 +21,7 @@ const SITE_URL = 'https://yykan.uk';
 // Guarded below so it never becomes a repeated home-card cover.
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.png`;
 const SITE_TITLE = '言又勤';
-const SITE_DESCRIPTION = '言又勤的雙語網誌。散文、遊記、哲思、移英筆記。一個香港人喺英倫,記低酒後與酒醒之間嘅閒話。';
+const SITE_DESCRIPTION = '言又勤的雙語網誌。散文、遊記、哲思、移英筆記。一個香港人喺英倫,記低酒後與酒醒之間嘅閒話。 A Hong Konger\'s bilingual (Cantonese / English) personal blog from the UK — essays, travelogues, philosophy, and notes on emigrating.';
 const MAX_FEED_ITEMS = 50;  // cap RSS feed length
 
 const ROOT = path.resolve(__dirname, '..');
@@ -32,18 +32,23 @@ const SITEMAP = path.join(ROOT, 'sitemap.xml');
 const FEED = path.join(ROOT, 'feed.xml');
 const LLMS = path.join(ROOT, 'llms.txt');
 
+// Nav taxonomy — kept separate from SEO <meta name="keywords">.
+const CANONICAL_TAGS = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
+
 // ============================================================
 // helpers — extract things from HTML
 // ============================================================
 
 function readMeta(html, attr, name) {
   // matches <meta name="..." content="..."> or property="..."
+  // content may appear before or after the name/property attribute.
   const re = new RegExp(
-    `<meta\\s+${attr}=["']${name}["']\\s+content=["']([^"']*)["']`,
+    `<meta\\s+(?:[^>]*?\\s)?${attr}=["']${name}["'][^>]*?\\scontent=["']([^"']*)["']` +
+    `|<meta\\s+(?:[^>]*?\\s)?content=["']([^"']*)["'][^>]*?\\s${attr}=["']${name}["']`,
     'i'
   );
   const m = html.match(re);
-  return m ? m[1] : null;
+  return m ? (m[1] ?? m[2]) : null;
 }
 
 function readTitle(html) {
@@ -53,11 +58,12 @@ function readTitle(html) {
   return m[1].replace(/\s*—\s*言又勤\s*$/, '').trim();
 }
 
-function extractTags(keywordsRaw) {
-  if (!keywordsRaw) return [];
-  const canonical = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
-  const tokens = keywordsRaw.split(/[,，]/).map(s => s.trim());
-  return tokens.filter(t => canonical.includes(t));
+function extractTags(html) {
+  // Prefer dedicated taxonomy meta; fall back to filtering keywords
+  // so older drafts without <meta name="tags"> still build.
+  const raw = readMeta(html, 'name', 'tags') || readMeta(html, 'name', 'keywords') || '';
+  const tokens = raw.split(/[,，]/).map(s => s.trim()).filter(Boolean);
+  return tokens.filter(t => CANONICAL_TAGS.includes(t));
 }
 
 // Escape text for use inside XML element content
@@ -104,8 +110,7 @@ function parsePost(filename) {
   const title = readTitle(html);
   const description = readMeta(html, 'name', 'description');
   const excerpt = readMeta(html, 'name', 'excerpt') || description || '';
-  const keywords = readMeta(html, 'name', 'keywords');
-  const tags = extractTags(keywords);
+  const tags = extractTags(html);
   const date = readMeta(html, 'property', 'article:published_time');
   const ogImage = readMeta(html, 'property', 'og:image');
   const featured = readMeta(html, 'name', 'featured') === 'true';
@@ -170,7 +175,7 @@ const posts = files
 console.log(`✓ parsed ${posts.length} post(s)`);
 
 // ============================================================
-// 2. rewrite app.js (SAMPLE_POSTS array)
+// 2. rewrite app.js (POSTS array)
 // ============================================================
 
 const postsArrayJS = posts.map(p => {
@@ -190,18 +195,18 @@ const postsArrayJS = posts.map(p => {
 }).join(',\n');
 
 const appJsCurrent = fs.readFileSync(APP_JS, 'utf8');
-const newPostsBlock = `const SAMPLE_POSTS = [\n${postsArrayJS}\n];`;
+const newPostsBlock = `const POSTS = [\n${postsArrayJS}\n];`;
 
 const updatedAppJs = appJsCurrent.replace(
-  /const SAMPLE_POSTS\s*=\s*\[[\s\S]*?\];/,
+  /const POSTS\s*=\s*\[[\s\S]*?\];/,
   newPostsBlock
 );
 
 if (updatedAppJs === appJsCurrent) {
   // distinguish "regex never matched" (a real bug) from "already up to date"
   // (a no-op build), so the genuine warning isn't lost in routine noise
-  if (!/const SAMPLE_POSTS\s*=\s*\[/.test(appJsCurrent)) {
-    console.warn('⚠️  SAMPLE_POSTS not found in app.js — no changes written');
+  if (!/const POSTS\s*=\s*\[/.test(appJsCurrent)) {
+    console.warn('⚠️  POSTS not found in app.js — no changes written');
   } else {
     console.log('✓ app.js already up to date');
   }
@@ -348,7 +353,7 @@ console.log('✓ llms.txt updated');
 // ============================================================
 // 6. inject static <noscript> post links into index.html
 // ============================================================
-// The home grid is rendered from SAMPLE_POSTS by app.js (JS). Google runs JS,
+// The home grid is rendered from POSTS by app.js (JS). Google runs JS,
 // but non-JS clients and some AI crawlers don't — so we mirror the post list as
 // real <a href> links inside a <noscript> block, regenerated here on every build.
 // index.html carries the markers <!-- BUILD:POSTS_START --> / <!-- BUILD:POSTS_END -->.

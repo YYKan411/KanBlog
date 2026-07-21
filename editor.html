@@ -690,7 +690,9 @@ function buildArticleHtml(data) {
   // Cover alt: user-supplied → fallback to title
   const coverAlt = (data.coverAlt && data.coverAlt.trim()) || data.title;
 
-  const tagsKeywords = data.tags.join(', ');
+  // keywords may later grow SEO extras; tags stays the nav taxonomy only.
+  const tagsCanonical = data.tags.join(', ');
+  const tagsKeywords = tagsCanonical;
   const tagsLinks = data.tags.map(t =>
     `    <a href="../#${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
   ).join('\n');
@@ -705,6 +707,7 @@ function buildArticleHtml(data) {
 <meta name="description" content="${escapeAttr(data.description)}">
 <meta name="author" content="言又勤 Yin Yau Kan">
 <meta name="keywords" content="${escapeAttr(tagsKeywords)}">
+<meta name="tags" content="${escapeAttr(tagsCanonical)}">
 <meta name="excerpt" content="${escapeAttr(data.excerpt)}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://yykan.uk/posts/${data.slug}">
@@ -754,7 +757,7 @@ ${coverImageMeta}
 <body>
 
 <article class="article">
-  <a href="../" class="article-back">← back</a>
+  <a href="../" class="article-back">← 主頁 · home</a>
 
   <header class="article-header">
     ${titleBlock}
@@ -776,11 +779,11 @@ ${tagsLinks}
   <div class="footer-inner">
     <a href="../">© ${year} 言又勤</a>
     <span class="dot">·</span>
-    <a href="../about">about</a>
+    <a href="../about">關於 · about</a>
     <span class="dot">·</span>
-    <a href="../minigames/">mini games</a>
+    <a href="../minigames/">小遊戲 · mini games</a>
     <span class="dot">·</span>
-    <a href="../learning/">learning</a>
+    <a href="../learning/">學習 · learning</a>
     <span class="dot">·</span>
     <a href="../feed.xml">rss</a>
   </div>

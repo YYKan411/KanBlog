@@ -46,7 +46,7 @@ var POSTS_NAV = [
   const group = document.createElement('div');
   group.className = 'lang-toggle-group has-en';
   group.setAttribute('role', 'group');
-  group.setAttribute('aria-label', 'language display');
+  group.setAttribute('aria-label', '顯示語言 · language display');
 
   const modes = [
     { key: 'zh',   label: '中' },
@@ -143,7 +143,9 @@ var POSTS_NAV = [
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encUrl}`
     },
     {
-      label: 'copy link',
+      label: '複製連結 · copy link',
+      labelDone: '已複製 · copied',
+      labelFail: '複製失敗 · copy failed',
       action: 'copy'
     }
   ];
@@ -151,12 +153,12 @@ var POSTS_NAV = [
   const wrap = document.createElement('div');
   wrap.className = 'article-share';
   wrap.setAttribute('role', 'group');
-  wrap.setAttribute('aria-label', 'share this post');
+  wrap.setAttribute('aria-label', '分享呢篇 · share this post');
 
   // Optional small label, matches the visual quietness of footer
   const lead = document.createElement('span');
   lead.className = 'article-share-lead';
-  lead.textContent = 'share to';
+  lead.textContent = '分享到 · share to';
   wrap.appendChild(lead);
 
   targets.forEach(t => {
@@ -170,7 +172,7 @@ var POSTS_NAV = [
         const original = el.textContent;
         try {
           await navigator.clipboard.writeText(url);
-          el.textContent = 'copied';
+          el.textContent = t.labelDone;
         } catch {
           // Fallback for browsers without clipboard API
           const ta = document.createElement('textarea');
@@ -179,8 +181,8 @@ var POSTS_NAV = [
           ta.style.opacity = '0';
           document.body.appendChild(ta);
           ta.select();
-          try { document.execCommand('copy'); el.textContent = 'copied'; }
-          catch { el.textContent = 'copy failed'; }
+          try { document.execCommand('copy'); el.textContent = t.labelDone; }
+          catch { el.textContent = t.labelFail; }
           document.body.removeChild(ta);
         }
         setTimeout(() => { el.textContent = original; }, 2000);
@@ -231,7 +233,7 @@ var POSTS_NAV = [
 
   const nav = document.createElement('nav');
   nav.className = 'post-nav';
-  nav.setAttribute('aria-label', 'more posts');
+  nav.setAttribute('aria-label', '更多文章 · more posts');
 
   function makeLink(post, cls, label) {
     const a = document.createElement('a');

@@ -1,0 +1,28 @@
+name: Smoke checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+concurrency:
+  group: smoke-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run smoke gates
+        run: node scripts/smoke.js
+      - name: Build regenerates cleanly
+        run: |
+          node scripts/build.js
+          git diff --exit-code -- app.js post.js sitemap.xml feed.xml llms.txt index.html \
+            || (echo 'build.js left a dirty tree — commit regenerated files' && git diff && exit 1)
