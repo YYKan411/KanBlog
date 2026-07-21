@@ -11,7 +11,8 @@ import {
   resultsEqual,
   listTables,
   tableInfo,
-  listIndexes
+  listIndexes,
+  indexColumns
 } from './db.js';
 
 const KEY = 'yykan-learning-sql-v1';
@@ -152,11 +153,20 @@ async function openLesson(id) {
     : theme.name + ' · 乾淨模式 · clean data';
 }
 
+/** Most lessons' hints are the same across themes ({zh:[], en:[]}); a few
+ *  (where the actual planted issue differs per theme) are per-theme, keyed
+ *  the same way as briefing ({ football: {zh,en}, anime: {...}, stocks: {...} }). */
+function resolveHints(lesson, themeId) {
+  if (lesson.hints.zh) return lesson.hints;
+  return lesson.hints[themeId] || lesson.hints.football;
+}
+
 function showHint() {
   const lesson = state.lesson;
+  const hints = resolveHints(lesson, state.themeId);
   const level = state.hintLevel[lesson.id] || 0;
-  const zh = lesson.hints.zh[Math.min(level, lesson.hints.zh.length - 1)];
-  const en = lesson.hints.en[Math.min(level, lesson.hints.en.length - 1)];
+  const zh = hints.zh[Math.min(level, hints.zh.length - 1)];
+  const en = hints.en[Math.min(level, hints.en.length - 1)];
   state.hintLevel[lesson.id] = level + 1;
   const box = $('#hint-box');
   box.hidden = false;
@@ -190,18 +200,55 @@ async function runCheck() {
   }
 }
 
+/** True only for a top-level ORDER BY — ignores one nested inside parentheses
+ *  (a window function's OVER(...), or a subquery), which does not control the
+ *  outer query's own row order. */
+function hasTopLevelOrderBy(sql) {
+  let depth = 0;
+  let out = '';
+  for (const ch of sql) {
+    if (ch === '(') { depth++; continue; }
+    if (ch === ')') { depth = Math.max(0, depth - 1); continue; }
+    if (depth === 0) out += ch;
+  }
+  return /order by/i.test(out);
+}
+
+/** Some techniques (an explicit IS NOT NULL guard, an UPDATE rather than a
+ *  SELECT, …) cannot be told apart from a lucky-coincidence pass by comparing
+ *  results alone. spec.mustContainSQL names literal substrings the student's
+ *  own SQL must contain (case-insensitive) on top of whatever else is checked. */
+function missingRequiredPhrases(spec, userSQL) {
+  if (!spec.mustContainSQL || !spec.mustContainSQL.length) return [];
+  const lower = userSQL.toLowerCase();
+  return spec.mustContainSQL.filter((s) => !lower.includes(s.toLowerCase()));
+}
+
 function validate(lesson, userSQL, result) {
   const spec = resolve(lesson.validate, state.themeId);
 
   if (spec.type === 'explain') {
-    const ok = result.kind === 'explain' || /^\s*EXPLAIN\b/i.test(userSQL);
-    return { pass: !!ok, reason: ok ? '' : '需要 EXPLAIN QUERY PLAN · Need EXPLAIN QUERY PLAN' };
+    const isExplain = result.kind === 'explain' || /^\s*EXPLAIN\b/i.test(userSQL);
+    if (!isExplain) return { pass: false, reason: '需要 EXPLAIN QUERY PLAN · Need EXPLAIN QUERY PLAN' };
+    const missing = missingRequiredPhrases(spec, userSQL);
+    if (missing.length) {
+      return { pass: false, reason: 'EXPLAIN 要分析返呢堂本身嗰條 query · EXPLAIN must analyse the lesson\'s own query (missing: ' + missing.join(', ') + ')' };
+    }
+    return { pass: true, reason: '' };
   }
   if (spec.type === 'index') {
-    const found = listIndexes().some(
-      (i) => i.name.toLowerCase() === spec.name.toLowerCase()
-    );
-    return { pass: found, reason: found ? '' : '搵唔到 index · Index not found: ' + spec.name };
+    const idx = listIndexes().find((i) => i.name.toLowerCase() === spec.name.toLowerCase());
+    if (!idx) return { pass: false, reason: '搵唔到 index · Index not found: ' + spec.name };
+    if (spec.table && idx.table.toLowerCase() !== spec.table.toLowerCase()) {
+      return { pass: false, reason: 'Index 建喺錯嘅表 · Index is on the wrong table: ' + idx.table };
+    }
+    if (spec.column) {
+      const cols = indexColumns(idx.name).map((c) => c.toLowerCase());
+      if (!cols.includes(spec.column.toLowerCase())) {
+        return { pass: false, reason: 'Index 冇覆蓋到嗰個欄 · Index does not cover column: ' + spec.column };
+      }
+    }
+    return { pass: true, reason: '' };
   }
 
   if (spec.expectedSQL) {
@@ -220,10 +267,14 @@ function validate(lesson, userSQL, result) {
         return { pass: false, reason: '缺欄 · Missing columns: ' + missing.join(', ') };
       }
     }
+    const missingPhrases = missingRequiredPhrases(spec, userSQL);
+    if (missingPhrases.length) {
+      return { pass: false, reason: 'SQL 要用到 · Your SQL must use: ' + missingPhrases.join(', ') };
+    }
     const equal = resultsEqual(
       { columns: expected.columns, values: expected.values },
       { columns: result.columns, values: result.values },
-      { requireOrder: /order by/i.test(spec.expectedSQL) }
+      { requireOrder: hasTopLevelOrderBy(spec.expectedSQL) }
     );
     if (spec.mustIncludeNullClub && equal) {
       const idx = result.columns.findIndex((c) => /club_name/i.test(c));
@@ -232,6 +283,29 @@ function validate(lesson, userSQL, result) {
       }
     }
     return { pass: equal, reason: equal ? '' : '結果同預期唔啱 · Rows do not match expected' };
+  }
+  if (spec.type === 'fix') {
+    // For DML lessons: the student's own UPDATE/INSERT/DELETE already ran
+    // via runSQL(). spec.checkSQL re-reads the now-mutated live db and is
+    // compared against a literal expected snapshot (not re-derived by
+    // running a reference fix on the same db, which would just compare the
+    // db against itself).
+    const missingPhrases = missingRequiredPhrases(spec, userSQL);
+    if (missingPhrases.length) {
+      return { pass: false, reason: 'SQL 要用到 · Your SQL must use: ' + missingPhrases.join(', ') };
+    }
+    let check;
+    try {
+      check = runExpected(spec.checkSQL);
+    } catch (e) {
+      return { pass: false, reason: e.message };
+    }
+    const equal = resultsEqual(
+      { columns: spec.columns, values: spec.expectedValues },
+      { columns: check.columns, values: check.values },
+      { requireOrder: false }
+    );
+    return { pass: equal, reason: equal ? '' : '資料仲未見到啱嘅修正 · The data does not show the expected fix yet' };
   }
   return { pass: false, reason: '無驗證規則 · No rule' };
 }

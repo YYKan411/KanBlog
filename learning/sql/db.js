@@ -161,6 +161,14 @@ export function listIndexes() {
   return res[0].values.map((v) => ({ name: v[0], table: v[1], sql: v[2] }));
 }
 
+/** Columns actually covered by a named index, via PRAGMA index_info (authoritative — not a text-parse of the CREATE INDEX SQL). */
+export function indexColumns(indexName) {
+  if (!db) return [];
+  const info = db.exec(`PRAGMA index_info(${quoteIdent(indexName)})`);
+  if (!info.length) return [];
+  return info[0].values.map((r) => r[2]);
+}
+
 function quoteIdent(name) {
   return `"${String(name).replace(/"/g, '""')}"`;
 }

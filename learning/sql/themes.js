@@ -104,7 +104,7 @@ UPDATE players SET nationality = NULL WHERE player_id IN (3, 9);
 UPDATE players SET age = NULL WHERE player_id = 8;
 UPDATE players SET market_value_m = -5 WHERE player_id = 14;
 INSERT INTO players VALUES (16,'Bukayo Saka',1,'FW','England',22,120,2018);
-INSERT INTO players VALUES (17,'Unknown Player',2,'XX','',-1,NULL,'twenty');
+INSERT INTO players VALUES (17,'Unknown Player',2,NULL,'',-1,NULL,'twenty');
 UPDATE matches SET match_date = '17/08/2024' WHERE match_id = 1;
 UPDATE matches SET match_date = 'Aug 18, 2024' WHERE match_id = 2;
 UPDATE matches SET home_goals = NULL WHERE match_id = 6;
@@ -220,9 +220,9 @@ INSERT INTO episodes VALUES
 `,
     dirtySQL: `
 UPDATE characters SET power_level = NULL WHERE char_id IN (5, 11);
-UPDATE characters SET role = 'hero' WHERE char_id = 1;
 INSERT INTO characters VALUES (13,'Eren Yeager',1,'protagonist',85,1);
 UPDATE series SET rating = 15.0 WHERE series_id = 2;
+UPDATE series SET rating = NULL WHERE series_id = 4;
 UPDATE series SET title = '  Demon Slayer  ' WHERE series_id = 2;
 UPDATE episodes SET air_date = '07/04/2013' WHERE ep_id = 1;
 UPDATE episodes SET air_date = 'April 6, 2019' WHERE ep_id = 3;
@@ -347,9 +347,8 @@ UPDATE prices SET trade_date = '01/10/2024' WHERE price_id = 1;
 UPDATE prices SET trade_date = 'Oct 2, 2024' WHERE price_id = 2;
 UPDATE prices SET close = NULL WHERE price_id = 5;
 UPDATE prices SET volume = -5000 WHERE price_id = 8;
-UPDATE trades SET side = 'buy' WHERE trade_id = 1;
+UPDATE prices SET volume = NULL WHERE price_id = 3;
 UPDATE trades SET qty = NULL WHERE trade_id = 4;
-UPDATE ratings SET rating = 'Strong Buy' WHERE rating_id = 1;
 UPDATE ratings SET target_price = NULL WHERE rating_id = 4;
 `
   }

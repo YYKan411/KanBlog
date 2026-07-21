@@ -32,10 +32,17 @@ function loadDb(theme, dirty) {
 for (const themeId of Object.keys(THEMES)) {
   for (const lesson of CURRICULUM) {
     const spec = resolve(lesson.validate, themeId);
-    if (!spec?.expectedSQL) continue;
+    const sql = spec?.expectedSQL || spec?.checkSQL;
+    if (!sql) continue;
     const db = loadDb(THEMES[themeId], !!lesson.chaos);
     try {
-      db.exec(spec.expectedSQL);
+      const rows = db.exec(sql);
+      if (spec.expectedValues) {
+        const got = (rows[0]?.values || []).length;
+        if (got !== spec.expectedValues.length) {
+          throw new Error(`checkSQL returned ${got} row(s), expectedValues has ${spec.expectedValues.length}`);
+        }
+      }
       console.log(`ok  ${themeId.padEnd(10)} ${lesson.id}`);
     } catch (e) {
       failures++;
