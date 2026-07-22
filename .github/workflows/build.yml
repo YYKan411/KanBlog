@@ -33,7 +33,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Only commit if there are actual changes
           if [[ -n "$(git status --porcelain)" ]]; then
-            git add app.js post.js sitemap.xml feed.xml llms.txt index.html
+            # Single source of truth: scripts/generated-files.js
+            mapfile -t GENERATED < <(node -e "require('./scripts/generated-files.js').forEach(f => console.log(f))")
+            git add -- "${GENERATED[@]}"
             git commit -m "chore: auto-update post list, sitemap & feed [skip ci]"
             git push
           else

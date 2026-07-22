@@ -1,0 +1,16 @@
+sql.js WebAssembly distribution notice
+======================================
+
+sql.js is a JavaScript SQL database, ported from SQLite to WebAssembly.
+Upstream: https://github.com/sql-js/sql.js
+License: MIT (see https://github.com/sql-js/sql.js/blob/master/LICENSE)
+
+Vendored files in this folder (sql-wasm.js, sql-wasm.wasm) correspond to
+npm package sql.js@1.14.1 as declared in ../package.json / ../package-lock.json.
+
+Copied from the published npm package's dist/ build for offline / CSP-safe
+loading (this site's Content-Security-Policy does not allow CDN script sources).
+
+SHA-256:
+sql-wasm.js    77d6435bac506af0e3c59636dce9d22b1b14156348bc327f41a1577f3212360f
+sql-wasm.wasm  438c88f666dc054ce4e9395f80fe9db4218b1a3c379960454880f048a7898aed

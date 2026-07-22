@@ -58,6 +58,8 @@ const chromeChecks = [
   ['index.html', '學習/learning'],
   ['index.html', '追蹤 · Follow me:'],
   ['index.html', '全部 · all'],
+  ['index.html', '跳去內容/skip to content'],
+  ['index.html', '站內導航/site navigation'],
   ['about.html', '關於 · About'],
   ['404.html', '返主頁/home'],
   ['learning/index.html', '主頁/home'],
@@ -67,6 +69,14 @@ for (const [rel, needle] of chromeChecks) {
   const text = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   if (!text.includes(needle)) fail(rel + ' missing “‘ + needle + ’”');
   else ok(rel + ' has ' + needle);
+}
+
+// Generated-file list must stay the single source for CI add/diff.
+const generated = require('./generated-files.js');
+if (!Array.isArray(generated) || generated.length < 4) {
+  fail('scripts/generated-files.js should export the build output list');
+} else {
+  ok('generated-files.js lists ' + generated.length + ' outputs');
 }
 
 // Learning hub must NOT load post.js; SQL lab may (lang toggle).
