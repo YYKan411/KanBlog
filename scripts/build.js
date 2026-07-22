@@ -31,6 +31,11 @@ const POST_JS = path.join(ROOT, 'post.js');
 const SITEMAP = path.join(ROOT, 'sitemap.xml');
 const FEED = path.join(ROOT, 'feed.xml');
 const LLMS = path.join(ROOT, 'llms.txt');
+const GENERATED_FILES = require('./generated-files.js');
+// Keep the require so renaming generated-files.js fails loudly in CI.
+if (!GENERATED_FILES.includes('app.js')) {
+  throw new Error('scripts/generated-files.js is missing expected outputs');
+}
 
 // Nav taxonomy — kept separate from SEO <meta name="keywords">.
 const CANONICAL_TAGS = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
@@ -248,8 +253,10 @@ const staticUrls = STATIC_PAGES
     priority: p.priority
   }));
 
+const homeLastmod = gitLastModified('index.html') || newestPostDate;
+
 const urls = [
-  { loc: `${SITE_URL}/`,            lastmod: newestPostDate,  priority: '1.0' },
+  { loc: `${SITE_URL}/`,            lastmod: homeLastmod,     priority: '1.0' },
   { loc: `${SITE_URL}/about`,       lastmod: aboutLastmod,    priority: '0.8' },
   ...staticUrls,
   ...posts.map(p => ({
@@ -323,7 +330,6 @@ const llmsPostLines = posts.map(p =>
 const llmsTxt = `# ${SITE_TITLE} (Yin Yau Kan)
 
 > ${SITE_DESCRIPTION}
-> A Hong Konger's bilingual (Cantonese / English) personal blog from the UK — essays, travelogues, philosophy, and notes on emigrating.
 
 ## About
 - [關於 · About](${SITE_URL}/about): 關於作者言又勤 Yin Yau Kan

@@ -24,5 +24,6 @@ jobs:
       - name: Build regenerates cleanly
         run: |
           node scripts/build.js
-          git diff --exit-code -- app.js post.js sitemap.xml feed.xml llms.txt index.html \
+          mapfile -t GENERATED < <(node -e "require('./scripts/generated-files.js').forEach(f => console.log(f))")
+          git diff --exit-code -- "${GENERATED[@]}" \
             || (echo 'build.js left a dirty tree — commit regenerated files' && git diff && exit 1)

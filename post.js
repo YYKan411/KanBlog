@@ -60,6 +60,7 @@ var POSTS_NAV = [
     btn.className = 'lang-toggle';
     btn.dataset.mode = m.key;
     btn.textContent = m.label;
+    btn.setAttribute('aria-pressed', m.key === 'zh' ? 'true' : 'false');
     if (m.key === 'zh') btn.classList.add('is-active');
     return btn;
   });
@@ -75,7 +76,9 @@ var POSTS_NAV = [
     if (mode === 'en')   body.classList.add('mode-en');
 
     buttons.forEach(b => {
-      b.classList.toggle('is-active', b.dataset.mode === mode);
+      const on = b.dataset.mode === mode;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
   }
 

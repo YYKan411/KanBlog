@@ -469,11 +469,17 @@ function renderLogin() {
 // Render: Editor (the main composer)
 // ============================================================
 function renderEditor(user) {
-  document.getElementById('topbarMeta').innerHTML = `
-    <span>${user}</span>
-    <button id="logoutBtn">Sign out</button>
-  `;
-  document.getElementById('logoutBtn').addEventListener('click', () => {
+  const meta = document.getElementById('topbarMeta');
+  meta.textContent = '';
+  const name = document.createElement('span');
+  name.textContent = user;
+  const logoutBtn = document.createElement('button');
+  logoutBtn.id = 'logoutBtn';
+  logoutBtn.type = 'button';
+  logoutBtn.textContent = 'Sign out';
+  meta.appendChild(name);
+  meta.appendChild(logoutBtn);
+  logoutBtn.addEventListener('click', () => {
     clearToken();
     location.reload();
   });
