@@ -12,11 +12,13 @@
 var POSTS_NAV = [
   { slug: "good-kind-of-bad-news", title: "好的壞消息｜The Good Kind of Bad News", url: "/posts/good-kind-of-bad-news" },
   { slug: "why-overthink-on-an-empty-stomach", title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?", url: "/posts/why-overthink-on-an-empty-stomach" },
+  { slug: "little-trumpet-prague", title: "布拉格的小喇叭｜The Little Trumpet of Prague", url: "/posts/little-trumpet-prague" },
   { slug: "all-quiet-at-hastings", title: "喜士定無戰事｜All Quiet at Hastings", url: "/posts/all-quiet-at-hastings" },
   { slug: "candleblossoms", title: "蠟燭花｜Candle Blossoms", url: "/posts/candleblossoms" },
   { slug: "theballadoftheurgentbowels", title: "鳩佬極急便｜The Ballad of the Urgent Bowels", url: "/posts/theballadoftheurgentbowels" },
   { slug: "footbridge-paradox", title: "橋上悖論｜Paradox over the Footbridge", url: "/posts/footbridge-paradox" },
   { slug: "sisyphus", title: "推石頭之人｜He Who Pushes the Stone", url: "/posts/sisyphus" },
+  { slug: "ghost-village-tyneham", title: "鬼村泰納娒｜Ghost Village Tyneham", url: "/posts/ghost-village-tyneham" },
   { slug: "the-cat-teachers", title: "貓老師｜The Cat Teachers", url: "/posts/the-cat-teachers" },
   { slug: "christmas-of-stillness", title: "留白的聖誕｜A Christmas of Stillness", url: "/posts/christmas-of-stillness" },
   { slug: "lakes-in-autumn", title: "憶湖區秋深｜A Return to the Lakes in Autumn", url: "/posts/lakes-in-autumn" },

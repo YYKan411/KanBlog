@@ -159,6 +159,15 @@ const POSTS = [
     url: "posts/why-overthink-on-an-empty-stomach"
   },
   {
+    slug: "little-trumpet-prague",
+    title: "布拉格的小喇叭｜The Little Trumpet of Prague",
+    date: "2026-06-13",
+    excerpt: "六月初夏，布拉格吹起陣陣波希米亞風。當地人仍然木口木面，市面亦非花枝招展。卻是如此小喇叭，聽到我入晒迷。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/LittleTrumpetPrague.webp",
+    url: "posts/little-trumpet-prague"
+  },
+  {
     slug: "all-quiet-at-hastings",
     title: "喜士定無戰事｜All Quiet at Hastings",
     date: "2026-06-07",
@@ -204,6 +213,15 @@ const POSTS = [
     tags: ["散文","哲思","移英"],
     featured: true,
     url: "posts/sisyphus"
+  },
+  {
+    slug: "ghost-village-tyneham",
+    title: "鬼村泰納娒｜Ghost Village Tyneham",
+    date: "2026-04-04",
+    excerpt: "1943年冬天，泰納娒村民因國家利益撤離。承諾從未兌現，多實郡山谷一隅由時光封存，成為英格蘭「鬼村」之一。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/GhostVillageTyneham.webp",
+    url: "posts/ghost-village-tyneham"
   },
   {
     slug: "the-cat-teachers",
