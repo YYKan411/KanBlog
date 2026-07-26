@@ -251,6 +251,15 @@ const POSTS = [
     url: "posts/bao-faan"
   },
   {
+    slug: "walking-croatia",
+    title: "行走克羅地亞 見山還是山｜Walking Croatia: Back to the Essence",
+    date: "2025-09-27",
+    excerpt: "初遇克羅地亞，見山是山，無處不是歷史傷疤。行走克羅地亞，平凡之處盡非凡。但願人長久，見山還是山。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/WalkingCroatia.webp",
+    url: "posts/walking-croatia"
+  },
+  {
     slug: "lands-end",
     title: "地之盡頭大風吹｜A Great Wind at Land's End",
     date: "2023-04-03",
