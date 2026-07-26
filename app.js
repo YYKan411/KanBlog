@@ -142,6 +142,14 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const POSTS = [
   {
+    slug: "good-kind-of-bad-news",
+    title: "好的壞消息｜The Good Kind of Bad News",
+    date: "2026-07-26",
+    excerpt: "見完工，等了幾個星期，終於有回覆。不是好消息。食檸檬並非新鮮事，但今次值得寫下。",
+    tags: ["散文","移英"],
+    url: "posts/good-kind-of-bad-news"
+  },
+  {
     slug: "why-overthink-on-an-empty-stomach",
     title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?",
     date: "2026-07-05",
