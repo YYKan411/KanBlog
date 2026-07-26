@@ -260,6 +260,15 @@ const POSTS = [
     url: "posts/walking-croatia"
   },
   {
+    slug: "dubrovnik-red-roofs",
+    title: "紅瓦映古城 自由繫人心｜Red Roofs, Ancient Walls, and the Spirit of Freedom",
+    date: "2025-09-26",
+    excerpt: "八月一過，英倫轉秋。逃往亞得里亞海。惟杜布羅夫尼克古城紅瓦映入眼簾當刻，一切值了。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/DubrovnikRedRoofs.webp",
+    url: "posts/dubrovnik-red-roofs"
+  },
+  {
     slug: "lands-end",
     title: "地之盡頭大風吹｜A Great Wind at Land's End",
     date: "2023-04-03",
