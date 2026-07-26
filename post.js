@@ -20,6 +20,7 @@ var POSTS_NAV = [
   { slug: "the-cat-teachers", title: "貓老師｜The Cat Teachers", url: "/posts/the-cat-teachers" },
   { slug: "christmas-of-stillness", title: "留白的聖誕｜A Christmas of Stillness", url: "/posts/christmas-of-stillness" },
   { slug: "lakes-in-autumn", title: "憶湖區秋深｜A Return to the Lakes in Autumn", url: "/posts/lakes-in-autumn" },
+  { slug: "pen-and-brand", title: "筆尖與品牌：真誠對真誠｜Pen and Brand: Sincerity to Sincerity", url: "/posts/pen-and-brand" },
   { slug: "bao-faan", title: "飽飯｜A Profound Satiety", url: "/posts/bao-faan" },
   { slug: "lands-end", title: "地之盡頭大風吹", url: "/posts/lands-end" }
 ];
