@@ -233,6 +233,15 @@ const POSTS = [
     url: "posts/lakes-in-autumn"
   },
   {
+    slug: "pen-and-brand",
+    title: "筆尖與品牌：真誠對真誠｜Pen and Brand: Sincerity to Sincerity",
+    date: "2025-10-05",
+    excerpt: "因為喜歡歷史，我曾想過做考古，後來更希望執筆記錄歷史。兜兜轉轉，最終走進酒店行銷領域。兩者始終圍繞着同一個核心——溝通。",
+    tags: ["散文","哲思","移英"],
+    cover: "images/PenAndBrand.webp",
+    url: "posts/pen-and-brand"
+  },
+  {
     slug: "bao-faan",
     title: "飽飯｜A Profound Satiety",
     date: "2025-09-28",
