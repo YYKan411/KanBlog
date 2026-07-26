@@ -10,6 +10,7 @@
 
 /* BUILD:NAV_START */
 var POSTS_NAV = [
+  { slug: "good-kind-of-bad-news", title: "好的壞消息｜The Good Kind of Bad News", url: "/posts/good-kind-of-bad-news" },
   { slug: "why-overthink-on-an-empty-stomach", title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?", url: "/posts/why-overthink-on-an-empty-stomach" },
   { slug: "all-quiet-at-hastings", title: "喜士定無戰事｜All Quiet at Hastings", url: "/posts/all-quiet-at-hastings" },
   { slug: "candleblossoms", title: "蠟燭花｜Candle Blossoms", url: "/posts/candleblossoms" },
