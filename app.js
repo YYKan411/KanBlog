@@ -224,6 +224,15 @@ const POSTS = [
     url: "posts/christmas-of-stillness"
   },
   {
+    slug: "lakes-in-autumn",
+    title: "憶湖區秋深｜A Return to the Lakes in Autumn",
+    date: "2025-12-02",
+    excerpt: "歲晚寒流撲來，想起十月那趟公路之旅。湖區靜謐山水之間，溫和秋日之下，芬草翠綠之上，添染層層黃褐與焦紅。",
+    tags: ["散文","遊記","移英"],
+    cover: "images/LakesInAutumn.webp",
+    url: "posts/lakes-in-autumn"
+  },
+  {
     slug: "bao-faan",
     title: "飽飯｜A Profound Satiety",
     date: "2025-09-28",
