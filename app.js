@@ -147,6 +147,7 @@ const POSTS = [
     date: "2026-07-26",
     excerpt: "見完工，等了幾個星期，終於有回覆。不是好消息。食檸檬並非新鮮事，但今次值得寫下。",
     tags: ["散文","移英"],
+    cover: "images/GoodKindOfBadNews.webp",
     url: "posts/good-kind-of-bad-news"
   },
   {
