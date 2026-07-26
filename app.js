@@ -215,6 +215,15 @@ const POSTS = [
     url: "posts/the-cat-teachers"
   },
   {
+    slug: "christmas-of-stillness",
+    title: "留白的聖誕｜A Christmas of Stillness",
+    date: "2025-12-25",
+    excerpt: "英倫聖誕無雪，日程刻意留白。謝絕一切聚會，無事非做不可。分分秒秒由我，真真正正唞唞。",
+    tags: ["散文","哲思","移英"],
+    cover: "images/ChristmasOfStillness.webp",
+    url: "posts/christmas-of-stillness"
+  },
+  {
     slug: "bao-faan",
     title: "飽飯｜A Profound Satiety",
     date: "2025-09-28",
