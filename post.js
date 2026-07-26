@@ -22,6 +22,7 @@ var POSTS_NAV = [
   { slug: "lakes-in-autumn", title: "憶湖區秋深｜A Return to the Lakes in Autumn", url: "/posts/lakes-in-autumn" },
   { slug: "pen-and-brand", title: "筆尖與品牌：真誠對真誠｜Pen and Brand: Sincerity to Sincerity", url: "/posts/pen-and-brand" },
   { slug: "bao-faan", title: "飽飯｜A Profound Satiety", url: "/posts/bao-faan" },
+  { slug: "walking-croatia", title: "行走克羅地亞 見山還是山｜Walking Croatia: Back to the Essence", url: "/posts/walking-croatia" },
   { slug: "lands-end", title: "地之盡頭大風吹｜A Great Wind at Land's End", url: "/posts/lands-end" }
 ];
 /* BUILD:NAV_END */
