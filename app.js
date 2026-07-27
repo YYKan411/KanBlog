@@ -146,7 +146,7 @@ const POSTS = [
     title: "好的壞消息｜The Good Kind of Bad News",
     date: "2026-07-26",
     excerpt: "見完工，等了幾個星期，終於有回覆。不是好消息。食檸檬並非新鮮事，但今次值得寫下。",
-    tags: ["散文","移英"],
+    tags: ["雜記","移英"],
     cover: "images/GoodKindOfBadNews.webp",
     url: "posts/good-kind-of-bad-news"
   },
@@ -155,7 +155,7 @@ const POSTS = [
     title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?",
     date: "2026-07-05",
     excerpt: "本周初有場面試，回家愈諗愈惆悵。開着焗爐，酥皮捲腸仔——油香一湧，成個腦靜晒。結果可以等，美味不可以。",
-    tags: ["散文","移英"],
+    tags: ["雜記","移英"],
     url: "posts/why-overthink-on-an-empty-stomach"
   },
   {
@@ -163,7 +163,7 @@ const POSTS = [
     title: "布拉格的小喇叭｜The Little Trumpet of Prague",
     date: "2026-06-13",
     excerpt: "六月初夏，布拉格吹起陣陣波希米亞風。當地人仍然木口木面，市面亦非花枝招展。卻是如此小喇叭，聽到我入晒迷。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/LittleTrumpetPrague.webp",
     url: "posts/little-trumpet-prague"
   },
@@ -172,7 +172,7 @@ const POSTS = [
     title: "喜士定無戰事｜All Quiet at Hastings",
     date: "2026-06-07",
     excerpt: "撞正銀行假，話行就行，去喜士定睇海。黑屋、石灘、海鷗虎視眈眈，一場人鷗之間嘅無形戰爭靜默展開。而所謂喜士定戰役，一千年前根本唔喺喜士定打。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/AllQuietatHastings.webp",
     url: "posts/all-quiet-at-hastings"
   },
@@ -181,7 +181,7 @@ const POSTS = [
     title: "蠟燭花｜Candle Blossoms",
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
-    tags: ["散文","哲思","移英","社會","香港"],
+    tags: ["哲思","香港","社會","移英"],
     cover: "images/CandleBlossoms.webp",
     featured: true,
     url: "posts/candleblossoms"
@@ -191,7 +191,7 @@ const POSTS = [
     title: "鳩佬極急便｜The Ballad of the Urgent Bowels",
     date: "2026-05-21",
     excerpt: "一首四節短歌，記一場最庸俗、最英雄式嘅私人危機。",
-    tags: ["散文"],
+    tags: ["雜記"],
     cover: "images/TheBalladoftheUrgentBowels.webp",
     url: "posts/theballadoftheurgentbowels"
   },
@@ -200,7 +200,7 @@ const POSTS = [
     title: "橋上悖論｜Paradox over the Footbridge",
     date: "2026-05-19",
     excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
-    tags: ["散文","移英","物","香港"],
+    tags: ["物","香港","移英"],
     cover: "images/bridge-paradox.webp",
     featured: true,
     url: "posts/footbridge-paradox"
@@ -210,7 +210,7 @@ const POSTS = [
     title: "推石頭之人｜He Who Pushes the Stone",
     date: "2026-05-19",
     excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。",
-    tags: ["散文","哲思","移英"],
+    tags: ["哲思","移英"],
     featured: true,
     url: "posts/sisyphus"
   },
@@ -219,7 +219,7 @@ const POSTS = [
     title: "鬼村泰納娒｜Ghost Village Tyneham",
     date: "2026-04-04",
     excerpt: "1943年冬天，泰納娒村民因國家利益撤離。承諾從未兌現，多實郡山谷一隅由時光封存，成為英格蘭「鬼村」之一。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/GhostVillageTyneham.webp",
     url: "posts/ghost-village-tyneham"
   },
@@ -228,7 +228,7 @@ const POSTS = [
     title: "貓老師｜The Cat Teachers",
     date: "2026-01-23",
     excerpt: "一路以為寵物同我無關，尤其諗到佢哋會走先過我。幾年前一個無工開嘅下午，我抱起兩隻黑媽媽嘅貓 BB 喊咗出嚟，然後帶咗佢哋返屋企——兩個小生命，撈返我返嚟。",
-    tags: ["散文","哲思"],
+    tags: ["哲思"],
     cover: "images/CatTeacher.webp",
     url: "posts/the-cat-teachers"
   },
@@ -237,7 +237,7 @@ const POSTS = [
     title: "留白的聖誕｜A Christmas of Stillness",
     date: "2025-12-25",
     excerpt: "英倫聖誕無雪，日程刻意留白。謝絕一切聚會，無事非做不可。分分秒秒由我，真真正正唞唞。",
-    tags: ["散文","哲思","移英"],
+    tags: ["哲思","移英"],
     cover: "images/ChristmasOfStillness.webp",
     url: "posts/christmas-of-stillness"
   },
@@ -246,7 +246,7 @@ const POSTS = [
     title: "憶湖區秋深｜A Return to the Lakes in Autumn",
     date: "2025-12-02",
     excerpt: "歲晚寒流撲來，想起十月那趟公路之旅。湖區靜謐山水之間，溫和秋日之下，芬草翠綠之上，添染層層黃褐與焦紅。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/LakesInAutumn.webp",
     url: "posts/lakes-in-autumn"
   },
@@ -255,7 +255,7 @@ const POSTS = [
     title: "筆尖與品牌：真誠對真誠｜Pen and Brand: Sincerity to Sincerity",
     date: "2025-10-05",
     excerpt: "因為喜歡歷史，我曾想過做考古，後來更希望執筆記錄歷史。兜兜轉轉，最終走進酒店行銷領域。兩者始終圍繞着同一個核心——溝通。",
-    tags: ["散文","哲思","移英"],
+    tags: ["哲思","移英"],
     cover: "images/PenAndBrand.webp",
     url: "posts/pen-and-brand"
   },
@@ -264,7 +264,7 @@ const POSTS = [
     title: "飽飯｜A Profound Satiety",
     date: "2025-09-28",
     excerpt: "細個嗰陣屋企忽然好窮。16歲生日返第一份兼職，月尾將幾百蚊放喺飯枱上。第二朝五點，我同老竇喊咗好耐好耐好耐。",
-    tags: ["散文","香港","人"],
+    tags: ["人","香港"],
     featured: true,
     url: "posts/bao-faan"
   },
@@ -273,7 +273,7 @@ const POSTS = [
     title: "行走克羅地亞 見山還是山｜Walking Croatia: Back to the Essence",
     date: "2025-09-27",
     excerpt: "初遇克羅地亞，見山是山，無處不是歷史傷疤。行走克羅地亞，平凡之處盡非凡。但願人長久，見山還是山。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/WalkingCroatia.webp",
     url: "posts/walking-croatia"
   },
@@ -282,7 +282,7 @@ const POSTS = [
     title: "紅瓦映古城 自由繫人心｜Red Roofs, Ancient Walls, and the Spirit of Freedom",
     date: "2025-09-26",
     excerpt: "八月一過，英倫轉秋。逃往亞得里亞海。惟杜布羅夫尼克古城紅瓦映入眼簾當刻，一切值了。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記"],
     cover: "images/DubrovnikRedRoofs.webp",
     url: "posts/dubrovnik-red-roofs"
   },
@@ -291,7 +291,7 @@ const POSTS = [
     title: "地之盡頭大風吹｜A Great Wind at Land's End",
     date: "2023-04-03",
     excerpt: "由雷丁到康和，二百五十八英里，六粒鐘車程。蘭茲角望向遠方係一條筆直水平線。離開香港兩年，忽然海水味撲面。",
-    tags: ["散文","遊記","移英"],
+    tags: ["遊記","移英"],
     cover: "images/landsend.webp",
     url: "posts/lands-end"
   }

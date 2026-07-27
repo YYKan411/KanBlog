@@ -33,7 +33,7 @@ const FEED = path.join(ROOT, 'feed.xml');
 const LLMS = path.join(ROOT, 'llms.txt');
 
 // Nav taxonomy — kept separate from SEO <meta name="keywords">.
-const CANONICAL_TAGS = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
+const CANONICAL_TAGS = ['遊記', '哲思', '雜記', '人', '物', '香港', '移英', '社會'];
 
 // ============================================================
 // helpers — extract things from HTML

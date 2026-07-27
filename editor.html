@@ -401,7 +401,7 @@ const WORKER_URL = 'https://kanblog-editor-api.7r6r7hf474.workers.dev';
 
 // Canonical tag set — kept in sync with scripts/build.js
 // Any tag outside this set will be silently dropped by the build pipeline.
-const CANONICAL_TAGS = ['散文', '遊記', '哲思', '移英', '物', '人', '社會', '香港'];
+const CANONICAL_TAGS = ['遊記', '哲思', '雜記', '人', '物', '香港', '移英', '社會'];
 
 // ============================================================
 // Session
@@ -503,7 +503,7 @@ function renderEditor(user) {
 
       <div class="field">
         <label for="f-tags">Tags (comma-separated)</label>
-        <input type="text" id="f-tags" placeholder="散文, 哲思, 移英">
+        <input type="text" id="f-tags" placeholder="遊記, 哲思, 移英">
         <div class="field-help">Canonical set: ${CANONICAL_TAGS.join(' / ')}. Anything outside is silently dropped by build.js.</div>
         <div class="field-warning" id="tags-warning"></div>
       </div>
