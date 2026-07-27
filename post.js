@@ -26,7 +26,8 @@ var POSTS_NAV = [
   { slug: "bao-faan", title: "飽飯｜A Profound Satiety", url: "/posts/bao-faan" },
   { slug: "walking-croatia", title: "行走克羅地亞 見山還是山｜Walking Croatia: Back to the Essence", url: "/posts/walking-croatia" },
   { slug: "dubrovnik-red-roofs", title: "紅瓦映古城 自由繫人心｜Red Roofs, Ancient Walls, and the Spirit of Freedom", url: "/posts/dubrovnik-red-roofs" },
-  { slug: "lands-end", title: "地之盡頭大風吹｜A Great Wind at Land's End", url: "/posts/lands-end" }
+  { slug: "lands-end", title: "地之盡頭大風吹｜A Great Wind at Land's End", url: "/posts/lands-end" },
+  { slug: "a-party-of-one", title: "盡興一個人｜A Party of One", url: "/posts/a-party-of-one" }
 ];
 /* BUILD:NAV_END */
 

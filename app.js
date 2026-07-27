@@ -294,6 +294,15 @@ const POSTS = [
     tags: ["遊記","移英"],
     cover: "images/landsend.webp",
     url: "posts/lands-end"
+  },
+  {
+    slug: "a-party-of-one",
+    title: "盡興一個人｜A Party of One",
+    date: "2022-04-13",
+    excerpt: "我返緊三份工。上個月喺酒吧總開銷高達八百英鎊，索性星期六晚返埋酒吧幫手——一來賺返少少零用錢，二來逼自己飲少啲酒。一個人原來都可以盡興。",
+    tags: ["移英","雜記"],
+    cover: "images/APartyOfOne.webp",
+    url: "posts/a-party-of-one"
   }
 ];
 
