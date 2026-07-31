@@ -645,7 +645,8 @@ a:hover { color: var(--accent); }
   margin: 0;
 }
 
-.pair .en {
+/* Soft italic is for body English only — bilingual h2/h3 are peers with the Chinese. */
+.pair p.en {
   color: var(--ink-soft);
   font-style: italic;
   font-size: 0.94em;
