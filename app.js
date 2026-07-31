@@ -287,6 +287,15 @@ const POSTS = [
     url: "posts/dubrovnik-red-roofs"
   },
   {
+    slug: "autumn-appetite",
+    title: "食慾之秋｜An Appetite for Autumn",
+    date: "2023-10-14",
+    excerpt: "食即是命，世道紛亂，飯仍得吃。命即選擇，吃甚麼好，在秋天實屬一大煩惱，煩在食材太過精彩。",
+    tags: ["雜記","物"],
+    cover: "images/AutumnAppetite.webp",
+    url: "posts/autumn-appetite"
+  },
+  {
     slug: "lands-end",
     title: "地之盡頭大風吹｜A Great Wind at Land's End",
     date: "2023-04-03",
