@@ -148,6 +148,7 @@ const POSTS = [
     excerpt: "星期六一大清早出車，二百五十哩北上Skipton，見一位五年前分手嘅朋友。約人愈難，反而愈少掛一層假面具；每次一別，都唔知幾時先有下次。",
     tags: ["遊記","哲思","人"],
     cover: "images/OneMaskFewer.webp",
+    featured: true,
     url: "posts/one-mask-fewer"
   },
   {
