@@ -142,6 +142,15 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const POSTS = [
   {
+    slug: "one-mask-fewer",
+    title: "總有下次｜One Mask Fewer",
+    date: "2026-08-11",
+    excerpt: "星期六一大清早出車，二百五十哩北上Skipton，見一位五年前分手嘅朋友。約人愈難，反而愈少掛一層假面具；每次一別，都唔知幾時先有下次。",
+    tags: ["遊記","哲思","人"],
+    cover: "images/OneMaskFewer.webp",
+    url: "posts/one-mask-fewer"
+  },
+  {
     slug: "good-kind-of-bad-news",
     title: "好的壞消息｜The Good Kind of Bad News",
     date: "2026-07-26",

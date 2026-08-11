@@ -10,6 +10,7 @@
 
 /* BUILD:NAV_START */
 var POSTS_NAV = [
+  { slug: "one-mask-fewer", title: "總有下次｜One Mask Fewer", url: "/posts/one-mask-fewer" },
   { slug: "good-kind-of-bad-news", title: "好的壞消息｜The Good Kind of Bad News", url: "/posts/good-kind-of-bad-news" },
   { slug: "why-overthink-on-an-empty-stomach", title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?", url: "/posts/why-overthink-on-an-empty-stomach" },
   { slug: "little-trumpet-prague", title: "布拉格的小喇叭｜The Little Trumpet of Prague", url: "/posts/little-trumpet-prague" },
