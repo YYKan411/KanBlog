@@ -142,6 +142,15 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const POSTS = [
   {
+    slug: "formula-money",
+    title: "奶粉錢｜Formula Money",
+    date: "2026-08-21",
+    excerpt: "雷丁最近開咗間舖頭，專做《寵物小精靈》卡交易。今日我去賣卡。細細間舖頭，大大堆小朋友，嘈到爆、迫到喊。",
+    tags: ["人","物","香港"],
+    cover: "images/FormulaMoney.webp",
+    url: "posts/formula-money"
+  },
+  {
     slug: "one-mask-fewer",
     title: "總有下次｜One Mask Fewer",
     date: "2026-08-11",
