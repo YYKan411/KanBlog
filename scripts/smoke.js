@@ -82,6 +82,16 @@ if (!learnLd || !/quiet shelf|practice/i.test(learnLd[1])) {
 }
 
 // 4. Every real post has dedicated tags meta + bilingual back link
+function readArray(src, name) {
+  const m = src.match(new RegExp(`const ${name} = \\[([^\\]]*)\\]`));
+  if (!m) return null;
+  return m[1].split(',').map(t => t.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+}
+const buildJs = fs.readFileSync(path.join(ROOT, 'scripts/build.js'), 'utf8');
+const GENRE_TAGS = readArray(buildJs, 'GENRE_TAGS') || [];
+const SUBJECT_TAGS = readArray(buildJs, 'SUBJECT_TAGS') || [];
+const CANONICAL_TAGS = [...GENRE_TAGS, ...SUBJECT_TAGS];
+if (!GENRE_TAGS.length || !SUBJECT_TAGS.length) fail('could not read GENRE_TAGS / SUBJECT_TAGS from build.js');
 const postsDir = path.join(ROOT, 'posts');
 const posts = fs.readdirSync(postsDir).filter(f => f.endsWith('.html') && !f.startsWith('_'));
 for (const f of posts) {
@@ -93,8 +103,27 @@ for (const f of posts) {
     fail(f + ' missing well-formed <meta name="keywords">');
   }
   if (!html.includes('← 主頁/home')) fail(f + ' missing bilingual back link');
+  // Two-axis taxonomy: exactly one genre tag per post, nothing off-set.
+  const tagsMeta = html.match(/<meta\s+name=["']tags["']\s+content=["']([^"']*)["']/i);
+  const tags = tagsMeta ? tagsMeta[1].split(/[,，]/).map(t => t.trim()).filter(Boolean) : [];
+  const genres = tags.filter(t => GENRE_TAGS.includes(t));
+  if (genres.length !== 1) fail(f + ` must carry exactly one genre tag (${GENRE_TAGS.join('/')}), has ${genres.length}`);
+  const offSet = tags.filter(t => !CANONICAL_TAGS.includes(t));
+  if (offSet.length) fail(f + ' has off-set tags: ' + offSet.join(', '));
+  if (tags[0] && !GENRE_TAGS.includes(tags[0])) fail(f + ' tags[0] must be the genre');
 }
-ok(`checked ${posts.length} posts for tags/keywords meta + back link`);
+ok(`checked ${posts.length} posts for tags/keywords meta + one-genre rule + back link`);
+
+// 4b. The three tag-set copies must not drift (build.js is the source of truth)
+const editorHtml = fs.readFileSync(path.join(ROOT, 'editor.html'), 'utf8');
+const homeAppJs = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
+const editorGenre = readArray(editorHtml, 'GENRE_TAGS');
+const editorSubject = readArray(editorHtml, 'SUBJECT_TAGS');
+const appOrder = readArray(homeAppJs, 'TAG_ORDER');
+if (JSON.stringify(editorGenre) !== JSON.stringify(GENRE_TAGS)) fail('editor.html GENRE_TAGS drifted from build.js');
+if (JSON.stringify(editorSubject) !== JSON.stringify(SUBJECT_TAGS)) fail('editor.html SUBJECT_TAGS drifted from build.js');
+if (JSON.stringify(appOrder) !== JSON.stringify(CANONICAL_TAGS)) fail('app.js TAG_ORDER drifted from build.js');
+if (!failed) ok('tag set in sync across build.js / editor.html / app.js');
 
 // 5. SQL status copy is ZH-first
 const sqlApp = fs.readFileSync(path.join(ROOT, 'learning/sql/app.js'), 'utf8');

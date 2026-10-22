@@ -49,7 +49,7 @@ Footer → **learning** → [`/learning/`](./learning/)
 | `[檔名沒有.html].html` | 你嘅檔名加 `.html`（例如 `reading-spring.html`） |
 | `[YYYY-MM-DD]` | 今日，例如 `2026-05-20` |
 | `[YYYY · MM · DD]` | 同上但用 dot，`2026 · 05 · 20` |
-| `[tag1]`, `[tag2]` | 導航 taxonomy：`遊記／哲思／雜記／人／物／香港／移英／社會`（寫入 `<meta name="tags">`；`keywords` 可以另加 SEO 字） |
+| `[體裁]`, `[題材1]`… | 導航 taxonomy 分兩層：**體裁**（每篇恰好一個，放最前）`遊記／哲思／雜記`；**題材**（0–3 個）`移英／香港／職場／人／食`。寫入 `<meta name="tags">`；`keywords` 可以另加 SEO 字。唔係呢八個嘅字 build 會靜靜咁 drop 咗；無體裁或者多過一個體裁，CI smoke 會 fail |
 
 **想做 featured 卡（深色 stand out 卡）？**
 喺 head 嗰部分 uncomment：

@@ -33,7 +33,12 @@ const FEED = path.join(ROOT, 'feed.xml');
 const LLMS = path.join(ROOT, 'llms.txt');
 
 // Nav taxonomy — kept separate from SEO <meta name="keywords">.
-const CANONICAL_TAGS = ['遊記', '哲思', '雜記', '人', '物', '香港', '移英', '社會'];
+// Two axes: every post carries exactly ONE genre (體裁) + 0–3 subjects (題材).
+// Array order here is the homepage tag-bar order (app.js TAG_ORDER mirrors it)
+// and the order tags are written out in POSTS, so tags[0] is always the genre.
+const GENRE_TAGS = ['遊記', '哲思', '雜記'];
+const SUBJECT_TAGS = ['移英', '香港', '職場', '人', '食'];
+const CANONICAL_TAGS = [...GENRE_TAGS, ...SUBJECT_TAGS];
 
 // ============================================================
 // helpers — extract things from HTML
@@ -63,7 +68,9 @@ function extractTags(html) {
   // so older drafts without <meta name="tags"> still build.
   const raw = readMeta(html, 'name', 'tags') || readMeta(html, 'name', 'keywords') || '';
   const tokens = raw.split(/[,，]/).map(s => s.trim()).filter(Boolean);
-  return tokens.filter(t => CANONICAL_TAGS.includes(t));
+  return tokens
+    .filter(t => CANONICAL_TAGS.includes(t))
+    .sort((a, b) => CANONICAL_TAGS.indexOf(a) - CANONICAL_TAGS.indexOf(b));
 }
 
 // Escape text for use inside XML element content

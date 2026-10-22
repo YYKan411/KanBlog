@@ -399,9 +399,12 @@ a:hover { text-decoration: underline; }
 // ============================================================
 const WORKER_URL = 'https://kanblog-editor-api.7r6r7hf474.workers.dev';
 
-// Canonical tag set — kept in sync with scripts/build.js
+// Canonical tag set — kept in sync with scripts/build.js (smoke.js checks they match).
+// Two axes: exactly ONE genre (體裁) + 0–3 subjects (題材). Order = homepage tag-bar order.
 // Any tag outside this set will be silently dropped by the build pipeline.
-const CANONICAL_TAGS = ['遊記', '哲思', '雜記', '人', '物', '香港', '移英', '社會'];
+const GENRE_TAGS = ['遊記', '哲思', '雜記'];
+const SUBJECT_TAGS = ['移英', '香港', '職場', '人', '食'];
+const CANONICAL_TAGS = [...GENRE_TAGS, ...SUBJECT_TAGS];
 
 // ============================================================
 // Session
@@ -503,8 +506,8 @@ function renderEditor(user) {
 
       <div class="field">
         <label for="f-tags">Tags (comma-separated)</label>
-        <input type="text" id="f-tags" placeholder="遊記, 哲思, 移英">
-        <div class="field-help">Canonical set: ${CANONICAL_TAGS.join(' / ')}. Anything outside is silently dropped by build.js.</div>
+        <input type="text" id="f-tags" placeholder="遊記, 移英, 人">
+        <div class="field-help">體裁（揀一個）: ${GENRE_TAGS.join(' / ')} · 題材（0–3 個）: ${SUBJECT_TAGS.join(' / ')}. Anything outside is silently dropped by build.js.</div>
         <div class="field-warning" id="tags-warning"></div>
       </div>
 
@@ -570,13 +573,29 @@ function parseTags(raw) {
   return raw.split(/[,，]/).map(t => t.trim()).filter(Boolean);
 }
 
+// Canonical order (genre first) so tags[0] is always the genre / primary tag.
+function sortTags(tags) {
+  const rank = t => { const i = CANONICAL_TAGS.indexOf(t); return i < 0 ? 99 : i; };
+  return [...tags].sort((a, b) => rank(a) - rank(b));
+}
+
+function tagWarnings(tags) {
+  const warnings = [];
+  const offenders = tags.filter(t => !CANONICAL_TAGS.includes(t));
+  if (offenders.length) warnings.push(`Not in canonical set, will be dropped: ${offenders.join(', ')}`);
+  const genres = tags.filter(t => GENRE_TAGS.includes(t));
+  if (tags.length && genres.length !== 1) {
+    warnings.push(`需要恰好一個體裁 (${GENRE_TAGS.join(' / ')}) — currently ${genres.length}`);
+  }
+  return warnings;
+}
+
 function validateTagsLive() {
   const raw = document.getElementById('f-tags').value;
   const warningEl = document.getElementById('tags-warning');
-  const tags = parseTags(raw);
-  const offenders = tags.filter(t => !CANONICAL_TAGS.includes(t));
-  if (offenders.length) {
-    warningEl.textContent = `⚠ Not in canonical set, will be dropped: ${offenders.join(', ')}`;
+  const warnings = tagWarnings(parseTags(raw));
+  if (warnings.length) {
+    warningEl.textContent = '⚠ ' + warnings.join(' · ');
     warningEl.classList.add('visible');
   } else {
     warningEl.classList.remove('visible');
@@ -831,16 +850,22 @@ async function publish() {
   }
 
   const date = new Date().toISOString().split('T')[0];
-  const tagsAll = parseTags(tagsRaw);
+  const tagsAll = sortTags(parseTags(tagsRaw));
 
   // Tag whitelist check — non-blocking, just surface the silent failure
   const validTags = tagsAll.filter(t => CANONICAL_TAGS.includes(t));
   const droppedTags = tagsAll.filter(t => !CANONICAL_TAGS.includes(t));
 
-  if (droppedTags.length && !window._tagWarningAcked) {
+  const genreCount = validTags.filter(t => GENRE_TAGS.includes(t)).length;
+
+  if ((droppedTags.length || genreCount !== 1) && !window._tagWarningAcked) {
     const proceed = confirm(
-      `These tags are not in the canonical set and will be silently dropped by build.js:\n\n` +
-      `  ${droppedTags.join(', ')}\n\n` +
+      (droppedTags.length
+        ? `These tags are not in the canonical set and will be silently dropped by build.js:\n\n  ${droppedTags.join(', ')}\n\n`
+        : '') +
+      (genreCount !== 1
+        ? `Every post needs exactly ONE genre tag (${GENRE_TAGS.join(' / ')}) — this one has ${genreCount}. smoke.js will fail CI.\n\n`
+        : '') +
       `Canonical set: ${CANONICAL_TAGS.join(', ')}\n\n` +
       `Publish anyway?`
     );

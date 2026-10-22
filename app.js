@@ -9,7 +9,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 let allPosts = [];
 let activeTag = 'all';
 
-// Read tag from URL hash on load (e.g. #散文)
+// Tag-bar order: genre (體裁) first, then subject (題材). Mirrors
+// GENRE_TAGS + SUBJECT_TAGS in scripts/build.js; smoke.js checks they match.
+const TAG_ORDER = ['遊記', '哲思', '雜記', '移英', '香港', '職場', '人', '食'];
+
+// Read tag from URL hash on load (e.g. #遊記)
 function getTagFromHash() {
   const hash = decodeURIComponent(window.location.hash.replace('#', ''));
   return hash || 'all';
@@ -41,7 +45,8 @@ function buildTagBar() {
   const tags = new Set();
   allPosts.forEach(p => (p.tags || []).forEach(t => tags.add(t)));
 
-  [...tags].sort().forEach(t => {
+  const rank = t => { const i = TAG_ORDER.indexOf(t); return i < 0 ? 99 : i; };
+  [...tags].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).forEach(t => {
     const btn = document.createElement('button');
     btn.className = 'tag';
     btn.dataset.tag = t;
@@ -146,7 +151,7 @@ const POSTS = [
     title: "嘆氣｜The Sigh",
     date: "2026-10-22",
     excerpt: "一串電郵，兩間供應商，三十六封信件。傾足兩年，結果係我公司網站有個功能，一直用唔到。第三十七封電郵，係我寫嘅。",
-    tags: ["雜記","移英"],
+    tags: ["雜記","移英","職場"],
     cover: "images/TheSigh.webp",
     url: "posts/the-sigh"
   },
@@ -155,7 +160,7 @@ const POSTS = [
     title: "奶粉錢｜Formula Money",
     date: "2026-08-21",
     excerpt: "雷丁最近開咗間舖頭，專做《寵物小精靈》卡交易。今日我去賣卡。細細間舖頭，大大堆小朋友，嘈到爆、迫到喊。",
-    tags: ["人","物","香港"],
+    tags: ["雜記","香港","人"],
     cover: "images/FormulaMoney.webp",
     url: "posts/formula-money"
   },
@@ -164,7 +169,7 @@ const POSTS = [
     title: "總有下次｜One Mask Fewer",
     date: "2026-08-11",
     excerpt: "星期六一大清早出車，二百五十哩北上Skipton，見一位五年前分手嘅朋友。約人愈難，反而愈少掛一層假面具；每次一別，都唔知幾時先有下次。",
-    tags: ["遊記","哲思","人"],
+    tags: ["遊記","人"],
     cover: "images/OneMaskFewer.webp",
     featured: true,
     url: "posts/one-mask-fewer"
@@ -174,7 +179,7 @@ const POSTS = [
     title: "好的壞消息｜The Good Kind of Bad News",
     date: "2026-07-26",
     excerpt: "見完工，等了幾個星期，終於有回覆。不是好消息。食檸檬並非新鮮事，但今次值得寫下。",
-    tags: ["雜記","移英"],
+    tags: ["雜記","移英","職場"],
     cover: "images/GoodKindOfBadNews.webp",
     url: "posts/good-kind-of-bad-news"
   },
@@ -183,7 +188,7 @@ const POSTS = [
     title: "做乜諗嘢唔食飯？｜Why Overthink on an Empty Stomach?",
     date: "2026-07-05",
     excerpt: "本周初有場面試，回家愈諗愈惆悵。開着焗爐，酥皮捲腸仔——油香一湧，成個腦靜晒。結果可以等，美味不可以。",
-    tags: ["雜記","移英"],
+    tags: ["雜記","移英","職場","食"],
     url: "posts/why-overthink-on-an-empty-stomach"
   },
   {
@@ -209,7 +214,7 @@ const POSTS = [
     title: "蠟燭花｜Candle Blossoms",
     date: "2026-05-21",
     excerpt: "五月伯克郡，蠟燭花沿路盛放。從安妮．法蘭克之樹寫到六四燭光，一篇關於記憶、流散與微光的短文。",
-    tags: ["哲思","香港","社會","移英"],
+    tags: ["哲思","移英","香港"],
     cover: "images/CandleBlossoms.webp",
     featured: true,
     url: "posts/candleblossoms"
@@ -228,7 +233,7 @@ const POSTS = [
     title: "橋上悖論｜Paradox over the Footbridge",
     date: "2026-05-19",
     excerpt: "熟悉畫面，陌生場景。我無法離開這裏，我只是回不來了。",
-    tags: ["物","香港","移英"],
+    tags: ["雜記","移英","香港"],
     cover: "images/bridge-paradox.webp",
     featured: true,
     url: "posts/footbridge-paradox"
@@ -238,7 +243,7 @@ const POSTS = [
     title: "推石頭之人｜He Who Pushes the Stone",
     date: "2026-05-19",
     excerpt: "又返到寫字樓。打開螢幕，五十八封電郵。最頂個討論串，嚟到第二十三個回覆，仍未斷尾。",
-    tags: ["哲思","移英"],
+    tags: ["哲思","移英","職場"],
     featured: true,
     url: "posts/sisyphus"
   },
@@ -283,7 +288,7 @@ const POSTS = [
     title: "筆尖與品牌：真誠對真誠｜Pen and Brand: Sincerity to Sincerity",
     date: "2025-10-05",
     excerpt: "因為喜歡歷史，我曾想過做考古，後來更希望執筆記錄歷史。兜兜轉轉，最終走進酒店行銷領域。兩者始終圍繞着同一個核心——溝通。",
-    tags: ["哲思","移英"],
+    tags: ["哲思","移英","職場"],
     cover: "images/PenAndBrand.webp",
     url: "posts/pen-and-brand"
   },
@@ -292,7 +297,7 @@ const POSTS = [
     title: "飽飯｜A Profound Satiety",
     date: "2025-09-28",
     excerpt: "細個嗰陣屋企忽然好窮。16歲生日返第一份兼職，月尾將幾百蚊放喺飯枱上。第二朝五點，我同老竇喊咗好耐好耐好耐。",
-    tags: ["人","香港"],
+    tags: ["雜記","香港","人","食"],
     featured: true,
     url: "posts/bao-faan"
   },
@@ -319,7 +324,7 @@ const POSTS = [
     title: "食慾之秋｜An Appetite for Autumn",
     date: "2023-10-14",
     excerpt: "食即是命，世道紛亂，飯仍得吃。命即選擇，吃甚麼好，在秋天實屬一大煩惱，煩在食材太過精彩。",
-    tags: ["雜記","物"],
+    tags: ["雜記","食"],
     cover: "images/AutumnAppetite.webp",
     url: "posts/autumn-appetite"
   },
@@ -337,7 +342,7 @@ const POSTS = [
     title: "盡興一個人｜A Party of One",
     date: "2022-04-13",
     excerpt: "我返緊三份工。上個月喺酒吧總開銷高達八百英鎊，索性星期六晚返埋酒吧幫手——一來賺返少少零用錢，二來逼自己飲少啲酒。一個人原來都可以盡興。",
-    tags: ["移英","雜記"],
+    tags: ["雜記","移英","職場"],
     cover: "images/APartyOfOne.webp",
     url: "posts/a-party-of-one"
   }

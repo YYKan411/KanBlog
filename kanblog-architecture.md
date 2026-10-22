@@ -110,7 +110,7 @@ The live list is named `POSTS` (renamed from the old `SAMPLE_POSTS` placeholder)
 | `<title>` (suffix " — 言又勤" stripped) | Card title; sitemap |
 | `meta[name="description"]` | Fallback for excerpt |
 | `meta[name="excerpt"]` | Homepage card excerpt + RSS description |
-| `meta[name="tags"]` | Homepage nav taxonomy (canonical set only). Prefer this. |
+| `meta[name="tags"]` | Homepage nav taxonomy (canonical set only; exactly one 體裁 first, then 0–3 題材 — see "Canonical tags"). Prefer this. |
 | `meta[name="keywords"]` | SEO extras OK here; also a **fallback** for tags if `tags` is absent (filtered to the canonical set) |
 | `meta[property="article:published_time"]` | Date — sort order, sitemap `lastmod`, RSS `pubDate` |
 | `meta[property="og:image"]` | Card cover image |
@@ -130,21 +130,24 @@ The live list is named `POSTS` (renamed from the old `SAMPLE_POSTS` placeholder)
 
 ---
 
-## Canonical tags
+## Canonical tags (two axes, decided 2026-10-22)
 
 ```
-散文 · 遊記 · 哲思 · 移英 · 物 · 人 · 社會 · 香港
+體裁 genre   (exactly one per post, listed first):  遊記 · 哲思 · 雜記
+題材 subject (0–3 per post):                        移英 · 香港 · 職場 · 人 · 食
 ```
 
-Defined in **two places that must stay in sync**: `build.js` (`CANONICAL_TAGS` / `extractTags`) and `editor.html` (`CANONICAL_TAGS`). Posts should declare nav tags in `<meta name="tags">`; `keywords` may hold SEO extras and remains a fallback if `tags` is missing. Any token outside the canonical set is **silently dropped** by `build.js`. The editor surfaces a live warning and a confirm dialog before publishing an off-set tag.
+**Rules.** Every post carries exactly **one** genre and it is `tags[0]` (it is also the primary tag shown in `.article-meta`). Subjects follow. `移英` means the piece is *about* the migrant experience, not merely written in England (so the UK day-trip 遊記 don't get it; 〈地之盡頭〉 does). `職場` covers work and job-hunting; `食` covers food as a subject, not a passing mention; `人` is a piece centred on one person or relationship. Retired on 2026-10-22: `社會` (one post, folded into 香港 + 移英) and `物` (three unrelated posts; 〈食慾之秋〉→食, the other two → 雜記 + their subjects). Why: the old flat set mixed the two axes without saying so, leaving 3 posts with no genre and 8 with no subject, and the site's most common subject (work) had no tag at all.
+
+**Where it lives.** `build.js` is the source of truth (`GENRE_TAGS` / `SUBJECT_TAGS` / `CANONICAL_TAGS`; `extractTags` filters to the set *and sorts into canonical order*). Mirrors: `editor.html` (same three arrays; live warning + confirm dialog for off-set tags or a genre count ≠ 1, and tags are sorted canonically before the HTML is built) and `app.js` (`TAG_ORDER`, the tag-bar order: genre buttons first, then subjects, instead of the old codepoint sort). **`scripts/smoke.js` reads the arrays out of `build.js` and fails CI if `editor.html` or `app.js` drift, if any post has off-set tags, or if a post does not have exactly one genre tag as `tags[0]`.** Posts declare nav tags in `<meta name="tags">`; `keywords` may hold SEO extras and remains a fallback if `tags` is missing. Any token outside the canonical set is **silently dropped** by `build.js`.
 
 ---
 
 ## Tag routing (how filtering works)
 
-The homepage reads the active tag from the **URL hash** (e.g. `yykan.uk/#散文`), **not** a query string. `app.js` decodes the hash and filters the post list; clicking a tag button sets the hash.
+The homepage reads the active tag from the **URL hash** (e.g. `yykan.uk/#遊記`), **not** a query string. `app.js` decodes the hash and filters the post list; clicking a tag button sets the hash.
 
-Post tag links must therefore point to `../index.html#<tag>`. Both encoded (`#%E6%95%A3%E6%96%87`) and plain (`#散文`) forms work, because `app.js` runs `decodeURIComponent`. *(A `?tag=` query string does nothing — this was the Candle Blossoms bug fixed 2026-06-06.)*
+Post tag links must therefore point to `../index.html#<tag>`. Both encoded (`#%E9%81%8A%E8%A8%98`) and plain (`#遊記`) forms work, because `app.js` runs `decodeURIComponent`. *(A `?tag=` query string does nothing — this was the Candle Blossoms bug fixed 2026-06-06.)*
 
 ---
 
@@ -404,6 +407,7 @@ Footer already includes `learning` site-wide (`about · mini games · learning �
 
 | Date | Change |
 |---|---|
+| **2026-10-22 — two-axis tag taxonomy** | Kaga asked for a structure review of the tags. Finding: the flat eight (遊記／哲思／雜記／人／物／香港／移英／社會) silently mixed a genre axis with a subject axis, so 3 posts had no genre, 8 had no subject, `社會` had one post, `物` three unrelated ones, `移英` was applied inconsistently to the UK 遊記, and the most common subject on the site — work — had no tag. **Shipped:** split into **體裁** `遊記 · 哲思 · 雜記` (exactly one, always `tags[0]`) + **題材** `移英 · 香港 · 職場 · 人 · 食` (0–3); added `職場` and `食`, retired `社會` and `物`. Retagged 12 of the 22 posts (`<meta name="tags">` + `keywords` + `.article-meta` primary tag + footer `.article-tags` links; the other 10 already conformed). Resulting counts: 遊記 8 · 哲思 5 · 雜記 9 ｜ 移英 10 · 職場 6 · 香港 4 · 人 3 · 食 3. Judgment call: 〈總有下次〉 kept 遊記 and dropped 哲思 under the one-genre rule. Mechanics: `build.js` `extractTags` now sorts into canonical order; `editor.html` sorts before building HTML and warns/confirms on genre count ≠ 1; `app.js` `TAG_ORDER` replaces the codepoint sort on the tag bar; `smoke.js` gains the one-genre gate, an off-set-tag gate, and a drift check that reads the arrays out of `build.js` and compares `editor.html` / `app.js`. Docs synced: this section, README placeholder table, `_TEMPLATE.html` comment + placeholders, the kanblog skill (SKILL.md + `references/`). The prose descriptions that say 「散文、遊記、哲思」 (home/about meta, `llms.txt`, home `<title>` 雜談) are branding copy, not taxonomy, and were left alone. |
 | **2026-10-22 — new post 嘆氣｜The Sigh** | Published `posts/the-sigh.html` — bilingual 雜記, daily voice, told straight with no lesson paragraph: a two-supplier email thread stuck for two years, a 37th email that gives notice, a call the next day, 「請問？」 tacked on the end of the hard question, a loud sigh, five seconds of silence, a fifteen-minute meeting, the boss laughing it off. Dated **2026-10-22** (written the same day). 15 `.pair` paragraphs, 1:1 ZH/EN; the Chinese contains no English (house rule from this piece on: 中文稿純中文); titles match (〈嘆氣〉 / *The Sigh*); slug follows the English title. Went through the 三審 desk (一審 mirror-only at Kaga's request, 二審 editor, Kaga's own pass). Cover: `images/TheSigh.webp` (cwebp q80) + `.jpg` for og:image, 1548×1161. Tags `雜記, 移英`. Not featured. **Deploy quirk sidestepped:** this human commit already carries the `scripts/build.js` output (`app.js` / `sitemap.xml` / `feed.xml` / `llms.txt` / `index.html` noscript / `post.js` nav). |
 | **2026-08-21 — new post 奶粉錢｜Formula Money** | Published `posts/formula-money.html` — bilingual coat-off essay: childhood Pokémon cards, a Grass deck burnt in the refuse chute, the remaining cards packed to England without knowing why, sold in a new Reading shop for a little formula money. Dated **2026-08-21** (written the same day). 17 `.pair` paragraphs, 1:1 ZH/EN; titles match across languages (〈奶粉錢〉 / *Formula Money*); slug follows the English title. Cover: `images/FormulaMoney.webp` (cwebp q80) + `.jpg` for og:image, 576×1024. Tags `人, 物, 香港`. Not featured — the set stays at five. **Deploy quirk sidestepped:** this human commit already carries the `scripts/build.js` output (`app.js` / `sitemap.xml` / `feed.xml` / `llms.txt` / `index.html` noscript / `post.js` nav). |
 | **2026-08-11 — feature 總有下次｜One Mask Fewer** | Opted the same-day post into `featured: true` (dark `--ink` home card). Now joins 〈飽飯〉〈蠟燭花〉〈天橋悖論〉〈推石的人〉 as the fifth featured — kept as the site's first mature bilingual peer-portrait / occasion essay; further featured additions should swap someone out rather than inflate the set. Build output included with the human commit (same deploy-quirk sidestep as the post itself). |
