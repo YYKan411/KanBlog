@@ -142,6 +142,15 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const POSTS = [
   {
+    slug: "the-sigh",
+    title: "嘆氣｜The Sigh",
+    date: "2026-10-22",
+    excerpt: "一串電郵，兩間供應商，三十六封信件。傾足兩年，結果係我公司網站有個功能，一直用唔到。第三十七封電郵，係我寫嘅。",
+    tags: ["雜記","移英"],
+    cover: "images/TheSigh.webp",
+    url: "posts/the-sigh"
+  },
+  {
     slug: "formula-money",
     title: "奶粉錢｜Formula Money",
     date: "2026-08-21",
