@@ -147,6 +147,15 @@ function formatDate(d) {
 // ----- post list (由 scripts/build.js 每次 build 重生) -----
 const POSTS = [
   {
+    slug: "the-seasons",
+    title: "四季人間世｜The Seasons",
+    date: "2026-10-24",
+    excerpt: "狄蜜特愛人類，更愛女兒波瑟芬妮。黑帝斯剛巧巡經，一眼入定。「帶走。」每年梗有三幾個月，阿女唔喺身邊，大地沉寂一排。",
+    tags: ["雜記","人"],
+    cover: "images/TheSeasons.webp",
+    url: "posts/the-seasons"
+  },
+  {
     slug: "the-sigh",
     title: "嘆氣｜The Sigh",
     date: "2026-10-22",

@@ -10,6 +10,7 @@
 
 /* BUILD:NAV_START */
 var POSTS_NAV = [
+  { slug: "the-seasons", title: "四季人間世｜The Seasons", url: "/posts/the-seasons" },
   { slug: "the-sigh", title: "嘆氣｜The Sigh", url: "/posts/the-sigh" },
   { slug: "formula-money", title: "奶粉錢｜Formula Money", url: "/posts/formula-money" },
   { slug: "one-mask-fewer", title: "總有下次｜One Mask Fewer", url: "/posts/one-mask-fewer" },
