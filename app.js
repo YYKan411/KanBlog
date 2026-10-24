@@ -153,6 +153,7 @@ const POSTS = [
     excerpt: "狄蜜特愛人類，更愛女兒波瑟芬妮。黑帝斯剛巧巡經，一眼入定。「帶走。」每年梗有三幾個月，阿女唔喺身邊，大地沉寂一排。",
     tags: ["雜記","人"],
     cover: "images/TheSeasons.webp",
+    featured: true,
     url: "posts/the-seasons"
   },
   {
